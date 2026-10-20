@@ -7,3 +7,6 @@ data/cache/
 .DS_Store
 .vercel
 .env*
+
+# iCloud Drive conflict copies ("name 2.json")
+* [0-9].*

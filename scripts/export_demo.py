@@ -48,6 +48,13 @@ def quote_spans(text: str, quotes: dict[str, str]) -> list[dict]:
     return sorted(spans, key=lambda s: (s["start"], -s["end"]))
 
 
+def write(path: Path, text: str) -> None:
+    """Write only when the content changed. Deleting and rewriting unchanged files makes iCloud Drive (this repo
+    lives on a synced Desktop) leave "name 2.json" copies behind."""
+    if not path.exists() or path.read_text() != text:
+        path.write_text(text)
+
+
 def jsonable(v):
     if hasattr(v, "item"):
         return v.item()
@@ -128,9 +135,7 @@ def main() -> None:
     by_nhs = wl.set_index("nhs")
 
     (DEMO / "patients").mkdir(parents=True, exist_ok=True)
-    for old in (DEMO / "patients").glob("*.json"):
-        old.unlink()
-    queue = []
+    queue, written = [], set()
     for set_name, path in LETTER_SETS:
         for d in map(json.loads, open(path)):
             lid, text = d["letter_id"], d["text"]
@@ -152,13 +157,17 @@ def main() -> None:
                 "priority_parts": dec["priority_parts"], "priority_max": PRIORITY_MAX,
                 "model": ex.model, "letter_text": text,
             }
-            (DEMO / "patients" / f"{pid}.json").write_text(json.dumps(patient, default=jsonable))
+            write(DEMO / "patients" / f"{pid}.json", json.dumps(patient, default=jsonable))
+            written.add(f"{pid}.json")
             queue.append({k: patient[k] for k in ("id", "letter_id", "set", "name", "pathway", "rule", "priority",
                                                    "weeks_waiting", "weight_support")}
                          | {"text_key": text_key(text)})
+    for old in (DEMO / "patients").glob("*.json"):
+        if old.name not in written:               # patients no longer in the queue (and stray sync copies)
+            old.unlink()
     queue.sort(key=lambda r: (-r["priority"], -(r["weeks_waiting"] or 0)))
-    (DEMO / "queue.json").write_text(json.dumps(queue))
-    (DEMO / "week.json").write_text(json.dumps(week_plan(wl, {r["id"] for r in queue}), default=jsonable))
+    write(DEMO / "queue.json", json.dumps(queue))
+    write(DEMO / "week.json", json.dumps(week_plan(wl, {r["id"] for r in queue}), default=jsonable))
 
     # results: extraction (dev and held-out test) and cleaning
     by_issue = pd.read_csv(RESULTS / "cleaning_by_issue.csv")
@@ -183,7 +192,7 @@ def main() -> None:
         "decision_tree": tree_results(),
         "optimise": optimise_results(),
     }
-    (DEMO / "results.json").write_text(json.dumps(results, default=jsonable))
+    write(DEMO / "results.json", json.dumps(results, default=jsonable))
 
     size = sum(f.stat().st_size for f in DEMO.rglob("*.json"))
     counts = pd.Series([r["pathway"] for r in queue]).value_counts().to_dict()
