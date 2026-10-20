@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/06/2025     UBRN: 0000 5363 8274
+
+Patient: Mrs Irene SHAW     DOB: 29/06/1961     Gender: Female
+NHS No: 999 006 3516     Postcode: TS18 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2019
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 33.2 kg/m2 (10/12/2024)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be garteful for your assessment of Mrs Irene Shaw, aged 63, who has worsening pain in the right knee.
+
+XR report (16/12/2024): "Doubtful joint space narrowing with possible early osteophytic lipping."
+
+She would like to discuss knee replacement.
+
+She lives w/ family. She works and the knee is affecting her job.
+
+There has been no physio to date. There have been no steroid inj. Current analgesia: Topical ibuprofen gel PRN. Wegihed in clinic, BMI today 33.2.
+
+She struggles with stairs & can manage roughly 26 mins on the flat. Oxford Knee Score 25, compared w/ 21 at the last review. She reports disturbed sleep due to knee pain.
+
+Kind regards,
+Dr S. Byrne
+Riverside Medical Centre

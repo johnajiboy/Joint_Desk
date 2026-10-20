@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/12/2025     UBRN: 0000 6730 1025
+
+Patient: Mr David HALL     DOB: 08/07/1965     Gender: Male
+NHS No: 999 989 8742     Postcode: TS10 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2019
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 41.2 kg/m2 (05/09/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr David Hall, aged 60, w/ osteoarthritis of the left knee.
+
+Social: He lives w/ his partner. He works & the knee is affecting his job.
+
+Mx to date: Management to date has included 17 weeks of physiotherapy. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Imaging: XR (12/07/2025): Minimal changes only, of doubtful significance, Kellgren-Lawrence grade 1.
+
+History: Oxford knee score recorded at 15, down from 18 6 months ago. Walking tolerance is around 9 mins. He walks without aids. Denies night pain.
+
+Request: He would like to discuss knee replacement.
+
+With thanks,
+Dr K. Ahmed
+Marton Park Health Centre

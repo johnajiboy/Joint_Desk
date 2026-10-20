@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/10/2026     UBRN: 0000 8096 6670
+
+Patient: Mrs Christine TAYLOR     DOB: 14/04/1945     Gender: Female
+NHS No: 999 603 3333     Postcode: TS4 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2007
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 26.8 kg/m2 (15/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colelague,
+
+I am writing again about Mrs Christine Taylor, aged 81, who is on your waiting list with osteoarthritis of the L) knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+History: Oxford knee score recorded at 24. She can walk for about 16 minutes before needing to stop. No night pain. She uses a walking stick.
+
+Imaging: X-ray report (14/03/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+Mx to date: She has completed 5 weeks of physio w/ limited benefit. She has had one steroid inj, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 25.0.
+
+Social: She lives alone.
+
+Request: She has been waiting 20 weeks so far. She would like to discuss knee replacement.
+
+With thanks,
+Dr S. Byrne
+Litnhorpe Lane Surgery

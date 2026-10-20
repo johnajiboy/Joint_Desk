@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/06/2026     UBRN: 0000 7801 5925
+
+Patient: Mr George LOWE     DOB: 20/07/1957     Gender: Male
+NHS No: 999 904 9087     Postcode: TS10 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2022
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 34.2 kg/m2 (08/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Docotr,
+
+I would be grateful for your assessment of Mr Geogre Lowe, aged 68, who has worsening pain in the R) knee.
+
+- He lives alone & is finding it hard to cope.
+- He would like to discuss knee replacement.
+- He struggles w/ stairs & can manage roughly 35 mins on the flat.
+- He walks without aids.
+- He c/o night pain most nights.
+- OKS 20/48.
+- Failed conservative mx incl. physio x13/52.
+- There have been no steroid inj.
+- Current analgesia: Naproxen 500mg BD w/ omeprazole 20mg OD.
+- Previous BMI 36.6 (25/08/2024).
+- XR (31/08/2025): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+
+With thanks,
+Dr S. Byrne
+Coulby Fields Surgery

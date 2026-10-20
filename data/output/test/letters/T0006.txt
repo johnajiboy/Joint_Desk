@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/10/2026     UBRN: 0000 5672 2539
+
+Patient: Ms Janet DAWSON     DOB: 12/11/1956     Gender: Female
+NHS No: 999 336 9799     Postcode: TS4 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 28.0 kg/m2 (09/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Ms Janet Dawson, who is on your waiting list w/ OA of the L) knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+Oxford Knee Score 21 (previously 27). She struggles w/ stairs & can manage ruoghly 28 mins on the flat. Sleeps well. She now mobilises w/ a stick.
+
+X-ray (20/05/2026): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+
+She has had 15 weeks of physio in the community. Current analgesia: Topical ibuproefn gel PRN. Weighed in clinic, BMI today 28.0.
+
+She lives w/ family.
+
+She has now been on your waiting list for 27 weeks. She is keen to consider srugery if appropriate.
+
+With thanks,
+Dr K. Ahmed
+Riverside Medical Centre

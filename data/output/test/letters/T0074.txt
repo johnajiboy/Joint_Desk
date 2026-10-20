@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 31/07/2026 UBRN: 0000 5946 4417
+
+Patient: Mr Kevin WATSON DOB: 25/02/1954 Gender: Male
+NHS No: 999 819 8488 Postcode: TS8 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 26.7 kg/m2 (30/06/2026)
+ Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Kevin Watson, aged 72. Knee osteoarthritis, L) knee, for
+opinion regarding further management.
+
+- He has not yet had physoitherapy.
+- He has  not had any inj.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Previous BMI 29.1 (10/03/2025).
+- I would be grateful for your opinion regarding further
+management.
+- XR report (16/04/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- He lives w/ his pratner.
+- He struggles w/ stairs & can manage roughly 44 mins
+on the flat.
+- Denies night pain.
+- I have not recorded a formal Oxford Knee Score.
+- He walks withuot aids.
+
+Page 1 of 2
+
+Best wishes,
+Dr A. Patel
+Eston Hills Surgery

@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 26/10/2025     UBRN: 0000 3816 4532
+
+Patient: Ms Elizabeth HART     DOB: 25/11/1946     Gender: Female
+NHS No: 999 393 7363     Postcode: TS5 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 26.3 kg/m2 (08/05/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Trigae Team,
+
+I would be grateful for your assessment of Ms Elizabeth Hart, aged 78, who has worsening pain in the R) knee.
+
+Hitsory: OKS 20/48, compared with 18 at the last review. Walking tolerance is around 28 mins. Denies night pain. She now mobilises w/ a stick.
+
+Imaging: XR (08/06/2025): Moderate tricompartmental degenerative change with definite medial joint space loss, KL3.
+
+Management to date: She has had five weeks of physio in the community. There have been no streoid injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: She lives alone & is finding it hard to cope.
+
+Request: She would like to discuss knee replacement.
+
+Best wishes,
+Dr T. Adeyemi
+Stockton Quay Health Cenrte

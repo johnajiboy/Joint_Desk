@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 23/06/2025     UBRN: 0000 4581 9104
+
+Patient: Mrs Patricia NOWAK     DOB: 04/05/1947     Gender: Female
+NHS No: 999 966 5144     Postcode: TS5 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.1 kg/m2 (23/04/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mrs Patricia Nowak, aged 78. Knee OA, bilat knees, for opinion regarding futrher management.
+
+Mx to date has included 7 weeks of physiotherapy. She has had one steroid inj, w/ only short-lived relief. Current analgesia: Naproxen 500mg BD w/ omeprazole 20mg OD.
+
+No night pain. She uses a frame outdoors. She can walk for about 14 minutes befroe needing to stop. OKS 22/48 (previously 18).
+
+XR report (19/03/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+She lives alone & is finding it hard to cope.
+
+I would be grateful for your opiinon regarding further management.
+
+Yours sincerely,
+Dr S. Byrne
+Acklam Green Practice

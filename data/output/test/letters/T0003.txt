@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/07/2026     UBRN: 0000 6488 7089
+
+Patient: Ms Fatima FLETCHER     DOB: 09/08/1950     Gender: Female
+NHS No: 999 298 4600     Postcode: TS3 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 33.7 kg/m2 (24/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Ms Fatima Fletcher, c/o worsening pain in the right knee.
+
+Hitsory: Oxford knee score recorded at 15 (previously 17). Walking tolerance is around 12 mintues. She c/o night pain most nights. She now mobilises w/ a stick.
+
+Mx to date: She has completed 4 weeks of physiotherapy with limited benefit. She has had one steroid inj, w/ only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+Social: She lives with her partner.
+
+Request: I would be grateful for your opinion reagrding further management.
+
+Kind regards,
+Dr E. Lowther
+Teesway Medical Group

@@ -1,0 +1,44 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 20/10/2025 UBRN: 0000 6740 1941
+
+Patient: Mr William TAYLOR DOB: 23/12/1972 Gender: Male
+NHS No: 999 553 3316 Postcode: TS3 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+ Paracetamol 1g QDS
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 33.0 kg/m2 (09/09/2025)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr William Taylor. Knee osteoarthriits, left knee, for oipnion regarding
+further  management.
+
+Request: He would like to discuss knee replacement.
+
+Page 1 of 2
+
+History: His Oxford Knee Score today is 18 (previously 21). Denies night
+pain. He walks  without aids. He struggles w/ stairs and can manage rouglhy
+37 minutes on the flat.
+
+Imaging: XR report (09/08/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Mx to date: He has had 1 intra-articular steroid injection, with
+only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+Weighed in cilnic, BMI today 33.0.
+
+Yours sincerely,
+Dr A. Patel
+Marton Park Health Centre

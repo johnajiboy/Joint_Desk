@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/06/2026     UBRN: 0000 4988 1480
+
+Patient: Mrs Elizabeth HUTCHINSON     DOB: 24/09/1944     Gender: Female
+NHS No: 999 585 5151     Postcode: TS4 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2006
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 28.4 kg/m2 (04/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mrs Elizabeth Hutchinson, aged 81, w/ osteoarthritis of both knees.
+
+- Oxford Knee Score 16 (previously 23).
+- She can walk for about 15 mins before needing to stop.
+- She c/o disturbed sleep due to knee pain.
+- She uses a frame outdoors.
+- XR report (12/05/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+- She tells me she saw a physiotherapist a while ago.
+- Current analgesia: Co-codaoml 30/500 2 tbalets QDS PRN.
+- Wieghed in clinic, BMI today 26.6.
+- She lives alone and is finding it hard to cope.
+- She is keen to consider surgery if appropriate.
+
+With thanks,
+Dr M. Clarke
+Linhtorpe Lane Surgery

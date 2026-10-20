@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/05/2026     UBRN: 0000 3317 5875
+
+Patient: Mrs Valerie HALL     DOB: 28/12/1970     Gender: Female
+NHS No: 999 333 7439     Postcode: TS10 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.9 kg/m2 (14/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colelague,
+
+Re: Mrs Valerie Hall. Knee OA, L) knee, for opinion regarding further management.
+
+She lives w/ family.
+
+XR report (13/01/2026): "Mild osteoarthritis with definite osteophytes, predominantly medial compartment."
+
+She is keen to consider srugery if appropriate.
+
+She walks without aids. She struggles w/ stairs & can manage roughly 26 mins on the flat. Oxford Knee Score 25, down from 27 6 months ago. Pain wakes her at night.
+
+Management to date has included three weeks of physiotherapy. She has had 1 intra-articular steroid injection, w/ only short-lived relief. Current analgesia: Naproxen 500mg BD with omerpazole 20mg OD. Weighed in clinic, BMI today 35.9.
+
+Yours sincerely,
+Dr J. Fenwick
+Teesway Medical Group

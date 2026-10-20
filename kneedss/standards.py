@@ -90,9 +90,10 @@ KL_REPORT_WORDING = {
         "Joint spaces preserved. No osteophytes."],
     1: ["Doubtful joint space narrowing with possible early osteophytic lipping.",
         "Minimal changes only, of doubtful significance."],
+    # KL 2 avoids "early", which also fits KL 1. Replaced in place (same count) so the random draws don't shift.
     2: ["Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis.",
-        "Mild degenerative change with early medial joint space narrowing and small osteophytes.",
-        "Early osteoarthritic change, predominantly medial compartment."],
+        "Mild degenerative change with definite small osteophytes and possible medial joint space narrowing.",
+        "Mild osteoarthritis with definite osteophytes, predominantly medial compartment."],
     3: ["Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis.",
         "Moderate tricompartmental degenerative change with definite medial joint space loss.",
         "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."],

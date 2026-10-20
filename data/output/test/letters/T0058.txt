@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/07/2026     UBRN: 0000 5649 4958
+
+Patient: Mr Chidi ROBSON     DOB: 05/11/1954     Gender: Male
+NHS No: 999 395 9480     Postcode: TS17 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2008
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Amlodipine 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.0 kg/m2 (29/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Chidi Robson. Knee OA, bilat knees, for opinion regarding further management.
+
+History: Oxford knee score recorded at 21. He struggles w/ stairs & can manage roughly 29 mins on the flat. He c/o night pain most nights. He walks without aids.
+
+Imaging: XR (09/06/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, Kellgren-Lawrence grade 2.
+
+Mx to date: He has had 19 weeks of physiotherapy in the community. Current analgseia: Naproxen 500mg BD w/ omeprazole 20mg OD. Weihged in clinic, BMI today 29.0.
+
+Social: He lives with his partner.
+
+Request: He would like to discuss knee replacement.
+
+Best wishes,
+Dr H. Robson
+Coulby Fields Surgery

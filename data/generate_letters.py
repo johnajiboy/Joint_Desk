@@ -1,7 +1,8 @@
 """Generate synthetic GP referral letters for knee osteoarthritis, each with an answer key.
 
-    python data/generate_letters.py              # needs data/output/patients_clean.csv
-    python data/generate_letters.py --n 150 --seed 11
+    python data/generate_letters.py              # dev set: 150 letters, seed 11, data/output/
+    python data/generate_letters.py --n 100 --seed 2027 --out data/output/test --prefix T --hard \
+        --exclude data/output/answer_key.jsonl   # held-out test set, patients not in the dev set
 
 Outputs (data/output/)
   letters/L0001.txt ...     one letter per file, as the clinic would receive it
@@ -19,11 +20,16 @@ then the GP's free text. They are deliberately imperfect, as real letters are:
   - BMI can appear twice, with a newer value in the free text
   - negations ("denies night pain"), four GP writing styles, initial and expedite letters
 
+Hard mode (test set only) adds GP shorthand ("OA", "R) knee", "c/o"), typos, facts out of the usual order,
+more conflicting BMI values and scanned-style text with odd line breaks. It draws from its own random
+generator, so the normal letters for a given seed are unchanged. Every evidence quote is re-read from the
+final text, so it is always an exact substring.
+
 Gold-standard rule: a fact is only in the answer key if the letter states it (otherwise null). When
 two values conflict, the most recent dated value is the gold one.
 """
 from __future__ import annotations
-import argparse, json, random, sys
+import argparse, json, random, re, sys
 from datetime import date, timedelta
 from pathlib import Path
 import pandas as pd
@@ -72,7 +78,103 @@ class Letter:
         return t
 
 
-def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
+# ---------------------------------------------------------------------------- hard mode
+
+# Radiology wording is pasted from the report, so it is never given GP shorthand or typos.
+PROTECTED = {"kl", "xray_finding"}
+SHORTHAND = [
+    (r"\bosteoarthritis\b", "OA"), (r"\bright knee\b", "R) knee"), (r"\bleft knee\b", "L) knee"),
+    (r"\bboth knees\b", "bilat knees"), (r"\bphysiotherapy\b", "physio"), (r"\breports\b", "c/o"),
+    (r"\bwho has worsening\b", "c/o worsening"), (r"\bminutes\b", "mins"), (r"\bX-ray\b", "XR"),
+    (r"\bManagement to date\b", "Mx to date"), (r"\bwith\b", "w/"), (r"\band\b", "&"),
+    (r"\bapproximately\b", "approx"), (r"\binjections?\b", "inj"),
+]
+
+
+def rewrite(text: str, evidence: dict[str, str], edits: list[tuple[int, int, str, bool]]) -> tuple[str, dict]:
+    """Apply (start, end, new, may_touch_quotes) edits and re-read every quote from the new text.
+
+    An edit is skipped if it overlaps another edit, crosses the edge of a quote, falls inside a protected
+    quote, or falls inside any quote when may_touch_quotes is False. Quotes stay exact substrings."""
+    spans = {f: (i, i + len(q)) for f, q in evidence.items() if (i := text.find(q)) >= 0}
+    kept, last_end = [], -1
+    for s, e, new, touch in sorted(edits):
+        if s < last_end or e <= s:
+            continue
+        ok = True
+        for f, (qs, qe) in spans.items():
+            inside, outside = qs <= s and e <= qe, e <= qs or s >= qe
+            if not (inside or outside) or (inside and (not touch or f in PROTECTED)):
+                ok = False
+                break
+        if ok:
+            kept.append((s, e, new))
+            last_end = e
+
+    def moved(pos: int) -> int:
+        return pos + sum(len(new) - (e - s) for s, e, new in kept if e <= pos)
+
+    out, prev = [], 0
+    for s, e, new in kept:
+        out += [text[prev:s], new]
+        prev = e
+    out.append(text[prev:])
+    new_text = "".join(out)
+    return new_text, {f: new_text[moved(qs):moved(qe)] for f, (qs, qe) in spans.items()}
+
+
+def harden(text: str, L: Letter, hrng: random.Random) -> str:
+    """Make a letter harder to read without changing its facts. Updates L.evidence and L.tags."""
+    body = text.index("-" * 72) + 72                     # GP free text; the record block above is computer-made
+
+    edits = []
+    for pattern, short in SHORTHAND:
+        for m in re.finditer(pattern, text[body:]):
+            if hrng.random() < 0.6:
+                edits.append((body + m.start(), body + m.end(), short, True))
+    text, L.evidence = rewrite(text, L.evidence, edits)
+    if any(short in text[body:] for _, short in SHORTHAND):
+        L.tags.add("shorthand")
+
+    # typos: swap two inner letters of a few longer words (same length, digits never touched)
+    words = [m for m in re.finditer(r"\b[A-Za-z]{6,}\b", text[body:])]
+    edits = []
+    for m in hrng.sample(words, min(len(words), hrng.randint(2, 5))):
+        w = m.group()
+        i = hrng.randint(1, len(w) - 3)
+        edits.append((body + m.start(), body + m.end(), w[:i] + w[i + 1] + w[i] + w[i + 2:], True))
+    before = text
+    text, L.evidence = rewrite(text, L.evidence, edits)
+    if text != before:
+        L.tags.add("typos")
+
+    # scanned-style: hard line breaks mid-sentence, doubled spaces, a page footer, columns collapsed
+    if hrng.random() < 0.35:
+        edits = [(m.start(), m.end(), " ", True) for m in re.finditer(r" {2,}", text[:body])]
+        width, col = hrng.randint(48, 70), 0
+        for i, ch in enumerate(text):
+            col = 0 if ch == "\n" else col + 1
+            if ch == " " and col >= width and i > body:
+                edits.append((i, i + 1, "\n", True))
+                col, width = 0, hrng.randint(48, 70)
+            elif ch == " " and i > body and hrng.random() < 0.03:
+                edits.append((i, i + 1, "  ", True))
+        breaks = [m.start() for m in re.finditer(r"\n\n", text) if m.start() > body]
+        if breaks:
+            at = hrng.choice(breaks)
+            edits.append((at, at + 1, "\n\nPage 1 of 2\n\x0c", False))
+        text, L.evidence = rewrite(text, L.evidence, edits)
+        L.tags.add("scanned")
+
+    for f, q in L.evidence.items():
+        assert q and q in text, f"evidence for {f} lost in hard mode: {q!r}"
+    return text
+
+
+def build(p: pd.Series, n: int, rng: random.Random, prefix: str = "L",
+          hrng: random.Random | None = None) -> tuple[str, dict]:
+    """One letter and its answer key. hrng turns on hard mode (and is its only source of randomness)."""
+    hard = hrng is not None
     L = Letter()
     expedite = p.weeks_waiting >= 20 and rng.random() < 0.45
     letter_type = "expedite" if expedite else "initial"
@@ -89,7 +191,7 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
 
     # ------------------------------------------------------------ auto-filled block (from the GP record)
     obs_date = letter_date - timedelta(days=rng.randint(10, 200))
-    bmi_coded = p.bmi if rng.random() < 0.85 else round(p.bmi + rng.choice([-2.4, -1.6, 1.8, 2.6]), 1)
+    bmi_coded = p.bmi if rng.random() < (0.65 if hard else 0.85) else round(p.bmi + rng.choice([-2.4, -1.6, 1.8, 2.6]), 1)
     hdr = [
         "NHS e-Referral Service - Referral letter",
         "SYNTHETIC TEST DATA - NOT A REAL PATIENT",
@@ -251,11 +353,17 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
     sents["treatment"].append(f"Current analgesia: {p.analgesia}.")
 
     # BMI updated in free text (newer than the coded value) in ~12% of letters
-    if rng.random() < 0.12 or bmi_coded != p.bmi:
+    if rng.random() < (0.3 if hard else 0.12) or bmi_coded != p.bmi:
         q = f"BMI today {p.bmi}"
         sents["treatment"].append(f"Weighed in clinic, {q}.")
         L.fact("bmi", float(p.bmi), q)            # newest dated value wins
         L.tags.add("bmi_two_values")
+    elif hard and hrng.random() < 0.35:
+        # an older BMI in the free text; the coded value in the record block is newer and stays gold
+        old = round(p.bmi + hrng.choice([-3.1, -2.2, 2.4, 3.3]), 1)
+        old_date = ddmmyyyy(obs_date - timedelta(days=hrng.randint(300, 900)))
+        sents["treatment"].append(hrng.choice([f"BMI was {old} on {old_date}.", f"Previous BMI {old} ({old_date})."]))
+        L.tags.add("bmi_old_value")
 
     # Social context
     if rng.random() < 0.75:
@@ -285,23 +393,29 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
                                         f"{pronoun} is keen to consider surgery if appropriate."]))
 
     # ------------------------------------------------------------ assemble in the chosen style
+    order = ["history", "imaging", "treatment", "social", "request"]
+    if hard and hrng.random() < 0.6:
+        hrng.shuffle(order)
+        hrng.shuffle(sents["history"])
+        L.tags.add("reordered")
+    heads = {"history": "History", "imaging": "Imaging", "treatment": "Management to date", "social": "Social",
+             "request": "Request"}
     L.add(greet)
     L.add("")
     L.add(opener)
     L.add("")
     if style == "structured":
-        for head, key in [("History", "history"), ("Imaging", "imaging"), ("Management to date", "treatment"),
-                          ("Social", "social"), ("Request", "request")]:
+        for key in order:
             if sents[key]:
-                L.add(f"{head}: " + " ".join(sents[key]))
+                L.add(f"{heads[key]}: " + " ".join(sents[key]))
                 L.add("")
     elif style == "brief":
-        for key in ["history", "imaging", "treatment", "social", "request"]:
+        for key in order:
             for s in sents[key]:
                 L.add(f"- {s}")
         L.add("")
     else:
-        for key in ["history", "imaging", "treatment", "social", "request"]:
+        for key in order:
             if sents[key]:
                 L.add(" ".join(sents[key]))
                 L.add("")
@@ -309,6 +423,8 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
     L.add(p.gp_name)
     L.add(p.practice_name)
     text = L.text()
+    if hard:
+        text = harden(text, L, hrng)
 
     # ------------------------------------------------------------ gold decisions
     g = L.gold
@@ -317,7 +433,7 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
                     "lives_alone_or_carer": g["lives_alone_or_carer"]}
     d = decide(letter_facts)
     key = {
-        "letter_id": f"L{n:04d}", "patient_id": p.patient_id, "letter_type": letter_type, "style": style,
+        "letter_id": f"{prefix}{n:04d}", "patient_id": p.patient_id, "letter_type": letter_type, "style": style,
         "letter_date": letter_date.isoformat(), "difficulty_tags": sorted(L.tags),
         "gold": g, "evidence": L.evidence,
         "gold_pathway": d["pathway"], "gold_pathway_label": PATHWAYS[d["pathway"]], "gold_rule": d["rule"],
@@ -327,27 +443,42 @@ def build(p: pd.Series, n: int, rng: random.Random) -> tuple[str, dict]:
     return text, key
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--n", type=int, default=150)
-    ap.add_argument("--seed", type=int, default=11)
-    a = ap.parse_args()
-    rng = random.Random(a.seed)
-    pts = pd.read_csv(OUT / "patients_clean.csv")
+def generate(pts: pd.DataFrame, n: int, seed: int, prefix: str = "L", hard: bool = False,
+             exclude: set[str] = frozenset()) -> list[tuple[str, dict]]:
+    """Letters and answer keys, stratified by pathway. Patients in `exclude` are never used."""
+    rng = random.Random(seed)
+    hrng = random.Random(f"hard-{seed}") if hard else None
+    pts = pts[~pts.patient_id.isin(exclude)]
     # stratify by pathway so every pathway is well represented
     per = {"surgery": 0.45, "non_surgical": 0.22, "physio": 0.20, "weight_physio": 0.13}
     picks = []
     for k, share in per.items():
         pool = pts[pts.true_pathway == k]
-        picks.append(pool.sample(n=min(len(pool), round(a.n * share)), random_state=a.seed))
-    sample = pd.concat(picks).sample(frac=1, random_state=a.seed).head(a.n).reset_index(drop=True)
+        picks.append(pool.sample(n=min(len(pool), round(n * share)), random_state=seed))
+    sample = pd.concat(picks).sample(frac=1, random_state=seed).head(n).reset_index(drop=True)
+    return [build(p, i + 1, rng, prefix, hrng) for i, p in sample.iterrows()]
 
-    (OUT / "letters").mkdir(parents=True, exist_ok=True)
-    keys, rows = [], []
-    with open(OUT / "letters.jsonl", "w") as fl, open(OUT / "answer_key.jsonl", "w") as fk:
-        for i, p in sample.iterrows():
-            text, key = build(p, i + 1, rng)
-            (OUT / "letters" / f"{key['letter_id']}.txt").write_text(text)
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--n", type=int, default=150)
+    ap.add_argument("--seed", type=int, default=11)
+    ap.add_argument("--out", type=Path, default=OUT, help="output folder (default data/output)")
+    ap.add_argument("--prefix", default="L", help="letter ID prefix, e.g. T for the test set")
+    ap.add_argument("--hard", action="store_true", help="harder letters (test set only)")
+    ap.add_argument("--exclude", type=Path, nargs="*", default=[],
+                    help="answer keys whose patients must not be used (keeps the test set held out)")
+    a = ap.parse_args()
+    pts = pd.read_csv(OUT / "patients_clean.csv")
+    exclude = {json.loads(line)["patient_id"] for path in a.exclude for line in open(path)}
+    letters = generate(pts, a.n, a.seed, a.prefix, a.hard, exclude)
+
+    out = a.out
+    (out / "letters").mkdir(parents=True, exist_ok=True)
+    rows = []
+    with open(out / "letters.jsonl", "w") as fl, open(out / "answer_key.jsonl", "w") as fk:
+        for text, key in letters:
+            (out / "letters" / f"{key['letter_id']}.txt").write_text(text)
             fl.write(json.dumps({"letter_id": key["letter_id"], "text": text}) + "\n")
             fk.write(json.dumps(key, default=str) + "\n")
             flat = {k: v for k, v in key.items() if k not in ("gold", "evidence")}
@@ -355,9 +486,9 @@ def main():
             flat.update({f"gold_{f}": key["gold"][f] for f in FIELDS})
             flat.update({f"evidence_{f}": key["evidence"].get(f) for f in FIELDS})
             rows.append(flat)
-    pd.DataFrame(rows).to_csv(OUT / "answer_key.csv", index=False)
     df = pd.DataFrame(rows)
-    print(f"{len(df)} letters -> letters/, letters.jsonl, answer_key.jsonl, answer_key.csv")
+    df.to_csv(out / "answer_key.csv", index=False)
+    print(f"{len(df)} letters -> {out}/: letters/, letters.jsonl, answer_key.jsonl, answer_key.csv")
     print(df.gold_pathway_label.value_counts().to_string())
 
 

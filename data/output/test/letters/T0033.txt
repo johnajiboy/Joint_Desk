@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/07/2026     UBRN: 0000 2878 9919
+
+Patient: Mrs Maureen PEARSON     DOB: 01/08/1966     Gender: Female
+NHS No: 999 348 9832     Postcode: TS17 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2017
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Losartan 50mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 24.8 kg/m2 (26/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mrs Maureen Pearson, aged 59, c/o worsening pain in the R) knee.
+
+History: OKS 21/48, compared w/ 24 at the last review. She can walk for about 31 mins before needing to stop. She walks without aids.
+
+Imaging: XR reoprt (05/12/2025): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+
+Mx to date: She has had 11 weeks of physio in the community. She has had 3 intra-articular steroid injections, w/ only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr R. Hughes
+Riverside Medical Centre

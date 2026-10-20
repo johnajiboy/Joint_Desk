@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 27/02/2026     UBRN: 0000 3170 2295
+
+Patient: Mr Chidi HART     DOB: 02/04/1956     Gender: Male
+NHS No: 999 070 3019     Postcode: TS7 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2012
+Medication
+  Topical ibuprofen gel PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.6 kg/m2 (13/11/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Chidi Hart, aged 69. Knee OA, R) knee, for opiinon regarding fruther management.
+
+He can walk for about 27 mins before needing to stop. OKS 27/48, compared w/ 26 at the last review. No night pain.
+
+X-ray (17/12/2025): Mild osteoarthritis with definite osteophytes, predominantly medial compartment, KL grade 2.
+
+I would be grateful for your opinion regarding further management.
+
+Mx to date has included four weeks of physiotherapy. He has not had any inj. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 29.6.
+
+Best wishes,
+Dr E. Lowther
+North Ormesby Family Practice

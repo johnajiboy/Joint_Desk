@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/07/2026     UBRN: 0000 6283 7653
+
+Patient: Mr Ian BELL     DOB: 29/10/1952     Gender: Male
+NHS No: 999 991 0173     Postcode: TS18 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.6 kg/m2 (05/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Ian Bell, aged 73. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+Imaging: An XR has been requested but not yet reported.
+
+Request: He would like to discuss knee replaecment.
+
+Social: He lives w/ his partner.
+
+History: OKS 16/48. He now mobilises w/ a stick. Pain wakes him at night. He can walk for about 24 minutes before neeidng to stop.
+
+Mx to date: He has had six weeks of physio in the cmomunity. Current anlagesia: Naproxen 500mg BD w/ omeprazole 20mg OD. BMI was 34.9 on 12/01/2025.
+
+Best wishes,
+Dr E. Lowther
+Eston Hills Surgery

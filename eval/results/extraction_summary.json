@@ -1,0 +1,32 @@
+{
+ "set": "dev",
+ "model": "claude-sonnet-5-5",
+ "letters": 150,
+ "failed": 0,
+ "mean_field_accuracy": 0.9996078431372548,
+ "letters_all_fields_right": 0.9933333333333333,
+ "quote_hit_rate": 0.9995852343425964,
+ "facts_dropped": 1,
+ "pathway_agreement": 1.0,
+ "priority_mae": 0.02666666666666667,
+ "nhs_matched": 1.0,
+ "field_accuracy": {
+  "name": 1.0,
+  "age": 1.0,
+  "sex": 1.0,
+  "side": 1.0,
+  "oks": 1.0,
+  "oks_before": 1.0,
+  "kl": 0.9933333333333333,
+  "xray_finding": 1.0,
+  "physio_weeks": 1.0,
+  "injections": 1.0,
+  "bmi": 1.0,
+  "night_pain": 1.0,
+  "lives_alone_or_carer": 1.0,
+  "walking_aid": 1.0,
+  "diabetes": 1.0,
+  "smoking": 1.0,
+  "weeks_waiting": 1.0
+ }
+}

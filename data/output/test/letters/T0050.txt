@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 13/10/2026 UBRN: 0000 7567 1327
+
+Patient: Ms Fatima GRAHAM DOB: 17/02/1968 Gender: Female
+NHS No: 999 690 5624 Postcode: TS7 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008) Referring clinician: Dr K. Ahmed
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+ Paracetamol 1g QDS PRN
+Allergies
+ Codeine - nausea
+Latest observations
+ BMI 31.0 kg/m2 (03/08/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing  again about Ms Faitma Graham, aged 58, who
+is on your waiting list w/ OA of the right knee. She
+has deteriorated since the original reefrral & I would
+be grateful if her care could be expedited.
+
+Page 1 of 2
+
+- She struggles w/ stairs & can manage roughly 39 mins on the flat.
+- Denies night pain.
+- She walks without aids.
+- There has been no physiotherapy to date.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- Weighed in clinic, BMI today 31.0.
+- She lives with her partner.
+- XR (21/03/2026): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL grade 3.
+- She has now been on your waiting list for 26 weeks.
+- She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr K. Ahmed
+Eston Hills Surgery

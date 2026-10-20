@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 23/08/2026     UBRN: 0000 2775 5689
+
+Patient: Mrs Joan SMITH     DOB: 10/05/1957     Gender: Female
+NHS No: 999 913 4971     Postcode: TS10 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2020
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 39.1 kg/m2 (18/03/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mrs Joan Smith, aged 69, c/o worsening pain in both knees.
+
+- She is keen to consider surgery if appropriate.
+- She lives with her partner.
+- She can walk for about 40 mniutes before needing to stop.
+- Her Oxford Knee Score today is 27 (previously 32).
+- Deines night pain.
+- An XR has been requested but not yet reported.
+- Failed conservative mx incl. pyhsio x6/52.
+- She has had 1 intra-articluar steroid inj, w/ only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS.
+
+With thanks,
+Dr S. Byrne
+Linthorpe Lane Surgery

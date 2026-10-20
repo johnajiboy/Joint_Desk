@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 01/05/2025 UBRN: 0000 9842 4350
+
+Patient: Ms Brenda ROBSON DOB: 24/11/1951 Gender: Female
+NHS No: 999 884 3219 Postcode: TS8 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+ Paracetamol 1g QDS PRN
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 37.4 kg/m2 (15/11/2024)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Ms Brenda Robson,  aged 73,
+c/o worsening pain in  the L) knee.
+
+Page 1 of 2
+
+Management to date: There has been no physiotherapy to date.
+She has had 3 intra-articular steroid injections, with
+only short-lived rleief. Current aanlgesia: Paracetamol
+1g QDS PRN.
+
+Reqeust: She would like  to discuss knee replacement.
+
+Imaging: X-ray report (11/12/2024): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+
+History: Sleeps well. She can walk for about 50 minutes before
+needing to stop. Oxfrod knee score recorded at 27.
+
+Social: She lives alone and is finding it hard to cope.
+
+Best wishes,
+Dr A. Patel
+Coulby Fields Sugrery

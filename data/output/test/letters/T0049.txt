@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/01/2026     UBRN: 0000 6337 8388
+
+Patient: Mrs Sheila RAHMAN     DOB: 07/03/1949     Gender: Female
+NHS No: 999 492 5105     Postcode: TS17 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2010
+Medication
+  Paracetamol 1g QDS
+  Amlodipine 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 42.5 kg/m2 (11/07/2025)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mrs Sheila Rahman, with osteoarthritis of bilat knees.
+
+Socail: She lives with her partner.
+
+Request: I would be grateful for your opinion regadring further management.
+
+Management to date: Management to date has included 6 weeks of physio. There have been no steroid injections. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 40.7.
+
+Imaging: XR report (05/07/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+History: She c/o disturbed sleep due to knee pain. Oxford knee score recorded at 21. Walking tolerance is around 52 mins. She walks without aids.
+
+Kind regards,
+Dr A. Patel
+Marton Park Health Centre

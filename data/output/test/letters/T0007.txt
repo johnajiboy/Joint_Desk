@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 22/03/2026 UBRN: 0000 1280 3762
+
+Patient: Mr Malcolm ALI DOB: 14/07/1956 Gender: Male
+NHS No: 999 812 0411 Postcode: TS1 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr M. Clarke
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+ Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 28.2 kg/m2 (14/01/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr Malcolm Ali,  w/ osteoarthritis
+of the R) knee.
+
+Page 1 of 2
+
+- He would like to discuss knee replacement.
+- XR (16/10/2025): Moderate tricompartmental degenerative change with definite medial joint space loss, KL grade 3.
+-  He reports night pain most nights.
+- He  now mobilises w/ a stick.
+- Oxofrd knee score recorded at 21, compared with 28 at the
+last review.
+- He struggles with stairs and can manage roughly 26 mins on the
+flat.
+- Failed conservative mx  incl. physio x9/52.
+- He has had 1 intra-articular steroid ijnection, with
+only short-lived relief.
+- Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+- Weighed in clinic, BMI today 25.6.
+
+Yours sincerely,
+Dr M. Clarke
+North Ormesby Family Pratcice

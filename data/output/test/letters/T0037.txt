@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/06/2026     UBRN: 0000 7133 9760
+
+Patient: Mr Paul DAWSON     DOB: 03/04/1963     Gender: Male
+NHS No: 999 996 3226     Postcode: TS6 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 25.8 kg/m2 (11/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateufl for your assessment of Mr Paul Dawson, c/o worsening pain in the R) knee.
+
+Social: He lives w/ family. He works & the knee is affecting his job.
+
+Management to date: He has completed 10 weeks of physiotherapy w/ limited benefit. He has had 2 intra-articular steroid inj, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+Request: He would like to discuss knee replacement.
+
+Imagnig: XR report (30/11/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+History: Oxford Knee Score 14, compared w/ 18 at the last reivew. He can walk for about 19 minutes before needing to stop. He walks without aids.
+
+Best wishes,
+Dr K. Ahmed
+Acklam Green Practice

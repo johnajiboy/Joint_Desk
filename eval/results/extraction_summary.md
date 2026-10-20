@@ -1,6 +1,6 @@
-# Extraction evaluation
+# Extraction evaluation: dev set
 
-Model: `claude-sonnet-5-5`. Letters scored: 150. Run time 139s.
+Model: `claude-sonnet-5-5`. Letters scored: 150. Run time 0s.
 
 | Measure | Value |
 |---|---|

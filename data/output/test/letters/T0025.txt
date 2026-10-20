@@ -1,0 +1,44 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 06/06/2026     UBRN: 0000 6732 8436
+
+Patient: Mrs Christine ROBSON     DOB: 12/04/1934     Gender: Female
+NHS No: 999 932 1542     Postcode: TS10 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2016
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.3 kg/m2 (17/05/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 72 mmol/mol (17/05/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mrs Chrisitne Robson, aged 92, c/o worsening pain in the right knee.
+
+I would be grateful for your opinion regarding further management.
+
+She lives alone.
+
+She has had some physiotherapy in the past but I do not have the details. She has not had any inj. Current analgesia: Co-codamol 30/500 2 tbalets QDS PRN.
+
+XR report (14/02/2026): "Mild degenerative change with definite small osteophytes and possible medial joint space narrowing."
+
+Sleeps well. She can walk for about 19 mins before needing to stop. OKS 19/48. She uses a wakling stick.
+
+With thanks,
+Dr S. Byrne
+Thornaby Bridge Practice

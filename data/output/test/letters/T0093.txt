@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/03/2026     UBRN: 0000 6392 2297
+
+Patient: Mr Graham ELLISON     DOB: 25/06/1971     Gender: Male
+NHS No: 999 957 8152     Postcode: TS1 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 33.7 kg/m2 (12/10/2025)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 60 mmol/mol (12/10/2025)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Graham Ellison, with osteoarthritis of bilat knees.
+
+Mx to date: Management to date has included 6 weeks of physio. There have been no steroid inj. Current analgesia: Topical ibuprofen gel PRN. Previous BMI 31.5 (03/09/2023).
+
+History: He walks without aids. Oxford Knee Score 18, down from 20 6 months ago. He struggles with stairs & can manage roughly 35 mins on the flat.
+
+Social: He lives w/ his partner.
+
+Imaging: X-ray rpeort (01/09/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Request: He would like to discsus knee replacement.
+
+Best wishes,
+Dr A. Patel
+North Ormesby Family Practice

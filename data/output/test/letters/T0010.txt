@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/10/2026     UBRN: 0000 8077 6663
+
+Patient: Mrs Patricia RAHMAN     DOB: 27/07/1969     Gender: Female
+NHS No: 999 455 9729     Postcode: TS5 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+  Essential hypertension (SNOMED CT 59621000) - 2012
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Metformin 500mg BD
+  Losartan 50mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 38.6 kg/m2 (18/05/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 59 mmol/mol (18/05/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am wriitng again about Mrs Patricia Rahman, who is on your waiting list w/ OA of the R) knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+I have not recorded a formal Oxford Knee Score. She struggles w/ stairs and can manage roughly 35 mins on the flat. Denies night pain. She walks without aids.
+
+X-ray report (21/09/2026): "Minimal changes only, of doubtful significance."
+
+Mx to date has included three weeks of physio. There have been no steroid inj. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 38.6.
+
+She lives alone and is finding it hard to cope. She works and the knee is affecting her job.
+
+She has now been on your waiting list for 31 weeks. I would be grateful for your opinion regarding furtehr management.
+
+Yours sincerely,
+Dr H. Robson
+Riverside Medical Centre

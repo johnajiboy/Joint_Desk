@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 26/09/2026     UBRN: 0000 9658 3559
+
+Patient: Ms Grace ELLISON     DOB: 16/02/1945     Gender: Female
+NHS No: 999 416 5712     Postcode: TS3 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 34.4 kg/m2 (04/08/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grtaeful for your assessment of Ms Grace Elliosn, c/o worsening pain in bilat knees.
+
+- She lives w/ her partner.
+- She is keen to consider surgery if apporpriate.
+- She can walk for about 36 minutes before needing to stop.
+- Oxford Knee Score 23, compared w/ 19 at the last review.
+- XR report (02/03/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+- Failed conservative mx incl. physio x11/52.
+- She has had three steroid injections, with only short-lived relief.
+- Current analegsia: Paracetamol 1g QDS PRN.
+- Weighed in clinic, BMI today 36.8.
+
+Kind regards,
+Dr P. Shrama
+Linthorpe Lane Surgery

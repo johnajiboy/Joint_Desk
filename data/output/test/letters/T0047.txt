@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/08/2026     UBRN: 0000 9089 1863
+
+Patient: Mr Kevin MOORE     DOB: 13/07/1949     Gender: Male
+NHS No: 999 971 8167     Postcode: TS3 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 36.4 kg/m2 (28/04/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 68 mmol/mol (28/04/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mr Kevin Moore, aged 77. Knee OA, L) knee, for opinion regarding furhter management.
+
+Mx to date: There has been no physio to date. He has had one steroid injection, w/ only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 36.4.
+
+Imaging: XR report (02/02/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Request: He is keen to consider sugrery if appropriate.
+
+Social: He lives with his partner.
+
+History: Walking tolerance is around 39 mins. Sleeps well. He walks without aids.
+
+Yours sincerely,
+Dr M. Clarke
+Linthorpe Lane Surgery

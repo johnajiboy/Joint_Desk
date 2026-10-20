@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/07/2026     UBRN: 0000 5805 9540
+
+Patient: Ms Linda HUSSAIN     DOB: 20/06/1943     Gender: Female
+NHS No: 999 104 2938     Postcode: TS7 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 26.9 kg/m2 (12/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Ms Linda Husasin. Knee osteoarthritis, R) knee, for opinion rgearding further management.
+
+She c/o disturbed sleep due to knee pain. Walking tolerance is around 32 mins. She walks without aids. Her Oxford Knee Score today is 29, down from 29 3 months ago.
+
+XR reprot (20/06/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Mx to date has included 3 weeks of pyhsio. There have been no steroid inj. Current analgesia: Naproxen 500mg BD w/ omeprazole 20mg OD.
+
+She is keen to consider surgery if appropriate.
+
+She lives w/ her partner.
+
+With thanks,
+Dr K. Ahmed
+Riverside Medical Centre

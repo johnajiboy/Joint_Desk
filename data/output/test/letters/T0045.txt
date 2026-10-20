@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 13/06/2026 UBRN: 0000 4095 9853
+
+Patient: Ms Pauline ROBSON DOB: 07/01/1944 Gender: Female
+NHS No: 999 654 1851 Postcode: TS8 (outward code only)
+Registered practice: Teesway Medical Group (Y99007) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ Codeine - nausea
+Latest observations
+ BMI 31.4 kg/m2 (30/05/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Collaegue,
+
+I would be grateful for your assessment of Ms Pauline Robson,
+aged 82, c/o  worsening pain in the L) knee.
+
+- Oxofrd Knee Score 14 (previously 15).
+- She struggles w/ stairs & can  manage roguhly 28
+minutes on  the flat.
+- No night pain.
+- She walks without aids.
+- XR (05/04/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis,
+Kellgren-Lawrence grade 2.
+-  Failed conservative mx incl. physio x2/52.
+- She has had one steroid injection, w/ only short-lived relief.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Weighed in cilnic, BMI today 29.6.
+- She lives alone.
+- She is keen to  conisder surgery if appropriate.
+
+Page 1 of 2
+
+Kind regards,
+Dr A. Patel
+Teesway Medical Group

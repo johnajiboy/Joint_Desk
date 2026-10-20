@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 26/06/2026     UBRN: 0000 3636 1349
+
+Patient: Mr Samuel CARR     DOB: 23/11/1964     Gender: Male
+NHS No: 999 605 0939     Postcode: TS18 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 26.1 kg/m2 (23/01/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Samuel Carr. Knee OA, bilat knees, for opinion regarding further management.
+
+- His Oxford Knee Score today is 24.
+- He struggles w/ stairs and can manage roughly 32 minutes on the flat.
+- Sleeps well.
+- XR report (26/09/2025): "Doubtful joint space narrowing with possible early osteophytic lipping."
+- Failed conservative mx incl. physio x2/52.
+- There have been no steroid inj.
+- Current analgesia: Co-codaoml 30/500 2 tablets QDS PRN.
+- Weighed in clinic, BMI today 28.5.
+- He lives w/ family.
+- I would be gratfeul for your opinion regarding further management.
+
+Yours sincerely,
+Dr J. Fnewick
+Riverside Mdeical Centre

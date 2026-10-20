@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/06/2026     UBRN: 0000 9724 2597
+
+Patient: Mr Barry HUTCHINSON     DOB: 06/04/1959     Gender: Male
+NHS No: 999 898 1409     Postcode: TS5 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 22.3 kg/m2 (03/12/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Barry Hutchinson, aged 67. Knee OA, R) knee, for opinion regarding fruther mnaagement.
+
+Management to date: He has had one steroid inj, w/ only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 22.3.
+
+Imaging: XR report (26/11/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Request: He would like to discuss knee replacement.
+
+History: Pain wakes him at night. Oxford Knee Score 9. He can walk for about 12 minutes before needing to stop.
+
+Social: He lives with his partner.
+
+Kind regards,
+Dr N. Iqbal
+Stockton Quay Health Centre

@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 04/12/2025     UBRN: 0000 8560 9787
+
+Patient: Ms Gillian HUTCHINSON     DOB: 17/01/1953     Gender: Female
+NHS No: 999 037 0419     Postcode: TS5 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 39.3 kg/m2 (30/07/2025)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Ms Gillian Hutchinson. Knee OA, right knee, for opinion regarding further management.
+
+OKS 26/48, compared with 22 at the last reivew. Wlaking tolerance is around 43 minutes. Deines night pain. She now mobilises w/ a stick.
+
+XR (26/03/2025): Mild osteoarthritis with definite osteophytes, predominantly medial compartment, KL2.
+
+Mx to date has included 2 weeks of physiotherapy. She has not had any injections. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 39.3.
+
+She lives w/ her partner.
+
+She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr L. Okonkwo
+Riverside Medical Centre

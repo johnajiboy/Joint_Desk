@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/10/2026     UBRN: 0000 5460 5449
+
+Patient: Mrs Elizabeth MOORE     DOB: 06/02/1965     Gender: Female
+NHS No: 999 483 8016     Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2012
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.2 kg/m2 (24/08/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 59 mmol/mol (24/08/2026)
+
+------------------------------------------------------------------------
+
+Dear Collaegue,
+
+I am writing again about Mrs Elziabeth Moore, aged 61, who is on your waiting list with OA of the right knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+Oxford knee score recorded at 17 (previously 20). She can walk for about 26 mins bfeore needing to stop. She c/o night pain most nights. She walks without aids.
+
+X-ray (29/05/2026): Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance, KL4.
+
+She tells me she saw a physiotherapist a while ago. She has had one steroid inejction, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+She works and the knee is affecting her job.
+
+She has now been on your waiting list for 51 weeks. She is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr J. Feniwck
+Eston Hills Surgery

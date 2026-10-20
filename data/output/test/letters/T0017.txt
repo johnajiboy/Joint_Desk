@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/10/2026     UBRN: 0000 4618 7734
+
+Patient: Mrs Brenda GRAHAM     DOB: 04/09/1951     Gender: Female
+NHS No: 999 339 2472     Postcode: TS1 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2014
+Medication
+  Paracetamol 1g QDS PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.7 kg/m2 (11/09/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mrs Brenda Graham, aged 75, who is on your waiting list w/ OA of the R) knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+- She cares for her grandchildren several days a week.
+- She has been waiting 73 weeks so far.
+- She is keen to consider surgery if appropriate.
+- Oxford Knee Score 30.
+- Sleeps well.
+- She can walk for about 33 mins before needing to stop.
+- XR (26/03/2026): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+- Failed conservative mx incl. physio x7/52.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- Weighed in clinic, BMI today 27.7.
+
+With thanks,
+Dr P. Sahrma
+Thornaby Bridge Pratcice

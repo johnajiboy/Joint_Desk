@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 11/10/2025 UBRN: 0000 2800 9020
+
+Patient: Mrs Grace SMITH DOB: 08/04/1960 Gender: Female
+NHS No: 999 245 4423 Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008) Referring clinician: Dr K. Ahmed
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 31.0 kg/m2 (21/08/2025)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Grace  Smith, aged 65, w/ osteoarthritis
+of the L) knee.
+
+She lives with family.
+
+She would like to discuss knee replacement.
+
+Walking tolerance is around 28 mins. OKS 12/48 (perviously
+12).
+
+XR report (26/06/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Page 1 of 2
+
+She has completed 19 weeks of physio with limited benefit.
+She has not had any inj. Current analgesia: Topical ibuprofen
+gel PRN.
+
+Yours sincerely,
+Dr K. Ahmed
+Eston Hills Surgery

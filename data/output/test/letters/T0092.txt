@@ -1,0 +1,47 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 15/10/2026 UBRN: 0000 4051 1373
+
+Patient: Mr Chidi WALSH DOB: 30/08/1973 Gender: Male
+NHS No: 999 541 5445 Postcode: TS17 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004) Referring clinician: Dr M. Clarke
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+ Paracetamol 1g QDS
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 43.4 kg/m2 (19/07/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Chidi Walsh, aged 53, who  is on your
+waiting  list w/ OA of the right knee. He has deteriorated
+since the original referral & I would  be grateful if
+his care could be expedited.
+
+History: Oxford Knee Score 32, down from 34 3 months ago. He
+struggles with stairs and can manage roughly 43 mins
+on the flat. Denies night pain. He walks without aids.
+
+Imaging: XR reprot (08/08/2026): "Doubtful joint space narrowing with possible early osteophytic lipping."
+
+Management to date: He has not yet had physiotherapy. He has
+had 1 intra-articular steroid  inj, with only short-lived relief. Current
+analgesia: Paracetamol 1g QDS.
+
+Page 1 of 2
+
+Request: He has now been on your waiting list for 55 weeks.
+He would like to discuss knee replacement.
+
+Best wishes,
+Dr M. Clarke
+Marotn Park Health  Centre

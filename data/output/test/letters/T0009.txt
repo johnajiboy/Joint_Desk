@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 26/08/2026     UBRN: 0000 6813 8968
+
+Patient: Mr Malcolm PEARSON     DOB: 11/01/1976     Gender: Male
+NHS No: 999 148 5155     Postcode: TS1 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 25.0 kg/m2 (22/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Traige Team,
+
+Thank you for seeing Mr Malcolm Pearosn, aged 50, with osteoarthritis of the left knee.
+
+- He lives w/ his partner.
+- Walking tolerance is around 39 mins.
+- His Oxford Knee Score today is 30, down from 35 6 months ago.
+- He walks without aids.
+- I would be grateful for your opinion regarding further manageemnt.
+- He has had one steroid injcetion, with only short-lived reilef.
+- Current analgesia: Topical ibuprofen gel PRN.
+- XR report (01/12/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+With thanks,
+Dr L. Okonkwo
+Acklam Green Practice

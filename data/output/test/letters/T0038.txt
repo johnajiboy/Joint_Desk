@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 26/06/2026 UBRN: 0000 2698 7201
+
+Patient: Mr Barry LISTER DOB: 19/06/1954 Gender: Male
+NHS No: 999 691 8491 Postcode: TS4 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001) Referring clinician: Dr T. Adeyemi
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+ Essential hypertension (SNOMED CT 59621000) - 2021
+Medication
+ Paracetamol 1g QDS PRN
+ Amlodipine 5mg OD
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 28.6 kg/m2 (06/04/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Page 1 of 2
+
+I would be grateful for your assessmnet of Mr  Barry
+Lister, who  has worsening pain in bilat knees.
+
+- He lives w/ fmaily.
+- Failed conservative mx incl. physio x12/52.
+- There have  been no steroid inj.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- Weighed in clinic, BMI today 31.0.
+- X-ray report (09/03/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+- He c/o disturbed sleep due to knee pain.
+- He walks without aids.
+- OKS 21/48.
+- Walking tolerance is around 24 mins.
+- He is  keen to cnosider surgery  if appropriate.
+
+With tahnks,
+Dr T. Adeyemi
+Riverside Medical Centre

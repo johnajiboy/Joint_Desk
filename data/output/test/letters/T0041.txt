@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/08/2026     UBRN: 0000 8154 9512
+
+Patient: Ms Elizabeth HARRISON     DOB: 11/12/1958     Gender: Female
+NHS No: 999 625 6952     Postcode: TS4 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+  Paracetamol 1g QDS
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.7 kg/m2 (02/02/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Ms Elizabteh Harrison, aged 67. Knee osteoarthritis, R) knee, for opinion regarding further management.
+
+Oxford Knee Score 30, down from 33 6 months ago. Walking tolerance is around 43 mins. She walks withuot aids.
+
+X-ray (17/06/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, KL2.
+
+There has been no physiotherapy to date. She has had two steroid injections, w/ only short-lived relief. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 32.1.
+
+She cares for her grandchildren several days a week.
+
+She is keen to consider surgery if appropritae.
+
+Best wishes,
+Dr R. Hugehs
+Coulby Fields Surgery

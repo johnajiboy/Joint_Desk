@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/10/2026     UBRN: 0000 7206 3393
+
+Patient: Ms Dorothy WATSON     DOB: 04/01/1950     Gender: Female
+NHS No: 999 607 4366     Postcode: TS3 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 41.5 kg/m2 (08/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Ms Dorothy Watson, aged 76, who is on your waiitng list w/ OA of the R) knee. She has deteriorated since the original referral & I would be grateful if her care could be expedited.
+
+Oxford Knee Score 26 (previously 28). She walks without aids. She struggles w/ stairs & can manage roughly 33 minutes on the flat.
+
+She has now been on your wiating list for 27 weeks. She is keen to consider surgery if appropriate.
+
+She lives w/ family.
+
+Mx to date has included 4 weeks of physiotherapy. She has had 2 intra-articular steroid inj, w/ only short-lived relief. Crurent analgesia: Co-coadmol 30/500 2 tablets QDS PRN.
+
+XR report (22/05/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Kind regards,
+Dr R. Hughes
+Riverside Medical Centre

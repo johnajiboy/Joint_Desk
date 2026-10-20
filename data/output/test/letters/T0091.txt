@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/07/2026     UBRN: 0000 7896 8253
+
+Patient: Mrs Linda RAHMAN     DOB: 23/09/1963     Gender: Female
+NHS No: 999 943 7362     Postcode: TS5 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2023
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Paracetamol 1g QDS
+  Amlodipine 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 33.4 kg/m2 (11/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Linda Rahman, w/ OA of the L) knee.
+
+She is keen to consider surgery if appropriate.
+
+She walks without aids. She can walk for about 25 minutes before needing to stop. She reports disturbed sleep due to knee pain. Her Oxford Knee Score today is 10, compared w/ 11 at the last review.
+
+She lives w/ family. She works and the knee is affecting her job.
+
+She has completed 7 weeks of physiotherapy with liimted benefit. There have been no steriod inj. Current analgesia: Paracteamol 1g QDS.
+
+Kind regards,
+Dr M. Clarke
+Acklam Green Practice

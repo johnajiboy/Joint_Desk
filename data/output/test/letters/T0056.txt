@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/07/2026     UBRN: 0000 5669 5108
+
+Patient: Mrs Aisha ROBSON     DOB: 04/08/1964     Gender: Female
+NHS No: 999 041 1484     Postcode: TS8 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2015
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 27.3 kg/m2 (18/04/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 61 mmol/mol (18/04/2026)
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mrs Aisha Robson, w/ OA of both knees.
+
+Walking tolerance is around 60 minutes. Denies night pain. She walks without aids.
+
+XR report (06/10/2025): "Doubtful joint space narrowing with possible early osteophytic lipping."
+
+Management to date has incluedd 14 weeks of physiotherapy. She has had one steriod inj, with only short-lived relief. Crurent analgesia: Topical ibuprofen gel PRN. Previous BMI 29.7 (23/02/2025).
+
+She would like to discuss knee replacement.
+
+With thanks,
+Dr K. Ahmed
+Teseway Medical Group

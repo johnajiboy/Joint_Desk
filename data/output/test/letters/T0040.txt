@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 30/08/2026     UBRN: 0000 8776 7905
+
+Patient: Ms Sandra ROBSON     DOB: 28/02/1947     Gender: Female
+NHS No: 999 136 3874     Postcode: TS5 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2008
+Medication
+  Paracetamol 1g QDS PRN
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 37.6 kg/m2 (19/04/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Ms Sandra Robson, who has worsennig pain in the left knee.
+
+Oxofrd Knee Score 23, compared with 25 at the last review. Wakling tolerance is around 41 mins. Denies night pain. She uses a walking stick.
+
+XR report (21/12/2025): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+She has had three weeks of physiotherapy in the community. There have been no steroid inj. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 35.0.
+
+She lives alone and is finding it hard to cope.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr L. Okonkwo
+Stockton Quay Health Centre

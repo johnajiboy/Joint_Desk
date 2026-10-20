@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Urgent Referral date: 04/07/2026 UBRN: 0000 8187 7905
+
+Patient: Mr Alan RAHMAN DOB: 23/05/1945 Gender: Male
+NHS No: 999 988 1815 Postcode: TS7 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr H. Robson
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+ Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 24.9 kg/m2 (13/02/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Docotr,
+
+Re: Mr Alan Rahman.  Knee osteoatrhritis, R) knee, for opinion
+regarding further management.
+
+He would like to discuss knee replacement.
+
+Page 1 of 2
+
+XR report  (24/12/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+His Oxford Knee Score today is 35  (previously 39).
+He can walk for about 55 minutes before needing to
+stop. He walks without aids. Denies night pain.
+
+Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Kind regards,
+Dr H. Robson
+North Omresby Family Practice

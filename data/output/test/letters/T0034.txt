@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 10/02/2026 UBRN: 0000 5835 4610
+
+Patient: Mr John WILSON DOB: 08/07/1945 Gender: Male
+NHS No: 999 491 8567 Postcode: TS18 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005) Referring clinician: Dr S. Byrne
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 31.3 kg/m2 (22/09/2025)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr John Wilson, aged 80. Knee OA,  bilat knees, for opinion regarding
+further management.
+
+He has had three weeks of physio in the community. Current
+anlagesia: Topical ibuprofen gel PRN. Previous BMI
+28.2 (06/09/2024).
+
+Page 1 of 2
+
+XR report (11/11/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+He walks without aids. Walking tolerance is around 18 minutes. His Oxford
+Knee Score today is  14. Pain wakes him at night.
+
+He is keen to consider surgery  if appropriate.
+
+Best wishes,
+Dr S. Byrne
+Coulby Fields Surgery

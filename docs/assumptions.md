@@ -52,6 +52,45 @@ generated. Every value below is either sourced or stated as an assumption. **Bef
 | Coded BMI out of date, newer BMI in the text | 12% | Tests choosing the most recent value |
 | Expedite letters (state weeks waiting) | About 30% | GPs write again when patients deteriorate |
 
+### X-ray wording for KL 2
+
+Two of the three KL 2 wordings used "early" ("Early osteoarthritic change...", "...early medial joint space
+narrowing..."), which fits KL 1 as well. The extraction model read "early" as KL 1, and the answer key could
+not fairly call that wrong. Both are now worded with "mild" and "definite osteophytes", the KL 2 criteria, and
+no KL 2 wording says "early". They were replaced in place so the random draws are unchanged.
+
+The 150 dev letters on disk were generated before this fix and have not been regenerated, so their results stay
+comparable. 20 of them use one of the old KL 2 wordings (L0005, L0017, L0019, L0028, L0049, L0051, L0054,
+L0064, L0080, L0083, L0098, L0099, L0107, L0123, L0127, L0131, L0145, L0146, L0147, L0150). Running
+`python data/generate_letters.py` again would change only that line in those 20 letters
+(`tests/test_generate_letters.py` checks this). The test set uses the new wording.
+
+## Held-out test set
+
+The extraction prompt was tuned on the 150 dev letters, so dev scores are optimistic. The test set is for a
+fair score and must never be used to change the prompt.
+
+| Item | Dev set | Test set |
+|---|---|---|
+| Folder | `data/output/` | `data/output/test/` |
+| Letters | 150, IDs L0001-L0150, seed 11 | 100, IDs T0001-T0100, seed 2027 |
+| Patients | stratified sample of the 1,500 | different patients: dev patients excluded |
+| Letter mode | normal | hard |
+
+Hard mode keeps every fact and rule the same and makes the text harder to read. Each change draws from its own
+random generator, and every evidence quote is re-read from the final text so it stays an exact substring.
+
+| Feature | Rate | Detail |
+|---|---|---|
+| GP shorthand | each phrase 60% | "OA", "R) knee", "L) knee", "bilat knees", "physio", "c/o", "w/", "&", "mins", "XR", "Mx", "inj" |
+| Typos | 2-5 per letter | two letters swapped inside a word of 6+ letters; never digits |
+| Facts out of order | 60% | letter sections and history sentences shuffled |
+| BMI conflicts | more often | coded BMI out of date 35% (vs 15%), newer BMI in the text 30% (vs 12%), or an older dated BMI in the text 35% of the rest |
+| Scanned-style text | 35% | hard line breaks mid-sentence, doubled spaces, collapsed columns, a "Page 1 of 2" break |
+
+Shorthand and typos go only in the GP's free text, not the computer-made record block, and never in the
+radiologist's X-ray wording.
+
 Gold rule: a fact is in the answer key only if the letter states it. Where two values conflict, the newest
 dated value is gold. Weeks waiting for the pathway decision comes from the waiting list (the RTT clock), not
 the letter.

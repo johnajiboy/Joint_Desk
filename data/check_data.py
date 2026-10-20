@@ -1,12 +1,13 @@
 """Check the generated data and write a summary for the report.
 
-    python data/check_data.py      -> prints checks, writes data/output/data_summary.md
+    python data/check_data.py                          -> checks the dev set, writes data/output/data_summary.md
+    python data/check_data.py --out data/output/test   -> checks the held-out test set the same way
 
 Fails loudly if anything is inconsistent: invalid NHS numbers, evidence that is not in its letter,
 gold pathways that the rules don't reproduce, or counts that don't add up.
 """
 from __future__ import annotations
-import json, sys
+import argparse, json, sys
 from pathlib import Path
 import pandas as pd
 
@@ -19,11 +20,14 @@ OUT = ROOT / "data" / "output"
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=OUT, help="folder with the letters and answer key")
+    out = ap.parse_args().out
     pts = pd.read_csv(OUT / "patients_clean.csv")
     raw = pd.read_csv(OUT / "patients_raw.csv")
     log = pd.read_csv(OUT / "data_quality_log.csv")
-    keys = [json.loads(l) for l in open(OUT / "answer_key.jsonl")]
-    letters = {json.loads(l)["letter_id"]: json.loads(l)["text"] for l in open(OUT / "letters.jsonl")}
+    keys = [json.loads(l) for l in open(out / "answer_key.jsonl")]
+    letters = {json.loads(l)["letter_id"]: json.loads(l)["text"] for l in open(out / "letters.jsonl")}
 
     # patients
     assert pts.nhs_number.map(is_valid_nhs_number).all(), "invalid NHS number"
@@ -49,6 +53,7 @@ def main():
              "weeks_waiting": int(pts.set_index("patient_id").at[k["patient_id"], "weeks_waiting"]),
              "night_pain": g["night_pain"], "lives_alone_or_carer": g["lives_alone_or_carer"]}
         assert decide(f)["pathway"] == k["gold_pathway"], k["letter_id"]
+        assert (out / "letters" / f"{k['letter_id']}.txt").read_text() == t, f"{k['letter_id']}: file differs"
     print("All checks passed.")
 
     # summary for the report
@@ -75,9 +80,9 @@ def main():
         f"Letters whose pathway differs from the full record (because facts are missing from the letter): "
         f"{(kdf.gold_pathway!=kdf.record_pathway).sum()}", "",
         "Difficulty tags:", "", tags.to_frame("letters").to_markdown(), "",
-        "Facts stated per field (out of 150):", "", pd.Series(stated).to_frame("letters").to_markdown(), "",
+        f"Facts stated per field (out of {len(keys)}):", "", pd.Series(stated).to_frame("letters").to_markdown(), "",
     ]
-    (OUT / "data_summary.md").write_text("\n".join(lines))
+    (out / "data_summary.md").write_text("\n".join(lines))
     print("Wrote data_summary.md")
 
 

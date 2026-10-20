@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/10/2026     UBRN: 0000 6650 8168
+
+Patient: Mr Peter PEARSON     DOB: 08/04/1958     Gender: Male
+NHS No: 999 677 0265     Postcode: TS3 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.4 kg/m2 (03/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mr Peter Pearson, who is on your waiting list w/ osteoarthritis of the R) knee. He has deteriorated since the original referral & I would be grateful if his care could be expedited.
+
+- Oxford knee score recorded at 28, comapred w/ 24 at the last review.
+- He struggles w/ stairs & can manage roughly 46 mintues on the flat.
+- He walks without aids.
+- XR (14/09/2026): Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance, KL4.
+- Mx to date has included 11 weeks of physio.
+- Current analgesia: Naproxen 500mg BD with omepraozle 20mg OD.
+- BMI was 38.8 on 15/06/2024.
+- He has now been on your waiting list for 68 weeks.
+- He is keen to consider sugrery if appropriate.
+
+Best wishes,
+Dr A. Patel
+Acklam Green Practice

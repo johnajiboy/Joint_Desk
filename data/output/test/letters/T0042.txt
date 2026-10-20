@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 11/04/2026 UBRN: 0000 7175 8846
+
+Patient: Mrs Brenda BELL DOB: 02/09/1952 Gender: Female
+NHS No: 999 850 1229 Postcode: TS6 (outward code only)
+Registered practice: Acklam Green Practice (Y99003) Referring clinician: Dr E. Lowther
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+ Paracetamol 1g QDS
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 28.5 kg/m2 (13/10/2025)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mrs Brenda Bell. Knee osteoarthritis, L) knee, for
+opinion regarding  further management.
+
+History: Her Oxofrd Knee Score today is 26. She struggles with staris
+& can manage roughly 28 mins on the flat. She walks without aids.
+
+Imaging: XR (09/07/2025): Mild degenerative change with definite small osteophytes and possible medial joint space narrowing,
+Kellgren-Lawrence grade 2.
+
+Management to date: She has cmopleted 8 weeks of physio w/ limited
+benefit. She has not had any injections. Current analgesia:
+Paracetamol 1g QDS. Weighed in clinic, BMI today 30.9.
+
+Social: She lives w/ her partner.
+
+Page 1 of 2
+
+Request: She is keen to consider surgery if apprporiate.
+
+Yours sincerely,
+Dr E. Lowther
+Acklam Green Pratcice

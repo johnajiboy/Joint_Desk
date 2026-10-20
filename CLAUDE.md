@@ -31,7 +31,7 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 
 ```
 kneedss/          shared Python: standards.py, rules.py, extract.py, optimise.py, schemas.py
-data/             generators + output (already built: 1,500 patients, 150 letters, answer key)
+data/             generators + output (1,500 patients; 150 dev letters; 100 held-out test letters in output/test/)
 backend/          FastAPI app (api routes, db, services)
 frontend/         React app
 eval/             evaluation scripts that write tables/figures for the report
@@ -56,7 +56,8 @@ docs/             assumptions, data dictionary
 2. Done: extraction, `kneedss/extract.py` + `eval/eval_extraction.py` scored against `data/output/answer_key.jsonl`
    (per-field accuracy, quote hit rate, pathway agreement). Cache LLM results to `data/cache/`, one JSON file
    per letter with the model name alongside the facts (`data/cache/<model>/<letter_id>.json`).
-   Results: `eval/results/extraction_summary.md`.
+   Results: `eval/results/extraction_summary.md`. Held-out test set (`data/output/test/`, hard letters, new
+   patients): `eval/results/test/`, compared in `eval/results/dev_vs_test.md`. Never tune the prompt on it.
 3. Cleaning: `kneedss/clean.py` turns `patients_raw.csv` into a clean table; check it against
    `data_quality_log.csv`. Discretise OKS bands, BMI categories, wait bands.
 4. Knowledge: decision tree trained on the clean data, compared with the expert rules.
@@ -146,6 +147,10 @@ Full-screen, animated, dark by default with the same light/dark toggle. Clicking
 
 ```bash
 python data/generate_patients.py && python data/generate_letters.py && python data/check_data.py
+python data/generate_letters.py --n 100 --seed 2027 --out data/output/test --prefix T --hard \
+  --exclude data/output/answer_key.jsonl && python data/check_data.py --out data/output/test
+python eval/eval_extraction.py && python eval/eval_extraction.py --data data/output/test --results eval/results/test
+python eval/compare_sets.py
 pytest
 uvicorn backend.main:app --reload
 cd frontend && npm run dev

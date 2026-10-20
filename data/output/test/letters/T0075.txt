@@ -1,0 +1,48 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 15/08/2026 UBRN: 0000 5711 9832
+
+Patient: Mr Colin FLETCHER DOB: 03/08/1968 Gender: Male
+NHS No: 999 737 7478 Postcode: TS5 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr H. Robson
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+ Essential hypertension (SNOMED CT 59621000) - 2020
+Medication
+ Paracetamol 1g QDS
+ Amlodipine 5mg OD
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 30.9 kg/m2 (06/05/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mr Colin
+Fletcher, c/o worsening pain in the left knee.
+
+Oxford knee score recorded at 27, compared w/ 27 at the
+last rveiew. He can walk for about 34 minutes before needing to
+stop. He walks without aids.
+
+Page 1 of 2
+
+XR  report (31/01/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+He has had 6  weeks of physio in the community. Current
+anaglesia: Paracetamol 1g QDS. Weighed in clinic, BMI today
+32.5.
+
+He lives with family.
+
+He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr H. Robson
+North Ormesby Family Practice

@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 18/07/2026 UBRN: 0000 3622 3507
+
+Patient: Mrs Sheila HALL DOB: 07/12/1961 Gender: Female
+NHS No: 999 331 7616 Postcode: TS1 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+ Essential hypertension (SNOMED CT 59621000) - 2016
+Medication
+ Naproxen 500mg BD with omeprazole 20mg OD
+ Amlodipine 5mg OD
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 26.2 kg/m2 (29/03/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Sheila Hall,  aged 64, w/ OA of the L) knee.
+
+Imaging: X-ray report (27/09/2025): "Mild osteoarthritis with definite osteophytes, predominantly medial compartment."
+
+Mx to date: Mx to date has included 17 weeks of physio. There have
+been no steroid injections. Current analgesia: Naproxen
+500mg BD w/ omeprazole 20mg OD. Previous BMI 24.0 (19/10/2023).
+
+History: She uses a frame outdoors. She can walk for about 19 minutes
+beofre needing  to stop. Denies night pain. Oxford
+knee score recorded at 25, down from 23 3 months ago.
+
+Request: She would like to discuss knee replacement.
+
+Page 1 of 2
+
+Kind regards,
+Dr A. Patel
+Coulby Feilds Surgery

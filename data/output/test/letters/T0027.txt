@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 22/06/2026 UBRN: 0000 2003 9686
+
+Patient: Mrs Joan ELLISON DOB: 17/04/1961 Gender: Female
+NHS No: 999 939 3195 Postcode: TS3 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009) Referring clinician: Dr L. Okonkwo
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+ Paracetamol 1g QDS
+Allergies
+ Codeine - nausea
+Latest observations
+ BMI 42.6 kg/m2 (08/03/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Traige Team,
+
+I would be grateufl for your assessment of Mrs Joan Ellison, aged
+65, who has worsening pain in the left knee.
+
+Page 1 of 2
+
+- An XR has been requseted but not yet reported.
+- I would be grateufl for your opinion regarding
+further management.
+- OKS 16/48, compared with 23 at the last review.
+- Walknig tolerance is around 22 minutes.
+- She walks without aids.
+- There have been no steroid inj.
+- Current analgesia: Paracetamol 1g QDS.
+- She lives w/ family.
+- She works and the knee is affecting her job.
+
+With thanks,
+Dr L. Okonkwo
+Thornaby Bridge Practice

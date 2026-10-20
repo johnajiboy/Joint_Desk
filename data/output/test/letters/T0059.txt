@@ -1,0 +1,44 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 11/09/2026 UBRN: 0000 8780 3435
+
+Patient: Mr Derek ELLISON DOB: 26/02/1960 Gender: Male
+NHS No: 999 893 6373 Postcode: TS6 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009) Referring clinician: Dr T. Adeyemi
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+ Essential hypertension (SNOMED CT 59621000) - 2009
+Medication
+ Paracetamol 1g QDS PRN
+ Amlodipine 5mg OD
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 27.5 kg/m2 (23/06/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Trigae Team,
+
+Re: Mr Derek Ellison,  aged 66. Knee OA, left knee, for opinion regarding
+further management.
+
+Page 1 of 2
+
+- Oxford knee score recorded at 19.
+- Walking tolerance is around 15 minutes.
+- No  night pain.
+- XR report (12/07/2026): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+- There  has been no physiotherapy to date.
+- He has not had any injections.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- He lives alone.
+- I would be grateful for your opiinon regarding further management.
+
+Kind regards,
+Dr T. Adeyemi
+Thornaby Bridge Practice

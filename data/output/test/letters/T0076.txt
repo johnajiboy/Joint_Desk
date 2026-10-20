@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/10/2026     UBRN: 0000 5810 7763
+
+Patient: Ms Linda TAYLOR     DOB: 04/12/1955     Gender: Female
+NHS No: 999 017 3060     Postcode: TS6 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2020
+Medication
+  Topical ibuprofen gel PRN
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 34.8 kg/m2 (11/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about Ms Linda Taylor, who is on your waiting list w/ OA of the left knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+She struggles w/ stairs & can manage roughly 26 mins on the flat. She walks without aids.
+
+XR (19/05/2026): Doubtful joint space narrowing with possible early osteophytic lipping, KL grade 1.
+
+She has completed twelve weeks of physiotherapy w/ limited benefit. She has had 2 intra-articular steroid injections, w/ only short-lived relief. Current analgesia: Topical ibuprofen gel PRN. Weighed in cilnic, BMI today 32.2.
+
+She lives w/ her partner.
+
+She has now been on your waiting list for 96 weeks. She would like to dicsuss knee replacement.
+
+Best wishes,
+Dr P. Sharma
+Teesway Medical Group

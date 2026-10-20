@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/08/2026     UBRN: 0000 1589 5833
+
+Patient: Ms Maureen WILSON     DOB: 04/05/1962     Gender: Female
+NHS No: 999 764 3224     Postcode: TS6 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2015
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 32.9 kg/m2 (05/03/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 59 mmol/mol (05/03/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Maureen Wilson, aged 64, c/o worsening pain in the right knee.
+
+- Her Oxford Knee Score today is 32.
+- She can walk for about 56 mins before needing to stop.
+- Denies night pain.
+- She walks wtihout aids.
+- XR report (18/10/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+- Mx to date has included three weeks of physiotherapy.
+- There have been no steroid inj.
+- Current analgesia: Naproxen 500mg BD w/ omerpazole 20mg OD.
+- Previous BMI 29.8 (06/10/2023).
+- She lives w/ family.
+- She would like to discuss knee replacement.
+
+Best wishes,
+Dr R. Hughes
+Acklam Green Practice

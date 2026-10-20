@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/01/2026     UBRN: 0000 9115 4740
+
+Patient: Mrs Janet DIXON     DOB: 25/03/1958     Gender: Female
+NHS No: 999 556 3185     Postcode: TS17 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2014
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 40.3 kg/m2 (13/07/2025)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 67 mmol/mol (13/07/2025)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Janet Dixon, aged 67, c/o worsening pain in the L) knee.
+
+- She lives alone.
+- I would be garteful for your opinion regardnig further manaegment.
+- She walks without aids.
+- Walking tolerance is around 37 mins.
+- Sleeps well.
+- There has been no pyhsio to date.
+- She has not had any inj.
+- Current analgesia: Paracetaoml 1g QDS.
+- XR report (01/04/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Kind regards,
+Dr T. Adeyemi
+Acklam Green Practice

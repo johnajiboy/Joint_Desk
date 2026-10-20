@@ -1,0 +1,44 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 23/04/2026     UBRN: 0000 6908 6963
+
+Patient: Mr John KHAN     DOB: 05/04/1943     Gender: Male
+NHS No: 999 656 4517     Postcode: TS18 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2020
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.4 kg/m2 (22/11/2025)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 62 mmol/mol (22/11/2025)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grtaeful for your assessment of Mr John Khan, who has worsening pain in the right knee.
+
+- Walking tolerance is around 35 mins.
+- Oxford Knee Score 27 (previously 24).
+- No night pain.
+- He walks without aids.
+- XR report (27/06/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- He has had six weeks of physiotherapy in the community.
+- He has had two steroid inj, with only short-lived rleief.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Wegihed in clinic, BMI today 29.6.
+- I would be grateful for your opinion regarding futrher management.
+
+With thanks,
+Dr T. Adeyemi
+Stockton Quay Health Centre

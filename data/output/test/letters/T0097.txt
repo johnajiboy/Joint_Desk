@@ -1,0 +1,48 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 11/10/2026 UBRN: 0000 7374 7085
+
+Patient: Mr John BROWN DOB: 12/07/1955 Gender: Male
+NHS No: 999 504 2940 Postcode: TS5 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002) Referring clinician: Dr R. Hughes
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 30.1 kg/m2 (31/08/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr John Brown, aged 71, who is on your waiting
+list w/  OA of the left knee. He has detreiorated since
+the original referral and I would be grateful if his care could
+be expedited.
+
+He  has been waiting 36 weeks so far. I would be grateful for your
+opinion regarding  further management.
+
+There has been no physio  to date. He has not had any injections.
+Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic,
+BMI today 28.3.
+
+Page 1 of 2
+
+XR report (10/05/2026): "Mild degenerative change with definite small osteophytes and possible medial joint space narrowing."
+
+He lives w/ his partner.
+
+Denies night pain. Walking tolerance is around 38 minutes. He walks
+withuot aids. Oxford knee score rceorded at 26.
+
+Kind regards,
+Dr R. Hughes
+Linthorpe Lane Surgery

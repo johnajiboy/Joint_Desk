@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/08/2026     UBRN: 0000 5700 8330
+
+Patient: Mr George MOORE     DOB: 04/11/1952     Gender: Male
+NHS No: 999 369 3049     Postcode: TS10 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 39.5 kg/m2 (01/02/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 73 mmol/mol (01/02/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mr George Moore, c/o worsennig pain in the R) knee.
+
+- Wakling tolerance is around 35 mins.
+- Denies night pain.
+- XR (13/04/2026): Mild osteoarthritis with definite osteophytes, predominantly medial compartment, KL grade 2.
+- He tells me he saw a physiotherapist a while ago.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- Weighed in clinic, BMI today 39.5.
+- He lives w/ family.
+- I would be grateful for your opinion regarding further maangement.
+
+Kind regards,
+Dr N. Iqbal
+Linthorpe Lane Surgery

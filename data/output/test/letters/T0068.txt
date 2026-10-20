@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 15/06/2026 UBRN: 0000 8869 9488
+
+Patient: Mr William DAWSON DOB: 01/06/1961 Gender: Male
+NHS No: 999 577 1470 Postcode: TS1 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr H. Robson
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+ Paracetamol 1g QDS
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 31.1 kg/m2 (26/03/2026)
+ Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mr William
+Dawson, who has worsening pain in the right knee.
+
+He lives w/ his partner. He works and the knee is affecting his
+job.
+
+He walks without aids. He struggles with stairs and can manage roughly
+21 mins on the flat. No night pain.
+
+He is keen to consider surgery if apporpriate.
+
+X-ray report (27/09/2025): "Doubtful joint space narrowing with possible early osteophytic lipping."
+
+Page 1 of 2
+
+Mx to date has included six weeks of phsyiotherapy. Current analgesia:
+Paracetamol 1g QDS. Weighed in clinic, BMI today 29.3.
+
+With tahnks,
+Dr H. Robson
+North  Ormseby Family Practice

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 29/09/2026     UBRN: 0000 6159 9533
+
+Patient: Mrs Joan HALL     DOB: 30/12/1948     Gender: Female
+NHS No: 999 602 5152     Postcode: TS7 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 26.9 kg/m2 (14/08/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Joan Hall, aged 77. Knee OA, L) knee, for opinion regarding further management.
+
+History: Oxford Knee Score 20, compared w/ 18 at the last review. She struggles w/ satirs & can manage roughly 33 mins on the flat. No night pain.
+
+Imaigng: X-ray (26/02/2026): Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity, KL4.
+
+Management to date: She has had 9 weeks of physio in the community. She has not had any injections. Current analgesia: Co-codaoml 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 26.9.
+
+Social: She lives w/ her partner.
+
+Request: She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr L. Okonkwo
+Thornaby Bridge Practice

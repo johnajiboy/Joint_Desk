@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/08/2026     UBRN: 0000 9012 7410
+
+Patient: Ms Carol MENSAH     DOB: 29/04/1951     Gender: Female
+NHS No: 999 160 8311     Postcode: TS10 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2015
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Amlodipine 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 35.6 kg/m2 (01/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Ms Carol Mensah, aged 75. Knee OA, both knees, for opinion regarding further management.
+
+- OKS 21/48, compared with 22 at the last review.
+- Walking tolerance is aronud 27 mins.
+- She c/o disturbed sleep due to knee pain.
+- XR (19/02/2026): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+- She has not yet had physio.
+- She has had one steorid inj, with only short-lived reilef.
+- Current analgesia: Naproxen 500mg BD w/ omeparzole 20mg OD.
+- She lives alone.
+- She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr S. Byrne
+Marton Park Health Centre

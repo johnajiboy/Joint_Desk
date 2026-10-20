@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/08/2026     UBRN: 0000 2826 6713
+
+Patient: Mr Neil PEARSON     DOB: 14/07/1942     Gender: Male
+NHS No: 999 741 8042     Postcode: TS10 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 24.6 kg/m2 (03/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr Neil Paerson, w/ OA of the L) knee.
+
+- His Oxford Knee Score today is 29, compared w/ 31 at the last review.
+- Denies night pain.
+- He can walk for about 35 minutes before needing to stop.
+- He would like to discsus knee replacement.
+- He has had 20 weeks of physio in the community.
+- There have been no steroid inj.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- X-ray reprot (03/06/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+- He lives with his partner.
+
+Best wishes,
+Dr L. Okonkwo
+Acklam Green Practice

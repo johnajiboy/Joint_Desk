@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/07/2026     UBRN: 0000 3730 5527
+
+Patient: Mrs Ann BELL     DOB: 19/11/1953     Gender: Female
+NHS No: 999 169 9775     Postcode: TS5 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.6 kg/m2 (17/01/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seieng Mrs Ann Bell, aged 72, with OA of the L) knee.
+
+I have not recorded a formal Oxford Knee Score. She can walk for about 44 minutes before needing to stop. No night pain. She walks without aids.
+
+XR report (13/01/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+Management to date has included nine weeks of physoitherapy. She has had two steroid injections, with only short-lived relief. Current aanlgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 35.6.
+
+She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr M. Clakre
+Marton Park Health Centre

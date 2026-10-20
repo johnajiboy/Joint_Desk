@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/07/2026     UBRN: 0000 5673 4084
+
+Patient: Mr Keith ATKINSON     DOB: 19/11/1950     Gender: Male
+NHS No: 999 090 3735     Postcode: TS1 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2023
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 34.8 kg/m2 (22/06/2026)
+  Smoking status: Current smoker
+Recent results
+  HbA1c 74 mmol/mol (22/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Keith Atkinson, aged 75, with OA of the R) knee.
+
+Request: I would be grateful for your opinion regarding further management.
+
+History: Denies night pain. He struglges with stairs and can mnaage roughly 30 mins on the flat. OKS 15/48, down from 18 6 mnoths ago.
+
+Imaging: XR report (29/04/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Social: He lives alone and is finding it hard to cope.
+
+Mx to date: He has completed ten weeks of physio w/ limited beenfit. He has not had any inj. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 36.4.
+
+With thanks,
+Dr A. Patel
+Acklam Green Practice

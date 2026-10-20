@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/10/2026     UBRN: 0000 4991 1139
+
+Patient: Mr Trevor DIXON     DOB: 29/11/1952     Gender: Male
+NHS No: 999 247 7016     Postcode: TS7 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2018
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 31.7 kg/m2 (04/06/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 63 mmol/mol (04/06/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Trevor Dixon, who is on your waiting list w/ OA of the L) knee. He has deteriorated since the oriignal referral & I would be graetful if his care could be expedited.
+
+Oxford Knee Score 31, down from 27 6 months ago. He can walk for about 40 minutes before needing to stop. Sleeps well. He walks without aids.
+
+X-ray report (23/02/2026): "Mild osteoarthritis with definite osteophytes, predominantly medial compartment."
+
+There has been no phsyio to date. He has had 3 intra-articular steroid inj, with only short-lived relief. Current analgseia: Topical ibuprofen gel PRN.
+
+He has now been on your waiting list for 50 weeks. He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr L. Okonkwo
+Eston Hills Surgery

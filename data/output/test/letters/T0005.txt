@@ -1,0 +1,47 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 27/07/2026 UBRN: 0000 4487 6083
+
+Patient: Mr Tony ELLISON DOB: 03/03/1950 Gender: Male
+NHS No: 999 185 1062 Postcode: TS1 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008) Referring clinician: Dr M. Clarke
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+ Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+ Co-codamol 30/500 2 tablets QDS PRN
+ Metformin 500mg BD
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 31.0 kg/m2 (12/06/2026)
+ Smoking status: Never smoked
+Recent results
+ HbA1c 59 mmol/mol (12/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Dcotor,
+
+Thank you for seeing Mr Tony Elliosn, aged 76, with
+osteoarthritis of the left knee.
+
+Page 1 of 2
+
+- Oxford knee score recorded at 22, down from 26  6 months
+ago.
+- He can walk for about 35 mins before needing to stop.
+- He now mobilises with a stick.
+- X-ray report (24/04/2026):  "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+- He  is keen to consider surgrey if appropriate.
+- There has been no physiotherapy to date.
+- Current analgesia: Co-cdoamol 30/500 2 tablets  QDS
+PRN.
+- BMI was 28.8 on 21/06/2025.
+
+Yours sincerely,
+Dr M. Calrke
+Eston Hills Surgery

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/08/2026     UBRN: 0000 5717 4507
+
+Patient: Mr Tony SHAW     DOB: 05/01/1938     Gender: Male
+NHS No: 999 692 2472     Postcode: TS18 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.1 kg/m2 (06/03/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Tony Shaw, aged 88. Knee OA, bilat knees, for opinion regarding fruther management.
+
+Ofxord knee score recodred at 26. He struggles with stairs and can manage roughly 35 minutes on the flat. No night pain. He now mobilises w/ a stick.
+
+X-ray report (17/01/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+He has had 18 weeks of physio in the community. He has had one steroid inj, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 33.3.
+
+He lives w/ family.
+
+He is keen to consider surgery if appropriate.
+
+With thanks,
+Dr S. Byrne
+Teesway Medical Group

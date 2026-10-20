@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/08/2026     UBRN: 0000 2911 3595
+
+Patient: Mrs Shirley MOORE     DOB: 08/09/1953     Gender: Female
+NHS No: 999 612 0104     Postcode: TS1 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2006
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Topical ibuprofen gel PRN
+  Amlodipine 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 37.0 kg/m2 (11/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mrs Shirley Moore. Knee OA, R) knee, for opinion regarding further management.
+
+- There has been no physio to date.
+- She has had two steroid inj, w/ only short-lived relief.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Weighed in clinic, BMI today 34.4.
+- She lives w/ her patrner.
+- She would like to discuss knee replacement.
+- X-ray (22/12/2025): Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis, Kellgren-Lawrence grade 3.
+- Walking tolerance is around 39 mins.
+- She reports disturbed sleep due to knee pain.
+
+Kind regards,
+Dr M. Clakre
+Riverside Medical Centre

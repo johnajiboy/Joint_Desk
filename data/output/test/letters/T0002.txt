@@ -1,0 +1,50 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Urgent Referral date: 15/10/2026 UBRN: 0000 2013 6328
+
+Patient: Ms Barbara BRENNAN DOB: 04/10/1953 Gender: Female
+NHS No: 999 017 8607 Postcode: TS3 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004) Referring clinician: Dr J. Fenwick
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+ Essential hypertension (SNOMED CT 59621000) - 2016
+Medication
+ Paracetamol 1g QDS
+ Losartan 50mg OD
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 35.3 kg/m2 (01/05/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Ms Barbara Brennan, who is on
+your waiting list with osteoarthritis of the R) knee.
+She has deteriorated since the original referral & I would be grateful
+if her care could be expedited.
+
+She has now  been on your waiting list for 23 weeks. I would be grateful
+for your opinion regarding further management.
+
+XR report (11/01/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Walking tolerance is around 33 minutes. Oxford knee score recorded
+at 15, down from 19 9 months ago. No night pain.
+
+Page 1 of 2
+
+She lives w/ family.
+
+She has completed nine weeks of physio w/ limited benefit. There
+have been no steroid injections. Current analgesia:
+Paracetamol 1g QDS. Weighed in clinic, BMI today 36.9.
+
+Best wsihes,
+Dr J. Fenwick
+Marton Park Health Centre

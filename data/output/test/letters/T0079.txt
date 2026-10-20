@@ -1,0 +1,49 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 18/09/2026 UBRN: 0000 5933 3440
+
+Patient: Ms Christine MENSAH DOB: 02/08/1954 Gender: Female
+NHS No: 999 471 3590 Postcode: TS3 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr N. Iqbal
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+ Type 2 diabetes mellitus (SNOMED CT 44054006) - 2014
+Medication
+ Naproxen 500mg BD with omeprazole 20mg OD
+ Metformin 500mg BD
+Allergies
+ Penicillin - rash
+Latest observations
+ BMI 40.4 kg/m2 (21/07/2026)
+ Smoking status: Current smoker
+Recent results
+ HbA1c 50 mmol/mol (21/07/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Page 1 of 2
+
+I would  be grateful for your assessment of Ms Christine Mensah,
+who has worsening pain in bilat knees.
+
+- Oxford knee score recorded at 16 (previously 17).
+- She struggles with stairs and can manage roughly 34 mins
+on the flat.
+- She uses a walking stick.
+- XR report (09/06/2026): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+- She has had 12 weeks of physio in the communtiy.
+- She has had 2 intra-articular steroid inj, w/
+only short-lived relief.
+- Current analgesia: Naproxen 500mg BD w/ omeprazole 20mg OD.
+- Weighed in clinic, BMI today 37.8.
+- She is the main carer for her husband.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr N. Iqbal
+North Ormesby Family Practice

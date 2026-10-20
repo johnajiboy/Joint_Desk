@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 29/08/2026 UBRN: 0000 6871 4165
+
+Patient: Ms Ann GRAHAM DOB: 30/03/1961 Gender: Female
+NHS No: 999 965 7869 Postcode: TS7 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009) Referring clinician: Dr J. Fenwick
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+ Paracetamol 1g QDS
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 33.8 kg/m2 (25/06/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Page 1 of 2
+
+Re: Ms Ann Graham, aged 65. Knee osteoarthritis, R) knee, for opinion
+regarding further management.
+
+- I would be grateful for your opinion regarding further
+management.
+- I have not recorded a formal Oxford Knee Score.
+- She walks without aids.
+- Walking tolerance is  around 24 mins.
+- She c/o disturbed sleep due to knee pain.
+- XR (29/05/2026): Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis,  KL grade 3.
+- She is the main carer for her husband.
+- She has had some physio in the past but I do not
+have the details.
+- She has had two steroid inj, with only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS.
+
+With thanks,
+Dr J. Feniwck
+Thornaby Bridge Pratcice

@@ -1,0 +1,47 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 15/10/2026 UBRN: 0000 4063 8081
+
+Patient: Ms Karen WILSON DOB: 11/08/1949 Gender: Female
+NHS No: 999 081 6255 Postcode: TS3 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006) Referring clinician: Dr R. Hughes
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+ Paracetamol 1g QDS PRN
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 30.5 kg/m2 (25/04/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about  Ms Karen Wilson, aged 77, who is on
+your waiting list w/ OA  of bilat knees. She has deteriorated
+since the original referral & I would be grateful if
+her care could be expedited.
+
+Social: She lives alone.
+
+Page 1 of 2
+
+History: OKS 6/48 (previously 7). She can walk for
+about 12 mins before neednig to stop. She now mobilises w/ a stick.
+
+Mx to date: She tells me she saw a physiotherapist a while ago. She has
+not had any inj. Current analgesia: Paracetamol 1g QDS PRN.
+
+Request: She has been waiting 61 weeks so far. I would be grateful
+for your opinion regarding further managemnet.
+
+Imaging: XR report (14/01/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Yours sincerely,
+Dr R. Hughes
+North Ormebsy Family Practice

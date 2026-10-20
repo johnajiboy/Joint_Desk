@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 27/06/2026 UBRN: 0000 9028 8329
+
+Patient: Ms Brenda WILSON DOB: 27/03/1961 Gender: Female
+NHS No: 999 509 1429 Postcode: TS7 (outward code only)
+Registered practice: Acklam Green Practice (Y99003) Referring clinician: Dr J. Fenwick
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ Codeine - nausea
+Latest observations
+ BMI 28.5 kg/m2 (04/02/2026)
+ Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be garteful for your assessment of Ms Brenda Wilson,
+aged 65, c/o worsneing pain in the R) knee.
+
+She would like to discuss knee replacement.
+
+X-ray reprot (02/02/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Page 1 of 2
+
+She has completed twelve weeks of physiotherapy w/ limited benefit.
+She has  had 3 intra-articular steroid inj, w/ only short-lived relief.
+Current analgesia: Topical  ibuprofen gel PRN. Previous
+BMI 30.9 (13/02/2025).
+
+She walks  witohut aids. Walking  tolerance is around 13
+mins. No night pain. OKS 15/48, down from 16 9 months ago.
+
+She works & the knee is affecting her job.
+
+With thanks,
+Dr J. Fenwick
+Acklam Green Practice

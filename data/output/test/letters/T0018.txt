@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 02/06/2026     UBRN: 0000 9874 5352
+
+Patient: Ms Maureen PIKE     DOB: 18/08/1961     Gender: Female
+NHS No: 999 120 0460     Postcode: TS4 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.0 kg/m2 (27/11/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Ms Maureen Pike, aged 64. Knee OA, left knee, for opinion regarding furhter management.
+
+Her Oxford Knee Score today is 21, compared with 21 at the last review. She walks without aids. She struggles w/ stiars and can manage roughly 22 mins on the flat.
+
+I would be grateful for your opinion regarding further management.
+
+X-ray report (08/05/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+Management to date has included five weeks of physiotherapy. She has not had any inj. Current analgesia: Paracetamol 1g QDS.
+
+She lives w/ family.
+
+Kind regards,
+Dr H. Robson
+Teesway Medical Group

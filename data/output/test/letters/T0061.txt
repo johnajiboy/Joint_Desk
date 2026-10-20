@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/10/2026     UBRN: 0000 2895 1384
+
+Patient: Ms Barbara WOOD     DOB: 21/02/1960     Gender: Female
+NHS No: 999 230 1953     Postcode: TS18 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2006
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 38.5 kg/m2 (04/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Ms Barbara Wood, aged 66, who is on your waiting list with OA of the right knee. She has dteeriorated since the original referral & I would be grateful if her care could be expedited.
+
+Request: She has now been on your waiting list for 49 weeks. She is keen to consider surgery if appropriate.
+
+History: She struggles w/ stairs & can manage roughly 28 mins on the flat. She uses a walking stick. Sleeps well. Her Oxford Knee Score today is 25.
+
+Management to date: She has had ten weeks of physio in the community. She has had one steroid injection, with only short-lived relief. Current anaglesia: Topical ibuprofen gel PRN.
+
+Imaging: XR report (09/09/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Social: She lives alone.
+
+Best wishes,
+Dr M. Clarke
+Teesway Medical Group

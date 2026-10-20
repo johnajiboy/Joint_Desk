@@ -1,0 +1,47 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Urgent Referral date: 31/08/2026 UBRN: 0000 5713 8587
+
+Patient: Mrs Sandra NOWAK DOB: 10/06/1958 Gender: Female
+NHS No: 999 556 2553 Postcode: TS7 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002) Referring clinician: Dr L. Okonkwo
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+ Essential hypertension (SNOMED CT 59621000) - 2008
+Medication
+ Naproxen 500mg BD with omeprazole 20mg OD
+ Ramipril 5mg OD
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 27.9 kg/m2 (27/02/2026)
+ Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Sandra Nowak, aged 68. Knee osteoarthritis, L) knee, for
+opinion regarding further management.
+
+History:  No night pain. I have not recorded a formal
+Oxford Knee Score. Walking tolerance is around 38
+mins.
+
+Request: I would be garteful for your opinion regarding further management.
+
+Imaging: XR (15/04/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL4.
+
+Page 1 of 2
+
+Mx to date: She has not yet had physiotherapy. She  has had two steroid
+injections, w/ only short-lived relief. Current analgesia:
+Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today
+27.9.
+
+Yours sincerely,
+Dr L. Okonkwo
+Linthorpe Lane Surgery

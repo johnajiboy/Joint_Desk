@@ -5,7 +5,8 @@ pathway), and writes tables to eval/results/. Weeks waiting comes from the waiti
 NHS number the LLM read, as the app does.
 
     python eval/eval_extraction.py --limit 5 --show
-    python eval/eval_extraction.py
+    python eval/eval_extraction.py                                                  # dev set
+    python eval/eval_extraction.py --data data/output/test --results eval/results/test  # held-out test set
 """
 from __future__ import annotations
 
@@ -100,7 +101,8 @@ def show(r: dict) -> None:
         print(f"  dropped {d['field']}={d['value']!r} ({d['reason']}): {d['quote']!r}")
 
 
-def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, seconds: float) -> str:
+def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, seconds: float,
+              out: Path = RESULTS, label: str = "dev") -> str:
     n = len(results)
     rows = []
     for f in SCORED_FIELDS:
@@ -108,18 +110,18 @@ def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, se
         rows.append({"field": f, "accuracy": c.get("correct", 0) / n, "correct": c.get("correct", 0),
                      "wrong": c.get("wrong", 0), "missed": c.get("missed", 0), "extra": c.get("extra", 0)})
     fields = pd.DataFrame(rows)
-    fields.to_csv(RESULTS / "extraction_fields.csv", index=False)
+    fields.to_csv(out / "extraction_fields.csv", index=False)
 
     errors = pd.DataFrame([e for r in results for e in r["errors"]],
                           columns=["letter_id", "field", "outcome", "gold", "got", "quote"])
-    errors.to_csv(RESULTS / "extraction_errors.csv", index=False)
+    errors.to_csv(out / "extraction_errors.csv", index=False)
 
     letters = pd.DataFrame([{k: r[k] for k in ("letter_id", "style", "gold_pathway", "pathway", "rule",
                                                "gold_priority", "priority", "nhs_matched")}
                             | {"tags": ";".join(r["tags"]),
                                "fields_correct": sum(o == "correct" for o in r["fields"].values())}
                             for r in results])
-    letters.to_csv(RESULTS / "extraction_letters.csv", index=False)
+    letters.to_csv(out / "extraction_letters.csv", index=False)
 
     quoted, hits = sum(r["quoted"] for r in results), sum(r["quote_hits"] for r in results)
     agree = (letters.pathway == letters.gold_pathway)
@@ -135,7 +137,7 @@ def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, se
                              for s in sorted(letters.style.unique()) for m in [letters.style == s]])
 
     lines = [
-        "# Extraction evaluation", "",
+        f"# Extraction evaluation: {label} set", "",
         f"Model: `{model}`. Letters scored: {n}" + (f" ({len(failed)} failed)" if failed else "") +
         f". Run time {seconds:.0f}s.", "",
         "| Measure | Value |", "|---|---|",
@@ -155,7 +157,17 @@ def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, se
     if failed:
         lines += ["", "## Failed", ""] + [f"- {lid}: {msg}" for lid, msg in failed]
     md = "\n".join(lines) + "\n"
-    (RESULTS / "extraction_summary.md").write_text(md)
+    (out / "extraction_summary.md").write_text(md)
+    headline = {
+        "set": label, "model": model, "letters": n, "failed": len(failed),
+        "mean_field_accuracy": fields.accuracy.mean(), "letters_all_fields_right": all_right.mean(),
+        "quote_hit_rate": hits / max(quoted, 1), "facts_dropped": sum(len(r["dropped"]) for r in results),
+        "pathway_agreement": agree.mean(),
+        "priority_mae": (letters.priority - letters.gold_priority).abs().mean(),
+        "nhs_matched": letters.nhs_matched.mean(),
+        "field_accuracy": dict(zip(fields.field, fields.accuracy)),
+    }
+    (out / "extraction_summary.json").write_text(json.dumps(headline, indent=1, default=float))
     return md
 
 
@@ -166,10 +178,13 @@ def main() -> None:
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--refresh", action="store_true", help="ignore the cache and call the API again")
     ap.add_argument("--show", action="store_true", help="print each letter's result")
+    ap.add_argument("--data", type=Path, default=OUT, help="letters and answer key (default data/output)")
+    ap.add_argument("--results", type=Path, default=RESULTS, help="where to write tables (default eval/results)")
     a = ap.parse_args()
+    label = "dev" if a.data.resolve() == OUT.resolve() else a.data.name
 
-    keys = [json.loads(line) for line in open(OUT / "answer_key.jsonl")]
-    texts = {d["letter_id"]: d["text"] for d in map(json.loads, open(OUT / "letters.jsonl"))}
+    keys = [json.loads(line) for line in open(a.data / "answer_key.jsonl")]
+    texts = {d["letter_id"]: d["text"] for d in map(json.loads, open(a.data / "letters.jsonl"))}
     if a.ids:
         keys = [k for k in keys if k["letter_id"] in set(a.ids)]
     if a.limit:
@@ -177,7 +192,7 @@ def main() -> None:
     patients = pd.read_csv(OUT / "patients_clean.csv", dtype={"nhs_number": str})
     waiting = dict(zip(patients.nhs_number.map(nhs_digits), patients.weeks_waiting.astype(int)))
 
-    RESULTS.mkdir(parents=True, exist_ok=True)
+    a.results.mkdir(parents=True, exist_ok=True)
     model, start = llm.model_name(), time.time()
     results, failed = [], []
     with ThreadPoolExecutor(max_workers=a.workers) as pool:
@@ -197,7 +212,7 @@ def main() -> None:
             show(r)
         print()
     if results:
-        print(summarise(results, failed, model, time.time() - start))
+        print(summarise(results, failed, model, time.time() - start, a.results, label))
     for lid, msg in failed:
         print(f"FAILED {lid}: {msg}")
 

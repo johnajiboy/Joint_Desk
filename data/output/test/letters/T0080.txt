@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 01/08/2026     UBRN: 0000 1835 9655
+
+Patient: Ms Sheila CARTER     DOB: 04/12/1955     Gender: Female
+NHS No: 999 049 6420     Postcode: TS4 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 34.7 kg/m2 (17/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Sheila Carter, aged 70, c/o worsening pain in bilat knees.
+
+She can walk for about 22 minutes before needing to stop. No night pain. Oxford Knee Score 19 (previously 27). She uses a walking stick.
+
+XR (16/05/2026): Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis, Kellgren-Lawrence grade 3.
+
+She has had two steroid inj, w/ only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN. BMI was 37.1 on 03/08/2024.
+
+She is keen to consiedr surgery if appropriate.
+
+She lives w/ her partner.
+
+Kind regards,
+Dr H. Robson
+Eston Hills Surgery

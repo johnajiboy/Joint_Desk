@@ -1,0 +1,46 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 25/05/2026 UBRN: 0000 1859 5096
+
+Patient: Ms Julie SHAW DOB: 16/08/1959 Gender: Female
+NHS No: 999 523 5803 Postcode: TS4 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005) Referring clinician: Dr R. Hughes
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+ Topical ibuprofen gel PRN
+Allergies
+ No known drug allergies
+Latest observations
+ BMI 27.6 kg/m2 (15/11/2025)
+ Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Ms Julie Shaw, w/ osteoarthritis
+of the left knee.
+
+Request: I would be grateful for your oipnion regaridng further
+management.
+
+Page 1 of 2
+
+History: OKS 20/48, compared with 28 at the last review. She can walk
+for about 33 mins before needing to stop.
+
+Mx to date: She has had 7 weeks of phsyio in the community.
+There have been no steroid injections. Current analgesia:
+Topical ibuprofen gel PRN.
+
+Imaging: XR report (15/09/2025): "Mild osteoarthritis with definite osteophytes, predominantly medial compartment."
+
+Social: She lives alone and is findnig it hard to cope.
+
+With thanks,
+Dr R. Hughes
+Coulby Fields Surgery

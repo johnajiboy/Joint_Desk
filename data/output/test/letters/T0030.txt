@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/08/2026     UBRN: 0000 8979 4707
+
+Patient: Mrs Linda CARR     DOB: 19/12/1957     Gender: Female
+NHS No: 999 844 0106     Postcode: TS8 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.8 kg/m2 (08/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mrs Linda Carr, aged 68. Knee OA, L) knee, for opinion regarding further management.
+
+OKS 15/48 (previously 15). Walking tolerance is around 25 mins. Sleeps well. She uses a walking stick.
+
+XR reprot (18/04/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+She has completed 13 weeks of physiotherapy with limited benefit. Current analgesia: Paracetamol 1g QDS.
+
+She would like to discuss knee replacement.
+
+Kind regards,
+Dr A. Patel
+Stockton Quay Heatlh Centre

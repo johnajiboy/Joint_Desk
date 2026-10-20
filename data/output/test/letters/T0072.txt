@@ -1,0 +1,50 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee) Treatment function: 110
+Priority: Routine Referral date: 05/12/2024 UBRN: 0000 8475 9737
+
+Patient: Mrs Patricia JACKSON DOB: 25/06/1941 Gender: Female
+NHS No: 999 146 3356 Postcode: TS18 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001) Referring clinician: Dr A. Patel
+
+Problems
+ Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+ Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+ Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+ Paracetamol 1g QDS
+ Metformin 500mg BD
+ Ramipril 5mg OD
+Allergies
+ Codeine - nausea
+Latest observations
+ BMI 46.3 kg/m2 (18/07/2024)
+ Smoking status: Ex-smoker
+Recent results
+ HbA1c 53 mmol/mol (18/07/2024)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mrs Patricia Jackson, aged 83. Knee osteoarthritis,
+right knee, for opinion regarding further management.
+
+- Her Oxford Knee Score today is 21.
+- She can walk for about 21  mins beofre needing to
+stop.
+- No night pain.
+- XR report (17/06/2024): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- Mx  to date has incldued 2 weeks  of physiotherapy.
+- She has had 2 intra-articular steroid inj, w/ only
+short-lived relief.
+- Current  analgesia: Paracetamol 1g QDS.
+- Weighed in cilnic, BMI today 46.3.
+- She is keen to consider surgery if appropriate.
+
+Page 1 of 2
+
+With thanks,
+Dr A. Patel
+Riverside Medical Centre

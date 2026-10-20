@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 15/05/2026     UBRN: 0000 8739 4173
+
+Patient: Mrs Dorothy BELL     DOB: 22/08/1966     Gender: Female
+NHS No: 999 937 4050     Postcode: TS3 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 26.3 kg/m2 (17/02/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mrs Dorothy Bell. Knee OA, both knees, for opinion rgearding further management.
+
+Management to date: Mx to date has icnluded twelve weeks of physiotherapy. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 24.5.
+
+Request: She is keen to consider surgery if appropriate.
+
+Imaging: X-ray report (28/10/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Social: She lives with family. She works & the knee is affecting her job.
+
+History: Her Oxford Knee Score today is 10. She uses a walking stick. Denies night pain. Walknig tolerance is around 12 minutes.
+
+Kind regadrs,
+Dr E. Lowther
+Thornaby Bridge Practice
