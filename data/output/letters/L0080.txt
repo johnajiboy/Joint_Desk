@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/04/2026     UBRN: 0000 9848 2516
+
+Patient: Mrs Gillian WATSON     DOB: 19/05/1970     Gender: Female
+NHS No: 999 722 2423     Postcode: TS7 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2008
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 25.4 kg/m2 (22/03/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Gillian Watson, aged 55. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+History: I have not recorded a formal Oxford Knee Score. Walking tolerance is around 46 minutes. No night pain.
+
+Imaging: X-ray report (10/01/2026): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+Management to date: She has had 7 weeks of physiotherapy in the community. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: She works and the knee is affecting her job.
+
+Request: She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr E. Lowther
+Coulby Fields Surgery

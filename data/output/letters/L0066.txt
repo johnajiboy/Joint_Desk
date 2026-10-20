@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/02/2026     UBRN: 0000 8573 7574
+
+Patient: Mr Paul TAYLOR     DOB: 20/10/1963     Gender: Male
+NHS No: 999 013 1341     Postcode: TS18 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 32.0 kg/m2 (27/01/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr Paul Taylor, aged 62, with osteoarthritis of the right knee.
+
+His Oxford Knee Score today is 16. He can walk for about 23 minutes before needing to stop. He reports disturbed sleep due to knee pain. He walks without aids.
+
+X-ray report (24/09/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+He has completed 12 weeks of physiotherapy with limited benefit. There have been no steroid injections. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 32.0.
+
+He would like to discuss knee replacement.
+
+Yours sincerely,
+Dr R. Hughes
+Thornaby Bridge Practice

@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/08/2026     UBRN: 0000 8685 1400
+
+Patient: Mr Ian CARR     DOB: 14/05/1942     Gender: Male
+NHS No: 999 022 4781     Postcode: TS3 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2012
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 37.4 kg/m2 (15/06/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 74 mmol/mol (15/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Ian Carr, aged 84, with osteoarthritis of the left knee.
+
+Oxford Knee Score 26. He can walk for about 16 minutes before needing to stop. Denies night pain. He uses a walking stick.
+
+X-ray report (21/04/2026): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+There has been no physiotherapy to date. Current analgesia: Paracetamol 1g QDS PRN.
+
+He is keen to consider surgery if appropriate.
+
+With thanks,
+Dr M. Clarke
+Riverside Medical Centre

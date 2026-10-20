@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/07/2026     UBRN: 0000 2748 9975
+
+Patient: Mr Raymond ALI     DOB: 20/01/1950     Gender: Male
+NHS No: 999 484 9336     Postcode: TS10 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2015
+  Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Metformin 500mg BD
+  Losartan 50mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 26.2 kg/m2 (19/06/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 55 mmol/mol (19/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Raymond Ali, with osteoarthritis of the right knee.
+
+History: I have not recorded a formal Oxford Knee Score. He can walk for about 22 minutes before needing to stop. Sleeps well.
+
+Imaging: X-ray (14/10/2025): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, Kellgren-Lawrence grade 4.
+
+Management to date: He has had 2 weeks of physiotherapy in the community. There have been no steroid injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: He lives with family.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr N. Iqbal
+Teesway Medical Group

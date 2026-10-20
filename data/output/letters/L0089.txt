@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/10/2026     UBRN: 0000 8094 8798
+
+Patient: Mr Derek SMITH     DOB: 18/12/1957     Gender: Male
+NHS No: 999 294 5672     Postcode: TS10 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 37.4 kg/m2 (11/09/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Derek Smith, aged 68, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+- His Oxford Knee Score today is 19, down from 20 3 months ago.
+- He can walk for about 46 minutes before needing to stop.
+- He walks without aids.
+- X-ray (05/05/2026): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+- Failed conservative mx incl. physio x8/52.
+- He has had 1 intra-articular steroid injection, with only short-lived relief.
+- Current analgesia: Topical ibuprofen gel PRN.
+- He lives with his partner.
+- He has now been on your waiting list for 26 weeks.
+- I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr N. Iqbal
+Acklam Green Practice

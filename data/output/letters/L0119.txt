@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 28/06/2026     UBRN: 0000 6391 4285
+
+Patient: Mrs Lesley ALI     DOB: 13/02/1967     Gender: Female
+NHS No: 999 790 3560     Postcode: TS17 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 22.2 kg/m2 (03/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Lesley Ali, aged 59, who has worsening pain in the left knee.
+
+OKS 26/48 (previously 34). She struggles with stairs and can manage roughly 24 minutes on the flat. Denies night pain. She walks without aids.
+
+X-ray report (06/11/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 23.8.
+
+She cares for her grandchildren several days a week.
+
+I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr M. Clarke
+Thornaby Bridge Practice

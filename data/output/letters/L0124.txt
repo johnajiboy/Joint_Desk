@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 04/08/2026     UBRN: 0000 2328 5314
+
+Patient: Ms Christine DAWSON     DOB: 18/05/1964     Gender: Female
+NHS No: 999 942 0044     Postcode: TS1 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 25.6 kg/m2 (30/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Ms Christine Dawson. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+Oxford Knee Score 21. She struggles with stairs and can manage roughly 35 minutes on the flat.
+
+X-ray report (30/01/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+She has not yet had physiotherapy. There have been no steroid injections. Current analgesia: Topical ibuprofen gel PRN.
+
+She lives with family.
+
+She would like to discuss knee replacement.
+
+Best wishes,
+Dr H. Robson
+Eston Hills Surgery

@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 27/06/2026     UBRN: 0000 4962 5296
+
+Patient: Mr Alan ELLISON     DOB: 04/12/1968     Gender: Male
+NHS No: 999 750 5093     Postcode: TS4 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2006
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 26.0 kg/m2 (21/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mr Alan Ellison, aged 57, with osteoarthritis of both knees.
+
+History: He can walk for about 32 minutes before needing to stop. Denies night pain. He walks without aids.
+
+Imaging: X-ray (19/12/2025): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, Kellgren-Lawrence grade 2.
+
+Management to date: Management to date has included 9 weeks of physiotherapy. He has not had any injections. Current analgesia: Topical ibuprofen gel PRN.
+
+Social: He lives with his partner. He works and the knee is affecting his job.
+
+Request: I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr H. Robson
+Coulby Fields Surgery

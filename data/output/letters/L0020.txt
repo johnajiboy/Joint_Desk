@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/03/2026     UBRN: 0000 1739 7331
+
+Patient: Mrs Shirley WOOD     DOB: 21/04/1968     Gender: Female
+NHS No: 999 929 5290     Postcode: TS7 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 37.9 kg/m2 (06/02/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Shirley Wood, who has worsening pain in the left knee.
+
+- Her Oxford Knee Score today is 22 (previously 32).
+- Walking tolerance is around 43 minutes.
+- Pain wakes her at night.
+- She now mobilises with a stick.
+- X-ray report (13/06/2025): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+- There has been no physiotherapy to date.
+- She has had 1 intra-articular steroid injection, with only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- Weighed in clinic, BMI today 37.9.
+- She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr R. Hughes
+Teesway Medical Group

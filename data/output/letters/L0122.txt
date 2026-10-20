@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 28/02/2026     UBRN: 0000 6030 8068
+
+Patient: Mrs Brenda BELL     DOB: 05/10/1955     Gender: Female
+NHS No: 999 885 9778     Postcode: TS1 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 21.0 kg/m2 (16/10/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grateful for your assessment of Mrs Brenda Bell, who has worsening pain in the right knee.
+
+History: Walking tolerance is around 45 minutes. She now mobilises with a stick.
+
+Imaging: X-ray report (08/01/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Management to date: She has had some physiotherapy in the past but I do not have the details. She has not had any injections. Current analgesia: Topical ibuprofen gel PRN.
+
+Social: She lives with her partner.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr R. Hughes
+Stockton Quay Health Centre

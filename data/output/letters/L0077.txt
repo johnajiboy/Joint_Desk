@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/08/2026     UBRN: 0000 3307 2006
+
+Patient: Ms Carol PIKE     DOB: 16/04/1974     Gender: Female
+NHS No: 999 079 6726     Postcode: TS10 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.0 kg/m2 (23/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Ms Carol Pike, aged 52. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+History: Her Oxford Knee Score today is 21, compared with 33 at the last review. She can walk for about 39 minutes before needing to stop. Sleeps well. She now mobilises with a stick.
+
+Imaging: An X-ray has been requested but not yet reported.
+
+Management to date: Management to date has included three weeks of physiotherapy. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+Social: She lives with family.
+
+Request: I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr R. Hughes
+Riverside Medical Centre

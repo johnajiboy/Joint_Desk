@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/10/2026     UBRN: 0000 1608 8223
+
+Patient: Ms Christine PEARSON     DOB: 21/03/1970     Gender: Female
+NHS No: 999 901 2108     Postcode: TS6 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.1 kg/m2 (12/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Ms Christine Pearson, aged 56, who is on your waiting list with osteoarthritis of the left knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+Her Oxford Knee Score today is 11, down from 7 6 months ago. She can walk for about 33 minutes before needing to stop. She reports disturbed sleep due to knee pain.
+
+X-ray (15/07/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL4.
+
+There has been no physiotherapy to date. Current analgesia: Paracetamol 1g QDS.
+
+She works and the knee is affecting her job.
+
+She has now been on your waiting list for 38 weeks. I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr L. Okonkwo
+Eston Hills Surgery

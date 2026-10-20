@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/10/2026     UBRN: 0000 6553 9002
+
+Patient: Mrs Barbara SMITH     DOB: 13/08/1962     Gender: Female
+NHS No: 999 835 2495     Postcode: TS4 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2015
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 47.9 kg/m2 (18/06/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 45 mmol/mol (18/06/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mrs Barbara Smith, aged 64, who is on your waiting list with osteoarthritis of both knees. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: OKS 28/48. She struggles with stairs and can manage roughly 35 minutes on the flat. She walks without aids.
+
+Imaging: X-ray report (13/03/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+Management to date: She has completed eight weeks of physiotherapy with limited benefit. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 46.1.
+
+Request: She has now been on your waiting list for 21 weeks. She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr E. Lowther
+Eston Hills Surgery

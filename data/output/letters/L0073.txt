@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/07/2026     UBRN: 0000 6673 3684
+
+Patient: Mr Brian ROBSON     DOB: 08/09/1961     Gender: Male
+NHS No: 999 006 3400     Postcode: TS6 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 28.6 kg/m2 (18/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Brian Robson, aged 64. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+- Oxford knee score recorded at 19 (previously 27).
+- Walking tolerance is around 19 minutes.
+- He uses a frame outdoors.
+- Failed conservative mx incl. physio x5/52.
+- He has had 1 intra-articular steroid injection, with only short-lived relief.
+- Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+- He lives with family.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr P. Sharma
+Thornaby Bridge Practice

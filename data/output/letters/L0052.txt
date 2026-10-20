@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 24/08/2026     UBRN: 0000 8398 9394
+
+Patient: Mrs Susan MOORE     DOB: 13/07/1964     Gender: Female
+NHS No: 999 562 1193     Postcode: TS4 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 36.1 kg/m2 (15/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mrs Susan Moore, aged 62, who has worsening pain in both knees.
+
+- I have not recorded a formal Oxford Knee Score.
+- Walking tolerance is around 36 minutes.
+- Sleeps well.
+- X-ray report (29/03/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- Failed conservative mx incl. physio x14/52.
+- She has had 1 intra-articular steroid injection, with only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS.
+- She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr J. Fenwick
+Thornaby Bridge Practice

@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 06/07/2026     UBRN: 0000 6611 4219
+
+Patient: Mr Peter ELLIS     DOB: 10/08/1940     Gender: Male
+NHS No: 999 205 9923     Postcode: TS7 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2021
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 29.9 kg/m2 (07/01/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 52 mmol/mol (07/01/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mr Peter Ellis, with osteoarthritis of the left knee.
+
+History: OKS 8/48. He can walk for about 12 minutes before needing to stop. Pain wakes him at night. He uses a walking stick.
+
+Imaging: X-ray (05/06/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL4.
+
+Management to date: There has been no physiotherapy to date. Current analgesia: Paracetamol 1g QDS.
+
+Social: He lives alone and is finding it hard to cope.
+
+Request: He would like to discuss knee replacement.
+
+With thanks,
+Dr A. Patel
+Linthorpe Lane Surgery

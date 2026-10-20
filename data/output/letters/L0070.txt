@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 29/08/2026     UBRN: 0000 1918 6163
+
+Patient: Mr Stephen MOORE     DOB: 10/09/1964     Gender: Male
+NHS No: 999 199 0496     Postcode: TS4 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 35.7 kg/m2 (27/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mr Stephen Moore, aged 61, who has worsening pain in the left knee.
+
+- His Oxford Knee Score today is 23, compared with 24 at the last review.
+- Walking tolerance is around 29 minutes.
+- X-ray report (30/01/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- Failed conservative mx incl. physio x4/52.
+- He has not had any injections.
+- Current analgesia: Paracetamol 1g QDS.
+- I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr J. Fenwick
+Thornaby Bridge Practice

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 22/09/2026     UBRN: 0000 7520 8860
+
+Patient: Ms Elizabeth DIXON     DOB: 22/10/1957     Gender: Female
+NHS No: 999 094 1769     Postcode: TS18 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.3 kg/m2 (21/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Ms Elizabeth Dixon, aged 68, who has worsening pain in the right knee.
+
+- Oxford Knee Score 22, compared with 23 at the last review.
+- Walking tolerance is around 23 minutes.
+- No night pain.
+- X-ray report (04/04/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+- She has completed 18 weeks of physiotherapy with limited benefit.
+- There have been no steroid injections.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- She lives alone and is finding it hard to cope.
+- She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr K. Ahmed
+Stockton Quay Health Centre

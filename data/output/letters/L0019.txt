@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 06/09/2026     UBRN: 0000 3981 9733
+
+Patient: Mr Stephen HUTCHINSON     DOB: 18/09/1970     Gender: Male
+NHS No: 999 164 0487     Postcode: TS4 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.8 kg/m2 (12/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Stephen Hutchinson. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+History: Oxford knee score recorded at 21. He can walk for about 24 minutes before needing to stop. No night pain.
+
+Imaging: X-ray report (24/01/2026): "Early osteoarthritic change, predominantly medial compartment."
+
+Management to date: He has had nine weeks of physiotherapy in the community. He has had one steroid injection, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Social: He lives with his partner.
+
+Request: He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr R. Hughes
+North Ormesby Family Practice

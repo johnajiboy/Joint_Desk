@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/08/2026     UBRN: 0000 7925 3363
+
+Patient: Mr Malcolm PIKE     DOB: 22/08/1942     Gender: Male
+NHS No: 999 378 7760     Postcode: TS5 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2007
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 33.1 kg/m2 (20/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr Malcolm Pike, with osteoarthritis of the left knee.
+
+His Oxford Knee Score today is 13, down from 17 6 months ago. Walking tolerance is around 12 minutes.
+
+An X-ray has been requested but not yet reported.
+
+He has completed ten weeks of physiotherapy with limited benefit. He has not had any injections. Current analgesia: Paracetamol 1g QDS.
+
+He lives with family.
+
+He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr A. Patel
+Linthorpe Lane Surgery

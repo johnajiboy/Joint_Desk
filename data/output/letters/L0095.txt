@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/04/2026     UBRN: 0000 1460 5771
+
+Patient: Ms Pauline WATSON     DOB: 31/05/1945     Gender: Female
+NHS No: 999 359 7163     Postcode: TS4 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 28.8 kg/m2 (03/12/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Pauline Watson, who has worsening pain in the left knee.
+
+History: Walking tolerance is around 35 minutes. No night pain. She walks without aids.
+
+Imaging: X-ray report (04/11/2025): "Minimal changes only, of doubtful significance."
+
+Management to date: Management to date has included eleven weeks of physiotherapy. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr T. Adeyemi
+Teesway Medical Group

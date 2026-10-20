@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 03/06/2026     UBRN: 0000 2392 8492
+
+Patient: Mrs Jean BROWN     DOB: 14/01/1958     Gender: Female
+NHS No: 999 400 8900     Postcode: TS6 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 23.9 kg/m2 (17/01/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Jean Brown, with osteoarthritis of the left knee.
+
+OKS 27/48. She struggles with stairs and can manage roughly 37 minutes on the flat. She reports night pain most nights. She walks without aids.
+
+X-ray (20/03/2026): Moderate tricompartmental degenerative change with definite medial joint space loss, KL grade 3.
+
+Management to date has included eight weeks of physiotherapy. She has had one steroid injection, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+She cares for her grandchildren several days a week.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr P. Sharma
+Marton Park Health Centre

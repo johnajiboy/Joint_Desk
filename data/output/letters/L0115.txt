@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/09/2026     UBRN: 0000 2865 8192
+
+Patient: Mr Neil KHAN     DOB: 06/11/1952     Gender: Male
+NHS No: 999 909 2705     Postcode: TS8 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 31.5 kg/m2 (28/07/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grateful for your assessment of Mr Neil Khan, aged 73, who has worsening pain in the right knee.
+
+OKS 9/48 (previously 16). Walking tolerance is around 29 minutes. He reports disturbed sleep due to knee pain. He walks without aids.
+
+An X-ray has been requested but not yet reported.
+
+Management to date has included 12 weeks of physiotherapy. He has had 2 intra-articular steroid injections, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 29.7.
+
+He is the main carer for his wife.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr L. Okonkwo
+Stockton Quay Health Centre

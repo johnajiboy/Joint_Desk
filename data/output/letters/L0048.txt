@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/02/2026     UBRN: 0000 6789 3000
+
+Patient: Mr Kevin HUTCHINSON     DOB: 28/10/1942     Gender: Male
+NHS No: 999 088 9163     Postcode: TS6 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 39.0 kg/m2 (22/12/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mr Kevin Hutchinson, aged 83, who has worsening pain in the right knee.
+
+History: Oxford knee score recorded at 21 (previously 17). Walking tolerance is around 13 minutes. Sleeps well. He uses a walking stick.
+
+Imaging: An X-ray has been requested but not yet reported.
+
+Management to date: Management to date has included 6 weeks of physiotherapy. There have been no steroid injections. Current analgesia: Paracetamol 1g QDS.
+
+Request: He would like to discuss knee replacement.
+
+Best wishes,
+Dr P. Sharma
+Riverside Medical Centre

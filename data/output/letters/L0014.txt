@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Urgent     Referral date: 13/10/2026     UBRN: 0000 9077 3080
+
+Patient: Mrs Jean BROWN     DOB: 23/06/1975     Gender: Female
+NHS No: 999 818 6129     Postcode: TS18 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2011
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 25.8 kg/m2 (27/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about Mrs Jean Brown, aged 51, who is on your waiting list with osteoarthritis of both knees. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+- OKS 28/48, down from 37 9 months ago.
+- She can walk for about 51 minutes before needing to stop.
+- No night pain.
+- She now mobilises with a stick.
+- X-ray report (26/03/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+- She has not yet had physiotherapy.
+- There have been no steroid injections.
+- Current analgesia: Paracetamol 1g QDS.
+- She lives alone and is finding it hard to cope.
+- She has been waiting 21 weeks so far.
+- She would like to discuss knee replacement.
+
+Best wishes,
+Dr S. Byrne
+Coulby Fields Surgery

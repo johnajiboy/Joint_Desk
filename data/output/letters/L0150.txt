@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 26/08/2026     UBRN: 0000 3471 8151
+
+Patient: Mr Colin CARR     DOB: 15/08/1977     Gender: Male
+NHS No: 999 147 9082     Postcode: TS4 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 55.0 kg/m2 (04/06/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr Colin Carr, with osteoarthritis of both knees.
+
+History: His Oxford Knee Score today is 21. Walking tolerance is around 30 minutes. Sleeps well. He walks without aids.
+
+Imaging: X-ray report (27/07/2026): "Early osteoarthritic change, predominantly medial compartment."
+
+Management to date: He has had 7 weeks of physiotherapy in the community. He has not had any injections. Current analgesia: Paracetamol 1g QDS.
+
+Social: He lives with family.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr L. Okonkwo
+Teesway Medical Group

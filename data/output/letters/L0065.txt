@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/10/2026     UBRN: 0000 2629 8424
+
+Patient: Mr Graham WILSON     DOB: 13/04/1959     Gender: Male
+NHS No: 999 130 5955     Postcode: TS5 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2022
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.2 kg/m2 (30/08/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Graham Wilson, aged 67, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+History: OKS 18/48. He can walk for about 29 minutes before needing to stop. He reports night pain most nights. He walks without aids.
+
+Imaging: X-ray report (21/01/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Management to date: Management to date has included 4 weeks of physiotherapy. There have been no steroid injections. Current analgesia: Paracetamol 1g QDS.
+
+Request: He has been waiting 20 weeks so far. I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr S. Byrne
+Coulby Fields Surgery

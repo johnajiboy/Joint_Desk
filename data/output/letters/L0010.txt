@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 18/06/2026     UBRN: 0000 6063 1313
+
+Patient: Mr Malcolm ELLIS     DOB: 07/05/1975     Gender: Male
+NHS No: 999 622 9289     Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2020
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 30.1 kg/m2 (29/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grateful for your assessment of Mr Malcolm Ellis, aged 51, who has worsening pain in the left knee.
+
+Oxford Knee Score 20. He struggles with stairs and can manage roughly 30 minutes on the flat. He reports night pain most nights. He walks without aids.
+
+X-ray report (22/11/2025): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+He has not yet had physiotherapy. Current analgesia: Paracetamol 1g QDS.
+
+He lives with his partner. He works and the knee is affecting his job.
+
+He would like to discuss knee replacement.
+
+Kind regards,
+Dr S. Byrne
+Eston Hills Surgery

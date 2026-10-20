@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/05/2026     UBRN: 0000 1032 6377
+
+Patient: Mrs Janet CARTER     DOB: 28/05/1958     Gender: Female
+NHS No: 999 016 5297     Postcode: TS7 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 28.8 kg/m2 (15/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mrs Janet Carter. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+History: Oxford knee score recorded at 20. She can walk for about 13 minutes before needing to stop. She walks without aids.
+
+Imaging: X-ray report (05/09/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Management to date: She has had eleven weeks of physiotherapy in the community. She has not had any injections. Current analgesia: Topical ibuprofen gel PRN.
+
+Social: She lives with family.
+
+Request: She would like to discuss knee replacement.
+
+Kind regards,
+Dr R. Hughes
+Teesway Medical Group

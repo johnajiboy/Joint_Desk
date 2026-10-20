@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/06/2026     UBRN: 0000 2590 6632
+
+Patient: Mr Neil ALI     DOB: 24/09/1959     Gender: Male
+NHS No: 999 190 5367     Postcode: TS7 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 24.8 kg/m2 (08/01/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Neil Ali. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+History: He struggles with stairs and can manage roughly 16 minutes on the flat. Sleeps well.
+
+Imaging: X-ray report (29/08/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date: Management to date has included 11 weeks of physiotherapy. He has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 24.8.
+
+Social: He cares for his elderly mother.
+
+Request: He would like to discuss knee replacement.
+
+Kind regards,
+Dr K. Ahmed
+Thornaby Bridge Practice

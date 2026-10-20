@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/05/2026     UBRN: 0000 5667 3018
+
+Patient: Mr John BRENNAN     DOB: 05/09/1955     Gender: Male
+NHS No: 999 482 2764     Postcode: TS6 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 40.8 kg/m2 (04/01/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 51 mmol/mol (04/01/2026)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mr John Brennan, aged 70, who has worsening pain in the right knee.
+
+Oxford knee score recorded at 29 (previously 29). He struggles with stairs and can manage roughly 36 minutes on the flat. Denies night pain. He walks without aids.
+
+X-ray report (14/12/2025): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+Management to date has included four weeks of physiotherapy. He has had one steroid injection, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr R. Hughes
+Acklam Green Practice

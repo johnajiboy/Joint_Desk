@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/01/2026     UBRN: 0000 1034 5414
+
+Patient: Mr Malcolm HART     DOB: 19/02/1960     Gender: Male
+NHS No: 999 351 7186     Postcode: TS8 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2010
+Medication
+  Paracetamol 1g QDS
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.5 kg/m2 (20/12/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Malcolm Hart, aged 65. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+- Oxford Knee Score 22.
+- He struggles with stairs and can manage roughly 26 minutes on the flat.
+- No night pain.
+- X-ray (26/11/2025): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL grade 4.
+- There has been no physiotherapy to date.
+- He has not had any injections.
+- Current analgesia: Paracetamol 1g QDS.
+- He lives with family.
+- He would like to discuss knee replacement.
+
+Best wishes,
+Dr S. Byrne
+Teesway Medical Group

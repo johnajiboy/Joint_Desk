@@ -1,0 +1,42 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 06/08/2025     UBRN: 0000 7811 3194
+
+Patient: Ms Gillian WATSON     DOB: 22/02/1954     Gender: Female
+NHS No: 999 050 8216     Postcode: TS4 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2019
+  Essential hypertension (SNOMED CT 59621000) - 2023
+Medication
+  Paracetamol 1g QDS
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 22.0 kg/m2 (30/05/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Gillian Watson, who has worsening pain in the right knee.
+
+- Her Oxford Knee Score today is 16, down from 20 6 months ago.
+- She struggles with stairs and can manage roughly 27 minutes on the flat.
+- No night pain.
+- She walks without aids.
+- X-ray report (10/06/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+- Failed conservative mx incl. physio x8/52.
+- There have been no steroid injections.
+- Current analgesia: Paracetamol 1g QDS.
+- She lives alone.
+- She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr L. Okonkwo
+Eston Hills Surgery

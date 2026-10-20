@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 22/09/2026     UBRN: 0000 9643 9451
+
+Patient: Ms Elizabeth DAWSON     DOB: 04/01/1956     Gender: Female
+NHS No: 999 112 9170     Postcode: TS4 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2023
+Medication
+  Paracetamol 1g QDS
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 46.7 kg/m2 (19/07/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Ms Elizabeth Dawson, who has worsening pain in the left knee.
+
+Oxford Knee Score 12. She struggles with stairs and can manage roughly 15 minutes on the flat. She walks without aids.
+
+X-ray report (20/06/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+She has had some physiotherapy in the past but I do not have the details. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 44.1.
+
+She lives alone and is finding it hard to cope.
+
+She is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr E. Lowther
+Acklam Green Practice

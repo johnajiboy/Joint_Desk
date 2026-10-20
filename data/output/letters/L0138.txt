@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/07/2026     UBRN: 0000 6664 3764
+
+Patient: Mr Keith SMITH     DOB: 06/06/1950     Gender: Male
+NHS No: 999 640 4420     Postcode: TS5 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 32.9 kg/m2 (23/01/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mr Keith Smith, with osteoarthritis of the left knee.
+
+History: His Oxford Knee Score today is 15. He struggles with stairs and can manage roughly 13 minutes on the flat. He reports night pain most nights. He uses a walking stick.
+
+Imaging: X-ray report (24/04/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Management to date: There has been no physiotherapy to date. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 32.9.
+
+Social: He is the main carer for his wife.
+
+Request: He is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr K. Ahmed
+Linthorpe Lane Surgery

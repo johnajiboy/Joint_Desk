@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/06/2026     UBRN: 0000 7278 6120
+
+Patient: Mr James WALSH     DOB: 04/10/1955     Gender: Male
+NHS No: 999 722 8502     Postcode: TS6 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2016
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 35.4 kg/m2 (08/01/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr James Walsh. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+OKS 24/48, down from 26 3 months ago. Walking tolerance is around 40 minutes. Denies night pain. He walks without aids.
+
+X-ray report (14/02/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+He tells me he saw a physiotherapist a while ago. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+He lives with family.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr R. Hughes
+Stockton Quay Health Centre

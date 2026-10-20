@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/07/2026     UBRN: 0000 3353 5485
+
+Patient: Ms Pauline CARTER     DOB: 24/09/1956     Gender: Female
+NHS No: 999 600 0028     Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 22.8 kg/m2 (02/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Ms Pauline Carter, aged 69, with osteoarthritis of the right knee.
+
+- OKS 25/48, compared with 22 at the last review.
+- She can walk for about 24 minutes before needing to stop.
+- No night pain.
+- X-ray report (21/05/2026): "Doubtful joint space narrowing with possible early osteophytic lipping."
+- Failed conservative mx incl. physio x10/52.
+- Current analgesia: Topical ibuprofen gel PRN.
+- I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr N. Iqbal
+Eston Hills Surgery

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/10/2026     UBRN: 0000 5251 3599
+
+Patient: Mr Samuel BRENNAN     DOB: 15/02/1975     Gender: Male
+NHS No: 999 029 1489     Postcode: TS6 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 19.0 kg/m2 (02/09/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Samuel Brennan, aged 51, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+History: I have not recorded a formal Oxford Knee Score. He can walk for about 42 minutes before needing to stop. Denies night pain. He walks without aids.
+
+Imaging: X-ray report (05/03/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date: He has had 2 weeks of physiotherapy in the community. There have been no steroid injections. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Social: He lives with his partner.
+
+Request: He has been waiting 40 weeks so far. I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr M. Clarke
+Eston Hills Surgery

@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/06/2026     UBRN: 0000 6517 1292
+
+Patient: Ms Lesley KOWALSKI     DOB: 03/07/1964     Gender: Female
+NHS No: 999 171 1244     Postcode: TS18 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Metformin 500mg BD
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.0 kg/m2 (21/02/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 53 mmol/mol (21/02/2026)
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grateful for your assessment of Ms Lesley Kowalski, who has worsening pain in both knees.
+
+History: Her Oxford Knee Score today is 18. She can walk for about 21 minutes before needing to stop. She reports disturbed sleep due to knee pain. She walks without aids.
+
+Imaging: X-ray (11/12/2025): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, KL2.
+
+Management to date: She has completed nine weeks of physiotherapy with limited benefit. She has had 2 intra-articular steroid injections, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: She lives with her partner.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr L. Okonkwo
+Stockton Quay Health Centre

@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/08/2026     UBRN: 0000 6195 3725
+
+Patient: Mrs Ann LOWE     DOB: 28/11/1944     Gender: Female
+NHS No: 999 397 2142     Postcode: TS3 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Losartan 50mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 28.5 kg/m2 (04/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Ann Lowe, aged 81, who has worsening pain in both knees.
+
+Oxford knee score recorded at 27, compared with 33 at the last review. She struggles with stairs and can manage roughly 44 minutes on the flat. Sleeps well. She walks without aids.
+
+An X-ray has been requested but not yet reported.
+
+She has had 10 weeks of physiotherapy in the community. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+She lives with family.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr J. Fenwick
+Thornaby Bridge Practice

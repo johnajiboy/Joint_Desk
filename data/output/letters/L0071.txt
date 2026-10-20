@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/08/2026     UBRN: 0000 5626 1929
+
+Patient: Mr Kenneth WOOD     DOB: 18/11/1968     Gender: Male
+NHS No: 999 883 6557     Postcode: TS8 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2023
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.0 kg/m2 (24/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Kenneth Wood. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+History: Oxford Knee Score 21, down from 33 9 months ago. He struggles with stairs and can manage roughly 32 minutes on the flat. Pain wakes him at night. He walks without aids.
+
+Management to date: He has completed 4 weeks of physiotherapy with limited benefit. He has had three steroid injections, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+Social: He lives with his partner.
+
+Request: He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr A. Patel
+North Ormesby Family Practice

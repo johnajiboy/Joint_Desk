@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/04/2026     UBRN: 0000 4346 9749
+
+Patient: Mr Kevin BRENNAN     DOB: 07/04/1944     Gender: Male
+NHS No: 999 897 8858     Postcode: TS1 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.0 kg/m2 (24/10/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mr Kevin Brennan. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+- Oxford Knee Score 20, compared with 31 at the last review.
+- He struggles with stairs and can manage roughly 39 minutes on the flat.
+- X-ray report (10/10/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+- He has not yet had physiotherapy.
+- Current analgesia: Paracetamol 1g QDS.
+- He lives with family.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr N. Iqbal
+Acklam Green Practice

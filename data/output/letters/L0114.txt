@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/10/2026     UBRN: 0000 3022 3063
+
+Patient: Ms Patricia MOORE     DOB: 08/09/1941     Gender: Female
+NHS No: 999 644 9521     Postcode: TS10 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.0 kg/m2 (27/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Ms Patricia Moore, aged 85, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+Her Oxford Knee Score today is 31, compared with 39 at the last review. She can walk for about 39 minutes before needing to stop. Denies night pain. She walks without aids.
+
+X-ray report (12/08/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+She has had 3 weeks of physiotherapy in the community. There have been no steroid injections. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 25.2.
+
+She has been waiting 21 weeks so far. She would like to discuss knee replacement.
+
+Kind regards,
+Dr H. Robson
+Stockton Quay Health Centre

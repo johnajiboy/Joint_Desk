@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 01/05/2026     UBRN: 0000 4301 1922
+
+Patient: Mrs Barbara HUTCHINSON     DOB: 15/05/1951     Gender: Female
+NHS No: 999 616 6341     Postcode: TS18 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 34.5 kg/m2 (25/02/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Barbara Hutchinson, aged 74, with osteoarthritis of the left knee.
+
+- Oxford knee score recorded at 11.
+- Walking tolerance is around 19 minutes.
+- An X-ray has been requested but not yet reported.
+- Failed conservative mx incl. physio x4/52.
+- She has had 3 intra-articular steroid injections, with only short-lived relief.
+- Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+- She lives with family.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr K. Ahmed
+Linthorpe Lane Surgery

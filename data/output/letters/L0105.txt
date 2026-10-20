@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/08/2026     UBRN: 0000 6932 5544
+
+Patient: Mrs Joan ELLIS     DOB: 06/12/1955     Gender: Female
+NHS No: 999 328 5757     Postcode: TS5 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 31.1 kg/m2 (01/07/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mrs Joan Ellis, with osteoarthritis of the left knee.
+
+History: Oxford knee score recorded at 22, down from 24 6 months ago. She struggles with stairs and can manage roughly 34 minutes on the flat. Sleeps well. She walks without aids.
+
+Imaging: X-ray (03/01/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, KL grade 2.
+
+Management to date: She has completed 6 weeks of physiotherapy with limited benefit. She has not had any injections. Current analgesia: Paracetamol 1g QDS PRN.
+
+Social: She lives alone.
+
+Request: She would like to discuss knee replacement.
+
+Best wishes,
+Dr S. Byrne
+Stockton Quay Health Centre

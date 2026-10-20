@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/10/2026     UBRN: 0000 8565 2997
+
+Patient: Mr William JACKSON     DOB: 07/04/1949     Gender: Male
+NHS No: 999 372 6826     Postcode: TS7 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 24.9 kg/m2 (20/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about Mr William Jackson, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+Oxford knee score recorded at 23, compared with 29 at the last review. He can walk for about 36 minutes before needing to stop. No night pain.
+
+X-ray report (14/06/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Management to date has included 8 weeks of physiotherapy. He has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+He lives with family.
+
+He has been waiting 26 weeks so far. He would like to discuss knee replacement.
+
+Kind regards,
+Dr N. Iqbal
+Riverside Medical Centre

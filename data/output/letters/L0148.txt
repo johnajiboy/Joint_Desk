@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/09/2026     UBRN: 0000 9869 7965
+
+Patient: Mr Keith HART     DOB: 29/11/1960     Gender: Male
+NHS No: 999 337 7074     Postcode: TS1 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2013
+Medication
+  Paracetamol 1g QDS
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 33.2 kg/m2 (03/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mr Keith Hart, aged 65, who has worsening pain in the left knee.
+
+History: Oxford knee score recorded at 21. Walking tolerance is around 29 minutes. Denies night pain. He walks without aids.
+
+Imaging: X-ray report (24/06/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Management to date: He has completed ten weeks of physiotherapy with limited benefit. He has not had any injections. Current analgesia: Paracetamol 1g QDS.
+
+Social: He lives alone.
+
+Request: He is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr T. Adeyemi
+Teesway Medical Group

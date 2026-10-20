@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/10/2026     UBRN: 0000 8485 1446
+
+Patient: Ms Joan HALL     DOB: 16/05/1966     Gender: Female
+NHS No: 999 480 2216     Postcode: TS18 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2012
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 34.4 kg/m2 (02/07/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 64 mmol/mol (02/07/2026)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Ms Joan Hall, aged 60, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+She struggles with stairs and can manage roughly 33 minutes on the flat. No night pain. She walks without aids.
+
+X-ray report (20/03/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date has included 14 weeks of physiotherapy. Current analgesia: Paracetamol 1g QDS PRN.
+
+She lives with her partner.
+
+She has now been on your waiting list for 24 weeks. I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr S. Byrne
+Riverside Medical Centre

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/03/2026     UBRN: 0000 5045 9754
+
+Patient: Ms Carol HUTCHINSON     DOB: 27/04/1953     Gender: Female
+NHS No: 999 732 1405     Postcode: TS7 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 43.7 kg/m2 (16/01/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Carol Hutchinson, aged 72, who has worsening pain in the left knee.
+
+- Her Oxford Knee Score today is 26, down from 27 9 months ago.
+- She can walk for about 44 minutes before needing to stop.
+- X-ray report (30/12/2025): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+- Management to date has included 3 weeks of physiotherapy.
+- She has had one steroid injection, with only short-lived relief.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- She lives with family.
+- She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr S. Byrne
+Riverside Medical Centre

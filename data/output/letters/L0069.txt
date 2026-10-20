@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/10/2026     UBRN: 0000 8053 6470
+
+Patient: Ms Lesley WOOD     DOB: 28/12/1955     Gender: Female
+NHS No: 999 300 6629     Postcode: TS17 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2023
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.3 kg/m2 (21/06/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 52 mmol/mol (21/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Ms Lesley Wood, aged 70, who is on your waiting list with osteoarthritis of the left knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: Oxford knee score recorded at 22. She struggles with stairs and can manage roughly 33 minutes on the flat. Pain wakes her at night. She walks without aids.
+
+Imaging: X-ray report (23/05/2026): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+
+Management to date: She has completed 6 weeks of physiotherapy with limited benefit. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 27.3.
+
+Social: She lives with her partner.
+
+Request: She has now been on your waiting list for 39 weeks. I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr N. Iqbal
+Stockton Quay Health Centre

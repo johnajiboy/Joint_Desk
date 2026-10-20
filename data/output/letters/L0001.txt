@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/04/2026     UBRN: 0000 4111 4025
+
+Patient: Ms Aisha HALL     DOB: 28/06/1954     Gender: Female
+NHS No: 999 809 9129     Postcode: TS1 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2009
+Medication
+  Paracetamol 1g QDS PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 25.4 kg/m2 (17/12/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Ms Aisha Hall, aged 71, with osteoarthritis of the left knee.
+
+Her Oxford Knee Score today is 22 (previously 24). Walking tolerance is around 43 minutes. Sleeps well. She walks without aids.
+
+X-ray report (09/07/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+She has completed five weeks of physiotherapy with limited benefit. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+She lives with family.
+
+She is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr K. Ahmed
+North Ormesby Family Practice

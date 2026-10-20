@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/06/2026     UBRN: 0000 9213 2798
+
+Patient: Ms Fatima BRENNAN     DOB: 30/09/1959     Gender: Female
+NHS No: 999 933 9182     Postcode: TS6 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2014
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.8 kg/m2 (28/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Ms Fatima Brennan, aged 66, with osteoarthritis of both knees.
+
+- Her Oxford Knee Score today is 15.
+- She struggles with stairs and can manage roughly 13 minutes on the flat.
+- She reports night pain most nights.
+- She uses a frame outdoors.
+- X-ray report (23/11/2025): "Early osteoarthritic change, predominantly medial compartment."
+- There have been no steroid injections.
+- Current analgesia: Topical ibuprofen gel PRN.
+- She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr M. Clarke
+Coulby Fields Surgery

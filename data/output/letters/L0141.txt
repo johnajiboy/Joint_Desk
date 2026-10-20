@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/10/2026     UBRN: 0000 6547 3568
+
+Patient: Ms Hazel HALL     DOB: 02/01/1964     Gender: Female
+NHS No: 999 449 7820     Postcode: TS7 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 23.5 kg/m2 (25/05/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about Ms Hazel Hall, aged 62, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: Oxford Knee Score 23. Walking tolerance is around 36 minutes. She walks without aids.
+
+Imaging: X-ray report (12/12/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Management to date: She has completed 7 weeks of physiotherapy with limited benefit. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Social: She lives with her partner.
+
+Request: She has been waiting 36 weeks so far. She is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr E. Lowther
+North Ormesby Family Practice

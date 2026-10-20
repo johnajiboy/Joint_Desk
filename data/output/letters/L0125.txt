@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/09/2026     UBRN: 0000 2216 1965
+
+Patient: Mrs Lesley TAYLOR     DOB: 22/12/1959     Gender: Female
+NHS No: 999 037 9432     Postcode: TS8 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 34.3 kg/m2 (14/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mrs Lesley Taylor, aged 66, who has worsening pain in the right knee.
+
+- Oxford knee score recorded at 12.
+- She can walk for about 12 minutes before needing to stop.
+- She reports disturbed sleep due to knee pain.
+- She walks without aids.
+- X-ray (25/07/2026): Moderate tricompartmental degenerative change with definite medial joint space loss, KL3.
+- Failed conservative mx incl. physio x8/52.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- She lives with family.
+- She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr M. Clarke
+Teesway Medical Group

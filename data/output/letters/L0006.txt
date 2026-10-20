@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/06/2026     UBRN: 0000 2133 5410
+
+Patient: Ms Susan NOWAK     DOB: 05/10/1957     Gender: Female
+NHS No: 999 565 4113     Postcode: TS5 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 28.4 kg/m2 (08/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Ms Susan Nowak, aged 68, with osteoarthritis of the right knee.
+
+History: Oxford Knee Score 19, down from 27 6 months ago. Walking tolerance is around 20 minutes. She walks without aids.
+
+Imaging: X-ray report (10/03/2026): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+Management to date: She has not yet had physiotherapy. She has not had any injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Request: She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr A. Patel
+Coulby Fields Surgery

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/07/2025     UBRN: 0000 6935 9259
+
+Patient: Mrs Susan TAYLOR     DOB: 04/01/1957     Gender: Female
+NHS No: 999 539 7307     Postcode: TS6 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 36.7 kg/m2 (19/03/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mrs Susan Taylor, aged 68. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+She can walk for about 18 minutes before needing to stop. Pain wakes her at night. She walks without aids.
+
+X-ray (02/06/2025): Early osteoarthritic change, predominantly medial compartment, KL grade 2.
+
+Management to date has included five weeks of physiotherapy. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+She lives with her partner.
+
+She is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr L. Okonkwo
+Stockton Quay Health Centre

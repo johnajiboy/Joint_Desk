@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/04/2026     UBRN: 0000 4715 5853
+
+Patient: Mrs Sheila WATSON     DOB: 17/08/1963     Gender: Female
+NHS No: 999 535 0327     Postcode: TS10 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 29.0 kg/m2 (03/01/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Sheila Watson, aged 62, who has worsening pain in the right knee.
+
+Her Oxford Knee Score today is 34, compared with 36 at the last review. Walking tolerance is around 41 minutes. Denies night pain. She walks without aids.
+
+X-ray report (30/08/2025): "Minimal changes only, of doubtful significance."
+
+She has had 8 weeks of physiotherapy in the community. There have been no steroid injections. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 31.4.
+
+She lives with her partner.
+
+She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr L. Okonkwo
+Coulby Fields Surgery

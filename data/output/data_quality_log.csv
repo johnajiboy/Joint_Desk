@@ -1,0 +1,686 @@
+row,patient_id,field,true_value,raw_value,issue
+1116,KP01117,oks,20,,missing
+478,KP00479,oks,24,,missing
+1311,KP01312,oks,20,,missing
+573,KP00574,oks,24,,missing
+546,KP00547,oks,26,,missing
+957,KP00958,oks,21,,missing
+1019,KP01020,oks,27,,missing
+158,KP00159,oks,26,,missing
+1317,KP01318,oks,17,,missing
+899,KP00900,oks,14,,missing
+1201,KP01202,oks,17,,missing
+580,KP00581,oks,19,,missing
+212,KP00213,oks,17,,missing
+1244,KP01245,oks,16,,missing
+490,KP00491,oks,22,,missing
+324,KP00325,oks,23,,missing
+1425,KP01426,oks,17,,missing
+668,KP00669,oks,26,,missing
+740,KP00741,oks,24,,missing
+265,KP00266,oks,16,,missing
+1246,KP01247,oks,10,,missing
+375,KP00376,oks,25,,missing
+461,KP00462,oks,28,,missing
+1210,KP01211,oks,23,,missing
+514,KP00515,oks,28,,missing
+1012,KP01013,oks,23,,missing
+503,KP00504,oks,21,,missing
+448,KP00449,oks,4,,missing
+1055,KP01056,oks,3,,missing
+1449,KP01450,oks,7,,missing
+721,KP00722,oks,15,,missing
+1009,KP01010,oks,39,,missing
+681,KP00682,oks,19,,missing
+1074,KP01075,oks,22,,missing
+722,KP00723,oks,26,,missing
+16,KP00017,oks,7,,missing
+718,KP00719,oks,18,,missing
+959,KP00960,oks,28,,missing
+845,KP00846,oks,22,,missing
+468,KP00469,oks,20,,missing
+1426,KP01427,oks,22,,missing
+543,KP00544,oks,12,,missing
+875,KP00876,oks,22,,missing
+881,KP00882,oks,27,,missing
+204,KP00205,oks,17,,missing
+1114,KP01115,oks,21,,missing
+1165,KP01166,oks,15,,missing
+417,KP00418,oks,20,,missing
+250,KP00251,oks,22,,missing
+1318,KP01319,oks,17,,missing
+436,KP00437,oks,15,,missing
+1372,KP01373,oks,16,,missing
+152,KP00153,oks,21,,missing
+570,KP00571,oks,21,,missing
+1153,KP01154,oks,20,,missing
+941,KP00942,oks,23,,missing
+1087,KP01088,oks,28,,missing
+1036,KP01037,oks,11,,missing
+222,KP00223,oks,12,,missing
+52,KP00053,oks,17,,missing
+872,KP00873,oks,23,,missing
+1400,KP01401,oks,27,,missing
+216,KP00217,oks,24,,missing
+864,KP00865,oks,19,,missing
+91,KP00092,oks,39,,missing
+331,KP00332,oks,16,,missing
+227,KP00228,oks,31,,missing
+148,KP00149,oks,20,,missing
+285,KP00286,oks,25,,missing
+132,KP00133,oks,14,,missing
+652,KP00653,oks,10,,missing
+295,KP00296,oks,21,,missing
+942,KP00943,oks,17,,missing
+1281,KP01282,oks,23,,missing
+1428,KP01429,oks,2,,missing
+1059,KP01060,oks,5,,missing
+856,KP00857,oks,23,,missing
+1424,KP01425,oks,26,,missing
+667,KP00668,oks,17,,missing
+739,KP00740,oks,34,,missing
+591,KP00592,oks,21,,missing
+170,KP00171,oks,30,,missing
+336,KP00337,oks,27,,missing
+876,KP00877,oks,37,,missing
+53,KP00054,oks,13,,missing
+630,KP00631,oks,21,,missing
+464,KP00465,oks,9,,missing
+812,KP00813,oks,29,,missing
+770,KP00771,oks,21,,missing
+1332,KP01333,oks,27,,missing
+565,KP00566,bmi,38.1,,missing
+899,KP00900,bmi,35.0,,missing
+1063,KP01064,bmi,34.2,,missing
+1035,KP01036,bmi,30.8,,missing
+1033,KP01034,bmi,27.0,,missing
+154,KP00155,bmi,26.9,,missing
+971,KP00972,bmi,25.1,,missing
+349,KP00350,bmi,37.2,,missing
+674,KP00675,bmi,25.2,,missing
+1120,KP01121,bmi,31.3,,missing
+1316,KP01317,bmi,21.8,,missing
+1152,KP01153,bmi,43.1,,missing
+1079,KP01080,bmi,36.4,,missing
+212,KP00213,bmi,40.3,,missing
+38,KP00039,bmi,44.5,,missing
+947,KP00948,bmi,29.8,,missing
+1020,KP01021,bmi,30.9,,missing
+461,KP00462,bmi,31.3,,missing
+548,KP00549,bmi,31.5,,missing
+423,KP00424,bmi,33.2,,missing
+1465,KP01466,bmi,31.6,,missing
+139,KP00140,bmi,25.1,,missing
+1435,KP01436,bmi,28.6,,missing
+966,KP00967,bmi,35.2,,missing
+1469,KP01470,bmi,28.2,,missing
+1147,KP01148,bmi,28.7,,missing
+251,KP00252,bmi,26.1,,missing
+1072,KP01073,bmi,39.3,,missing
+277,KP00278,bmi,29.2,,missing
+721,KP00722,bmi,24.6,,missing
+1339,KP01340,bmi,28.6,,missing
+1172,KP01173,bmi,30.9,,missing
+102,KP00103,bmi,32.5,,missing
+1302,KP01303,bmi,38.6,,missing
+237,KP00238,bmi,33.2,,missing
+915,KP00916,bmi,35.5,,missing
+1362,KP01363,bmi,55.0,,missing
+1011,KP01012,bmi,29.6,,missing
+1135,KP01136,bmi,25.3,,missing
+459,KP00460,bmi,39.5,,missing
+667,KP00668,bmi,35.6,,missing
+1071,KP01072,bmi,26.6,,missing
+819,KP00820,bmi,29.4,,missing
+952,KP00953,bmi,27.5,,missing
+940,KP00941,bmi,39.2,,missing
+376,KP00377,kl_grade,2,,missing
+1268,KP01269,kl_grade,2,,missing
+1137,KP01138,kl_grade,3,,missing
+147,KP00148,kl_grade,4,,missing
+1433,KP01434,kl_grade,4,,missing
+780,KP00781,kl_grade,2,,missing
+775,KP00776,kl_grade,4,,missing
+1202,KP01203,kl_grade,3,,missing
+367,KP00368,kl_grade,2,,missing
+1118,KP01119,kl_grade,4,,missing
+654,KP00655,kl_grade,2,,missing
+364,KP00365,kl_grade,4,,missing
+552,KP00553,kl_grade,3,,missing
+663,KP00664,kl_grade,4,,missing
+1033,KP01034,kl_grade,2,,missing
+1257,KP01258,kl_grade,2,,missing
+360,KP00361,kl_grade,3,,missing
+457,KP00458,kl_grade,2,,missing
+932,KP00933,kl_grade,2,,missing
+916,KP00917,kl_grade,2,,missing
+868,KP00869,kl_grade,2,,missing
+556,KP00557,kl_grade,3,,missing
+847,KP00848,kl_grade,4,,missing
+533,KP00534,kl_grade,2,,missing
+917,KP00918,kl_grade,4,,missing
+904,KP00905,kl_grade,2,,missing
+1125,KP01126,kl_grade,4,,missing
+1440,KP01441,kl_grade,2,,missing
+1220,KP01221,kl_grade,1,,missing
+1200,KP01201,kl_grade,4,,missing
+1325,KP01326,bmi,26.4,264.0,decimal point lost (e.g. 31.4 -> 314)
+874,KP00875,bmi,35.0,350.0,decimal point lost (e.g. 31.4 -> 314)
+1467,KP01468,bmi,27.1,271.0,decimal point lost (e.g. 31.4 -> 314)
+630,KP00631,bmi,25.6,256.0,decimal point lost (e.g. 31.4 -> 314)
+849,KP00850,bmi,35.4,354.0,decimal point lost (e.g. 31.4 -> 314)
+1202,KP01203,bmi,31.8,318.0,decimal point lost (e.g. 31.4 -> 314)
+108,KP00109,bmi,35.7,357.0,decimal point lost (e.g. 31.4 -> 314)
+19,KP00020,bmi,28.7,287.0,decimal point lost (e.g. 31.4 -> 314)
+13,KP00014,bmi,33.0,330.0,decimal point lost (e.g. 31.4 -> 314)
+55,KP00056,bmi,29.3,293.0,decimal point lost (e.g. 31.4 -> 314)
+466,KP00467,bmi,25.9,259.0,decimal point lost (e.g. 31.4 -> 314)
+367,KP00368,bmi,30.2,302.0,decimal point lost (e.g. 31.4 -> 314)
+640,KP00641,bmi,25.8,258.0,decimal point lost (e.g. 31.4 -> 314)
+839,KP00840,bmi,30.9,309.0,decimal point lost (e.g. 31.4 -> 314)
+454,KP00455,bmi,29.5,295.0,decimal point lost (e.g. 31.4 -> 314)
+184,KP00185,bmi,24.8,248.0,decimal point lost (e.g. 31.4 -> 314)
+726,KP00727,bmi,34.9,349.0,decimal point lost (e.g. 31.4 -> 314)
+202,KP00203,bmi,33.5,335.0,decimal point lost (e.g. 31.4 -> 314)
+1085,KP01086,bmi,42.5,425.0,decimal point lost (e.g. 31.4 -> 314)
+1437,KP01438,bmi,29.6,296.0,decimal point lost (e.g. 31.4 -> 314)
+1154,KP01155,bmi,34.0,340.0,decimal point lost (e.g. 31.4 -> 314)
+759,KP00760,bmi,31.3,313.0,decimal point lost (e.g. 31.4 -> 314)
+343,KP00344,age,68,0,impossible value
+1151,KP01152,age,71,129,impossible value
+575,KP00576,age,78,0,impossible value
+930,KP00931,age,56,199,impossible value
+1269,KP01270,age,50,129,impossible value
+1276,KP01277,age,73,0,impossible value
+166,KP00167,age,64,199,impossible value
+457,KP00458,age,77,129,impossible value
+374,KP00375,age,82,129,impossible value
+628,KP00629,age,51,0,impossible value
+990,KP00991,age,51,199,impossible value
+901,KP00902,age,83,0,impossible value
+1132,KP01133,age,64,199,impossible value
+23,KP00024,age,70,129,impossible value
+1342,KP01343,age,77,129,impossible value
+1389,KP01390,oks,33,-1,out of range (OKS is 0-48)
+817,KP00818,oks,13,52,out of range (OKS is 0-48)
+966,KP00967,oks,14,-1,out of range (OKS is 0-48)
+1161,KP01162,oks,17,52,out of range (OKS is 0-48)
+246,KP00247,oks,9,52,out of range (OKS is 0-48)
+940,KP00941,oks,9,60,out of range (OKS is 0-48)
+751,KP00752,oks,21,60,out of range (OKS is 0-48)
+1459,KP01460,oks,15,-1,out of range (OKS is 0-48)
+948,KP00949,oks,14,-1,out of range (OKS is 0-48)
+1259,KP01260,oks,18,52,out of range (OKS is 0-48)
+195,KP00196,oks,23,-1,out of range (OKS is 0-48)
+1483,KP01484,oks,22,60,out of range (OKS is 0-48)
+1117,KP01118,oks,23,-1,out of range (OKS is 0-48)
+858,KP00859,oks,18,-1,out of range (OKS is 0-48)
+1264,KP01265,oks,18,-1,out of range (OKS is 0-48)
+796,KP00797,laterality,Right,R,inconsistent label
+1041,KP01042,laterality,Right,Rt,inconsistent label
+666,KP00667,laterality,Right,right,inconsistent label
+1467,KP01468,laterality,Left,left,inconsistent label
+1409,KP01410,laterality,Left,left,inconsistent label
+358,KP00359,laterality,Left,Lt,inconsistent label
+1011,KP01012,laterality,Left,Lt,inconsistent label
+404,KP00405,laterality,Left,L,inconsistent label
+1215,KP01216,laterality,Bilateral,bilateral,inconsistent label
+177,KP00178,laterality,Right,Rt,inconsistent label
+374,KP00375,laterality,Bilateral,Both,inconsistent label
+1218,KP01219,laterality,Left,Lt,inconsistent label
+841,KP00842,laterality,Right,Rt,inconsistent label
+1166,KP01167,laterality,Left,L,inconsistent label
+940,KP00941,laterality,Right,right,inconsistent label
+877,KP00878,laterality,Left,Lt,inconsistent label
+786,KP00787,laterality,Right,Rt,inconsistent label
+907,KP00908,laterality,Left,Lt,inconsistent label
+157,KP00158,laterality,Left,Lt,inconsistent label
+1101,KP01102,laterality,Right,Rt,inconsistent label
+535,KP00536,laterality,Right,right,inconsistent label
+351,KP00352,laterality,Left,left,inconsistent label
+1238,KP01239,laterality,Right,Rt,inconsistent label
+1441,KP01442,laterality,Left,left,inconsistent label
+1012,KP01013,laterality,Right,R,inconsistent label
+329,KP00330,laterality,Right,right,inconsistent label
+818,KP00819,laterality,Bilateral,Both,inconsistent label
+336,KP00337,laterality,Left,Lt,inconsistent label
+1024,KP01025,laterality,Bilateral,bilateral,inconsistent label
+999,KP01000,laterality,Left,L,inconsistent label
+870,KP00871,laterality,Bilateral,bilateral,inconsistent label
+1025,KP01026,laterality,Right,right,inconsistent label
+1485,KP01486,laterality,Right,Rt,inconsistent label
+257,KP00258,laterality,Right,Rt,inconsistent label
+1179,KP01180,laterality,Right,right,inconsistent label
+1474,KP01475,laterality,Bilateral,B/L,inconsistent label
+410,KP00411,laterality,Bilateral,B/L,inconsistent label
+954,KP00955,laterality,Left,left,inconsistent label
+1471,KP01472,laterality,Right,Rt,inconsistent label
+635,KP00636,laterality,Right,R,inconsistent label
+104,KP00105,laterality,Right,Rt,inconsistent label
+313,KP00314,laterality,Left,Lt,inconsistent label
+766,KP00767,laterality,Bilateral,B/L,inconsistent label
+405,KP00406,laterality,Left,left,inconsistent label
+915,KP00916,laterality,Right,right,inconsistent label
+662,KP00663,laterality,Right,Rt,inconsistent label
+1023,KP01024,laterality,Right,right,inconsistent label
+1285,KP01286,laterality,Bilateral,B/L,inconsistent label
+38,KP00039,laterality,Right,right,inconsistent label
+288,KP00289,laterality,Left,left,inconsistent label
+1470,KP01471,laterality,Right,R,inconsistent label
+219,KP00220,laterality,Left,Lt,inconsistent label
+339,KP00340,laterality,Right,Rt,inconsistent label
+1013,KP01014,laterality,Right,right,inconsistent label
+1209,KP01210,laterality,Left,Lt,inconsistent label
+158,KP00159,laterality,Left,Lt,inconsistent label
+1351,KP01352,laterality,Right,Rt,inconsistent label
+594,KP00595,laterality,Left,L,inconsistent label
+688,KP00689,laterality,Right,right,inconsistent label
+757,KP00758,laterality,Right,Rt,inconsistent label
+254,KP00255,laterality,Bilateral,bilateral,inconsistent label
+400,KP00401,laterality,Left,L,inconsistent label
+381,KP00382,laterality,Left,left,inconsistent label
+106,KP00107,laterality,Bilateral,Both,inconsistent label
+114,KP00115,laterality,Left,left,inconsistent label
+866,KP00867,laterality,Left,left,inconsistent label
+622,KP00623,laterality,Right,Rt,inconsistent label
+735,KP00736,laterality,Right,right,inconsistent label
+579,KP00580,laterality,Right,right,inconsistent label
+657,KP00658,laterality,Left,L,inconsistent label
+234,KP00235,laterality,Right,Rt,inconsistent label
+261,KP00262,laterality,Bilateral,B/L,inconsistent label
+764,KP00765,laterality,Right,right,inconsistent label
+894,KP00895,laterality,Bilateral,bilateral,inconsistent label
+501,KP00502,laterality,Right,Rt,inconsistent label
+807,KP00808,laterality,Right,right,inconsistent label
+521,KP00522,laterality,Bilateral,Both,inconsistent label
+814,KP00815,laterality,Right,right,inconsistent label
+1137,KP01138,laterality,Left,Lt,inconsistent label
+1156,KP01157,laterality,Left,left,inconsistent label
+797,KP00798,laterality,Left,Lt,inconsistent label
+135,KP00136,laterality,Left,L,inconsistent label
+1255,KP01256,laterality,Bilateral,Both,inconsistent label
+722,KP00723,laterality,Right,Rt,inconsistent label
+1078,KP01079,laterality,Left,L,inconsistent label
+856,KP00857,laterality,Left,L,inconsistent label
+811,KP00812,laterality,Right,R,inconsistent label
+179,KP00180,laterality,Bilateral,bilateral,inconsistent label
+1390,KP01391,laterality,Right,right,inconsistent label
+423,KP00424,laterality,Left,Lt,inconsistent label
+545,KP00546,laterality,Right,Rt,inconsistent label
+1206,KP01207,laterality,Left,left,inconsistent label
+488,KP00489,laterality,Bilateral,B/L,inconsistent label
+1257,KP01258,laterality,Left,L,inconsistent label
+88,KP00089,laterality,Right,Rt,inconsistent label
+340,KP00341,laterality,Right,Rt,inconsistent label
+876,KP00877,laterality,Right,R,inconsistent label
+1318,KP01319,laterality,Left,Lt,inconsistent label
+1254,KP01255,laterality,Right,right,inconsistent label
+624,KP00625,laterality,Right,right,inconsistent label
+1029,KP01030,laterality,Right,Rt,inconsistent label
+644,KP00645,laterality,Right,right,inconsistent label
+895,KP00896,laterality,Right,R,inconsistent label
+1449,KP01450,laterality,Left,L,inconsistent label
+124,KP00125,laterality,Left,left,inconsistent label
+241,KP00242,laterality,Right,right,inconsistent label
+1439,KP01440,laterality,Left,L,inconsistent label
+1039,KP01040,laterality,Right,Rt,inconsistent label
+574,KP00575,laterality,Right,right,inconsistent label
+897,KP00898,laterality,Bilateral,B/L,inconsistent label
+519,KP00520,laterality,Bilateral,bilateral,inconsistent label
+474,KP00475,laterality,Left,left,inconsistent label
+176,KP00177,laterality,Left,Lt,inconsistent label
+1499,KP01500,laterality,Bilateral,bilateral,inconsistent label
+779,KP00780,laterality,Bilateral,B/L,inconsistent label
+107,KP00108,laterality,Bilateral,bilateral,inconsistent label
+711,KP00712,laterality,Bilateral,Both,inconsistent label
+1239,KP01240,laterality,Left,Lt,inconsistent label
+312,KP00313,laterality,Left,Lt,inconsistent label
+1081,KP01082,laterality,Right,right,inconsistent label
+517,KP00518,sex,Male,1,inconsistent label
+596,KP00597,sex,Female,2,inconsistent label
+1307,KP01308,sex,Female,female,inconsistent label
+1171,KP01172,sex,Female,female,inconsistent label
+734,KP00735,sex,Male,male,inconsistent label
+969,KP00970,sex,Male,male,inconsistent label
+218,KP00219,sex,Male,1,inconsistent label
+89,KP00090,sex,Female,F,inconsistent label
+1147,KP01148,sex,Female,2,inconsistent label
+1144,KP01145,sex,Female,2,inconsistent label
+1269,KP01270,sex,Male,male,inconsistent label
+754,KP00755,sex,Female,F,inconsistent label
+703,KP00704,sex,Male,M,inconsistent label
+1473,KP01474,sex,Male,1,inconsistent label
+758,KP00759,sex,Male,M,inconsistent label
+1059,KP01060,sex,Male,male,inconsistent label
+301,KP00302,sex,Male,male,inconsistent label
+276,KP00277,sex,Female,2,inconsistent label
+1054,KP01055,sex,Male,male,inconsistent label
+1247,KP01248,sex,Male,male,inconsistent label
+859,KP00860,sex,Female,2,inconsistent label
+25,KP00026,sex,Female,2,inconsistent label
+1300,KP01301,sex,Male,M,inconsistent label
+723,KP00724,sex,Male,male,inconsistent label
+99,KP00100,sex,Male,1,inconsistent label
+545,KP00546,sex,Male,M,inconsistent label
+930,KP00931,sex,Female,2,inconsistent label
+72,KP00073,sex,Female,female,inconsistent label
+1196,KP01197,sex,Female,F,inconsistent label
+36,KP00037,sex,Male,male,inconsistent label
+707,KP00708,sex,Male,M,inconsistent label
+938,KP00939,sex,Male,male,inconsistent label
+1014,KP01015,sex,Female,2,inconsistent label
+48,KP00049,sex,Female,female,inconsistent label
+1206,KP01207,sex,Female,2,inconsistent label
+234,KP00235,sex,Female,female,inconsistent label
+180,KP00181,sex,Female,F,inconsistent label
+492,KP00493,sex,Male,male,inconsistent label
+384,KP00385,sex,Female,F,inconsistent label
+490,KP00491,sex,Male,M,inconsistent label
+187,KP00188,sex,Female,female,inconsistent label
+933,KP00934,sex,Male,male,inconsistent label
+420,KP00421,sex,Male,1,inconsistent label
+223,KP00224,sex,Female,female,inconsistent label
+1418,KP01419,sex,Female,2,inconsistent label
+126,KP00127,sex,Female,female,inconsistent label
+826,KP00827,sex,Female,F,inconsistent label
+1479,KP01480,sex,Female,female,inconsistent label
+645,KP00646,sex,Male,male,inconsistent label
+1276,KP01277,sex,Male,male,inconsistent label
+650,KP00651,sex,Female,2,inconsistent label
+245,KP00246,sex,Male,1,inconsistent label
+193,KP00194,sex,Male,male,inconsistent label
+873,KP00874,sex,Male,M,inconsistent label
+160,KP00161,sex,Male,1,inconsistent label
+466,KP00467,sex,Male,1,inconsistent label
+83,KP00084,sex,Male,M,inconsistent label
+986,KP00987,sex,Female,female,inconsistent label
+1217,KP01218,sex,Male,male,inconsistent label
+1379,KP01380,sex,Female,female,inconsistent label
+406,KP00407,sex,Female,2,inconsistent label
+296,KP00297,sex,Male,male,inconsistent label
+329,KP00330,sex,Male,M,inconsistent label
+90,KP00091,sex,Female,F,inconsistent label
+1063,KP01064,sex,Male,male,inconsistent label
+582,KP00583,sex,Male,M,inconsistent label
+1159,KP01160,sex,Female,female,inconsistent label
+336,KP00337,sex,Female,2,inconsistent label
+753,KP00754,sex,Male,male,inconsistent label
+767,KP00768,sex,Male,1,inconsistent label
+361,KP00362,sex,Female,2,inconsistent label
+858,KP00859,sex,Female,F,inconsistent label
+1380,KP01381,sex,Female,2,inconsistent label
+129,KP00130,sex,Female,female,inconsistent label
+889,KP00890,sex,Female,F,inconsistent label
+995,KP00996,sex,Male,1,inconsistent label
+332,KP00333,sex,Female,F,inconsistent label
+984,KP00985,sex,Male,1,inconsistent label
+677,KP00678,sex,Female,F,inconsistent label
+856,KP00857,sex,Female,2,inconsistent label
+683,KP00684,sex,Male,1,inconsistent label
+694,KP00695,sex,Female,2,inconsistent label
+232,KP00233,sex,Female,2,inconsistent label
+648,KP00649,sex,Female,female,inconsistent label
+686,KP00687,sex,Female,F,inconsistent label
+211,KP00212,sex,Male,male,inconsistent label
+977,KP00978,sex,Female,F,inconsistent label
+464,KP00465,sex,Female,F,inconsistent label
+876,KP00877,sex,Female,F,inconsistent label
+1259,KP01260,sex,Male,1,inconsistent label
+870,KP00871,sex,Male,1,inconsistent label
+798,KP00799,sex,Male,1,inconsistent label
+440,KP00441,sex,Male,male,inconsistent label
+409,KP00410,sex,Female,2,inconsistent label
+108,KP00109,sex,Male,M,inconsistent label
+918,KP00919,sex,Male,1,inconsistent label
+839,KP00840,sex,Female,F,inconsistent label
+312,KP00313,sex,Male,1,inconsistent label
+328,KP00329,sex,Male,male,inconsistent label
+824,KP00825,sex,Male,1,inconsistent label
+947,KP00948,sex,Female,2,inconsistent label
+96,KP00097,sex,Male,1,inconsistent label
+1411,KP01412,sex,Female,2,inconsistent label
+730,KP00731,sex,Female,female,inconsistent label
+1425,KP01426,sex,Male,M,inconsistent label
+1365,KP01366,sex,Female,F,inconsistent label
+161,KP00162,sex,Male,male,inconsistent label
+891,KP00892,sex,Male,M,inconsistent label
+1312,KP01313,sex,Female,2,inconsistent label
+902,KP00903,sex,Male,male,inconsistent label
+1007,KP01008,sex,Female,F,inconsistent label
+1407,KP01408,sex,Female,female,inconsistent label
+267,KP00268,sex,Female,female,inconsistent label
+1445,KP01446,sex,Female,2,inconsistent label
+967,KP00968,sex,Male,1,inconsistent label
+771,KP00772,sex,Female,F,inconsistent label
+433,KP00434,sex,Female,F,inconsistent label
+47,KP00048,sex,Male,1,inconsistent label
+979,KP00980,sex,Male,1,inconsistent label
+1158,KP01159,sex,Male,M,inconsistent label
+854,KP00855,sex,Female,female,inconsistent label
+773,KP00774,sex,Male,male,inconsistent label
+324,KP00325,sex,Female,female,inconsistent label
+691,KP00692,sex,Female,female,inconsistent label
+1472,KP01473,sex,Female,female,inconsistent label
+1486,KP01487,sex,Female,F,inconsistent label
+966,KP00967,sex,Male,M,inconsistent label
+284,KP00285,sex,Male,1,inconsistent label
+1428,KP01429,sex,Male,1,inconsistent label
+547,KP00548,sex,Male,M,inconsistent label
+51,KP00052,sex,Female,F,inconsistent label
+617,KP00618,sex,Female,2,inconsistent label
+562,KP00563,sex,Female,F,inconsistent label
+722,KP00723,sex,Male,1,inconsistent label
+1453,KP01454,sex,Male,male,inconsistent label
+1370,KP01371,sex,Female,F,inconsistent label
+1090,KP01091,sex,Female,female,inconsistent label
+594,KP00595,sex,Male,M,inconsistent label
+453,KP00454,sex,Female,female,inconsistent label
+1216,KP01217,sex,Female,female,inconsistent label
+404,KP00405,sex,Male,1,inconsistent label
+1304,KP01305,sex,Male,1,inconsistent label
+1449,KP01450,sex,Male,male,inconsistent label
+1346,KP01347,sex,Male,1,inconsistent label
+994,KP00995,sex,Female,F,inconsistent label
+618,KP00619,sex,Male,male,inconsistent label
+1372,KP01373,sex,Female,F,inconsistent label
+810,KP00811,sex,Female,F,inconsistent label
+110,KP00111,sex,Male,M,inconsistent label
+1310,KP01311,sex,Female,2,inconsistent label
+652,KP00653,referral_date,2026-06-11,11/06/2026,mixed date format
+404,KP00405,referral_date,2026-06-21,21/06/2026,mixed date format
+1327,KP01328,referral_date,2026-05-23,23/05/2026,mixed date format
+801,KP00802,referral_date,2025-07-29,29/07/2025,mixed date format
+598,KP00599,referral_date,2026-09-30,30/09/2026,mixed date format
+1134,KP01135,referral_date,2026-07-30,30/07/2026,mixed date format
+1237,KP01238,referral_date,2025-12-29,29/12/2025,mixed date format
+50,KP00051,referral_date,2026-05-26,26/05/2026,mixed date format
+1232,KP01233,referral_date,2026-07-27,27/07/2026,mixed date format
+1397,KP01398,referral_date,2026-08-05,05/08/2026,mixed date format
+160,KP00161,referral_date,2025-03-24,24/03/2025,mixed date format
+1334,KP01335,referral_date,2026-02-19,19/02/2026,mixed date format
+537,KP00538,referral_date,2026-05-15,15/05/2026,mixed date format
+759,KP00760,referral_date,2026-06-27,27/06/2026,mixed date format
+278,KP00279,referral_date,2026-07-28,28/07/2026,mixed date format
+1368,KP01369,referral_date,2025-09-28,28/09/2025,mixed date format
+1016,KP01017,referral_date,2026-07-22,22/07/2026,mixed date format
+814,KP00815,referral_date,2026-06-12,12/06/2026,mixed date format
+645,KP00646,referral_date,2026-09-18,18/09/2026,mixed date format
+200,KP00201,referral_date,2025-12-12,12/12/2025,mixed date format
+728,KP00729,referral_date,2026-07-30,30/07/2026,mixed date format
+950,KP00951,referral_date,2025-10-31,31/10/2025,mixed date format
+901,KP00902,referral_date,2026-02-26,26/02/2026,mixed date format
+1319,KP01320,referral_date,2026-07-29,29/07/2026,mixed date format
+1008,KP01009,referral_date,2026-07-29,29/07/2026,mixed date format
+46,KP00047,referral_date,2026-08-04,04/08/2026,mixed date format
+731,KP00732,referral_date,2026-07-27,27/07/2026,mixed date format
+556,KP00557,referral_date,2025-12-16,16/12/2025,mixed date format
+749,KP00750,referral_date,2026-06-15,15/06/2026,mixed date format
+137,KP00138,referral_date,2026-08-31,31/08/2026,mixed date format
+544,KP00545,referral_date,2026-09-08,08/09/2026,mixed date format
+374,KP00375,referral_date,2026-07-12,12/07/2026,mixed date format
+632,KP00633,referral_date,2026-09-04,04/09/2026,mixed date format
+1255,KP01256,referral_date,2026-09-05,05/09/2026,mixed date format
+54,KP00055,referral_date,2026-07-12,12/07/2026,mixed date format
+311,KP00312,referral_date,2026-08-14,14/08/2026,mixed date format
+260,KP00261,referral_date,2026-09-06,06/09/2026,mixed date format
+174,KP00175,referral_date,2026-06-17,17/06/2026,mixed date format
+434,KP00435,referral_date,2026-05-04,04/05/2026,mixed date format
+1137,KP01138,referral_date,2026-05-27,27/05/2026,mixed date format
+1419,KP01420,referral_date,2026-04-05,05/04/2026,mixed date format
+1081,KP01082,referral_date,2026-03-30,30/03/2026,mixed date format
+228,KP00229,referral_date,2026-09-04,04/09/2026,mixed date format
+867,KP00868,referral_date,2026-07-29,29/07/2026,mixed date format
+26,KP00027,referral_date,2026-03-24,24/03/2026,mixed date format
+937,KP00938,referral_date,2026-07-31,31/07/2026,mixed date format
+67,KP00068,referral_date,2026-04-16,16/04/2026,mixed date format
+855,KP00856,referral_date,2026-07-05,05/07/2026,mixed date format
+226,KP00227,referral_date,2026-06-28,28/06/2026,mixed date format
+771,KP00772,referral_date,2026-07-31,31/07/2026,mixed date format
+336,KP00337,referral_date,2026-07-15,15/07/2026,mixed date format
+753,KP00754,referral_date,2026-08-12,12/08/2026,mixed date format
+1277,KP01278,referral_date,2026-03-31,31/03/2026,mixed date format
+81,KP00082,referral_date,2026-08-21,21/08/2026,mixed date format
+1043,KP01044,referral_date,2026-07-26,26/07/2026,mixed date format
+304,KP00305,referral_date,2026-08-10,10/08/2026,mixed date format
+463,KP00464,referral_date,2026-03-24,24/03/2026,mixed date format
+785,KP00786,referral_date,2026-07-11,11/07/2026,mixed date format
+31,KP00032,referral_date,2026-06-09,09/06/2026,mixed date format
+500,KP00501,referral_date,2025-12-30,30/12/2025,mixed date format
+1454,KP01455,referral_date,2026-02-21,21/02/2026,mixed date format
+427,KP00428,referral_date,2026-03-13,13/03/2026,mixed date format
+1362,KP01363,referral_date,2026-01-22,22/01/2026,mixed date format
+1092,KP01093,referral_date,2025-12-17,17/12/2025,mixed date format
+1090,KP01091,referral_date,2026-09-18,18/09/2026,mixed date format
+856,KP00857,referral_date,2026-05-28,28/05/2026,mixed date format
+1374,KP01375,referral_date,2026-08-20,20/08/2026,mixed date format
+1109,KP01110,referral_date,2026-06-26,26/06/2026,mixed date format
+504,KP00505,referral_date,2026-04-16,16/04/2026,mixed date format
+1275,KP01276,referral_date,2026-06-08,08/06/2026,mixed date format
+73,KP00074,referral_date,2025-12-24,24/12/2025,mixed date format
+606,KP00607,referral_date,2026-05-10,10/05/2026,mixed date format
+444,KP00445,referral_date,2026-07-12,12/07/2026,mixed date format
+966,KP00967,referral_date,2026-05-19,19/05/2026,mixed date format
+302,KP00303,referral_date,2025-10-26,26/10/2025,mixed date format
+354,KP00355,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+1265,KP01266,smoking_status,Never smoked,,inconsistent label
+643,KP00644,smoking_status,Never smoked,,inconsistent label
+993,KP00994,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+645,KP00646,smoking_status,Ex-smoker,,inconsistent label
+1319,KP01320,smoking_status,Never smoked,unknown,inconsistent label
+1452,KP01453,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+1133,KP01134,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+1191,KP01192,smoking_status,Never smoked,unknown,inconsistent label
+218,KP00219,smoking_status,Current smoker,,inconsistent label
+827,KP00828,smoking_status,Ex-smoker,unknown,inconsistent label
+386,KP00387,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+301,KP00302,smoking_status,Current smoker,CURRENT SMOKER,inconsistent label
+841,KP00842,smoking_status,Ex-smoker,,inconsistent label
+126,KP00127,smoking_status,Never smoked,,inconsistent label
+1346,KP01347,smoking_status,Never smoked,,inconsistent label
+488,KP00489,smoking_status,Current smoker,unknown,inconsistent label
+719,KP00720,smoking_status,Ex-smoker,,inconsistent label
+319,KP00320,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+670,KP00671,smoking_status,Ex-smoker,unknown,inconsistent label
+1221,KP01222,smoking_status,Ex-smoker,,inconsistent label
+422,KP00423,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+436,KP00437,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+608,KP00609,smoking_status,Never smoked,unknown,inconsistent label
+1082,KP01083,smoking_status,Never smoked,,inconsistent label
+917,KP00918,smoking_status,Current smoker,unknown,inconsistent label
+460,KP00461,smoking_status,Never smoked,,inconsistent label
+364,KP00365,smoking_status,Ex-smoker,unknown,inconsistent label
+563,KP00564,smoking_status,Ex-smoker,,inconsistent label
+376,KP00377,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+418,KP00419,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+453,KP00454,smoking_status,Ex-smoker,unknown,inconsistent label
+1020,KP01021,smoking_status,Never smoked,unknown,inconsistent label
+71,KP00072,smoking_status,Ex-smoker,,inconsistent label
+1045,KP01046,smoking_status,Never smoked,,inconsistent label
+1349,KP01350,smoking_status,Ex-smoker,,inconsistent label
+1333,KP01334,smoking_status,Ex-smoker,,inconsistent label
+452,KP00453,smoking_status,Ex-smoker,,inconsistent label
+902,KP00903,smoking_status,Never smoked,unknown,inconsistent label
+349,KP00350,smoking_status,Never smoked,NEVER SMOKED,inconsistent label
+278,KP00279,smoking_status,Ex-smoker,unknown,inconsistent label
+6,KP00007,smoking_status,Ex-smoker,,inconsistent label
+1313,KP01314,smoking_status,Current smoker,unknown,inconsistent label
+1462,KP01463,smoking_status,Ex-smoker,unknown,inconsistent label
+972,KP00973,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+1482,KP01483,smoking_status,Never smoked,,inconsistent label
+1412,KP01413,smoking_status,Never smoked,,inconsistent label
+1308,KP01309,smoking_status,Never smoked,unknown,inconsistent label
+93,KP00094,smoking_status,Never smoked,unknown,inconsistent label
+1369,KP01370,smoking_status,Current smoker,unknown,inconsistent label
+233,KP00234,smoking_status,Ex-smoker,unknown,inconsistent label
+1025,KP01026,smoking_status,Current smoker,,inconsistent label
+568,KP00569,smoking_status,Ex-smoker,unknown,inconsistent label
+406,KP00407,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+543,KP00544,smoking_status,Never smoked,,inconsistent label
+748,KP00749,smoking_status,Current smoker,,inconsistent label
+237,KP00238,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+50,KP00051,smoking_status,Ex-smoker,EX-SMOKER,inconsistent label
+507,KP00508,smoking_status,Ex-smoker,unknown,inconsistent label
+843,KP00844,smoking_status,Ex-smoker,,inconsistent label
+568,KP00569,physio_weeks,9,?,free text in numeric field
+1018,KP01019,physio_weeks,6,?,free text in numeric field
+963,KP00964,physio_weeks,10,yes,free text in numeric field
+910,KP00911,physio_weeks,0,6-8,free text in numeric field
+898,KP00899,physio_weeks,6,some,free text in numeric field
+1495,KP01496,physio_weeks,7,yes,free text in numeric field
+216,KP00217,physio_weeks,8,6-8,free text in numeric field
+1452,KP01453,physio_weeks,10,yes,free text in numeric field
+1012,KP01013,physio_weeks,8,?,free text in numeric field
+319,KP00320,physio_weeks,0,?,free text in numeric field
+242,KP00243,physio_weeks,0,?,free text in numeric field
+1418,KP01419,physio_weeks,0,yes,free text in numeric field
+528,KP00529,physio_weeks,16,yes,free text in numeric field
+4,KP00005,physio_weeks,10,6-8,free text in numeric field
+88,KP00089,physio_weeks,6,yes,free text in numeric field
+472,KP00473,physio_weeks,8,some,free text in numeric field
+805,KP00806,physio_weeks,9,some,free text in numeric field
+1205,KP01206,physio_weeks,8,some,free text in numeric field
+102,KP00103,physio_weeks,4,yes,free text in numeric field
+110,KP00111,physio_weeks,10,?,free text in numeric field
+1131,KP01132,physio_weeks,0,yes,free text in numeric field
+1010,KP01011,physio_weeks,7,yes,free text in numeric field
+616,KP00617,physio_weeks,9,?,free text in numeric field
+736,KP00737,physio_weeks,11,?,free text in numeric field
+1357,KP01358,physio_weeks,0,?,free text in numeric field
+294,KP00295,physio_weeks,18,?,free text in numeric field
+351,KP00352,physio_weeks,0,6-8,free text in numeric field
+1371,KP01372,physio_weeks,7,6-8,free text in numeric field
+27,KP00028,physio_weeks,17,?,free text in numeric field
+205,KP00206,physio_weeks,6,yes,free text in numeric field
+1338,KP01339,physio_weeks,15,?,free text in numeric field
+222,KP00223,physio_weeks,6,6-8,free text in numeric field
+1035,KP01036,physio_weeks,8,yes,free text in numeric field
+192,KP00193,physio_weeks,6,some,free text in numeric field
+517,KP00518,physio_weeks,19,some,free text in numeric field
+943,KP00944,physio_weeks,12,6-8,free text in numeric field
+156,KP00157,physio_weeks,11,some,free text in numeric field
+423,KP00424,physio_weeks,9,?,free text in numeric field
+933,KP00934,physio_weeks,9,?,free text in numeric field
+867,KP00868,physio_weeks,0,6-8,free text in numeric field
+728,KP00729,physio_weeks,7,?,free text in numeric field
+1036,KP01037,physio_weeks,8,some,free text in numeric field
+281,KP00282,physio_weeks,19,some,free text in numeric field
+66,KP00067,physio_weeks,15,?,free text in numeric field
+727,KP00728,physio_weeks,10,?,free text in numeric field
+34,KP00035,(row),,duplicate row,duplicate referral
+1236,KP01237,(row),,duplicate row,duplicate referral
+1304,KP01305,(row),,duplicate row,duplicate referral
+1150,KP01151,(row),,duplicate row,duplicate referral
+552,KP00553,(row),,duplicate row,duplicate referral
+594,KP00595,(row),,duplicate row,duplicate referral
+1431,KP01432,(row),,duplicate row,duplicate referral
+490,KP00491,(row),,duplicate row,duplicate referral
+691,KP00692,(row),,duplicate row,duplicate referral
+391,KP00392,(row),,duplicate row,duplicate referral
+880,KP00881,(row),,duplicate row,duplicate referral
+79,KP00080,(row),,duplicate row,duplicate referral
+1022,KP01023,(row),,duplicate row,duplicate referral
+832,KP00833,(row),,duplicate row,duplicate referral
+188,KP00189,(row),,duplicate row,duplicate referral
+934,KP00935,(row),,duplicate row,duplicate referral
+872,KP00873,(row),,duplicate row,duplicate referral
+1197,KP01198,(row),,duplicate row,duplicate referral

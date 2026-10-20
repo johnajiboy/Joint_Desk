@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 29/07/2026     UBRN: 0000 6499 5983
+
+Patient: Mr Tony PIKE     DOB: 26/02/1973     Gender: Male
+NHS No: 999 381 4695     Postcode: TS10 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 26.1 kg/m2 (30/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr Tony Pike, with osteoarthritis of both knees.
+
+- His Oxford Knee Score today is 18.
+- Walking tolerance is around 31 minutes.
+- He reports disturbed sleep due to knee pain.
+- He walks without aids.
+- X-ray report (29/01/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+- Failed conservative mx incl. physio x11/52.
+- There have been no steroid injections.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Weighed in clinic, BMI today 28.5.
+- He lives with his partner.
+- He is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr R. Hughes
+Riverside Medical Centre

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/10/2026     UBRN: 0000 5467 1717
+
+Patient: Ms Karen BROWN     DOB: 13/05/1943     Gender: Female
+NHS No: 999 025 8538     Postcode: TS6 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.4 kg/m2 (14/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Ms Karen Brown, aged 83, who is on your waiting list with osteoarthritis of both knees. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: Oxford Knee Score 17 (previously 13). She can walk for about 24 minutes before needing to stop. She reports night pain most nights.
+
+Imaging: X-ray report (22/09/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+Management to date: She has completed 2 weeks of physiotherapy with limited benefit. She has had two steroid injections, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+Social: She lives with family.
+
+Request: She has been waiting 35 weeks so far. She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr L. Okonkwo
+Acklam Green Practice

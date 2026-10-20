@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 04/07/2026     UBRN: 0000 8943 4242
+
+Patient: Mr Derek ALI     DOB: 29/10/1940     Gender: Male
+NHS No: 999 065 6185     Postcode: TS5 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 28.8 kg/m2 (03/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Re: Mr Derek Ali. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+His Oxford Knee Score today is 30 (previously 29). He can walk for about 47 minutes before needing to stop. He walks without aids.
+
+X-ray report (26/04/2026): "Early osteoarthritic change, predominantly medial compartment."
+
+He has completed 14 weeks of physiotherapy with limited benefit. He has not had any injections. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+He lives alone and is finding it hard to cope.
+
+He is keen to consider surgery if appropriate.
+
+With thanks,
+Dr J. Fenwick
+Marton Park Health Centre

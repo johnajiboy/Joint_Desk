@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/07/2026     UBRN: 0000 4281 4509
+
+Patient: Mrs Carol BELL     DOB: 01/10/1957     Gender: Female
+NHS No: 999 251 1737     Postcode: TS17 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 38.3 kg/m2 (06/05/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mrs Carol Bell, aged 68, with osteoarthritis of both knees.
+
+Her Oxford Knee Score today is 12. Walking tolerance is around 24 minutes. She walks without aids.
+
+X-ray report (26/02/2026): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Management to date has included 11 weeks of physiotherapy. She has not had any injections. Current analgesia: Topical ibuprofen gel PRN.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr S. Byrne
+North Ormesby Family Practice

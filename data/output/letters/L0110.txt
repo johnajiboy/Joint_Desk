@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 22/02/2026     UBRN: 0000 1834 5608
+
+Patient: Mrs Linda DAWSON     DOB: 10/09/1949     Gender: Female
+NHS No: 999 225 7172     Postcode: TS1 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2014
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.5 kg/m2 (19/11/2025)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mrs Linda Dawson, with osteoarthritis of the left knee.
+
+History: OKS 27/48, down from 27 6 months ago. She can walk for about 41 minutes before needing to stop. She now mobilises with a stick.
+
+Imaging: X-ray report (04/07/2025): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date: She has had 8 weeks of physiotherapy in the community. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: She lives with her partner.
+
+Request: She would like to discuss knee replacement.
+
+Best wishes,
+Dr A. Patel
+Acklam Green Practice

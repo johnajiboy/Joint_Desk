@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/10/2026     UBRN: 0000 3519 3903
+
+Patient: Mr Colin WALSH     DOB: 02/09/1951     Gender: Male
+NHS No: 999 618 6342     Postcode: TS7 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 23.4 kg/m2 (23/08/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Mr Colin Walsh, aged 75, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+OKS 29/48 (previously 25). He can walk for about 51 minutes before needing to stop. No night pain.
+
+X-ray report (01/02/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+He has had 17 weeks of physiotherapy in the community. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 23.4.
+
+He lives with his partner.
+
+He has now been on your waiting list for 28 weeks. He is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr A. Patel
+Acklam Green Practice

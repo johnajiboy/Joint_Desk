@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/08/2026     UBRN: 0000 5420 6519
+
+Patient: Mr Samuel SHAW     DOB: 04/04/1951     Gender: Male
+NHS No: 999 749 6221     Postcode: TS18 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 35.0 kg/m2 (22/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mr Samuel Shaw, aged 75, who has worsening pain in both knees.
+
+His Oxford Knee Score today is 30, compared with 42 at the last review. He can walk for about 32 minutes before needing to stop. Denies night pain.
+
+X-ray (27/04/2026): Moderate tricompartmental degenerative change with definite medial joint space loss, KL3.
+
+He has completed 3 weeks of physiotherapy with limited benefit. He has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+He would like to discuss knee replacement.
+
+With thanks,
+Dr M. Clarke
+Linthorpe Lane Surgery

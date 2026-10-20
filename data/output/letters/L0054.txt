@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/09/2025     UBRN: 0000 6065 8189
+
+Patient: Mrs Margaret RAHMAN     DOB: 26/01/1951     Gender: Female
+NHS No: 999 070 0958     Postcode: TS18 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2019
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 32.0 kg/m2 (18/07/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Margaret Rahman, aged 74. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+- Oxford Knee Score 21.
+- Walking tolerance is around 41 minutes.
+- She reports night pain most nights.
+- She walks without aids.
+- X-ray report (06/06/2025): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+- Failed conservative mx incl. physio x12/52.
+- Current analgesia: Topical ibuprofen gel PRN.
+- She is the main carer for her husband.
+- She would like to discuss knee replacement.
+
+With thanks,
+Dr N. Iqbal
+Teesway Medical Group

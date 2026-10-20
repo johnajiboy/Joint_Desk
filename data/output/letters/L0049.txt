@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/07/2026     UBRN: 0000 1377 7412
+
+Patient: Mrs Pauline BRENNAN     DOB: 07/06/1939     Gender: Female
+NHS No: 999 786 2031     Postcode: TS10 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 36.3 kg/m2 (05/01/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Mrs Pauline Brennan, who has worsening pain in both knees.
+
+Oxford knee score recorded at 25. Walking tolerance is around 42 minutes. Denies night pain.
+
+X-ray (05/06/2026): Mild degenerative change with early medial joint space narrowing and small osteophytes, KL grade 2.
+
+She tells me she saw a physiotherapist a while ago. She has had 2 intra-articular steroid injections, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 34.5.
+
+She lives alone.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr M. Clarke
+Linthorpe Lane Surgery

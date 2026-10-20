@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/06/2026     UBRN: 0000 1697 9441
+
+Patient: Mr Chidi ATKINSON     DOB: 17/04/1956     Gender: Male
+NHS No: 999 401 3785     Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 38.4 kg/m2 (19/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr Chidi Atkinson, aged 70, with osteoarthritis of the left knee.
+
+OKS 10/48 (previously 13). Walking tolerance is around 11 minutes.
+
+X-ray report (18/09/2025): "Established osteoarthritis with joint space narrowing, osteophytes and sclerosis."
+
+He has completed 5 weeks of physiotherapy with limited benefit. He has not had any injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 38.4.
+
+He lives with family.
+
+He would like to discuss knee replacement.
+
+Yours sincerely,
+Dr E. Lowther
+Eston Hills Surgery

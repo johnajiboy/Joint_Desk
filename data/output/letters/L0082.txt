@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/09/2026     UBRN: 0000 2173 4028
+
+Patient: Mrs Hazel PIKE     DOB: 27/07/1948     Gender: Female
+NHS No: 999 839 9084     Postcode: TS17 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2013
+Medication
+  Paracetamol 1g QDS
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.0 kg/m2 (11/08/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mrs Hazel Pike, aged 78, with osteoarthritis of the left knee.
+
+OKS 31/48, compared with 32 at the last review. She struggles with stairs and can manage roughly 46 minutes on the flat. Sleeps well. She walks without aids.
+
+X-ray (09/05/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, Kellgren-Lawrence grade 2.
+
+She has had some physiotherapy in the past but I do not have the details. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 30.6.
+
+She lives with her partner.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr M. Clarke
+Eston Hills Surgery

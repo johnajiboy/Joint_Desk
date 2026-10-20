@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 28/07/2026     UBRN: 0000 7076 8098
+
+Patient: Ms Barbara ROBSON     DOB: 22/01/1953     Gender: Female
+NHS No: 999 017 6957     Postcode: TS18 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 33.2 kg/m2 (15/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Barbara Robson, who has worsening pain in the right knee.
+
+I have not recorded a formal Oxford Knee Score. Walking tolerance is around 63 minutes. Denies night pain. She walks without aids.
+
+X-ray report (13/10/2025): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+She has had eleven weeks of physiotherapy in the community. She has had one steroid injection, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+She lives alone.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr E. Lowther
+Stockton Quay Health Centre

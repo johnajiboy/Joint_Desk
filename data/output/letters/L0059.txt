@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Urgent     Referral date: 20/02/2026     UBRN: 0000 7391 6279
+
+Patient: Mrs Irene MOORE     DOB: 20/02/1953     Gender: Female
+NHS No: 999 972 4833     Postcode: TS4 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2013
+Medication
+  Paracetamol 1g QDS PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.1 kg/m2 (03/12/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Irene Moore. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+- Her Oxford Knee Score today is 10, compared with 17 at the last review.
+- Walking tolerance is around 2 minutes.
+- X-ray report (18/05/2025): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+- She has had some physiotherapy in the past but I do not have the details.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- She lives with her partner.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr E. Lowther
+Teesway Medical Group

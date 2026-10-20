@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 15/10/2026     UBRN: 0000 5962 8604
+
+Patient: Mr Robert LISTER     DOB: 22/08/1960     Gender: Male
+NHS No: 999 426 3781     Postcode: TS3 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 38.0 kg/m2 (23/07/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I am writing again about Mr Robert Lister, aged 66, who is on your waiting list with osteoarthritis of the left knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+- Oxford knee score recorded at 14, down from 16 6 months ago.
+- He struggles with stairs and can manage roughly 28 minutes on the flat.
+- Denies night pain.
+- X-ray report (01/05/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+- He tells me he saw a physiotherapist a while ago.
+- He has had three steroid injections, with only short-lived relief.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- Weighed in clinic, BMI today 38.0.
+- He lives with his partner.
+- He has been waiting 30 weeks so far.
+- He is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr T. Adeyemi
+Stockton Quay Health Centre

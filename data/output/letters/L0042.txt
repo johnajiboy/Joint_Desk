@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 12/10/2026     UBRN: 0000 4865 5254
+
+Patient: Mr John HALL     DOB: 19/09/1948     Gender: Male
+NHS No: 999 682 6872     Postcode: TS5 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2007
+Medication
+  Paracetamol 1g QDS PRN
+  Amlodipine 5mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 35.5 kg/m2 (02/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr John Hall, aged 78, who is on your waiting list with osteoarthritis of both knees. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+His Oxford Knee Score today is 22, down from 32 9 months ago. Walking tolerance is around 33 minutes. No night pain. He now mobilises with a stick.
+
+X-ray report (11/05/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+He has not yet had physiotherapy. He has had three steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+He lives with family.
+
+He has now been on your waiting list for 43 weeks. I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr M. Clarke
+Teesway Medical Group

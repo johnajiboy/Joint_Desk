@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/06/2026     UBRN: 0000 7981 4945
+
+Patient: Ms Carol WOOD     DOB: 13/04/1950     Gender: Female
+NHS No: 999 876 3398     Postcode: TS1 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 31.2 kg/m2 (26/11/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Carol Wood, aged 76, who has worsening pain in the right knee.
+
+Oxford knee score recorded at 18 (previously 23). Walking tolerance is around 11 minutes. She uses a frame outdoors.
+
+X-ray (05/01/2026): Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity, KL4.
+
+Management to date has included 18 weeks of physiotherapy. She has not had any injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN. Weighed in clinic, BMI today 31.2.
+
+She lives with her partner.
+
+I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr T. Adeyemi
+Coulby Fields Surgery

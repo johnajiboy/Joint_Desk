@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/07/2026     UBRN: 0000 8203 1369
+
+Patient: Mrs Barbara SHAW     DOB: 08/09/1945     Gender: Female
+NHS No: 999 189 2990     Postcode: TS4 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Essential hypertension (SNOMED CT 59621000) - 2013
+Medication
+  Topical ibuprofen gel PRN
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.3 kg/m2 (12/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mrs Barbara Shaw, aged 80. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+OKS 10/48. Walking tolerance is around 7 minutes. No night pain. She uses a frame outdoors.
+
+X-ray report (14/09/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+She has had 15 weeks of physiotherapy in the community. There have been no steroid injections. Current analgesia: Topical ibuprofen gel PRN.
+
+She lives with family.
+
+She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr M. Clarke
+Marton Park Health Centre

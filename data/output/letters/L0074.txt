@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/10/2026     UBRN: 0000 7779 9700
+
+Patient: Mrs Patricia ELLIS     DOB: 05/10/1943     Gender: Female
+NHS No: 999 274 4413     Postcode: TS18 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2012
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 27.0 kg/m2 (11/09/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Mrs Patricia Ellis, aged 83, who is on your waiting list with osteoarthritis of the left knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: OKS 34/48, down from 32 6 months ago. She can walk for about 49 minutes before needing to stop. She walks without aids.
+
+Imaging: X-ray (10/01/2026): Minimal changes only, of doubtful significance, KL grade 1.
+
+Management to date: There has been no physiotherapy to date. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 27.0.
+
+Request: She has now been on your waiting list for 26 weeks. She would like to discuss knee replacement.
+
+With thanks,
+Dr S. Byrne
+Stockton Quay Health Centre

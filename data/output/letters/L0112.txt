@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/06/2026     UBRN: 0000 3107 2472
+
+Patient: Mrs Brenda ELLISON     DOB: 20/04/1951     Gender: Female
+NHS No: 999 578 8411     Postcode: TS18 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 37.6 kg/m2 (25/12/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Brenda Ellison, aged 75, who has worsening pain in the left knee.
+
+History: She can walk for about 59 minutes before needing to stop. Denies night pain. She uses a frame outdoors.
+
+Imaging: X-ray report (02/03/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Management to date: She has had 8 weeks of physiotherapy in the community. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+Social: She lives with her partner.
+
+Request: She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr S. Byrne
+Coulby Fields Surgery

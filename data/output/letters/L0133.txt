@@ -1,0 +1,44 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/10/2026     UBRN: 0000 5300 8212
+
+Patient: Mr Imran HALL     DOB: 10/07/1942     Gender: Male
+NHS No: 999 310 6445     Postcode: TS1 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2021
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 52.2 kg/m2 (04/09/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 49 mmol/mol (04/09/2026)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mr Imran Hall, aged 84, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+Oxford Knee Score 21. He can walk for about 24 minutes before needing to stop. No night pain.
+
+X-ray (05/05/2026): Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis, KL2.
+
+He has had one steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+He lives with family.
+
+He has been waiting 27 weeks so far. He is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr R. Hughes
+Coulby Fields Surgery

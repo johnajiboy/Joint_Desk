@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 30/06/2026     UBRN: 0000 2822 2544
+
+Patient: Mr James KHAN     DOB: 10/01/1962     Gender: Male
+NHS No: 999 287 6379     Postcode: TS18 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 21.8 kg/m2 (03/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr James Khan, aged 64, with osteoarthritis of the left knee.
+
+OKS 13/48, down from 14 6 months ago. He can walk for about 7 minutes before needing to stop. Pain wakes him at night. He walks without aids.
+
+X-ray (22/10/2025): Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity, KL4.
+
+He has completed 17 weeks of physiotherapy with limited benefit. Current analgesia: Topical ibuprofen gel PRN.
+
+He lives with family. He works and the knee is affecting his job.
+
+He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr P. Sharma
+Coulby Fields Surgery

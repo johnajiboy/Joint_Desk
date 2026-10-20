@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 27/11/2025     UBRN: 0000 9909 3666
+
+Patient: Ms Janet ALI     DOB: 28/06/1981     Gender: Female
+NHS No: 999 998 1011     Postcode: TS17 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2011
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 19.2 kg/m2 (01/07/2025)
+  Smoking status: Current smoker
+Recent results
+  HbA1c 48 mmol/mol (01/07/2025)
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Ms Janet Ali, aged 44, who has worsening pain in both knees.
+
+History: Oxford Knee Score 30, compared with 35 at the last review. Walking tolerance is around 39 minutes. No night pain.
+
+Imaging: X-ray report (13/05/2025): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+Management to date: Management to date has included 12 weeks of physiotherapy. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 21.6.
+
+Social: She lives with family. She works and the knee is affecting her job.
+
+Request: She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr J. Fenwick
+Riverside Medical Centre

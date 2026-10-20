@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 28/06/2026     UBRN: 0000 7040 6315
+
+Patient: Mr Paul KHAN     DOB: 09/08/1968     Gender: Male
+NHS No: 999 459 5652     Postcode: TS6 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 40.9 kg/m2 (01/05/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mr Paul Khan. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+History: I have not recorded a formal Oxford Knee Score. Walking tolerance is around 42 minutes. He reports disturbed sleep due to knee pain.
+
+Imaging: X-ray report (13/01/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Management to date: There has been no physiotherapy to date. He has not had any injections. Current analgesia: Topical ibuprofen gel PRN. Weighed in clinic, BMI today 40.9.
+
+Request: He is keen to consider surgery if appropriate.
+
+Kind regards,
+Dr L. Okonkwo
+Teesway Medical Group

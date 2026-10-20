@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/05/2026     UBRN: 0000 7323 8909
+
+Patient: Mr Tony JACKSON     DOB: 19/12/1964     Gender: Male
+NHS No: 999 580 3100     Postcode: TS6 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 31.3 kg/m2 (09/03/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mr Tony Jackson. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+History: Oxford Knee Score 31. He struggles with stairs and can manage roughly 23 minutes on the flat. Denies night pain. He walks without aids.
+
+Imaging: X-ray report (07/09/2025): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+Management to date: He has not yet had physiotherapy. He has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+Social: He lives with family.
+
+Request: I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr A. Patel
+North Ormesby Family Practice

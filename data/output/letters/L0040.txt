@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/07/2026     UBRN: 0000 5477 7103
+
+Patient: Mr Derek GRAHAM     DOB: 09/01/1958     Gender: Male
+NHS No: 999 900 9344     Postcode: TS6 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 28.8 kg/m2 (03/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr Derek Graham, with osteoarthritis of the right knee.
+
+OKS 23/48, compared with 30 at the last review. He can walk for about 11 minutes before needing to stop. No night pain. He walks without aids.
+
+X-ray report (01/10/2025): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+Management to date has included 10 weeks of physiotherapy. There have been no steroid injections. Current analgesia: Topical ibuprofen gel PRN.
+
+He would like to discuss knee replacement.
+
+Kind regards,
+Dr H. Robson
+Linthorpe Lane Surgery

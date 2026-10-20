@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/10/2026     UBRN: 0000 2462 8612
+
+Patient: Ms Valerie CARTER     DOB: 30/04/1957     Gender: Female
+NHS No: 999 783 0512     Postcode: TS1 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 40.6 kg/m2 (01/07/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Ms Valerie Carter, who is on your waiting list with osteoarthritis of the left knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+- Walking tolerance is around 43 minutes.
+- She uses a walking stick.
+- She has not yet had physiotherapy.
+- She has not had any injections.
+- Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+- Weighed in clinic, BMI today 38.0.
+- She has been waiting 32 weeks so far.
+- I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr S. Byrne
+Acklam Green Practice

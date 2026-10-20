@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/10/2026     UBRN: 0000 7169 3564
+
+Patient: Mr Chidi ELLIS     DOB: 16/03/1948     Gender: Male
+NHS No: 999 973 1309     Postcode: TS5 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2016
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 41.7 kg/m2 (09/09/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 62 mmol/mol (09/09/2026)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mr Chidi Ellis, aged 78, who is on your waiting list with osteoarthritis of the left knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+History: His Oxford Knee Score today is 21 (previously 18). He can walk for about 32 minutes before needing to stop. Sleeps well. He now mobilises with a stick.
+
+Imaging: X-ray report (20/01/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date: He has completed 2 weeks of physiotherapy with limited benefit. He has had two steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+Social: He lives alone.
+
+Request: He has been waiting 22 weeks so far. He is keen to consider surgery if appropriate.
+
+With thanks,
+Dr S. Byrne
+Marton Park Health Centre

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 17/06/2026     UBRN: 0000 9412 3322
+
+Patient: Mrs Grace KOWALSKI     DOB: 22/05/1954     Gender: Female
+NHS No: 999 469 0701     Postcode: TS7 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 34.9 kg/m2 (09/03/2026)
+  Smoking status: Current smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mrs Grace Kowalski, aged 72, with osteoarthritis of the right knee.
+
+Oxford Knee Score 6. She can walk for about 8 minutes before needing to stop. She reports disturbed sleep due to knee pain. She now mobilises with a stick.
+
+X-ray report (25/11/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+
+Management to date has included five weeks of physiotherapy. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+She lives with her partner.
+
+She would like to discuss knee replacement.
+
+With thanks,
+Dr M. Clarke
+Stockton Quay Health Centre

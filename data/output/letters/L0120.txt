@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 29/07/2026     UBRN: 0000 5430 9950
+
+Patient: Mrs Grace WALSH     DOB: 06/12/1954     Gender: Female
+NHS No: 999 258 3231     Postcode: TS10 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 28.1 kg/m2 (06/07/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mrs Grace Walsh, aged 71, who has worsening pain in both knees.
+
+OKS 15/48 (previously 21). She can walk for about 28 minutes before needing to stop. She reports night pain most nights. She walks without aids.
+
+X-ray report (20/04/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+There has been no physiotherapy to date. There have been no steroid injections. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+She lives alone and is finding it hard to cope.
+
+She would like to discuss knee replacement.
+
+Best wishes,
+Dr K. Ahmed
+Riverside Medical Centre

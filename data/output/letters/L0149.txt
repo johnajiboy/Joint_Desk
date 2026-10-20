@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/10/2026     UBRN: 0000 9264 4835
+
+Patient: Mr Alan DAWSON     DOB: 19/01/1966     Gender: Male
+NHS No: 999 218 2598     Postcode: TS5 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.3 kg/m2 (10/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I am writing again about Mr Alan Dawson, aged 60, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+- His Oxford Knee Score today is 28.
+- Walking tolerance is around 18 minutes.
+- Sleeps well.
+- He walks without aids.
+- X-ray report (21/01/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- He has completed 11 weeks of physiotherapy with limited benefit.
+- Current analgesia: Topical ibuprofen gel PRN.
+- He has now been on your waiting list for 40 weeks.
+- He is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr P. Sharma
+Eston Hills Surgery

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/09/2026     UBRN: 0000 8097 7168
+
+Patient: Mr Stephen BROWN     DOB: 13/08/1963     Gender: Male
+NHS No: 999 418 7465     Postcode: TS17 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr M. Clarke
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 26.3 kg/m2 (20/06/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Thank you for seeing Mr Stephen Brown, with osteoarthritis of the left knee.
+
+- Oxford knee score recorded at 20 (previously 16).
+- He can walk for about 33 minutes before needing to stop.
+- He reports night pain most nights.
+- He uses a walking stick.
+- X-ray report (03/02/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+- He tells me he saw a physiotherapist a while ago.
+- Current analgesia: Topical ibuprofen gel PRN.
+- He works and the knee is affecting his job.
+- He is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr M. Clarke
+Linthorpe Lane Surgery

@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/10/2026     UBRN: 0000 9906 2360
+
+Patient: Ms Irene OKAFOR     DOB: 23/08/1965     Gender: Female
+NHS No: 999 766 3160     Postcode: TS8 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr H. Robson
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Chronic kidney disease stage 3 (SNOMED CT 709044004)
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 40.5 kg/m2 (08/06/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Ms Irene Okafor, aged 61, who is on your waiting list with osteoarthritis of both knees. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+Her Oxford Knee Score today is 16, compared with 12 at the last review. She struggles with stairs and can manage roughly 35 minutes on the flat. Pain wakes her at night. She walks without aids.
+
+X-ray report (10/04/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+She has had some physiotherapy in the past but I do not have the details. She has had 2 intra-articular steroid injections, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 42.9.
+
+She lives with her partner. She works and the knee is affecting her job.
+
+She has been waiting 33 weeks so far. I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr H. Robson
+Riverside Medical Centre

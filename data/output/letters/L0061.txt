@@ -1,0 +1,38 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 27/09/2025     UBRN: 0000 1627 6610
+
+Patient: Ms Grace WALKER     DOB: 26/09/1950     Gender: Female
+NHS No: 999 214 9639     Postcode: TS8 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 34.9 kg/m2 (01/09/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Ms Grace Walker, aged 75, with osteoarthritis of the left knee.
+
+- I have not recorded a formal Oxford Knee Score.
+- Walking tolerance is around 35 minutes.
+- She uses a walking stick.
+- X-ray report (30/12/2024): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+- There has been no physiotherapy to date.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- She lives alone and is finding it hard to cope.
+- She would like to discuss knee replacement.
+
+With thanks,
+Dr S. Byrne
+North Ormesby Family Practice

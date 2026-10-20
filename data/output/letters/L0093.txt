@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 19/02/2026     UBRN: 0000 6565 6975
+
+Patient: Mr John DAWSON     DOB: 25/08/1953     Gender: Male
+NHS No: 999 006 7198     Postcode: TS10 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Essential hypertension (SNOMED CT 59621000) - 2009
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Ramipril 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 30.0 kg/m2 (01/11/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+Thank you for seeing Mr John Dawson, aged 72, with osteoarthritis of the right knee.
+
+- OKS 22/48.
+- He struggles with stairs and can manage roughly 36 minutes on the flat.
+- He walks without aids.
+- X-ray report (05/05/2025): "Advanced osteoarthritis with complete loss of the medial joint space and bone-on-bone appearance."
+- He has had 14 weeks of physiotherapy in the community.
+- He has had two steroid injections, with only short-lived relief.
+- Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+- He lives with family.
+- He would like to discuss knee replacement.
+
+Yours sincerely,
+Dr L. Okonkwo
+Linthorpe Lane Surgery

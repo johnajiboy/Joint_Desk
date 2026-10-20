@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 30/03/2026     UBRN: 0000 3634 3051
+
+Patient: Mr Neil ALI     DOB: 24/09/1968     Gender: Male
+NHS No: 999 208 0736     Postcode: TS7 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2012
+Medication
+  Topical ibuprofen gel PRN
+  Losartan 50mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 37.6 kg/m2 (12/09/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr Neil Ali, with osteoarthritis of the left knee.
+
+History: Oxford Knee Score 29 (previously 34). Walking tolerance is around 33 minutes. Sleeps well. He walks without aids.
+
+Imaging: An X-ray has been requested but not yet reported.
+
+Management to date: He has completed 8 weeks of physiotherapy with limited benefit. He has not had any injections. Current analgesia: Topical ibuprofen gel PRN.
+
+Social: He works and the knee is affecting his job.
+
+Request: I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr P. Sharma
+Riverside Medical Centre

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/09/2026     UBRN: 0000 3064 4287
+
+Patient: Mrs Dorothy GRAHAM     DOB: 07/11/1969     Gender: Female
+NHS No: 999 164 7007     Postcode: TS3 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 28.1 kg/m2 (31/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mrs Dorothy Graham, aged 56. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+History: OKS 11/48, compared with 12 at the last review. She struggles with stairs and can manage roughly 18 minutes on the flat. She uses a frame outdoors.
+
+Imaging: X-ray report (31/07/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+Management to date: Management to date has included ten weeks of physiotherapy. She has had 3 intra-articular steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+Social: She lives with family.
+
+Request: She would like to discuss knee replacement.
+
+Kind regards,
+Dr S. Byrne
+Eston Hills Surgery

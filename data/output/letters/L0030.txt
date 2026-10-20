@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/10/2026     UBRN: 0000 5422 9649
+
+Patient: Mrs Barbara OKAFOR     DOB: 18/04/1949     Gender: Female
+NHS No: 999 061 1378     Postcode: TS18 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 24.2 kg/m2 (02/09/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mrs Barbara Okafor, aged 77, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+- OKS 36/48, down from 43 9 months ago.
+- Walking tolerance is around 39 minutes.
+- Sleeps well.
+- She walks without aids.
+- X-ray report (10/06/2026): "Doubtful joint space narrowing with possible early osteophytic lipping."
+- There has been no physiotherapy to date.
+- She has had 3 intra-articular steroid injections, with only short-lived relief.
+- Current analgesia: Topical ibuprofen gel PRN.
+- She lives alone and is finding it hard to cope.
+- She has been waiting 23 weeks so far.
+- I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr J. Fenwick
+Teesway Medical Group

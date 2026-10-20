@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 13/05/2026     UBRN: 0000 6163 7517
+
+Patient: Mrs Pauline ROBSON     DOB: 15/07/1956     Gender: Female
+NHS No: 999 759 2115     Postcode: TS3 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 31.2 kg/m2 (09/11/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mrs Pauline Robson, with osteoarthritis of the right knee.
+
+Oxford knee score recorded at 21, down from 24 6 months ago. She can walk for about 31 minutes before needing to stop. She reports disturbed sleep due to knee pain.
+
+X-ray (19/12/2025): Established osteoarthritis with joint space narrowing, osteophytes and sclerosis, KL3.
+
+She has had 2 weeks of physiotherapy in the community. She has had 2 intra-articular steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+She lives with her partner.
+
+I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr K. Ahmed
+Marton Park Health Centre

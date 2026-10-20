@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 30/06/2026     UBRN: 0000 5231 5579
+
+Patient: Mrs Hazel HUTCHINSON     DOB: 03/05/1965     Gender: Female
+NHS No: 999 786 9923     Postcode: TS5 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 37.3 kg/m2 (25/03/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Hazel Hutchinson, aged 61, who has worsening pain in the left knee.
+
+Walking tolerance is around 30 minutes. She walks without aids.
+
+X-ray report (05/05/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+She has not yet had physiotherapy. She has not had any injections. Current analgesia: Paracetamol 1g QDS PRN.
+
+She works and the knee is affecting her job.
+
+I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr L. Okonkwo
+Thornaby Bridge Practice

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/08/2025     UBRN: 0000 2395 7199
+
+Patient: Ms Elizabeth NOWAK     DOB: 05/11/1956     Gender: Female
+NHS No: 999 944 5225     Postcode: TS4 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 32.1 kg/m2 (15/04/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Ms Elizabeth Nowak, with osteoarthritis of the right knee.
+
+- Oxford knee score recorded at 39.
+- She struggles with stairs and can manage roughly 38 minutes on the flat.
+- No night pain.
+- She walks without aids.
+- X-ray report (31/12/2024): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+- She has had 11 weeks of physiotherapy in the community.
+- There have been no steroid injections.
+- Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+- She is keen to consider surgery if appropriate.
+
+Yours sincerely,
+Dr E. Lowther
+Acklam Green Practice

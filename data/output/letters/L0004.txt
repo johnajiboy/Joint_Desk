@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/07/2026     UBRN: 0000 1321 4452
+
+Patient: Mr Robert HARRISON     DOB: 08/08/1969     Gender: Male
+NHS No: 999 438 7634     Postcode: TS4 (outward code only)
+Registered practice: Marton Park Health Centre (Y99004)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 37.1 kg/m2 (10/02/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Robert Harrison, aged 56, with osteoarthritis of the right knee.
+
+- OKS 21/48, compared with 21 at the last review.
+- Walking tolerance is around 24 minutes.
+- He walks without aids.
+- X-ray (17/03/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL4.
+- He has had 10 weeks of physiotherapy in the community.
+- He has had two steroid injections, with only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS PRN.
+- He lives with his partner.
+- He would like to discuss knee replacement.
+
+Kind regards,
+Dr P. Sharma
+Marton Park Health Centre

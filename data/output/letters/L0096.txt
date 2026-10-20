@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/07/2026     UBRN: 0000 3808 8751
+
+Patient: Mr Tariq BELL     DOB: 24/07/1954     Gender: Male
+NHS No: 999 833 1153     Postcode: TS6 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 30.0 kg/m2 (31/01/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+I would be grateful for your assessment of Mr Tariq Bell, who has worsening pain in the right knee.
+
+- I have not recorded a formal Oxford Knee Score.
+- Walking tolerance is around 2 minutes.
+- Pain wakes him at night.
+- X-ray (20/05/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL4.
+- He has had three steroid injections, with only short-lived relief.
+- Current analgesia: Paracetamol 1g QDS.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr R. Hughes
+North Ormesby Family Practice

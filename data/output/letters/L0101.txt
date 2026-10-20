@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 18/10/2026     UBRN: 0000 5981 7272
+
+Patient: Mr Graham OKAFOR     DOB: 21/07/1981     Gender: Male
+NHS No: 999 257 1357     Postcode: TS18 (outward code only)
+Registered practice: Teesway Medical Group (Y99007)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2016
+Medication
+  Paracetamol 1g QDS PRN
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 31.7 kg/m2 (16/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mr Graham Okafor, aged 45, who is on your waiting list with osteoarthritis of the right knee. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+History: I have not recorded a formal Oxford Knee Score. Walking tolerance is around 26 minutes. He reports night pain most nights. He walks without aids.
+
+Imaging: X-ray (25/06/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, Kellgren-Lawrence grade 4.
+
+Management to date: He has not yet had physiotherapy. Current analgesia: Paracetamol 1g QDS PRN.
+
+Social: He lives with his partner.
+
+Request: He has been waiting 27 weeks so far. I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr K. Ahmed
+Teesway Medical Group

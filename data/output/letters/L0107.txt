@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/03/2026     UBRN: 0000 4191 6877
+
+Patient: Mr Alan FLETCHER     DOB: 01/04/1949     Gender: Male
+NHS No: 999 104 6259     Postcode: TS17 (outward code only)
+Registered practice: Eston Hills Surgery (Y99008)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2024
+Medication
+  Paracetamol 1g QDS PRN
+  Metformin 500mg BD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 37.1 kg/m2 (10/01/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 58 mmol/mol (10/01/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Mr Alan Fletcher, with osteoarthritis of the right knee.
+
+OKS 25/48. He struggles with stairs and can manage roughly 26 minutes on the flat. Denies night pain.
+
+X-ray (02/02/2026): Mild degenerative change with early medial joint space narrowing and small osteophytes, Kellgren-Lawrence grade 2.
+
+He has completed 4 weeks of physiotherapy with limited benefit. He has had two steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN. Weighed in clinic, BMI today 37.1.
+
+He lives with his partner.
+
+He would like to discuss knee replacement.
+
+With thanks,
+Dr L. Okonkwo
+Eston Hills Surgery

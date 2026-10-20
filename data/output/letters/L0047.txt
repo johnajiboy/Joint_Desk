@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 18/10/2026     UBRN: 0000 7728 7947
+
+Patient: Mrs Dorothy GRAHAM     DOB: 02/11/1950     Gender: Female
+NHS No: 999 438 4872     Postcode: TS3 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 35.4 kg/m2 (30/09/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mrs Dorothy Graham, aged 75, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+Oxford knee score recorded at 20, down from 26 9 months ago. Walking tolerance is around 24 minutes. Denies night pain. She now mobilises with a stick.
+
+X-ray report (30/03/2026): "Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis."
+
+Management to date has included 7 weeks of physiotherapy. There have been no steroid injections. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+She lives alone.
+
+She has now been on your waiting list for 32 weeks. She is keen to consider surgery if appropriate.
+
+With thanks,
+Dr S. Byrne
+Riverside Medical Centre

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/02/2026     UBRN: 0000 5116 2391
+
+Patient: Ms Julie WALKER     DOB: 02/03/1968     Gender: Female
+NHS No: 999 671 8727     Postcode: TS10 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr J. Fenwick
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Paracetamol 1g QDS
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 25.6 kg/m2 (04/10/2025)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Thank you for seeing Ms Julie Walker, aged 57, with osteoarthritis of the right knee.
+
+Oxford Knee Score 36. She struggles with stairs and can manage roughly 45 minutes on the flat. No night pain. She walks without aids.
+
+X-ray report (06/10/2025): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+She has had nine weeks of physiotherapy in the community. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+She lives with family. She works and the knee is affecting her job.
+
+She would like to discuss knee replacement.
+
+Kind regards,
+Dr J. Fenwick
+North Ormesby Family Practice

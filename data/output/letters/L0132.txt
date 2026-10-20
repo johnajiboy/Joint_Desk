@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 28/04/2026     UBRN: 0000 3060 4808
+
+Patient: Ms Margaret DAWSON     DOB: 15/11/1955     Gender: Female
+NHS No: 999 466 6460     Postcode: TS3 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr E. Lowther
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 36.8 kg/m2 (06/04/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Ms Margaret Dawson, aged 70. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+- She can walk for about 25 minutes before needing to stop.
+- She reports night pain most nights.
+- X-ray report (19/12/2025): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+- She has had eleven weeks of physiotherapy in the community.
+- Current analgesia: Topical ibuprofen gel PRN.
+- She lives alone.
+- She would like to discuss knee replacement.
+
+Kind regards,
+Dr E. Lowther
+Riverside Medical Centre

@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 08/09/2026     UBRN: 0000 9456 5068
+
+Patient: Mrs Aisha ELLIS     DOB: 07/04/1973     Gender: Female
+NHS No: 999 249 5111     Postcode: TS7 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr R. Hughes
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2013
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 33.4 kg/m2 (04/07/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mrs Aisha Ellis. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+Oxford Knee Score 10. Walking tolerance is around 19 minutes. She uses a frame outdoors.
+
+X-ray report (21/05/2026): "Large osteophytes, marked joint space narrowing with bone-on-bone contact, severe sclerosis and varus deformity."
+
+She has had 11 weeks of physiotherapy in the community. Current analgesia: Paracetamol 1g QDS.
+
+She lives with family. She works and the knee is affecting her job.
+
+She would like to discuss knee replacement.
+
+Best wishes,
+Dr R. Hughes
+Stockton Quay Health Centre

@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 16/10/2026     UBRN: 0000 6036 1651
+
+Patient: Mrs Carol LOWE     DOB: 04/10/1969     Gender: Female
+NHS No: 999 734 7218     Postcode: TS5 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2024
+  Essential hypertension (SNOMED CT 59621000) - 2018
+Medication
+  Paracetamol 1g QDS
+  Metformin 500mg BD
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 32.2 kg/m2 (29/06/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 44 mmol/mol (29/06/2026)
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mrs Carol Lowe, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+Oxford knee score recorded at 2 (previously 4). She struggles with stairs and can manage roughly 22 minutes on the flat. Pain wakes her at night.
+
+X-ray report (02/08/2026): "Severe end-stage degenerative change with marked joint space loss and subchondral cysts."
+
+There has been no physiotherapy to date. She has had two steroid injections, with only short-lived relief. Current analgesia: Paracetamol 1g QDS.
+
+She lives alone and is finding it hard to cope.
+
+She has been waiting 34 weeks so far. I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr L. Okonkwo
+Acklam Green Practice

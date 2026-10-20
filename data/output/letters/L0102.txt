@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 21/09/2026     UBRN: 0000 2999 9699
+
+Patient: Mr Brian ELLISON     DOB: 10/01/1953     Gender: Male
+NHS No: 999 445 2746     Postcode: TS8 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2024
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 30.1 kg/m2 (09/05/2026)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 71 mmol/mol (09/05/2026)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mr Brian Ellison, aged 73. Knee osteoarthritis, right knee, for opinion regarding further management.
+
+History: OKS 14/48, compared with 10 at the last review. He struggles with stairs and can manage roughly 23 minutes on the flat. He uses a frame outdoors.
+
+Imaging: X-ray (02/05/2026): Moderate tricompartmental degenerative change with definite medial joint space loss, Kellgren-Lawrence grade 3.
+
+Management to date: Management to date has included twelve weeks of physiotherapy. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD. Weighed in clinic, BMI today 30.1.
+
+Social: He lives with his partner.
+
+Request: He would like to discuss knee replacement.
+
+Best wishes,
+Dr L. Okonkwo
+Acklam Green Practice

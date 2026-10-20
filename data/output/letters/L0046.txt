@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 14/10/2026     UBRN: 0000 5298 9390
+
+Patient: Mrs Christine SMITH     DOB: 15/09/1934     Gender: Female
+NHS No: 999 871 8414     Postcode: TS10 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Essential hypertension (SNOMED CT 59621000) - 2006
+Medication
+  Paracetamol 1g QDS PRN
+  Losartan 50mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 26.5 kg/m2 (25/05/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I am writing again about Mrs Christine Smith, aged 92, who is on your waiting list with osteoarthritis of the right knee. She has deteriorated since the original referral and I would be grateful if her care could be expedited.
+
+History: OKS 33/48, down from 34 6 months ago. She struggles with stairs and can manage roughly 47 minutes on the flat. She walks without aids.
+
+Management to date: There has been no physiotherapy to date. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+Social: She lives alone.
+
+Request: She has now been on your waiting list for 83 weeks. I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr N. Iqbal
+Thornaby Bridge Practice

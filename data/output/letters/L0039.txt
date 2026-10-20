@@ -1,0 +1,43 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 09/02/2026     UBRN: 0000 6802 8741
+
+Patient: Mr Colin CARR     DOB: 01/01/1960     Gender: Male
+NHS No: 999 961 2709     Postcode: TS8 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2022
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 42.4 kg/m2 (15/01/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 44 mmol/mol (15/01/2026)
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mr Colin Carr, aged 66, with osteoarthritis of the right knee.
+
+OKS 29/48. Walking tolerance is around 30 minutes. He walks without aids.
+
+X-ray report (12/11/2025): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+
+He has had 10 weeks of physiotherapy in the community. He has had one steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+He lives alone and is finding it hard to cope.
+
+I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr K. Ahmed
+Acklam Green Practice

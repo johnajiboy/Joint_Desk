@@ -1,0 +1,41 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Urgent     Referral date: 02/07/2026     UBRN: 0000 3810 8642
+
+Patient: Mrs Joan WOOD     DOB: 21/01/1939     Gender: Female
+NHS No: 999 299 7818     Postcode: TS6 (outward code only)
+Registered practice: Coulby Fields Surgery (Y99005)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+  Essential hypertension (SNOMED CT 59621000) - 2020
+Medication
+  Paracetamol 1g QDS
+  Ramipril 5mg OD
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 29.3 kg/m2 (07/05/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+Re: Mrs Joan Wood. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+OKS 27/48, down from 28 12 months ago. She struggles with stairs and can manage roughly 42 minutes on the flat. Sleeps well. She now mobilises with a stick.
+
+X-ray report (02/03/2026): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+She has had four weeks of physiotherapy in the community. Current analgesia: Paracetamol 1g QDS.
+
+She lives alone and is finding it hard to cope.
+
+She would like to discuss knee replacement.
+
+With thanks,
+Dr K. Ahmed
+Coulby Fields Surgery

@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/10/2026     UBRN: 0000 7447 4668
+
+Patient: Mr Stephen MENSAH     DOB: 24/09/1964     Gender: Male
+NHS No: 999 263 9407     Postcode: TS4 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2025
+Medication
+  Topical ibuprofen gel PRN
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 34.5 kg/m2 (02/04/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I am writing again about Mr Stephen Mensah, aged 62, who is on your waiting list with osteoarthritis of both knees. He has deteriorated since the original referral and I would be grateful if his care could be expedited.
+
+- His Oxford Knee Score today is 32, compared with 29 at the last review.
+- He struggles with stairs and can manage roughly 38 minutes on the flat.
+- An X-ray has been requested but not yet reported.
+- Failed conservative mx incl. physio x4/52.
+- There have been no steroid injections.
+- Current analgesia: Topical ibuprofen gel PRN.
+- Weighed in clinic, BMI today 36.1.
+- He has now been on your waiting list for 20 weeks.
+- I would be grateful for your opinion regarding further management.
+
+With thanks,
+Dr N. Iqbal
+Acklam Green Practice

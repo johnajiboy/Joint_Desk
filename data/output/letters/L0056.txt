@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 31/08/2026     UBRN: 0000 1944 4521
+
+Patient: Mrs Shirley ALI     DOB: 09/10/1981     Gender: Female
+NHS No: 999 698 6047     Postcode: TS7 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr A. Patel
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2021
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 34.6 kg/m2 (31/03/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear MSK Triage Team,
+
+I would be grateful for your assessment of Mrs Shirley Ali, aged 44, who has worsening pain in both knees.
+
+Walking tolerance is around 22 minutes. Sleeps well. She uses a walking stick.
+
+An X-ray has been requested but not yet reported.
+
+There has been no physiotherapy to date. She has not had any injections. Current analgesia: Paracetamol 1g QDS. Weighed in clinic, BMI today 34.6.
+
+She lives with family. She works and the knee is affecting her job.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr A. Patel
+Thornaby Bridge Practice

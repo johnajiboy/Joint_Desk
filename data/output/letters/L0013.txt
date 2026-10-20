@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 11/03/2026     UBRN: 0000 5202 6106
+
+Patient: Mrs Janet BELL     DOB: 08/09/1978     Gender: Female
+NHS No: 999 215 0068     Postcode: TS1 (outward code only)
+Registered practice: North Ormesby Family Practice (Y99006)     Referring clinician: Dr T. Adeyemi
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 30.8 kg/m2 (18/01/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Thank you for seeing Mrs Janet Bell, aged 47, with osteoarthritis of both knees.
+
+She struggles with stairs and can manage roughly 46 minutes on the flat. Denies night pain. She walks without aids.
+
+X-ray report (10/08/2025): "Definite small osteophytes with possible joint space narrowing, in keeping with mild osteoarthritis."
+
+She has had eight weeks of physiotherapy in the community. She has had 3 intra-articular steroid injections, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+She lives with family. She works and the knee is affecting her job.
+
+She is keen to consider surgery if appropriate.
+
+Best wishes,
+Dr T. Adeyemi
+North Ormesby Family Practice

@@ -1,0 +1,40 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 07/09/2026     UBRN: 0000 7364 8499
+
+Patient: Mr Trevor THOMPSON     DOB: 21/02/1949     Gender: Male
+NHS No: 999 327 1306     Postcode: TS4 (outward code only)
+Registered practice: Linthorpe Lane Surgery (Y99002)     Referring clinician: Dr S. Byrne
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+Medication
+  Paracetamol 1g QDS
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 27.0 kg/m2 (14/05/2026)
+  Smoking status: Never smoked
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+Re: Mr Trevor Thompson, aged 77. Knee osteoarthritis, left knee, for opinion regarding further management.
+
+- His Oxford Knee Score today is 13, down from 16 6 months ago.
+- He struggles with stairs and can manage roughly 20 minutes on the flat.
+- He reports disturbed sleep due to knee pain.
+- He now mobilises with a stick.
+- X-ray report (13/08/2026): "Moderate tricompartmental degenerative change with definite medial joint space loss."
+- He has not yet had physiotherapy.
+- He has not had any injections.
+- Current analgesia: Paracetamol 1g QDS.
+- He lives with family.
+- I would be grateful for your opinion regarding further management.
+
+Best wishes,
+Dr S. Byrne
+Linthorpe Lane Surgery

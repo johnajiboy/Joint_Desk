@@ -1,0 +1,65 @@
+# Assumptions behind the synthetic data
+
+Real patient data can't be used (UK GDPR special category data; Caldicott Principles), so the data is
+generated. Every value below is either sourced or stated as an assumption. **Before submitting, check each
+"Verify" item against the latest published figure and update `data/generate_patients.py` if needed.**
+
+## NHS standards used
+
+| Item | Standard | Use in the data |
+|---|---|---|
+| NHS number | 10 digits, modulus 11 check digit; numbers starting 999 are the NHS test range | Every patient has a valid 999 test number |
+| Gender | NHS Data Dictionary, Person Stated Gender Code (1 Male, 2 Female) | `sex_code`, `sex` |
+| Priority | NHS Data Dictionary, Priority Type (1 Routine, 2 Urgent, 3 Two week wait) | `priority_type` |
+| Referral source | NHS Data Dictionary, Source of Referral for Outpatients (03 = GP) | `source_of_referral` |
+| Specialty | Treatment Function Code 110, Trauma and Orthopaedics | `treatment_function_code` |
+| RTT status | Referral to Treatment Period Status (10 = first activity) | `rtt_status` |
+| Diagnosis | ICD-10 M17.0 (bilateral primary gonarthrosis), M17.1 (other primary gonarthrosis) | `icd10` |
+| Problem list | SNOMED CT 239873007 Osteoarthritis of knee; comorbidity codes in `kneedss/standards.py` | Letter problem lists |
+| Surgery | OPCS-4 W40.1 Primary total prosthetic replacement of knee joint using cement | For the slot model later |
+| Pain and function | Oxford Knee Score, 12 items, 0 (worst) to 48 (best); bands 0-19 severe, 20-29 moderate to severe, 30-39 mild to moderate, 40-48 satisfactory | `oks`, `oks_before` |
+| X-ray | Kellgren-Lawrence grade 0-4, written in letters as the radiologist's wording | `kl_grade` |
+| Waiting time | 18-week referral-to-treatment standard; 52 weeks as the long-wait marker | `weeks_waiting` |
+| Letter layout | NHS e-Referral Service referral: auto-filled record block, then GP free text | Letters |
+| Pathway rules | NICE NG226, Osteoarthritis in over 16s (2022), simplified | `kneedss/rules.py` |
+
+## Distributions
+
+| Field | Value used | Source or reasoning |
+|---|---|---|
+| Sex | 57% female | NJR 12th Annual Report: 43% of primary knee replacements were in men |
+| Age | Normal, mean 69, SD 9.5, 45-92 | NJR: median age about 70; listing-clinic study: knee mean 69.8 (SD 9.7). Verify against latest NJR |
+| Indication | All knee osteoarthritis | NJR: osteoarthritis the sole indication in 96% of primary knee replacements |
+| BMI | Log-normal, median 31 | Assumption from typical NJR primary knee BMI around 31. Verify in NJR Part Two data |
+| Oxford Knee Score | Mean 31 - 3.6 x KL grade, SD 6.5 (overall mean about 20) | Listing-clinic mean 16.8 to 18.7 (hip and knee combined). Referrals include milder cases, so slightly higher |
+| X-ray grade | KL1 4%, KL2 21%, KL3 43%, KL4 32% | Assumption: orthopaedic referrals skew to moderate or severe change |
+| Score decline | About 1.5 + 0.6 x (KL - 2) points per 6 months, SD 3 | Assumption: worse joints decline faster |
+| Physiotherapy | None 22%, 2-5 weeks 15%, 6-12 weeks 50%, 13-20 weeks 13% | Assumption: most patients are offered exercise therapy first (NICE NG226) |
+| Diabetes | 6% rising 1.2 points per BMI unit over 25 | Assumption: diabetes is more common with higher BMI |
+| Hypertension, CKD | Rise with age | Assumption |
+| Smoking | Never 48%, ex 40%, current 12% | Assumption, in line with an older population |
+| Living alone | About 18-30%, higher with age and in women | Assumption |
+| Weeks waiting | Log-normal, median 18, up to 104; about 7% over 52 | Assumption shaped like Trauma and Orthopaedics RTT waits. Verify against latest NHS England RTT statistics |
+| Deprivation | Postcode-based IMD decile; about 44% in deciles 1-3 | Middlesbrough has a high share of the most deprived areas in England |
+
+## Letters
+
+| Feature | Share | Why |
+|---|---|---|
+| Oxford Knee Score stated | 80% | Many GPs don't record it |
+| X-ray as KL grade / radiologist wording only / requested / not mentioned | 25% / 65% / 5% / 5% | Reports usually describe findings in words |
+| Physiotherapy in weeks / vague / not mentioned | 86% / 8% / 6% | |
+| Coded BMI out of date, newer BMI in the text | 12% | Tests choosing the most recent value |
+| Expedite letters (state weeks waiting) | About 30% | GPs write again when patients deteriorate |
+
+Gold rule: a fact is in the answer key only if the letter states it. Where two values conflict, the newest
+dated value is gold. Weeks waiting for the pathway decision comes from the waiting list (the RTT clock), not
+the letter.
+
+## Sources
+
+- NHS number validation and test range: [cardinal_pythonlib nhs module](https://cardinalpythonlib.readthedocs.io/en/latest/_modules/cardinal_pythonlib/nhs.html)
+- National Joint Registry 12th Annual Report (2015): [HQIP](https://www.hqip.org.uk/wp-content/uploads/2018/02/national-joint-registry-12th-annual-report-2015.pdf)
+- Oxford scores at listing clinic and pre-operative assessment: [PMC5838660](https://pmc.ncbi.nlm.nih.gov/articles/PMC5838660)
+- NICE NG226, Osteoarthritis in over 16s: diagnosis and management (2022)
+- NHS Data Dictionary (codes listed above)

@@ -1,0 +1,37 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 20/02/2026     UBRN: 0000 6922 8858
+
+Patient: Mr Neil WILSON     DOB: 28/08/1967     Gender: Male
+NHS No: 999 470 5741     Postcode: TS18 (outward code only)
+Registered practice: Thornaby Bridge Practice (Y99009)     Referring clinician: Dr P. Sharma
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2020
+Medication
+  Co-codamol 30/500 2 tablets QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 30.8 kg/m2 (11/12/2025)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mr Neil Wilson, who has worsening pain in both knees.
+
+Oxford Knee Score 31 (previously 33). Walking tolerance is around 25 minutes. He reports night pain most nights. He walks without aids.
+
+X-ray (28/10/2025): Mild degenerative change with early medial joint space narrowing and small osteophytes, KL2.
+
+He has completed nine weeks of physiotherapy with limited benefit. He has had three steroid injections, with only short-lived relief. Current analgesia: Co-codamol 30/500 2 tablets QDS PRN.
+
+I would be grateful for your opinion regarding further management.
+
+Kind regards,
+Dr P. Sharma
+Thornaby Bridge Practice

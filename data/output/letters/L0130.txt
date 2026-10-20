@@ -1,0 +1,39 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 10/07/2026     UBRN: 0000 9636 1019
+
+Patient: Mrs Joan OKAFOR     DOB: 05/10/1965     Gender: Female
+NHS No: 999 284 8553     Postcode: TS5 (outward code only)
+Registered practice: Stockton Quay Health Centre (Y99010)     Referring clinician: Dr N. Iqbal
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2024
+Medication
+  Paracetamol 1g QDS PRN
+Allergies
+  No known drug allergies
+Latest observations
+  BMI 33.1 kg/m2 (05/01/2026)
+  Smoking status: Ex-smoker
+
+------------------------------------------------------------------------
+
+Dear Doctor,
+
+I would be grateful for your assessment of Mrs Joan Okafor, who has worsening pain in the right knee.
+
+OKS 24/48, compared with 26 at the last review. She can walk for about 39 minutes before needing to stop. She walks without aids.
+
+X-ray (22/03/2026): Severe end-stage degenerative change with marked joint space loss and subchondral cysts, KL grade 4.
+
+She has not yet had physiotherapy. She has had one steroid injection, with only short-lived relief. Current analgesia: Paracetamol 1g QDS PRN.
+
+She lives with her partner.
+
+I would be grateful for your opinion regarding further management.
+
+Yours sincerely,
+Dr N. Iqbal
+Stockton Quay Health Centre

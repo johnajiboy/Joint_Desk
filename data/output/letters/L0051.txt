@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 05/09/2026     UBRN: 0000 2295 6464
+
+Patient: Mrs Karen PEARSON     DOB: 02/12/1955     Gender: Female
+NHS No: 999 987 3685     Postcode: TS10 (outward code only)
+Registered practice: Acklam Green Practice (Y99003)     Referring clinician: Dr K. Ahmed
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2023
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2019
+  Essential hypertension (SNOMED CT 59621000) - 2021
+Medication
+  Topical ibuprofen gel PRN
+  Metformin 500mg BD
+  Amlodipine 5mg OD
+Allergies
+  Penicillin - rash
+Latest observations
+  BMI 37.8 kg/m2 (13/03/2026)
+  Smoking status: Never smoked
+Recent results
+  HbA1c 54 mmol/mol (13/03/2026)
+
+------------------------------------------------------------------------
+
+Dear Colleague,
+
+Re: Mrs Karen Pearson. Knee osteoarthritis, both knees, for opinion regarding further management.
+
+Oxford Knee Score 26. She can walk for about 48 minutes before needing to stop. Sleeps well. She walks without aids.
+
+X-ray report (08/02/2026): "Mild degenerative change with early medial joint space narrowing and small osteophytes."
+
+Management to date has included 14 weeks of physiotherapy. She has had 1 intra-articular steroid injection, with only short-lived relief. Current analgesia: Topical ibuprofen gel PRN.
+
+She lives alone and is finding it hard to cope.
+
+She would like to discuss knee replacement.
+
+Yours sincerely,
+Dr K. Ahmed
+Acklam Green Practice

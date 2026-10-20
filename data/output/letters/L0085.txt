@@ -1,0 +1,45 @@
+NHS e-Referral Service - Referral letter
+SYNTHETIC TEST DATA - NOT A REAL PATIENT
+
+Service: Trauma and Orthopaedics - MSK Triage (Knee)     Treatment function: 110
+Priority: Routine     Referral date: 25/01/2026     UBRN: 0000 1026 9134
+
+Patient: Ms Irene HALL     DOB: 27/06/1962     Gender: Female
+NHS No: 999 161 9690     Postcode: TS10 (outward code only)
+Registered practice: Riverside Medical Centre (Y99001)     Referring clinician: Dr L. Okonkwo
+
+Problems
+  Osteoarthritis of knee (SNOMED CT 239873007) - 2022
+  Type 2 diabetes mellitus (SNOMED CT 44054006) - 2020
+  Essential hypertension (SNOMED CT 59621000) - 2009
+Medication
+  Naproxen 500mg BD with omeprazole 20mg OD
+  Metformin 500mg BD
+  Losartan 50mg OD
+Allergies
+  Codeine - nausea
+Latest observations
+  BMI 31.7 kg/m2 (06/09/2025)
+  Smoking status: Ex-smoker
+Recent results
+  HbA1c 61 mmol/mol (06/09/2025)
+
+------------------------------------------------------------------------
+
+Dear Orthopaedic Colleague,
+
+I would be grateful for your assessment of Ms Irene Hall, aged 63, who has worsening pain in both knees.
+
+Her Oxford Knee Score today is 20, down from 25 9 months ago. Walking tolerance is around 32 minutes. She reports night pain most nights. She uses a walking stick.
+
+X-ray (15/06/2025): Moderate osteophytes with definite joint space narrowing and some subchondral sclerosis, in keeping with moderate osteoarthritis, KL grade 3.
+
+She has not yet had physiotherapy. She has had one steroid injection, with only short-lived relief. Current analgesia: Naproxen 500mg BD with omeprazole 20mg OD.
+
+She lives with her partner.
+
+She would like to discuss knee replacement.
+
+With thanks,
+Dr L. Okonkwo
+Riverside Medical Centre
