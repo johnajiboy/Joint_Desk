@@ -55,9 +55,12 @@ function EndLabel({ x, y, index, last, text }: LabelPos & { last: number; text: 
   return <text x={Number(x) + 6} y={Number(y)} dy={4} fontSize={11} fill="var(--muted)">{text}</text>
 }
 
-function Chart({ data, metric, title }: { data: Row[]; metric: '18' | '52'; title: string }) {
+function Chart({ data, metric, title }: { data: Row[]; metric: 'std' | 'long'; title: string }) {
   const animate = !reduceMotion()
   const last = data.length - 1
+  // about six evenly spaced week ticks, always including the first and last week
+  const step = Math.max(1, Math.round((data.length - 1) / 5))
+  const ticks = data.filter((_, i) => i % step === 0 || i === last).map((r) => r.week)
   return (
     <figure className="min-w-0">
       <figcaption className="mb-2 text-sm font-medium">{title}</figcaption>
@@ -66,7 +69,7 @@ function Chart({ data, metric, title }: { data: Row[]; metric: '18' | '52'; titl
           <LineChart data={data} margin={{ top: 8, right: 72, bottom: 4, left: -8 }}>
             <CartesianGrid vertical={false} stroke="var(--line)" />
             <XAxis dataKey="week" tickLine={false} axisLine={false} tick={{ fill: 'var(--muted)', fontSize: 11 }}
-              ticks={[1, 6, 11, 16, 21, 26]} />
+              ticks={ticks} />
             <YAxis tickLine={false} axisLine={false} tick={{ fill: 'var(--muted)', fontSize: 11 }} width={44}
               allowDecimals={false} />
             <Tooltip cursor={{ stroke: 'var(--muted)', strokeWidth: 1 }}
@@ -88,10 +91,11 @@ function Chart({ data, metric, title }: { data: Row[]; metric: '18' | '52'; titl
 
 export function BacklogChart({ o }: { o: OptimiseResults }) {
   const [table, setTable] = useState(false)
+  const { standard_weeks: std, long_wait_weeks: long } = o.thresholds
   const data = useMemo<Row[]>(() => o.series.Optimiser.map((r, i) => ({
     week: r.week,
-    opt_18: r.over_18, opt_52: r.over_52,
-    fcfs_18: o.series.FCFS[i].over_18, fcfs_52: o.series.FCFS[i].over_52,
+    opt_std: r.over_18, opt_long: r.over_52,
+    fcfs_std: o.series.FCFS[i].over_18, fcfs_long: o.series.FCFS[i].over_52,
   })), [o])
 
   return (
@@ -107,23 +111,23 @@ export function BacklogChart({ o }: { o: OptimiseResults }) {
         <div className="max-h-72 overflow-auto">
           <table className="w-full text-sm tabular-nums">
             <thead className="sticky top-0 bg-surface text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Week</th><th className="py-1 text-right font-medium">Over 18 · optimiser</th>
-                <th className="py-1 text-right font-medium">Over 18 · FCFS</th><th className="py-1 text-right font-medium">Over 52 · optimiser</th>
-                <th className="py-1 text-right font-medium">Over 52 · FCFS</th></tr>
+              <tr><th className="py-1 font-medium">Week</th><th className="py-1 text-right font-medium">Over {std} · optimiser</th>
+                <th className="py-1 text-right font-medium">Over {std} · FCFS</th><th className="py-1 text-right font-medium">Over {long} · optimiser</th>
+                <th className="py-1 text-right font-medium">Over {long} · FCFS</th></tr>
             </thead>
             <tbody className="divide-y divide-line">
               {data.map((r) => (
-                <tr key={r.week}><td className="py-1">{r.week}</td><td className="py-1 text-right">{r.opt_18}</td>
-                  <td className="py-1 text-right">{r.fcfs_18}</td><td className="py-1 text-right">{r.opt_52}</td>
-                  <td className="py-1 text-right">{r.fcfs_52}</td></tr>
+                <tr key={r.week}><td className="py-1">{r.week}</td><td className="py-1 text-right">{r.opt_std}</td>
+                  <td className="py-1 text-right">{r.fcfs_std}</td><td className="py-1 text-right">{r.opt_long}</td>
+                  <td className="py-1 text-right">{r.fcfs_long}</td></tr>
               ))}
             </tbody>
           </table>
         </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2">
-          <Chart data={data} metric="18" title="Waiting over 18 weeks" />
-          <Chart data={data} metric="52" title="Waiting over 52 weeks" />
+          <Chart data={data} metric="std" title={`Waiting over ${std} weeks`} />
+          <Chart data={data} metric="long" title={`Waiting over ${long} weeks`} />
         </div>
       )}
     </div>

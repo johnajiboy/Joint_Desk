@@ -76,7 +76,9 @@ docs/             assumptions, data dictionary
    `eval/eval_tree.py` (`eval/results/tree/`): agreement with the rules, thresholds, disagreements.
 5. Done: optimiser, `kneedss/optimise.py` (PuLP + CBC: over-52s as a hard rule, infeasible weeks reported, then
    priority with a weeks tie-break); `eval/eval_optimise.py` simulates 26 weeks (FCFS, priority only, optimiser;
-   surgery 8/12/16) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
+   surgery 8/12/16), triage on vs off (KL 2+ straight to surgery) and 20 arrival seeds (mean ± 95% CI, paired
+   verdicts) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
+   Every figure on the Results page comes from `results.json` (exported from eval/results); none are typed in.
 6. Backend API: upload, queue, patient, confirm, build week, results.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when

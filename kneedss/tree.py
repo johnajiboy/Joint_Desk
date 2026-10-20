@@ -34,12 +34,12 @@ GATE = ["oks", "kl_grade", "physio_weeks"]                                      
 
 # The expert rules' cut points (rules.py), written the way a tree splits: "feature <= t" goes left.
 RULE_THRESHOLDS = [
-    {"rule": "OKS 26 or less (with KL 3+) -> surgery", "feature": "oks", "threshold": 26, "step": 1},
-    {"rule": "OKS above 19 (severe 0-19) -> physio first", "feature": "oks", "threshold": 19, "step": 1},
-    {"rule": "KL grade 3 or more", "feature": "kl_grade", "threshold": 2, "step": 1},
-    {"rule": "BMI 35 or more -> weight support", "feature": "bmi", "threshold": 34.9, "step": 0.1},
-    {"rule": "Physio under 6 weeks", "feature": "physio_weeks", "threshold": 5, "step": 1},
-    {"rule": "OKS drop of 5 or more", "feature": "oks_drop", "threshold": 4, "step": 1},
+    {"rule": "OKS 26 or less (with KL 3+) -> surgery", "short": "OKS ≤ 26 → surgery", "feature": "oks", "threshold": 26, "step": 1},
+    {"rule": "OKS above 19 (severe 0-19) -> physio first", "short": "OKS > 19 → physio first", "feature": "oks", "threshold": 19, "step": 1},
+    {"rule": "KL grade 3 or more", "short": "KL ≥ 3", "feature": "kl_grade", "threshold": 2, "step": 1},
+    {"rule": "BMI 35 or more -> weight support", "short": "BMI ≥ 35", "feature": "bmi", "threshold": 34.9, "step": 0.1},
+    {"rule": "Physio under 6 weeks", "short": "Physio < 6 weeks", "feature": "physio_weeks", "threshold": 5, "step": 1},
+    {"rule": "OKS drop of 5 or more", "short": "OKS drop ≥ 5", "feature": "oks_drop", "threshold": 4, "step": 1},
 ]
 
 
@@ -145,7 +145,7 @@ def compare_thresholds(model: DecisionTreeClassifier, names: list[str]) -> pd.Da
         splits = learned.get(r["feature"], [])
         nearest = min(splits, key=lambda s: abs(s - r["threshold"]), default=None)
         same = nearest is not None and r["threshold"] <= nearest < r["threshold"] + r["step"]
-        rows.append({"rule": r["rule"], "feature": r["feature"], "rule_cut": f"<= {r['threshold']}",
+        rows.append({"rule": r["rule"], "short": r["short"], "feature": r["feature"], "rule_cut": f"<= {r['threshold']}",
                      "tree_nearest": nearest, "tree_splits": ", ".join(f"{s:g}" for s in splits) or "not used",
                      "same_cut": same})
     return pd.DataFrame(rows)

@@ -86,8 +86,11 @@ def optimise_results() -> dict | None:
     o = json.loads(path.read_text())
     keep = ("policy", "surgery_capacity", "over_18_end", "over_52_end", "over_52_mean", "over_52_skipped_patients",
             "weeks_infeasible", "mean_wait_surgery", "mean_oks_operated")
-    return {"weeks": o["weeks"], "arrival_rate": round(o["arrival_rate"], 1), "series": o["series"],
-            "summary": [{k: r[k] for k in keep} for r in o["summary"]]}
+    return {"weeks": o["weeks"], "arrival_rate": round(o["arrival_rate"], 1), "capacity": o["capacity"],
+            "thresholds": o["thresholds"], "seeds": o["seeds"], "metrics": o["metrics"],
+            "triage_off_scenario": o["triage_off_scenario"], "triage_off_rule": o["triage_off_rule"], "series": o["series"],
+            "summary": [{k: r[k] for k in keep} for r in o["summary"]],
+            "robustness": o["robustness"], "pairs": o["pairs"]}
 
 
 def tree_results() -> dict | None:
@@ -105,9 +108,13 @@ def tree_results() -> dict | None:
         "runs": [{k: r[k] for k in ("name", "agreement", "agreement_complete", "cv_accuracy", "depth", "leaves",
                                     "best_params", "test_patients")} | {"disagreements": len(r["disagreements"])}
                  for r in (cont, disc)],
-        "thresholds": [{"rule": x["rule"], "rule_cut": x["rule_cut"], "tree": x["tree_nearest"], "same": x["same_cut"],
-                        "banded": banded_cut[x["rule"]]["tree_nearest"], "banded_same": banded_cut[x["rule"]]["same_cut"]}
+        "thresholds": [{"rule": x["rule"], "short": x["short"], "rule_cut": x["rule_cut"], "tree": x["tree_nearest"],
+                        "same": x["same_cut"], "banded": banded_cut[x["rule"]]["tree_nearest"],
+                        "banded_same": banded_cut[x["rule"]]["same_cut"]}
                        for x in cont["thresholds"]],
+        # the cut points the banded tree can't draw, and the band edge it used instead
+        "band_misses": [{"short": x["short"], "rule_cut": x["rule_cut"], "band_edge": x["tree_nearest"]}
+                        for x in disc["thresholds"] if not x["same_cut"] and x["tree_nearest"] is not None],
         "disagreements": [{k: d[k] for k in ("patient_id", "oks", "kl_grade", "bmi", "physio_weeks", "oks_drop",
                                               "rules", "tree", "model")} for d in cont["disagreements"] + disc["disagreements"]],
         "importances": cont["importances"],

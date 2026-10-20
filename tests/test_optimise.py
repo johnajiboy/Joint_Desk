@@ -129,3 +129,31 @@ def test_everyone_fits():
     plan = O.optimise(df)
     assert plan.feasible and set(slots(plan)) == {"A", "B"}
     assert all(n.empty for n in plan.next.values()) and plan.long_wait["unmet"] == []
+
+
+def test_triage_off_puts_every_kl2_plus_on_the_surgery_list():
+    df = pd.DataFrame({"kl_grade": [1.0, 2.0, 3.0, 4.0, None],
+                       "pathway": ["non_surgical", "physio", "weight_physio", "review", "review"]})
+    assert E.triage_off(df).pathway.tolist() == ["non_surgical", "surgery", "surgery", "surgery", "review"]
+    assert df.pathway.tolist()[1] == "physio"                       # the input is not changed
+
+
+def test_ci95_uses_the_t_distribution():
+    m, lo, hi = E.ci95(pd.Series([1.0, 2.0, 3.0, 4.0]))
+    assert m == 2.5 and lo == pytest.approx(2.5 - 3.182446 * 1.290994 / 2, abs=1e-4) and hi - m == pytest.approx(m - lo)
+    assert E.ci95(pd.Series([5.0, 5.0, 5.0])) == (5.0, 5.0, 5.0)
+
+
+def test_robustness_verdicts():
+    rows = []
+    for seed in range(5):
+        for policy, skipped, wait in [("FCFS", 0, 50 + seed), ("Priority only", 10 + seed, 30), ("Optimiser", 0, 45 + seed % 2),
+                                      (E.TRIAGE_OFF, 0, 60)]:
+            rows.append({"policy": policy, "seed": seed, "surgery_list_start": 1, **{k: 0 for k in E.METRICS},
+                         "over_52_skipped_patients": skipped, "mean_wait_surgery": wait})
+    _, pairs = E.robustness_tables(pd.DataFrame(rows))
+    v = pairs.set_index(["comparison", "metric"]).verdict
+    assert v[("Optimiser - FCFS", "over_52_skipped_patients")] == "same in every seed"
+    assert v[("Optimiser - Priority only", "over_52_skipped_patients")] == "holds: lower in 5/5 seeds"
+    assert v[("Optimiser - Priority only", "mean_wait_surgery")] == "holds: higher in 5/5 seeds"
+    assert v[("Optimiser - FCFS", "mean_wait_surgery")].startswith("holds: lower in")

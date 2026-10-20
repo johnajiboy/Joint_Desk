@@ -74,7 +74,7 @@ export function PageHeader({ title, meta, action }: { title: string; meta?: Reac
 
 export function Card({ title, meta, children, className = '' }: { title?: string; meta?: ReactNode; children: ReactNode; className?: string }) {
   return (
-    <section className={`rounded-lg border border-line bg-surface p-4 sm:p-5 ${className}`}>
+    <section className={`min-w-0 rounded-lg border border-line bg-surface p-4 sm:p-5 ${className}`}>
       {title && (
         <div className="mb-3 flex items-center gap-2">
           <h2 className="text-sm font-semibold">{title}</h2>

@@ -39,14 +39,14 @@ The label is the pathway the rules give on the cleaned table, so agreement shows
 
 A split at `<= t` is the same cut as the rule when t lies between the rule value and the next possible value (whole numbers; BMI to 0.1).
 
-| rule                                       | feature      | rule_cut   |   tree_nearest | tree_splits   | same_cut   |
-|:-------------------------------------------|:-------------|:-----------|---------------:|:--------------|:-----------|
-| OKS 26 or less (with KL 3+) -> surgery     | oks          | <= 26      |          26.5  | 19.5, 26.5    | True       |
-| OKS above 19 (severe 0-19) -> physio first | oks          | <= 19      |          19.5  | 19.5, 26.5    | True       |
-| KL grade 3 or more                         | kl_grade     | <= 2       |           2.5  | 2.5           | True       |
-| BMI 35 or more -> weight support           | bmi          | <= 34.9    |          34.95 | 34.35, 34.95  | True       |
-| Physio under 6 weeks                       | physio_weeks | <= 5       |           5.5  | 5.5           | True       |
-| OKS drop of 5 or more                      | oks_drop     | <= 4       |           4    | 4             | True       |
+| rule                                       | short                   | feature      | rule_cut   |   tree_nearest | tree_splits   | same_cut   |
+|:-------------------------------------------|:------------------------|:-------------|:-----------|---------------:|:--------------|:-----------|
+| OKS 26 or less (with KL 3+) -> surgery     | OKS ≤ 26 → surgery      | oks          | <= 26      |          26.5  | 19.5, 26.5    | True       |
+| OKS above 19 (severe 0-19) -> physio first | OKS > 19 → physio first | oks          | <= 19      |          19.5  | 19.5, 26.5    | True       |
+| KL grade 3 or more                         | KL ≥ 3                  | kl_grade     | <= 2       |           2.5  | 2.5           | True       |
+| BMI 35 or more -> weight support           | BMI ≥ 35                | bmi          | <= 34.9    |          34.95 | 34.35, 34.95  | True       |
+| Physio under 6 weeks                       | Physio < 6 weeks        | physio_weeks | <= 5       |           5.5  | 5.5           | True       |
+| OKS drop of 5 or more                      | OKS drop ≥ 5            | oks_drop     | <= 4       |           4    | 4             | True       |
 
 Extra splits that are not rule cuts: bmi <= 34.35. The tree splits halfway between the nearest patients either side; where nobody sits near the rule's value, any cut in that gap fits the data equally well, so these agree with the rules on every patient but are not the rules' numbers.
 
@@ -124,14 +124,14 @@ Extra splits that are not rule cuts: bmi <= 34.35. The tree splits halfway betwe
 
 A split at `<= t` is the same cut as the rule when t lies between the rule value and the next possible value (whole numbers; BMI to 0.1). Band splits are shown as the raw value at the band edge.
 
-| rule                                       | feature      | rule_cut   |   tree_nearest | tree_splits   | same_cut   |
-|:-------------------------------------------|:-------------|:-----------|---------------:|:--------------|:-----------|
-| OKS 26 or less (with KL 3+) -> surgery     | oks          | <= 26      |           29   | 19, 29        | False      |
-| OKS above 19 (severe 0-19) -> physio first | oks          | <= 19      |           19   | 19, 29        | True       |
-| KL grade 3 or more                         | kl_grade     | <= 2       |            2.5 | 2.5           | True       |
-| BMI 35 or more -> weight support           | bmi          | <= 34.9    |           34.9 | 34.9          | True       |
-| Physio under 6 weeks                       | physio_weeks | <= 5       |            5.5 | 5.5           | True       |
-| OKS drop of 5 or more                      | oks_drop     | <= 4       |            4   | 2.5, 4        | True       |
+| rule                                       | short                   | feature      | rule_cut   |   tree_nearest | tree_splits   | same_cut   |
+|:-------------------------------------------|:------------------------|:-------------|:-----------|---------------:|:--------------|:-----------|
+| OKS 26 or less (with KL 3+) -> surgery     | OKS ≤ 26 → surgery      | oks          | <= 26      |           29   | 19, 29        | False      |
+| OKS above 19 (severe 0-19) -> physio first | OKS > 19 → physio first | oks          | <= 19      |           19   | 19, 29        | True       |
+| KL grade 3 or more                         | KL ≥ 3                  | kl_grade     | <= 2       |            2.5 | 2.5           | True       |
+| BMI 35 or more -> weight support           | BMI ≥ 35                | bmi          | <= 34.9    |           34.9 | 34.9          | True       |
+| Physio under 6 weeks                       | Physio < 6 weeks        | physio_weeks | <= 5       |            5.5 | 5.5           | True       |
+| OKS drop of 5 or more                      | OKS drop ≥ 5            | oks_drop     | <= 4       |            4   | 2.5, 4        | True       |
 
 Extra splits that are not rule cuts: oks <= 29.0, oks_drop <= 2.5. A band split can only fall on a band edge, so the OKS band edge at 29 stands in for the rules' 26: patients with OKS 27-29 and KL 3+ are where the 8 disagreements come from. Any other extra split either leads to the same pathway on both sides or sits in a gap between patients.
 

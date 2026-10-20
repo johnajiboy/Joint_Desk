@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { getResults } from '../api'
 import { Card, ErrorNote, Loading, Meter, PageHeader } from '../components/AppShell'
 import { BacklogChart } from '../components/BacklogChart'
-import type { OptimiseResults, Policy, Results as ResultsData, TreeResults } from '../types'
+import type { CI, OptimiseResults, Pair, Policy, Results as ResultsData, TreeResults } from '../types'
 
 const pct = (v: number) => `${(v * 100).toFixed(1)}%`
 
@@ -21,15 +21,6 @@ function Stat({ label, value, sub }: { label: string; value: string; sub?: strin
       {sub && <div className="text-xs text-muted">{sub}</div>}
     </div>
   )
-}
-
-const RULE_SHORT: Record<string, string> = {
-  'OKS 26 or less (with KL 3+) -> surgery': 'OKS ≤ 26 → surgery',
-  'OKS above 19 (severe 0-19) -> physio first': 'OKS > 19 → physio first',
-  'KL grade 3 or more': 'KL ≥ 3',
-  'BMI 35 or more -> weight support': 'BMI ≥ 35',
-  'Physio under 6 weeks': 'Physio < 6 weeks',
-  'OKS drop of 5 or more': 'OKS drop ≥ 5',
 }
 
 /** A learned split shown as the rule's comparison: "OKS <= 26.5" reads as 26 for whole-number scores. */
@@ -61,14 +52,18 @@ function TreeCard({ t }: { t: TreeResults }) {
             <tbody className="divide-y divide-line">
               {t.thresholds.map((x) => (
                 <tr key={x.rule}>
-                  <td className="py-1.5">{RULE_SHORT[x.rule] ?? x.rule}</td>
+                  <td className="py-1.5">{x.short}</td>
                   <td className="py-1.5"><Cut value={x.tree} same={x.same} /></td>
                   <td className="py-1.5"><Cut value={x.banded} same={x.banded_same} /></td>
                 </tr>
               ))}
             </tbody>
           </table>
-          <p className="mt-2 text-xs text-muted">OKS bands end at 19 and 29, so the banded tree can't draw the rules' line at 26.</p>
+          {t.band_misses.map((m) => (
+            <p key={m.short} className="mt-2 text-xs text-muted">
+              Bands can't draw the rule {m.short}; the nearest band edge is {m.band_edge}.
+            </p>
+          ))}
         </div>
 
         <div>
@@ -101,25 +96,47 @@ function TreeCard({ t }: { t: TreeResults }) {
 
 const POLICIES: Policy[] = ['FCFS', 'Priority only', 'Optimiser']
 
+/** Mean ± half-width of the 95% CI, as in eval/results/optimise. */
+const pm = (m: number, lo: number, hi: number) => {
+  const d = Math.abs(m) >= 100 ? 0 : 1
+  return `${m.toFixed(d)} ± ${((hi - lo) / 2).toFixed(d)}`
+}
+
 function OptimiseCard({ o }: { o: OptimiseResults }) {
-  const at = (cap: number, p: Policy) => o.summary.find((r) => r.surgery_capacity === cap && r.policy === p)!
+  const cap = o.capacity.surgery
+  const at = (c: number, p: Policy) => o.summary.find((r) => r.surgery_capacity === c && r.policy === p)
   const caps = [...new Set(o.summary.map((r) => r.surgery_capacity))]
+  const ci = (scenario: string, metric: string) => o.robustness.find((r) => r.scenario === scenario && r.metric === metric)
+  const cell = (c?: CI) => (c ? pm(c.mean, c.ci_low, c.ci_high) : '—')
+  const pair = (comparison: string, metric: string) => o.pairs.find((r) => r.comparison === comparison && r.metric === metric)
+  const metricKeys = Object.keys(o.metrics)
+  const lw = o.thresholds.long_wait_weeks
+  const triageKeys = ['surgery_list_start', 'surgery_list_end', 'mean_wait_surgery', 'over_18_end', 'over_52_end']
+  const triageLabel = (k: string) => (k === 'surgery_list_start' ? 'Surgery list, start' : o.metrics[k])
+  const vs = (other: string) => `Optimiser - ${other}`
+  const PairCell = ({ p }: { p?: Pair }) => p ? (
+    <><span className="tabular-nums">{pm(p.mean_diff, p.ci_low, p.ci_high)}</span>
+      <span className="block text-xs text-muted">{p.verdict}</span></>
+  ) : <>—</>
+
   return (
     <Card title={`Weekly slots · ${o.weeks}-week simulation`} className="fade-up lg:col-span-2"
-      meta={<span className="ml-auto text-xs text-muted tabular-nums">{o.arrival_rate} new referrals a week · surgery 12, physio 20, weight support 8</span>}>
+      meta={<span className="ml-auto text-xs text-muted tabular-nums">{o.arrival_rate} new referrals a week · surgery {o.capacity.surgery},
+        physio {o.capacity.physio}, weight support {o.capacity.weight_support}</span>}>
       <BacklogChart o={o} />
       <div className="mt-5 grid gap-5 lg:grid-cols-2">
         <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Surgery capacity 12</h3>
+          <h3 className="mb-1 text-xs font-medium text-muted">Surgery capacity {cap} · seed {o.seeds[0]}</h3>
           <table className="w-full min-w-[24rem] text-sm tabular-nums">
             <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Policy</th><th className="py-1 text-right font-medium">Over-52s skipped</th>
-                <th className="py-1 text-right font-medium">Over 52, end</th><th className="py-1 text-right font-medium">Surgery wait</th>
+              <tr><th className="py-1 font-medium">Policy</th><th className="py-1 text-right font-medium">Over-{lw}s skipped</th>
+                <th className="py-1 text-right font-medium">Over {lw}, end</th><th className="py-1 text-right font-medium">Surgery wait</th>
                 <th className="py-1 text-right font-medium">OKS operated</th></tr>
             </thead>
             <tbody className="divide-y divide-line">
               {POLICIES.map((p) => {
-                const r = at(12, p)
+                const r = at(cap, p)
+                if (!r) return null
                 return (
                   <tr key={p}>
                     <td className="py-1.5">{p}</td>
@@ -132,10 +149,10 @@ function OptimiseCard({ o }: { o: OptimiseResults }) {
               })}
             </tbody>
           </table>
-          <p className="mt-2 text-xs text-muted">Lower OKS = worse knees treated. Skipped = over 52 weeks, passed over for someone who isn't.</p>
+          <p className="mt-2 text-xs text-muted">Lower OKS = worse knees treated. Skipped = over {lw} weeks, passed over for someone who isn't.</p>
         </div>
         <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Over 52 weeks after {o.weeks} weeks, by surgery slots a week</h3>
+          <h3 className="mb-1 text-xs font-medium text-muted">Over {lw} weeks after {o.weeks} weeks, by surgery slots a week</h3>
           <table className="w-full min-w-[20rem] text-sm tabular-nums">
             <thead className="text-left text-xs text-muted">
               <tr><th className="py-1 font-medium">Slots</th>{POLICIES.map((p) => <th key={p} className="py-1 text-right font-medium">{p}</th>)}</tr>
@@ -144,9 +161,73 @@ function OptimiseCard({ o }: { o: OptimiseResults }) {
               {caps.map((c) => (
                 <tr key={c}>
                   <td className="py-1.5">{c}</td>
-                  {POLICIES.map((p) => <td key={p} className={`py-1.5 text-right ${at(c, p).over_52_end ? 'text-danger' : ''}`}>{at(c, p).over_52_end}</td>)}
+                  {POLICIES.map((p) => {
+                    const v = at(c, p)?.over_52_end
+                    return <td key={p} className={`py-1.5 text-right ${v ? 'text-danger' : ''}`}>{v ?? '—'}</td>
+                  })}
                 </tr>
               ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="overflow-x-auto">
+          <h3 className="mb-1 text-xs font-medium text-muted">Across {o.seeds.length} arrival seeds · mean ± 95% CI</h3>
+          <table className="w-full min-w-[28rem] text-sm tabular-nums">
+            <thead className="text-left text-xs text-muted">
+              <tr><th className="py-1 font-medium">Measure</th>{POLICIES.map((p) => <th key={p} className="py-1 text-right font-medium">{p}</th>)}</tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {metricKeys.map((k) => (
+                <tr key={k}>
+                  <td className="py-1.5">{o.metrics[k]}</td>
+                  {POLICIES.map((p) => <td key={p} className="py-1.5 text-right">{cell(ci(p, k))}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="overflow-x-auto">
+          <h3 className="mb-1 text-xs font-medium text-muted">Do the differences hold? Optimiser minus each policy, paired by seed</h3>
+          <table className="w-full min-w-[28rem] text-sm">
+            <thead className="text-left text-xs text-muted">
+              <tr><th className="py-1 font-medium">Measure</th><th className="py-1 font-medium">vs FCFS</th>
+                <th className="py-1 font-medium">vs Priority only</th></tr>
+            </thead>
+            <tbody className="divide-y divide-line align-top">
+              {metricKeys.map((k) => (
+                <tr key={k}>
+                  <td className="py-1.5 pr-2">{o.metrics[k]}</td>
+                  <td className="py-1.5 pr-2"><PairCell p={pair(vs('FCFS'), k)} /></td>
+                  <td className="py-1.5"><PairCell p={pair(vs('Priority only'), k)} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="overflow-x-auto lg:col-span-2">
+          <h3 className="mb-1 text-xs font-medium text-muted">
+            Triage on vs off · optimiser, {o.seeds.length} seeds · off = {o.triage_off_rule}
+          </h3>
+          <table className="w-full min-w-[30rem] text-sm">
+            <thead className="text-left text-xs text-muted">
+              <tr><th className="py-1 font-medium">Measure</th><th className="py-1 text-right font-medium">Triage on</th>
+                <th className="py-1 text-right font-medium">Triage off</th><th className="py-1 pl-4 font-medium">Off minus on</th></tr>
+            </thead>
+            <tbody className="divide-y divide-line align-top">
+              {triageKeys.map((k) => {
+                const p = pair(`${o.triage_off_scenario} - Optimiser`, k)
+                return (
+                  <tr key={k}>
+                    <td className="py-1.5">{triageLabel(k)}</td>
+                    <td className="py-1.5 text-right tabular-nums">{cell(ci('Optimiser', k))}</td>
+                    <td className="py-1.5 text-right tabular-nums">{cell(ci(o.triage_off_scenario, k))}</td>
+                    <td className="py-1.5 pl-4">{p ? <PairCell p={p} /> : <span className="text-muted">same start list each seed</span>}</td>
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>

@@ -1,10 +1,10 @@
-policy,surgery_capacity,over_18_end,over_52_end,over_52_mean,over_52_skipped_patients,over_52_skipped_patient_weeks,weeks_infeasible,served,mean_wait_surgery,mean_wait_physio,mean_wait_weight_physio,mean_oks_operated,operated,waiting_end
-FCFS,8,659,17,12.8,0,0,0,571,59.3,20.0,21.6,17.3,208,905
-Priority only,8,668,149,87.7,198,2279,0,571,37.6,20.0,21.6,11.2,208,905
-Optimiser,8,659,20,14.5,0,0,22,571,58.9,20.0,21.5,16.5,208,905
-FCFS,12,555,0,5.7,0,0,0,675,52.0,20.0,21.6,17.1,312,801
-Priority only,12,583,118,76.5,181,1988,0,675,35.0,20.0,21.6,12.2,312,801
-Optimiser,12,559,0,5.7,0,0,6,675,48.9,20.0,21.5,15.1,312,801
-FCFS,16,451,0,3.5,0,0,0,779,46.9,20.0,21.6,16.9,416,697
-Priority only,16,493,95,66.3,163,1724,0,779,33.7,20.0,21.6,12.9,416,697
-Optimiser,16,474,0,3.5,0,0,4,779,41.9,20.0,21.5,14.5,416,697
+policy,surgery_capacity,over_18_end,over_52_end,over_52_mean,over_52_skipped_patients,over_52_skipped_patient_weeks,weeks_infeasible,served,mean_wait_surgery,mean_wait_physio,mean_wait_weight_physio,mean_oks_operated,operated,waiting_end,surgery_list_end
+FCFS,8,659,17,12.8,0,0,0,571,59.3,20.0,21.6,17.3,208,905,905
+Priority only,8,668,149,87.7,198,2279,0,571,37.6,20.0,21.6,11.2,208,905,905
+Optimiser,8,659,20,14.5,0,0,22,571,58.9,20.0,21.5,16.5,208,905,905
+FCFS,12,555,0,5.7,0,0,0,675,52.0,20.0,21.6,17.1,312,801,801
+Priority only,12,583,118,76.5,181,1988,0,675,35.0,20.0,21.6,12.2,312,801,801
+Optimiser,12,559,0,5.7,0,0,6,675,48.9,20.0,21.5,15.1,312,801,801
+FCFS,16,451,0,3.5,0,0,0,779,46.9,20.0,21.6,16.9,416,697,697
+Priority only,16,493,95,66.3,163,1724,0,779,33.7,20.0,21.6,12.9,416,697,697
+Optimiser,16,474,0,3.5,0,0,4,779,41.9,20.0,21.5,14.5,416,697,697

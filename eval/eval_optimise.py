@@ -9,6 +9,10 @@ Arrival rate: the generator draws a snapshot of waits rather than an arrival pro
 referral dates imply: patients referred in the last 52 weeks / 53 weeks. New referrals are drawn from the cleaned
 list (same mix of pathways and clinical values) and start at 0 weeks.
 
+Two more analyses: triage off (every referral with KL 2 or more goes on the surgery list: no physio-first or
+weight-support redirect), compared with triage on, both run by the optimiser; and robustness, the whole 26-week
+run repeated with 20 arrival seeds, reported as mean +/- 95% CI with paired per-seed comparisons.
+
     python eval/eval_optimise.py     -> eval/results/optimise/
 """
 from __future__ import annotations
@@ -22,6 +26,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import numpy as np  # noqa: E402
 import pandas as pd  # noqa: E402
+from scipy import stats  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
@@ -35,6 +40,17 @@ SEED = 2026
 SURGERY_CAPACITIES = [8, 12, 16]
 POLICIES = ["FCFS", "Priority only", "Optimiser"]
 ELIGIBLE = list(O.ALLOWED)
+STANDARD_WEEKS = 18                      # RTT standard; the long-wait mark is O.LONG_WAIT
+ROBUST_SEEDS = list(range(SEED, SEED + 20))
+TRIAGE_OFF = "Optimiser, triage off"
+TRIAGE_OFF_MIN_KL = 2                    # triage off: KL at or above this goes straight on the surgery list
+# metric -> label; for every one of these, lower is the better or more severe-first outcome
+METRICS = {
+    "surgery_list_end": "Surgery list, end", "over_18_end": "Over 18 weeks, end", "over_52_end": "Over 52 weeks, end",
+    "over_52_mean": "Over 52 weeks, weekly mean", "over_52_skipped_patients": "Over-52s skipped",
+    "weeks_infeasible": "Weeks over-52s didn't fit", "mean_wait_surgery": "Mean wait at surgery (weeks)",
+    "mean_oks_operated": "Mean OKS operated on (lower = worse knees)",
+}
 
 
 # ---------------------------------------------------------------------------- the list
@@ -140,7 +156,7 @@ def summarise(weekly: pd.DataFrame, served: pd.DataFrame, skipped: set, policy: 
         "weeks_infeasible": int(weekly.infeasible.sum()), "served": len(served),
         **{f"mean_wait_{p}": round(served.weeks_waiting[served.pathway == p].mean(), 1) for p in ELIGIBLE},
         "mean_oks_operated": round(surg.oks.mean(), 1), "operated": len(surg),
-        "waiting_end": int(weekly.waiting.iloc[-1]),
+        "waiting_end": int(weekly.waiting.iloc[-1]), "surgery_list_end": int(weekly.waiting_surgery.iloc[-1]),
     }
 
 
@@ -194,6 +210,77 @@ def charts(weekly: pd.DataFrame, summary: pd.DataFrame) -> None:
     fig.tight_layout()
     fig.savefig(RESULTS / "sensitivity.png", dpi=150)
     plt.close(fig)
+
+
+# ---------------------------------------------------------------------------- triage off, robustness
+
+def triage_off(df: pd.DataFrame) -> pd.DataFrame:
+    """No triage: every referral with KL 2 or more goes on the surgery list. Without an X-ray grade it still needs
+    the GP; KL 0-1 stays on non-surgical care."""
+    out = df.copy()
+    out["pathway"] = np.where(out.kl_grade >= TRIAGE_OFF_MIN_KL, "surgery", np.where(out.kl_grade.isna(), "review", "non_surgical"))
+    return out
+
+
+def ci95(x: pd.Series) -> tuple[float, float, float]:
+    """Mean and 95% confidence interval (t distribution, one value per seed)."""
+    x = pd.Series(x, dtype=float).dropna()
+    m = float(x.mean())
+    if len(x) < 2 or x.std(ddof=1) == 0:
+        return m, m, m
+    h = float(stats.t.ppf(0.975, len(x) - 1) * x.std(ddof=1) / np.sqrt(len(x)))
+    return m, m - h, m + h
+
+
+def seed_runs(start: pd.DataFrame, rate: float, seeds: list[int], capacity: dict) -> pd.DataFrame:
+    """Every policy, plus the optimiser with triage off, for each arrival seed."""
+    off_start = triage_off(start)
+    rows = []
+    for seed in seeds:
+        new = arrivals(start, rate, WEEKS, seed)
+        runs = [(p, start, new) for p in POLICIES] + [(TRIAGE_OFF, off_start, [triage_off(n) for n in new])]
+        for name, s0, ns in runs:
+            weekly, served, skipped = simulate(s0, ns, "Optimiser" if name == TRIAGE_OFF else name, capacity)
+            rows.append({**summarise(weekly, served, skipped, name, capacity["surgery"]), "seed": seed,
+                         "surgery_list_start": int((s0.pathway == "surgery").sum())})
+    return pd.DataFrame(rows)
+
+
+def robustness_tables(runs: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+    scenarios = POLICIES + [TRIAGE_OFF]
+    rows = []
+    for sc in scenarios:
+        d = runs[runs.policy == sc]
+        for k in ["surgery_list_start", *METRICS]:
+            m, lo, hi = ci95(d[k])
+            rows.append({"scenario": sc, "metric": k, "mean": m, "ci_low": lo, "ci_high": hi})
+    summary = pd.DataFrame(rows)
+
+    pairs = []
+    for a, b in [("Optimiser", "FCFS"), ("Optimiser", "Priority only"), (TRIAGE_OFF, "Optimiser")]:
+        da = runs[runs.policy == a].set_index("seed")
+        db = runs[runs.policy == b].set_index("seed")
+        for k in METRICS:
+            diff = (da[k] - db[k]).dropna()
+            m, lo, hi = ci95(diff)
+            lower, higher, n = int((diff < 0).sum()), int((diff > 0).sum()), len(diff)
+            if lower == higher == 0:
+                verdict = "same in every seed"
+            elif lo > 0 or hi < 0:
+                side = "lower" if m < 0 else "higher"
+                count = lower if m < 0 else higher
+                verdict = f"holds: {side} in {count}/{n} seeds" + ("" if count == n else ", CI excludes 0")
+            else:
+                verdict = f"doesn't hold: CI includes 0 (lower in {lower}, higher in {higher} of {n})"
+            pairs.append({"comparison": f"{a} - {b}", "metric": k, "mean_diff": m, "ci_low": lo, "ci_high": hi,
+                          "lower_seeds": lower, "higher_seeds": higher, "seeds": n, "verdict": verdict})
+    return summary, pd.DataFrame(pairs)
+
+
+def pm(m: float, lo: float, hi: float) -> str:
+    """Mean +/- half-width of the 95% CI."""
+    d = 0 if abs(m) >= 100 else 1
+    return f"{m:.{d}f} ± {(hi - lo) / 2:.{d}f}"
 
 
 def fmt(t: pd.DataFrame) -> pd.DataFrame:
@@ -264,11 +351,52 @@ def main() -> None:
         "## Sensitivity: surgery capacity 8, 12, 16 a week", "", fmt(sens).to_markdown(index=False), "",
         "![Sensitivity](sensitivity.png)", "",
     ]
+    # triage off and robustness (20 arrival seeds, surgery capacity 12)
+    runs = seed_runs(start, rate, ROBUST_SEEDS, O.CAPACITY)
+    runs.to_csv(RESULTS / "robustness_runs.csv", index=False)
+    robust, pairs = robustness_tables(runs)
+    robust.to_csv(RESULTS / "robustness.csv", index=False)
+    pairs.to_csv(RESULTS / "robustness_pairs.csv", index=False)
+    cell = {(r.scenario, r.metric): pm(r.mean, r.ci_low, r.ci_high) for r in robust.itertuples()}
+    robust_md = pd.DataFrame({sc: [cell[(sc, k)] for k in METRICS] for sc in POLICIES}, index=list(METRICS.values()))
+    triage_keys = ["surgery_list_start", "surgery_list_end", "mean_wait_surgery", "over_18_end", "over_52_end",
+                   "weeks_infeasible", "mean_oks_operated"]
+    triage_labels = {"surgery_list_start": "Surgery list, start", **METRICS}
+    triage_md = pd.DataFrame({"Triage on (optimiser)": [cell[("Optimiser", k)] for k in triage_keys],
+                              "Triage off (optimiser)": [cell[(TRIAGE_OFF, k)] for k in triage_keys]},
+                             index=[triage_labels[k] for k in triage_keys])
+    pairs_md = pairs.assign(
+        metric=pairs.metric.map(METRICS),
+        difference=[pm(r.mean_diff, r.ci_low, r.ci_high) for r in pairs.itertuples()])[
+        ["comparison", "metric", "difference", "verdict"]]
+    off = start.pipe(triage_off)
+    md += [
+        f"## Triage on vs off ({len(ROBUST_SEEDS)} arrival seeds, mean ± 95% CI)", "",
+        f"Triage off: every referral with KL 2 or more goes on the surgery list ({int((off.pathway == 'surgery').sum())} "
+        f"of {len(off)} patients at the start, against {int((start.pathway == 'surgery').sum())} with triage on), so no "
+        "physio-first or weight-support redirect. Both scenarios use the optimiser and the same arrivals. Over 18/52 "
+        "counts are of patients waiting for a slot.", "",
+        triage_md.to_markdown(), "",
+        f"## Robustness: {len(ROBUST_SEEDS)} arrival seeds ({ROBUST_SEEDS[0]}-{ROBUST_SEEDS[-1]}), surgery capacity 12", "",
+        "Each value is the mean ± half-width of the 95% CI across seeds (t distribution). Only the arrivals change "
+        f"between seeds; the starting list is the same. A new referral can't pass {O.LONG_WAIT} weeks within "
+        f"{WEEKS} weeks, so the over-{O.LONG_WAIT} figures depend only on the starting list: their CI is 0 by "
+        "construction, not by luck.", "",
+        robust_md.to_markdown(), "",
+        "### Do the differences hold across seeds?", "",
+        "Paired by seed (same arrivals). A difference holds when its 95% CI excludes 0; the count says in how many "
+        "seeds it went the same way.", "",
+        pairs_md.to_markdown(index=False), "",
+    ]
     (RESULTS / "optimise_summary.md").write_text("\n".join(md))
     series = weekly[(weekly.surgery_capacity == 12) & weekly.policy.isin(POLICIES)][
         ["policy", "week", "over_18", "over_52", "waiting"]]
     (RESULTS / "optimise_summary.json").write_text(json.dumps({
         "weeks": WEEKS, "arrival_rate": rate, "arrivals": sum(len(n) for n in new), "capacity": O.CAPACITY,
+        "thresholds": {"standard_weeks": STANDARD_WEEKS, "long_wait_weeks": O.LONG_WAIT},
+        "seeds": ROBUST_SEEDS, "metrics": METRICS, "triage_off_scenario": TRIAGE_OFF,
+        "triage_off_rule": f"every referral with KL ≥ {TRIAGE_OFF_MIN_KL} on the surgery list",
+        "robustness": robust.to_dict(orient="records"), "pairs": pairs.to_dict(orient="records"),
         "summary": summary.to_dict(orient="records"),
         "series": {p: series[series.policy == p].drop(columns="policy").to_dict(orient="records") for p in POLICIES},
     }, indent=1, default=lambda v: v.item() if hasattr(v, "item") else str(v)))

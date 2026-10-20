@@ -1,0 +1,25 @@
+comparison,metric,mean_diff,ci_low,ci_high,lower_seeds,higher_seeds,seeds,verdict
+Optimiser - FCFS,surgery_list_end,0.0,0.0,0.0,0,0,20,same in every seed
+Optimiser - FCFS,over_18_end,9.0,7.794776215108617,10.205223784891384,0,20,20,holds: higher in 20/20 seeds
+Optimiser - FCFS,over_52_end,0.0,0.0,0.0,0,0,20,same in every seed
+Optimiser - FCFS,over_52_mean,0.08999999999999968,0.0755948205164751,0.10440517948352425,0,18,20,"holds: higher in 18/20 seeds, CI excludes 0"
+Optimiser - FCFS,over_52_skipped_patients,0.0,0.0,0.0,0,0,20,same in every seed
+Optimiser - FCFS,weeks_infeasible,7.8,7.511896410329507,8.088103589670492,0,20,20,holds: higher in 20/20 seeds
+Optimiser - FCFS,mean_wait_surgery,-3.6300000000000003,-3.7437309978899456,-3.516269002110055,20,0,20,holds: lower in 20/20 seeds
+Optimiser - FCFS,mean_oks_operated,-2.0750000000000015,-2.111804536650035,-2.038195463349968,20,0,20,holds: lower in 20/20 seeds
+Optimiser - Priority only,surgery_list_end,0.0,0.0,0.0,0,0,20,same in every seed
+Optimiser - Priority only,over_18_end,-25.5,-27.39956688532984,-23.60043311467016,20,0,20,holds: lower in 20/20 seeds
+Optimiser - Priority only,over_52_end,-122.45,-123.2012055178873,-121.6987944821127,20,0,20,holds: lower in 20/20 seeds
+Optimiser - Priority only,over_52_mean,-71.92,-72.21349509859219,-71.62650490140781,20,0,20,holds: lower in 20/20 seeds
+Optimiser - Priority only,over_52_skipped_patients,-182.5,-182.9920305498083,-182.0079694501917,20,0,20,holds: lower in 20/20 seeds
+Optimiser - Priority only,weeks_infeasible,7.8,7.511896410329507,8.088103589670492,0,20,20,holds: higher in 20/20 seeds
+Optimiser - Priority only,mean_wait_surgery,14.415000000000001,14.175743406859402,14.6542565931406,0,20,20,holds: higher in 20/20 seeds
+Optimiser - Priority only,mean_oks_operated,2.9599999999999995,2.9134455343835,3.006554465616499,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",surgery_list_end,900.4,893.812003251189,906.9879967488109,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",over_18_end,684.95,681.6669566730798,688.2330433269203,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",over_52_end,97.0,97.0,97.0,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",over_52_mean,44.11,44.095594820516474,44.124405179483524,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",over_52_skipped_patients,0.0,0.0,0.0,0,0,20,same in every seed
+"Optimiser, triage off - Optimiser",weeks_infeasible,18.2,17.911896410329508,18.48810358967049,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",mean_wait_surgery,11.13,11.016269002110056,11.243730997889946,0,20,20,holds: higher in 20/20 seeds
+"Optimiser, triage off - Optimiser",mean_oks_operated,3.475,3.4381954633499667,3.5118045366500334,0,20,20,holds: higher in 20/20 seeds

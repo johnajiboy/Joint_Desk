@@ -111,9 +111,24 @@ export interface Results {
 
 export type Policy = 'FCFS' | 'Priority only' | 'Optimiser'
 
+export interface CI { scenario: string; metric: string; mean: number; ci_low: number; ci_high: number }
+
+export interface Pair {
+  comparison: string; metric: string; mean_diff: number; ci_low: number; ci_high: number
+  lower_seeds: number; higher_seeds: number; seeds: number; verdict: string
+}
+
 export interface OptimiseResults {
   weeks: number
   arrival_rate: number
+  capacity: { surgery: number; physio: number; weight_support: number }
+  thresholds: { standard_weeks: number; long_wait_weeks: number }
+  seeds: number[]
+  metrics: Record<string, string>
+  triage_off_scenario: string
+  triage_off_rule: string
+  robustness: CI[]
+  pairs: Pair[]
   series: Record<Policy, { week: number; over_18: number; over_52: number; waiting: number }[]>
   summary: { policy: Policy; surgery_capacity: number; over_18_end: number; over_52_end: number; over_52_mean: number;
     over_52_skipped_patients: number; weeks_infeasible: number; mean_wait_surgery: number; mean_oks_operated: number }[]
@@ -136,7 +151,8 @@ export interface TreeResults {
   train: number
   test: number
   runs: TreeRun[]
-  thresholds: { rule: string; rule_cut: string; tree: number | null; same: boolean; banded: number | null; banded_same: boolean }[]
+  thresholds: { rule: string; short: string; rule_cut: string; tree: number | null; same: boolean; banded: number | null; banded_same: boolean }[]
+  band_misses: { short: string; rule_cut: string; band_edge: number }[]
   disagreements: { patient_id: string; oks: number; kl_grade: number; bmi: number | null; physio_weeks: number;
     oks_drop: number; rules: string; tree: string; model: string }[]
   importances: Record<string, number>
