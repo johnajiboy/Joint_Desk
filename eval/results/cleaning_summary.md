@@ -1,6 +1,6 @@
 # Cleaning summary
 
-Raw rows: 1,518. Patients after cleaning: 1,500. Changes made: 497.
+Raw rows: 1,518. Patients after cleaning: 1,500. Changes made: 496.
 
 | Check | Result |
 |---|---|
@@ -9,7 +9,7 @@ Raw rows: 1,518. Patients after cleaning: 1,500. Changes made: 497.
 | Fixed (clean value = true value) | 398 (59.7%) |
 | Set missing (true value can't be recovered) | 269 (40.3%) |
 | Left wrong | 0 |
-| Changes the log doesn't explain | 1: KP00788 age |
+| Changes the log doesn't explain | 0 |
 | Pathway from cleaned data = pathway from full record | 88.2% |
 
 ## Logged problems by issue
@@ -41,7 +41,7 @@ Missing = the truth has a value the cleaned table doesn't (it was lost in the ra
 | sex_code       |    1500 |          1500 |         0 |       0 |                  |
 | sex            |    1500 |          1500 |         0 |       0 |                  |
 | date_of_birth  |    1500 |          1500 |         0 |       0 |                  |
-| age            |    1500 |          1499 |         0 |       1 | KP00788          |
+| age            |    1500 |          1500 |         0 |       0 |                  |
 | laterality     |    1500 |          1500 |         0 |       0 |                  |
 | referral_date  |    1500 |          1500 |         0 |       0 |                  |
 | weeks_waiting  |    1500 |          1500 |         0 |       0 |                  |

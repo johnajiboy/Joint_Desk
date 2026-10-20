@@ -114,9 +114,10 @@ Missing values are not imputed because a guessed Oxford score or X-ray grade wou
 `eval/eval_cleaning.py` checks every logged problem and every cell against the truth
 (`eval/results/cleaning_summary.md`): no value is left wrong.
 
-Known issue in the truth table: `generate_patients.py` sets the date of birth from `age x 365.25` days, so one
-patient (KP00788, born 21/10/1955) has a stored age of 71 but is 70 on 20/10/2026. Cleaning gives 70, from the
-date of birth. The generator is left as it is so the existing data doesn't change.
+Age in the truth table is always worked out from the date of birth on the extract date (20/10/2026). An
+earlier version stored the drawn age instead, which was one year out for one patient (KP00788, born 21/10/1955:
+now 70, was 71). The drawn age still sets the date of birth and the age-related risks, so fixing this changed
+only that one cell in `patients_clean.csv` and `patients_raw.csv`; letters, answer keys and caches are the same.
 
 ## Sources
 

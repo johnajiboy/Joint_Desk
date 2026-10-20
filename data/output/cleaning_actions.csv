@@ -257,7 +257,6 @@ KP00695,sex,2,Female,label standardised
 KP01008,sex,F,Female,label standardised
 KP00508,smoking_status,unknown,,"unknown, set missing"
 KP01375,referral_date,20/08/2026,2026-08-20,date format standardised
-KP00788,age,71,70,recalculated from date of birth
 KP00421,sex,1,Male,label standardised
 KP00193,physio_weeks,some,,"free text in numeric field, set missing"
 KP00671,smoking_status,unknown,,"unknown, set missing"

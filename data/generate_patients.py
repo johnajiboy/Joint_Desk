@@ -32,9 +32,16 @@ def clip(x, lo, hi):
     return max(lo, min(hi, x))
 
 
+def age_on(dob: date, on: date = EXTRACT_DATE) -> int:
+    """Age in whole years on a date."""
+    return on.year - dob.year - ((on.month, on.day) < (dob.month, dob.day))
+
+
 def make_patient(i: int, rng: random.Random, nrng: np.random.Generator, used_nhs: set) -> dict:
     # --- demographics (NJR: ~57% of primary knee replacements are in women; median age ~70)
     sex = "2" if rng.random() < 0.57 else "1"
+    # The drawn age sets the date of birth and the age-related risks below; the stored age is always worked out
+    # from the date of birth on the extract date, so the two can never disagree.
     age = int(round(clip(nrng.normal(69, 9.5), 45, 92)))
     dob = EXTRACT_DATE - timedelta(days=int(age * 365.25 + rng.randint(0, 364)))
     first = rng.choice(S.FIRST_NAMES_F if sex == "2" else S.FIRST_NAMES_M)
@@ -86,7 +93,7 @@ def make_patient(i: int, rng: random.Random, nrng: np.random.Generator, used_nhs
         "nhs_number": S.synthetic_nhs_number(rng, used_nhs),
         "title": title, "first_name": first, "surname": surname,
         "sex_code": sex, "sex": S.PERSON_STATED_GENDER[sex],
-        "date_of_birth": dob.isoformat(), "age": age,
+        "date_of_birth": dob.isoformat(), "age": age_on(dob),
         "postcode_outward": outward, "imd_decile": imd,
         "practice_code": practice_code, "practice_name": practice_name, "gp_name": rng.choice(S.GP_NAMES),
         "source_of_referral": "03", "priority_type": priority, "priority": S.PRIORITY_TYPE[priority],
