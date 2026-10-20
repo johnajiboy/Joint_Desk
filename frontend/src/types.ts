@@ -45,25 +45,35 @@ export interface Patient extends Omit<Referral, 'text_key'> {
   letter_text: string
 }
 
-export interface WeekConfig {
-  week_of: string
-  capacity: Record<'surgery' | 'physio' | 'weight_physio', number>
-  long_wait_weeks: number
+export interface WeekPatient {
+  id: string
+  name: string
+  pathway: PathwayKey
+  priority: number
+  weeks_waiting: number
+  long_wait: boolean
+  reason: string
+  has_page: boolean
 }
 
 export interface SlotList {
-  kind: 'surgery' | 'physio' | 'weight_physio'
+  kind: 'surgery' | 'physio' | 'weight_support'
+  label: string
   capacity: number
-  in: Referral[]
-  next: Referral[]
+  in: WeekPatient[]
+  next: WeekPatient[]
   waiting: number
 }
 
+/** The optimiser's plan for this week (kneedss/optimise.py via scripts/export_demo.py, later the backend). */
 export interface WeekPlan {
   week_of: string
-  method: 'greedy' | 'optimiser'
+  method: 'optimiser'
+  status: 'optimal' | 'infeasible'
+  shortfall: string[]
+  patients: number
   lists: SlotList[]
-  long_wait: { weeks: number; included: number; total: number }
+  long_wait: { weeks: number; total: number; included: number; unmet: number }
 }
 
 export type UploadResult =
@@ -96,6 +106,17 @@ export interface Results {
     by_issue: { field: string; issue: string; logged: number; fixed: number; 'set missing': number; wrong: number }[]
   }
   decision_tree: TreeResults | null
+  optimise: OptimiseResults | null
+}
+
+export type Policy = 'FCFS' | 'Priority only' | 'Optimiser'
+
+export interface OptimiseResults {
+  weeks: number
+  arrival_rate: number
+  series: Record<Policy, { week: number; over_18: number; over_52: number; waiting: number }[]>
+  summary: { policy: Policy; surgery_capacity: number; over_18_end: number; over_52_end: number; over_52_mean: number;
+    over_52_skipped_patients: number; weeks_infeasible: number; mean_wait_surgery: number; mean_oks_operated: number }[]
 }
 
 export interface TreeRun {

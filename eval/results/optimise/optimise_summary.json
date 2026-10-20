@@ -1,0 +1,641 @@
+{
+ "weeks": 26,
+ "arrival_rate": 26.264150943396228,
+ "arrivals": 638,
+ "capacity": {
+  "surgery": 12,
+  "physio": 20,
+  "weight_support": 8
+ },
+ "summary": [
+  {
+   "policy": "FCFS",
+   "surgery_capacity": 8,
+   "over_18_end": 659,
+   "over_52_end": 17,
+   "over_52_mean": 12.8,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 0,
+   "served": 571,
+   "mean_wait_surgery": 59.3,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 17.3,
+   "operated": 208,
+   "waiting_end": 905
+  },
+  {
+   "policy": "Priority only",
+   "surgery_capacity": 8,
+   "over_18_end": 668,
+   "over_52_end": 149,
+   "over_52_mean": 87.7,
+   "over_52_skipped_patients": 198,
+   "over_52_skipped_patient_weeks": 2279,
+   "weeks_infeasible": 0,
+   "served": 571,
+   "mean_wait_surgery": 37.6,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 11.2,
+   "operated": 208,
+   "waiting_end": 905
+  },
+  {
+   "policy": "Optimiser",
+   "surgery_capacity": 8,
+   "over_18_end": 659,
+   "over_52_end": 20,
+   "over_52_mean": 14.5,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 22,
+   "served": 571,
+   "mean_wait_surgery": 58.9,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.5,
+   "mean_oks_operated": 16.5,
+   "operated": 208,
+   "waiting_end": 905
+  },
+  {
+   "policy": "FCFS",
+   "surgery_capacity": 12,
+   "over_18_end": 555,
+   "over_52_end": 0,
+   "over_52_mean": 5.7,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 0,
+   "served": 675,
+   "mean_wait_surgery": 52.0,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 17.1,
+   "operated": 312,
+   "waiting_end": 801
+  },
+  {
+   "policy": "Priority only",
+   "surgery_capacity": 12,
+   "over_18_end": 583,
+   "over_52_end": 118,
+   "over_52_mean": 76.5,
+   "over_52_skipped_patients": 181,
+   "over_52_skipped_patient_weeks": 1988,
+   "weeks_infeasible": 0,
+   "served": 675,
+   "mean_wait_surgery": 35.0,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 12.2,
+   "operated": 312,
+   "waiting_end": 801
+  },
+  {
+   "policy": "Optimiser",
+   "surgery_capacity": 12,
+   "over_18_end": 559,
+   "over_52_end": 0,
+   "over_52_mean": 5.7,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 6,
+   "served": 675,
+   "mean_wait_surgery": 48.9,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.5,
+   "mean_oks_operated": 15.1,
+   "operated": 312,
+   "waiting_end": 801
+  },
+  {
+   "policy": "FCFS",
+   "surgery_capacity": 16,
+   "over_18_end": 451,
+   "over_52_end": 0,
+   "over_52_mean": 3.5,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 0,
+   "served": 779,
+   "mean_wait_surgery": 46.9,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 16.9,
+   "operated": 416,
+   "waiting_end": 697
+  },
+  {
+   "policy": "Priority only",
+   "surgery_capacity": 16,
+   "over_18_end": 493,
+   "over_52_end": 95,
+   "over_52_mean": 66.3,
+   "over_52_skipped_patients": 163,
+   "over_52_skipped_patient_weeks": 1724,
+   "weeks_infeasible": 0,
+   "served": 779,
+   "mean_wait_surgery": 33.7,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.6,
+   "mean_oks_operated": 12.9,
+   "operated": 416,
+   "waiting_end": 697
+  },
+  {
+   "policy": "Optimiser",
+   "surgery_capacity": 16,
+   "over_18_end": 474,
+   "over_52_end": 0,
+   "over_52_mean": 3.5,
+   "over_52_skipped_patients": 0,
+   "over_52_skipped_patient_weeks": 0,
+   "weeks_infeasible": 4,
+   "served": 779,
+   "mean_wait_surgery": 41.9,
+   "mean_wait_physio": 20.0,
+   "mean_wait_weight_physio": 21.5,
+   "mean_oks_operated": 14.5,
+   "operated": 416,
+   "waiting_end": 697
+  }
+ ],
+ "series": {
+  "FCFS": [
+   {
+    "week": 1,
+    "over_18": 474,
+    "over_52": 45,
+    "waiting": 1016
+   },
+   {
+    "week": 2,
+    "over_18": 459,
+    "over_52": 36,
+    "waiting": 991
+   },
+   {
+    "week": 3,
+    "over_18": 455,
+    "over_52": 29,
+    "waiting": 963
+   },
+   {
+    "week": 4,
+    "over_18": 454,
+    "over_52": 20,
+    "waiting": 941
+   },
+   {
+    "week": 5,
+    "over_18": 456,
+    "over_52": 13,
+    "waiting": 920
+   },
+   {
+    "week": 6,
+    "over_18": 464,
+    "over_52": 5,
+    "waiting": 894
+   },
+   {
+    "week": 7,
+    "over_18": 476,
+    "over_52": 0,
+    "waiting": 870
+   },
+   {
+    "week": 8,
+    "over_18": 491,
+    "over_52": 0,
+    "waiting": 853
+   },
+   {
+    "week": 9,
+    "over_18": 501,
+    "over_52": 0,
+    "waiting": 830
+   },
+   {
+    "week": 10,
+    "over_18": 513,
+    "over_52": 0,
+    "waiting": 816
+   },
+   {
+    "week": 11,
+    "over_18": 536,
+    "over_52": 0,
+    "waiting": 799
+   },
+   {
+    "week": 12,
+    "over_18": 556,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 13,
+    "over_18": 573,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 14,
+    "over_18": 580,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 15,
+    "over_18": 578,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 16,
+    "over_18": 583,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 17,
+    "over_18": 578,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 18,
+    "over_18": 567,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 19,
+    "over_18": 555,
+    "over_52": 0,
+    "waiting": 806
+   },
+   {
+    "week": 20,
+    "over_18": 554,
+    "over_52": 0,
+    "waiting": 801
+   },
+   {
+    "week": 21,
+    "over_18": 555,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 22,
+    "over_18": 553,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 23,
+    "over_18": 556,
+    "over_52": 0,
+    "waiting": 806
+   },
+   {
+    "week": 24,
+    "over_18": 555,
+    "over_52": 0,
+    "waiting": 807
+   },
+   {
+    "week": 25,
+    "over_18": 554,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 26,
+    "over_18": 555,
+    "over_52": 0,
+    "waiting": 801
+   }
+  ],
+  "Priority only": [
+   {
+    "week": 1,
+    "over_18": 481,
+    "over_52": 62,
+    "waiting": 1016
+   },
+   {
+    "week": 2,
+    "over_18": 480,
+    "over_52": 62,
+    "waiting": 991
+   },
+   {
+    "week": 3,
+    "over_18": 488,
+    "over_52": 62,
+    "waiting": 963
+   },
+   {
+    "week": 4,
+    "over_18": 501,
+    "over_52": 65,
+    "waiting": 941
+   },
+   {
+    "week": 5,
+    "over_18": 515,
+    "over_52": 64,
+    "waiting": 920
+   },
+   {
+    "week": 6,
+    "over_18": 532,
+    "over_52": 64,
+    "waiting": 894
+   },
+   {
+    "week": 7,
+    "over_18": 542,
+    "over_52": 62,
+    "waiting": 870
+   },
+   {
+    "week": 8,
+    "over_18": 543,
+    "over_52": 61,
+    "waiting": 853
+   },
+   {
+    "week": 9,
+    "over_18": 533,
+    "over_52": 58,
+    "waiting": 830
+   },
+   {
+    "week": 10,
+    "over_18": 539,
+    "over_52": 58,
+    "waiting": 815
+   },
+   {
+    "week": 11,
+    "over_18": 551,
+    "over_52": 54,
+    "waiting": 798
+   },
+   {
+    "week": 12,
+    "over_18": 568,
+    "over_52": 59,
+    "waiting": 802
+   },
+   {
+    "week": 13,
+    "over_18": 584,
+    "over_52": 63,
+    "waiting": 803
+   },
+   {
+    "week": 14,
+    "over_18": 590,
+    "over_52": 67,
+    "waiting": 803
+   },
+   {
+    "week": 15,
+    "over_18": 588,
+    "over_52": 72,
+    "waiting": 800
+   },
+   {
+    "week": 16,
+    "over_18": 592,
+    "over_52": 77,
+    "waiting": 802
+   },
+   {
+    "week": 17,
+    "over_18": 591,
+    "over_52": 79,
+    "waiting": 802
+   },
+   {
+    "week": 18,
+    "over_18": 581,
+    "over_52": 86,
+    "waiting": 803
+   },
+   {
+    "week": 19,
+    "over_18": 572,
+    "over_52": 91,
+    "waiting": 806
+   },
+   {
+    "week": 20,
+    "over_18": 575,
+    "over_52": 93,
+    "waiting": 801
+   },
+   {
+    "week": 21,
+    "over_18": 576,
+    "over_52": 96,
+    "waiting": 800
+   },
+   {
+    "week": 22,
+    "over_18": 575,
+    "over_52": 95,
+    "waiting": 800
+   },
+   {
+    "week": 23,
+    "over_18": 579,
+    "over_52": 98,
+    "waiting": 806
+   },
+   {
+    "week": 24,
+    "over_18": 580,
+    "over_52": 107,
+    "waiting": 807
+   },
+   {
+    "week": 25,
+    "over_18": 583,
+    "over_52": 115,
+    "waiting": 802
+   },
+   {
+    "week": 26,
+    "over_18": 583,
+    "over_52": 118,
+    "waiting": 801
+   }
+  ],
+  "Optimiser": [
+   {
+    "week": 1,
+    "over_18": 474,
+    "over_52": 45,
+    "waiting": 1016
+   },
+   {
+    "week": 2,
+    "over_18": 469,
+    "over_52": 36,
+    "waiting": 991
+   },
+   {
+    "week": 3,
+    "over_18": 475,
+    "over_52": 29,
+    "waiting": 963
+   },
+   {
+    "week": 4,
+    "over_18": 484,
+    "over_52": 20,
+    "waiting": 941
+   },
+   {
+    "week": 5,
+    "over_18": 499,
+    "over_52": 13,
+    "waiting": 920
+   },
+   {
+    "week": 6,
+    "over_18": 513,
+    "over_52": 5,
+    "waiting": 894
+   },
+   {
+    "week": 7,
+    "over_18": 524,
+    "over_52": 0,
+    "waiting": 870
+   },
+   {
+    "week": 8,
+    "over_18": 530,
+    "over_52": 0,
+    "waiting": 853
+   },
+   {
+    "week": 9,
+    "over_18": 525,
+    "over_52": 0,
+    "waiting": 830
+   },
+   {
+    "week": 10,
+    "over_18": 530,
+    "over_52": 0,
+    "waiting": 816
+   },
+   {
+    "week": 11,
+    "over_18": 545,
+    "over_52": 0,
+    "waiting": 799
+   },
+   {
+    "week": 12,
+    "over_18": 565,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 13,
+    "over_18": 583,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 14,
+    "over_18": 588,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 15,
+    "over_18": 585,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 16,
+    "over_18": 589,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 17,
+    "over_18": 585,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 18,
+    "over_18": 574,
+    "over_52": 0,
+    "waiting": 803
+   },
+   {
+    "week": 19,
+    "over_18": 562,
+    "over_52": 0,
+    "waiting": 806
+   },
+   {
+    "week": 20,
+    "over_18": 560,
+    "over_52": 0,
+    "waiting": 801
+   },
+   {
+    "week": 21,
+    "over_18": 561,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 22,
+    "over_18": 558,
+    "over_52": 0,
+    "waiting": 800
+   },
+   {
+    "week": 23,
+    "over_18": 562,
+    "over_52": 0,
+    "waiting": 806
+   },
+   {
+    "week": 24,
+    "over_18": 560,
+    "over_52": 0,
+    "waiting": 807
+   },
+   {
+    "week": 25,
+    "over_18": 558,
+    "over_52": 0,
+    "waiting": 802
+   },
+   {
+    "week": 26,
+    "over_18": 559,
+    "over_52": 0,
+    "waiting": 801
+   }
+  ]
+ }
+}

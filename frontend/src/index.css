@@ -39,6 +39,9 @@
   --nonsurg-bg: #eef0f4;
   --review-fg: #a3143c;
   --review-bg: #fce7ed;
+  /* chart series (validated categorical slots 1-2; see eval charts) */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
   color-scheme: light;
 }
 
@@ -64,6 +67,8 @@
   --nonsurg-bg: #252c3b;
   --review-fg: #f9a8c0;
   --review-bg: #3d1a26;
+  --series-1: #3987e5;
+  --series-2: #d95926;
   color-scheme: dark;
 }
 

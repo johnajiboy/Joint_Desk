@@ -31,7 +31,8 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 
 ## Stack
 
-- Python 3.12: pandas, numpy, scikit-learn, PuLP, pydantic, anthropic SDK, pypdf, python-docx, pytest
+- Python 3.12: pandas, numpy, scikit-learn, PuLP, pydantic, anthropic SDK, pypdf, python-docx, pytest.
+  PuLP 4 needs the `cbc` binary: `brew install cbc` (the pip `cbcbox` build is killed by macOS here).
 - Backend: FastAPI + SQLite (SQLModel)
 - Frontend: React + TypeScript (Vite), Tailwind, Recharts
 - Env: `ANTHROPIC_API_KEY` in `.env` (never commit it), `CLAUDE_MODEL` (default `claude-sonnet-5-5`).
@@ -73,7 +74,9 @@ docs/             assumptions, data dictionary
    (`eval/results/cleaning_summary.md`). OKS bands, BMI categories, wait bands; pathway from the rules.
 4. Done: knowledge, `kneedss/tree.py` (gated decision tree on the cleaned table, raw and banded features) and
    `eval/eval_tree.py` (`eval/results/tree/`): agreement with the rules, thresholds, disagreements.
-5. Optimiser: `kneedss/optimise.py` weekly allocation; compare with first come, first served.
+5. Done: optimiser, `kneedss/optimise.py` (PuLP + CBC: over-52s as a hard rule, infeasible weeks reported, then
+   priority with a weeks tie-break); `eval/eval_optimise.py` simulates 26 weeks (FCFS, priority only, optimiser;
+   surgery 8/12/16) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
 6. Backend API: upload, queue, patient, confirm, build week, results.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
@@ -168,6 +171,7 @@ DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eva
 python eval/compare_sets.py
 python -m kneedss.clean && python eval/eval_cleaning.py
 python eval/eval_tree.py
+python eval/eval_optimise.py
 python scripts/export_demo.py          # demo JSON for the frontend, from the cache
 pytest
 uvicorn backend.main:app --reload

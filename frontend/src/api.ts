@@ -3,8 +3,7 @@
  * scripts/export_demo.py from /demo/ and keeps the clinician's decisions in localStorage. With VITE_API_URL set,
  * the same functions call the FastAPI backend (stage 6). Nothing here ever holds an API key.
  */
-import type { Decision, PathwayKey, Patient, Referral, Results, UploadResult, WeekConfig, WeekPlan } from './types'
-import { greedyWeek } from './week'
+import type { Decision, PathwayKey, Patient, Referral, Results, UploadResult, WeekPlan } from './types'
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
 export const DEMO = !API_URL
@@ -84,10 +83,9 @@ export function getResults(): Promise<Results> {
   return request<Results>('results.json', '/results')
 }
 
-export async function buildWeek(): Promise<WeekPlan> {
-  if (!DEMO) return request<WeekPlan>('', '/week/build', { method: 'POST' })
-  const [cfg, queue] = await Promise.all([request<WeekConfig>('week.json', ''), getQueue()])
-  return greedyWeek(queue, cfg)
+/** This week's slots from the optimiser. Demo: the plan exported from the cleaned waiting list. */
+export function buildWeek(): Promise<WeekPlan> {
+  return request<WeekPlan>('week.json', '/week/build', DEMO ? undefined : { method: 'POST' })
 }
 
 // ------------------------------------------------------------------ upload

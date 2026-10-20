@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { getResults } from '../api'
 import { Card, ErrorNote, Loading, Meter, PageHeader } from '../components/AppShell'
-import type { Results as ResultsData, TreeResults } from '../types'
+import { BacklogChart } from '../components/BacklogChart'
+import type { OptimiseResults, Policy, Results as ResultsData, TreeResults } from '../types'
 
 const pct = (v: number) => `${(v * 100).toFixed(1)}%`
 
@@ -98,6 +99,62 @@ function TreeCard({ t }: { t: TreeResults }) {
   )
 }
 
+const POLICIES: Policy[] = ['FCFS', 'Priority only', 'Optimiser']
+
+function OptimiseCard({ o }: { o: OptimiseResults }) {
+  const at = (cap: number, p: Policy) => o.summary.find((r) => r.surgery_capacity === cap && r.policy === p)!
+  const caps = [...new Set(o.summary.map((r) => r.surgery_capacity))]
+  return (
+    <Card title={`Weekly slots · ${o.weeks}-week simulation`} className="fade-up lg:col-span-2"
+      meta={<span className="ml-auto text-xs text-muted tabular-nums">{o.arrival_rate} new referrals a week · surgery 12, physio 20, weight support 8</span>}>
+      <BacklogChart o={o} />
+      <div className="mt-5 grid gap-5 lg:grid-cols-2">
+        <div className="overflow-x-auto">
+          <h3 className="mb-1 text-xs font-medium text-muted">Surgery capacity 12</h3>
+          <table className="w-full min-w-[24rem] text-sm tabular-nums">
+            <thead className="text-left text-xs text-muted">
+              <tr><th className="py-1 font-medium">Policy</th><th className="py-1 text-right font-medium">Over-52s skipped</th>
+                <th className="py-1 text-right font-medium">Over 52, end</th><th className="py-1 text-right font-medium">Surgery wait</th>
+                <th className="py-1 text-right font-medium">OKS operated</th></tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {POLICIES.map((p) => {
+                const r = at(12, p)
+                return (
+                  <tr key={p}>
+                    <td className="py-1.5">{p}</td>
+                    <td className={`py-1.5 text-right ${r.over_52_skipped_patients ? 'font-medium text-danger' : ''}`}>{r.over_52_skipped_patients}</td>
+                    <td className={`py-1.5 text-right ${r.over_52_end ? 'text-danger' : ''}`}>{r.over_52_end}</td>
+                    <td className="py-1.5 text-right">{r.mean_wait_surgery.toFixed(1)} wk</td>
+                    <td className="py-1.5 text-right">{r.mean_oks_operated.toFixed(1)}</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+          <p className="mt-2 text-xs text-muted">Lower OKS = worse knees treated. Skipped = over 52 weeks, passed over for someone who isn't.</p>
+        </div>
+        <div className="overflow-x-auto">
+          <h3 className="mb-1 text-xs font-medium text-muted">Over 52 weeks after {o.weeks} weeks, by surgery slots a week</h3>
+          <table className="w-full min-w-[20rem] text-sm tabular-nums">
+            <thead className="text-left text-xs text-muted">
+              <tr><th className="py-1 font-medium">Slots</th>{POLICIES.map((p) => <th key={p} className="py-1 text-right font-medium">{p}</th>)}</tr>
+            </thead>
+            <tbody className="divide-y divide-line">
+              {caps.map((c) => (
+                <tr key={c}>
+                  <td className="py-1.5">{c}</td>
+                  {POLICIES.map((p) => <td key={p} className={`py-1.5 text-right ${at(c, p).over_52_end ? 'text-danger' : ''}`}>{at(c, p).over_52_end}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </Card>
+  )
+}
+
 export default function Results() {
   const [r, setR] = useState<ResultsData | null>(null)
   const [error, setError] = useState(false)
@@ -169,6 +226,7 @@ export default function Results() {
           </table>
         </Card>
 
+        {r.optimise && <OptimiseCard o={r.optimise} />}
         {r.decision_tree ? <TreeCard t={r.decision_tree} /> : (
           <Card title="Rules vs decision tree" className="fade-up">
             <div className="flex min-h-40 items-center justify-center rounded-md border border-dashed border-line text-sm text-muted">
