@@ -1,0 +1,9 @@
+# Never upload secrets or local data with a CLI deploy
+.env
+.env.*
+.venv/
+data/cache/
+__pycache__/
+node_modules/
+*.db
+.DS_Store
