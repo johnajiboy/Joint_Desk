@@ -12,6 +12,11 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 - Commit only when asked. Small commits with plain messages.
 - Build one stage at a time and run its tests before moving on.
 - The LLM only reads letters. It never decides the pathway: `kneedss/rules.py` does, and a clinician confirms.
+- Anthropic API only. Every LLM call goes through `kneedss/llm.py: complete_json(system, prompt, schema) -> dict`,
+  which uses a strict tool built from the pydantic schema and returns the tool input. Only that file imports
+  `anthropic`. Validate the result with the pydantic model; the DEMO_MODE cache and quote check sit in `extract.py`.
+- One model reads every letter: `CLAUDE_MODEL` in `.env` (default `claude-sonnet-5-5`), no fallback model.
+  Every cache file stores the model name (`llm.model_name()`) so each result can be traced.
 - Keep `kneedss/rules.py` the single source of the pathway rules; the generators and the app both use it.
 
 ## Stack
@@ -19,7 +24,8 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 - Python 3.12: pandas, numpy, scikit-learn, PuLP, pydantic, anthropic SDK, pypdf, python-docx, pytest
 - Backend: FastAPI + SQLite (SQLModel)
 - Frontend: React + TypeScript (Vite), Tailwind, Recharts
-- Env: `ANTHROPIC_API_KEY` in `.env` (never commit it). `DEMO_MODE=1` uses saved LLM results.
+- Env: `ANTHROPIC_API_KEY` in `.env` (never commit it), `CLAUDE_MODEL` (default `claude-sonnet-5-5`).
+  `DEMO_MODE=1` uses saved LLM results.
 
 ## Layout
 
@@ -47,8 +53,10 @@ docs/             assumptions, data dictionary
 ## Stages
 
 1. Done: data generators (`data/`).
-2. Extraction: `kneedss/extract.py` + `eval/eval_extraction.py` scored against `data/output/answer_key.jsonl`
-   (per-field accuracy, quote hit rate, pathway agreement). Cache LLM results to `data/cache/`.
+2. Done: extraction, `kneedss/extract.py` + `eval/eval_extraction.py` scored against `data/output/answer_key.jsonl`
+   (per-field accuracy, quote hit rate, pathway agreement). Cache LLM results to `data/cache/`, one JSON file
+   per letter with the model name alongside the facts (`data/cache/<model>/<letter_id>.json`).
+   Results: `eval/results/extraction_summary.md`.
 3. Cleaning: `kneedss/clean.py` turns `patients_raw.csv` into a clean table; check it against
    `data_quality_log.csv`. Discretise OKS bands, BMI categories, wait bands.
 4. Knowledge: decision tree trained on the clean data, compared with the expert rules.
