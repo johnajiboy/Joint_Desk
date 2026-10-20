@@ -6,4 +6,6 @@ pydantic>=2.14
 python-dotenv>=1.2
 pypdf>=6.0
 python-docx>=1.2
+scikit-learn>=1.9
+matplotlib>=3.11
 pytest>=9.1

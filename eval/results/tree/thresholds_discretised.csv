@@ -1,0 +1,7 @@
+rule,feature,rule_cut,tree_nearest,tree_splits,same_cut
+OKS 26 or less (with KL 3+) -> surgery,oks,<= 26,29.0,"19, 29",False
+OKS above 19 (severe 0-19) -> physio first,oks,<= 19,19.0,"19, 29",True
+KL grade 3 or more,kl_grade,<= 2,2.5,2.5,True
+BMI 35 or more -> weight support,bmi,<= 34.9,34.9,34.9,True
+Physio under 6 weeks,physio_weeks,<= 5,5.5,5.5,True
+OKS drop of 5 or more,oks_drop,<= 4,4.0,"2.5, 4",True

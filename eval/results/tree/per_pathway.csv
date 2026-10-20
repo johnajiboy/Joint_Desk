@@ -1,0 +1,6 @@
+pathway,precision,recall,f1,patients
+Surgery list,1.0,1.0,1.0,235
+Physio first,1.0,1.0,1.0,57
+Weight support and physio first,1.0,1.0,1.0,20
+Keep on non-surgical care,1.0,1.0,1.0,85
+Ask the GP for more information,1.0,1.0,1.0,53

@@ -53,6 +53,31 @@ def jsonable(v):
     return None if isinstance(v, float) and v != v else v
 
 
+def tree_results() -> dict | None:
+    """Stage 4 summary for the Results page (eval/eval_tree.py must have been run)."""
+    path = RESULTS / "tree" / "tree_summary.json"
+    if not path.exists():
+        return None
+    t = json.loads(path.read_text())
+    runs = {r["name"]: r for r in t["runs"]}
+    cont, disc = runs["continuous"], runs["discretised"]
+    banded_cut = {x["rule"]: x for x in disc["thresholds"]}
+    return {
+        "truth_check": {k: t["truth_check"][k] for k in ("patients", "matching")},
+        "train": t["train"], "test": t["test"],
+        "runs": [{k: r[k] for k in ("name", "agreement", "agreement_complete", "cv_accuracy", "depth", "leaves",
+                                    "best_params", "test_patients")} | {"disagreements": len(r["disagreements"])}
+                 for r in (cont, disc)],
+        "thresholds": [{"rule": x["rule"], "rule_cut": x["rule_cut"], "tree": x["tree_nearest"], "same": x["same_cut"],
+                        "banded": banded_cut[x["rule"]]["tree_nearest"], "banded_same": banded_cut[x["rule"]]["same_cut"]}
+                       for x in cont["thresholds"]],
+        "disagreements": [{k: d[k] for k in ("patient_id", "oks", "kl_grade", "bmi", "physio_weeks", "oks_drop",
+                                              "rules", "tree", "model")} for d in cont["disagreements"] + disc["disagreements"]],
+        "importances": cont["importances"],
+        "tree_text": (RESULTS / "tree" / "tree_rules.txt").read_text(),
+    }
+
+
 def main() -> None:
     wl = pd.read_csv(OUT / "waiting_list.csv", dtype={"nhs_number": str})
     wl["nhs"] = wl.nhs_number.str.replace(r"\D", "", regex=True)
@@ -111,7 +136,7 @@ def main() -> None:
             "set_missing": int(by_issue["set missing"].sum()), "wrong": int(by_issue.wrong.sum()),
             "by_issue": by_issue.to_dict(orient="records"),
         },
-        "decision_tree": None,                              # stage 4
+        "decision_tree": tree_results(),
     }
     (DEMO / "results.json").write_text(json.dumps(results, default=jsonable))
 

@@ -71,7 +71,8 @@ docs/             assumptions, data dictionary
 3. Done: cleaning, `kneedss/clean.py` turns `patients_raw.csv` into `data/output/waiting_list.csv` (+
    `cleaning_actions.csv`); `eval/eval_cleaning.py` checks it against `data_quality_log.csv` and the truth
    (`eval/results/cleaning_summary.md`). OKS bands, BMI categories, wait bands; pathway from the rules.
-4. Knowledge: decision tree trained on the clean data, compared with the expert rules.
+4. Done: knowledge, `kneedss/tree.py` (gated decision tree on the cleaned table, raw and banded features) and
+   `eval/eval_tree.py` (`eval/results/tree/`): agreement with the rules, thresholds, disagreements.
 5. Optimiser: `kneedss/optimise.py` weekly allocation; compare with first come, first served.
 6. Backend API: upload, queue, patient, confirm, build week, results.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
@@ -166,6 +167,7 @@ python eval/eval_extraction.py          # dev, cache only
 DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eval/results/test   # real run
 python eval/compare_sets.py
 python -m kneedss.clean && python eval/eval_cleaning.py
+python eval/eval_tree.py
 python scripts/export_demo.py          # demo JSON for the frontend, from the cache
 pytest
 uvicorn backend.main:app --reload

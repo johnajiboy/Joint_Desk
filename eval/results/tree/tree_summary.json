@@ -1,0 +1,451 @@
+{
+ "truth_check": {
+  "patients": 1500,
+  "matching": 1500,
+  "mismatches": []
+ },
+ "train": 1050,
+ "test": 450,
+ "seed": 2026,
+ "runs": [
+  {
+   "name": "continuous",
+   "features": [
+    "oks",
+    "kl_grade",
+    "bmi",
+    "physio_weeks",
+    "oks_drop",
+    "weeks_waiting",
+    "night_pain",
+    "lives_alone_or_carer",
+    "age",
+    "female"
+   ],
+   "best_params": {
+    "max_depth": 5,
+    "min_samples_leaf": 1
+   },
+   "cv_accuracy": 0.998918918918919,
+   "depth": 5,
+   "leaves": 10,
+   "test_patients": 450,
+   "test_complete": 397,
+   "agreement": 1.0,
+   "agreement_complete": 1.0,
+   "per_class": [
+    {
+     "pathway": "Surgery list",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 235
+    },
+    {
+     "pathway": "Physio first",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 57
+    },
+    {
+     "pathway": "Weight support and physio first",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 20
+    },
+    {
+     "pathway": "Keep on non-surgical care",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 85
+    },
+    {
+     "pathway": "Ask the GP for more information",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 53
+    }
+   ],
+   "confusion": {
+    "Surgery list": {
+     "Surgery list": 235,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 0
+    },
+    "Physio first": {
+     "Surgery list": 0,
+     "Physio first": 57,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 0
+    },
+    "Weight support and physio first": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 20,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 0
+    },
+    "Keep on non-surgical care": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 85,
+     "Ask the GP for more information": 0
+    },
+    "Ask the GP for more information": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 53
+    }
+   },
+   "thresholds": [
+    {
+     "rule": "OKS 26 or less (with KL 3+) -> surgery",
+     "feature": "oks",
+     "rule_cut": "<= 26",
+     "tree_nearest": 26.5,
+     "tree_splits": "19.5, 26.5",
+     "same_cut": true
+    },
+    {
+     "rule": "OKS above 19 (severe 0-19) -> physio first",
+     "feature": "oks",
+     "rule_cut": "<= 19",
+     "tree_nearest": 19.5,
+     "tree_splits": "19.5, 26.5",
+     "same_cut": true
+    },
+    {
+     "rule": "KL grade 3 or more",
+     "feature": "kl_grade",
+     "rule_cut": "<= 2",
+     "tree_nearest": 2.5,
+     "tree_splits": "2.5",
+     "same_cut": true
+    },
+    {
+     "rule": "BMI 35 or more -> weight support",
+     "feature": "bmi",
+     "rule_cut": "<= 34.9",
+     "tree_nearest": 34.95,
+     "tree_splits": "34.35, 34.95",
+     "same_cut": true
+    },
+    {
+     "rule": "Physio under 6 weeks",
+     "feature": "physio_weeks",
+     "rule_cut": "<= 5",
+     "tree_nearest": 5.5,
+     "tree_splits": "5.5",
+     "same_cut": true
+    },
+    {
+     "rule": "OKS drop of 5 or more",
+     "feature": "oks_drop",
+     "rule_cut": "<= 4",
+     "tree_nearest": 4.0,
+     "tree_splits": "4",
+     "same_cut": true
+    }
+   ],
+   "importances": {
+    "kl_grade": 0.3378741806444042,
+    "physio_weeks": 0.26867924521442754,
+    "oks": 0.22239090894831462,
+    "bmi": 0.13031560111624793,
+    "oks_drop": 0.04074006407660564,
+    "weeks_waiting": 0.0,
+    "night_pain": 0.0,
+    "lives_alone_or_carer": 0.0,
+    "age": 0.0,
+    "female": 0.0
+   },
+   "disagreements": []
+  },
+  {
+   "name": "discretised",
+   "features": [
+    "oks_band",
+    "kl_grade",
+    "bmi_category",
+    "physio_weeks",
+    "oks_drop",
+    "wait_band",
+    "night_pain",
+    "lives_alone_or_carer",
+    "age",
+    "female"
+   ],
+   "best_params": {
+    "max_depth": 5,
+    "min_samples_leaf": 1
+   },
+   "cv_accuracy": 0.9762801511188608,
+   "depth": 5,
+   "leaves": 11,
+   "test_patients": 450,
+   "test_complete": 397,
+   "agreement": 0.9822222222222222,
+   "agreement_complete": 0.9798488664987406,
+   "per_class": [
+    {
+     "pathway": "Surgery list",
+     "precision": 0.9670781893004116,
+     "recall": 1.0,
+     "f1": 0.9832635983263598,
+     "patients": 235
+    },
+    {
+     "pathway": "Physio first",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 57
+    },
+    {
+     "pathway": "Weight support and physio first",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 20
+    },
+    {
+     "pathway": "Keep on non-surgical care",
+     "precision": 1.0,
+     "recall": 0.9058823529411765,
+     "f1": 0.9506172839506173,
+     "patients": 85
+    },
+    {
+     "pathway": "Ask the GP for more information",
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "patients": 53
+    }
+   ],
+   "confusion": {
+    "Surgery list": {
+     "Surgery list": 235,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 8,
+     "Ask the GP for more information": 0
+    },
+    "Physio first": {
+     "Surgery list": 0,
+     "Physio first": 57,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 0
+    },
+    "Weight support and physio first": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 20,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 0
+    },
+    "Keep on non-surgical care": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 77,
+     "Ask the GP for more information": 0
+    },
+    "Ask the GP for more information": {
+     "Surgery list": 0,
+     "Physio first": 0,
+     "Weight support and physio first": 0,
+     "Keep on non-surgical care": 0,
+     "Ask the GP for more information": 53
+    }
+   },
+   "thresholds": [
+    {
+     "rule": "OKS 26 or less (with KL 3+) -> surgery",
+     "feature": "oks",
+     "rule_cut": "<= 26",
+     "tree_nearest": 29.0,
+     "tree_splits": "19, 29",
+     "same_cut": false
+    },
+    {
+     "rule": "OKS above 19 (severe 0-19) -> physio first",
+     "feature": "oks",
+     "rule_cut": "<= 19",
+     "tree_nearest": 19.0,
+     "tree_splits": "19, 29",
+     "same_cut": true
+    },
+    {
+     "rule": "KL grade 3 or more",
+     "feature": "kl_grade",
+     "rule_cut": "<= 2",
+     "tree_nearest": 2.5,
+     "tree_splits": "2.5",
+     "same_cut": true
+    },
+    {
+     "rule": "BMI 35 or more -> weight support",
+     "feature": "bmi",
+     "rule_cut": "<= 34.9",
+     "tree_nearest": 34.9,
+     "tree_splits": "34.9",
+     "same_cut": true
+    },
+    {
+     "rule": "Physio under 6 weeks",
+     "feature": "physio_weeks",
+     "rule_cut": "<= 5",
+     "tree_nearest": 5.5,
+     "tree_splits": "5.5",
+     "same_cut": true
+    },
+    {
+     "rule": "OKS drop of 5 or more",
+     "feature": "oks_drop",
+     "rule_cut": "<= 4",
+     "tree_nearest": 4.0,
+     "tree_splits": "2.5, 4",
+     "same_cut": true
+    }
+   ],
+   "importances": {
+    "kl_grade": 0.3619925581120465,
+    "physio_weeks": 0.28785830009646596,
+    "oks_band": 0.19002441710493534,
+    "bmi_category": 0.13961788296462696,
+    "oks_drop": 0.020506841721925264,
+    "wait_band": 0.0,
+    "night_pain": 0.0,
+    "lives_alone_or_carer": 0.0,
+    "age": 0.0,
+    "female": 0.0
+   },
+   "disagreements": [
+    {
+     "patient_id": "KP01346",
+     "oks": 28.0,
+     "oks_before": 29,
+     "kl_grade": 4.0,
+     "bmi": 33.8,
+     "physio_weeks": 10.0,
+     "weeks_waiting": 13,
+     "oks_drop": 1.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP00344",
+     "oks": 27.0,
+     "oks_before": 28,
+     "kl_grade": 4.0,
+     "bmi": 36.6,
+     "physio_weeks": 17.0,
+     "weeks_waiting": 14,
+     "oks_drop": 1.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP01229",
+     "oks": 28.0,
+     "oks_before": 32,
+     "kl_grade": 3.0,
+     "bmi": 35.8,
+     "physio_weeks": 9.0,
+     "weeks_waiting": 8,
+     "oks_drop": 4.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP01329",
+     "oks": 28.0,
+     "oks_before": 31,
+     "kl_grade": 3.0,
+     "bmi": 32.1,
+     "physio_weeks": 6.0,
+     "weeks_waiting": 3,
+     "oks_drop": 3.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP00283",
+     "oks": 28.0,
+     "oks_before": 27,
+     "kl_grade": 4.0,
+     "bmi": 31.4,
+     "physio_weeks": 11.0,
+     "weeks_waiting": 3,
+     "oks_drop": -1.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP00200",
+     "oks": 27.0,
+     "oks_before": 27,
+     "kl_grade": 3.0,
+     "bmi": 32.7,
+     "physio_weeks": 18.0,
+     "weeks_waiting": 11,
+     "oks_drop": 0.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP00166",
+     "oks": 27.0,
+     "oks_before": 23,
+     "kl_grade": 3.0,
+     "bmi": 32.4,
+     "physio_weeks": 11.0,
+     "weeks_waiting": 24,
+     "oks_drop": -4.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    },
+    {
+     "patient_id": "KP01307",
+     "oks": 29.0,
+     "oks_before": 30,
+     "kl_grade": 3.0,
+     "bmi": 27.1,
+     "physio_weeks": 10.0,
+     "weeks_waiting": 30,
+     "oks_drop": 1.0,
+     "rules": "Keep on non-surgical care",
+     "rule": 6,
+     "tree": "Surgery list",
+     "model": "discretised"
+    }
+   ]
+  }
+ ]
+}

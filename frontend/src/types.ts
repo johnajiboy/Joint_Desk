@@ -95,5 +95,29 @@ export interface Results {
     wrong: number
     by_issue: { field: string; issue: string; logged: number; fixed: number; 'set missing': number; wrong: number }[]
   }
-  decision_tree: null
+  decision_tree: TreeResults | null
+}
+
+export interface TreeRun {
+  name: 'continuous' | 'discretised'
+  agreement: number
+  agreement_complete: number
+  cv_accuracy: number
+  depth: number
+  leaves: number
+  best_params: { max_depth: number; min_samples_leaf: number }
+  test_patients: number
+  disagreements: number
+}
+
+export interface TreeResults {
+  truth_check: { patients: number; matching: number }
+  train: number
+  test: number
+  runs: TreeRun[]
+  thresholds: { rule: string; rule_cut: string; tree: number | null; same: boolean; banded: number | null; banded_same: boolean }[]
+  disagreements: { patient_id: string; oks: number; kl_grade: number; bmi: number | null; physio_weeks: number;
+    oks_drop: number; rules: string; tree: string; model: string }[]
+  importances: Record<string, number>
+  tree_text: string
 }

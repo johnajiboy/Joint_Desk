@@ -1,0 +1,31 @@
+|--- kl_grade <= 2.50
+|   |--- physio_weeks <= 5.50
+|   |   |--- oks_band <= 0.50
+|   |   |   |--- class: non_surgical
+|   |   |--- oks_band >  0.50
+|   |   |   |--- bmi_category <= 4.50
+|   |   |   |   |--- class: physio
+|   |   |   |--- bmi_category >  4.50
+|   |   |   |   |--- class: weight_physio
+|   |--- physio_weeks >  5.50
+|   |   |--- class: non_surgical
+|--- kl_grade >  2.50
+|   |--- oks_band <= 0.50
+|   |   |--- class: surgery
+|   |--- oks_band >  0.50
+|   |   |--- physio_weeks <= 5.50
+|   |   |   |--- bmi_category <= 4.50
+|   |   |   |   |--- class: physio
+|   |   |   |--- bmi_category >  4.50
+|   |   |   |   |--- class: weight_physio
+|   |   |--- physio_weeks >  5.50
+|   |   |   |--- oks_band <= 1.50
+|   |   |   |   |--- oks_drop <= 2.50
+|   |   |   |   |   |--- class: surgery
+|   |   |   |   |--- oks_drop >  2.50
+|   |   |   |   |   |--- class: surgery
+|   |   |   |--- oks_band >  1.50
+|   |   |   |   |--- oks_drop <= 4.00
+|   |   |   |   |   |--- class: non_surgical
+|   |   |   |   |--- oks_drop >  4.00
+|   |   |   |   |   |--- class: surgery
