@@ -18,6 +18,12 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 - One model reads every letter: `CLAUDE_MODEL` in `.env` (default `claude-sonnet-5-5`), no fallback model.
   Every cache file stores the model name (`llm.model_name()`) so each result can be traced.
 - Keep `kneedss/rules.py` the single source of the pathway rules; the generators and the app both use it.
+- Vercel deploys automatically on every push to main (root directory: frontend).
+- Before pushing frontend changes, run `npm run build` in frontend/ and fix any errors.
+- After every push, wait for the Vercel deployment to finish (`vercel ls` / `vercel inspect` from frontend/) and
+  confirm it is Ready. Report the live URL. If the build fails, show the error from the build log, fix it, and push
+  again.
+- Never put the API key or anything from .env into the frontend or Vercel.
 
 ## Stack
 
