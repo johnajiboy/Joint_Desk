@@ -23,8 +23,16 @@ HEADLINE = [
 def main() -> None:
     dev = json.loads((RESULTS / "extraction_summary.json").read_text())
     test = json.loads((RESULTS / "test" / "extraction_summary.json").read_text())
+    def cost(d: dict) -> str:
+        u = d.get("usage") or {}
+        if not u.get("letters_recorded"):
+            return "not recorded"
+        return f"${u['cost_usd']:.2f} ({u['letters_recorded']} letters)"
+
     head = pd.DataFrame([{"Measure": name, "Dev (150, tuned on)": fmt.format(dev[k]),
-                          "Test (100, held out, hard)": fmt.format(test[k])} for k, name, fmt in HEADLINE])
+                          "Test (100, held out, hard)": fmt.format(test[k])} for k, name, fmt in HEADLINE]
+                        + [{"Measure": "API cost", "Dev (150, tuned on)": cost(dev),
+                            "Test (100, held out, hard)": cost(test)}])
     fields = pd.DataFrame({"Dev": dev["field_accuracy"], "Test": test["field_accuracy"]})
     fields["Change"] = fields.Test - fields.Dev
     models = {dev["model"], test["model"]}

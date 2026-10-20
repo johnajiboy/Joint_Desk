@@ -12,10 +12,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import CancelledError, ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 import pandas as pd
@@ -79,6 +80,7 @@ def score_letter(key: dict, text: str, ex: X.Extraction, raw: dict, waiting: dic
         "errors": [{"letter_id": key["letter_id"], "field": f, "outcome": o, "gold": key["gold"][f],
                     "got": ex.facts[f], "quote": raw[f]["quote"]} for f, o in fields.items() if o != "correct"],
         "from_cache": ex.from_cache,
+        "usage": ex.usage,
     }
 
 
@@ -99,6 +101,16 @@ def show(r: dict) -> None:
         print(f"  {e['outcome']:7} {e['field']}: gold {e['gold']!r}, got {e['got']!r}  quote {e['quote']!r}")
     for d in r["dropped"]:
         print(f"  dropped {d['field']}={d['value']!r} ({d['reason']}): {d['quote']!r}")
+
+
+def usage_totals(results: list[dict]) -> dict:
+    """Tokens and cost recorded in the cache files (older files have none), and how many were read this run."""
+    recorded = [r for r in results if r["usage"]]
+    total = {k: sum(r["usage"].get(k, 0) for r in recorded) for k in llm.USAGE_KEYS}
+    costs = [r["usage"].get("cost_usd") for r in recorded]
+    return {"letters_recorded": len(recorded), "read_this_run": sum(not r["from_cache"] for r in results),
+            **total, "attempts": sum(r["usage"].get("attempts", 1) for r in recorded),
+            "cost_usd": round(sum(c for c in costs if c is not None), 4) if recorded else None}
 
 
 def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, seconds: float,
@@ -148,6 +160,23 @@ def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, se
         f"| Pathway agreement | {agree.mean():.1%} ({int(agree.sum())}/{n}) |",
         f"| Priority score, mean absolute difference | {(letters.priority - letters.gold_priority).abs().mean():.1f} |",
         f"| NHS number matched to waiting list | {letters.nhs_matched.mean():.1%} |",
+    ]
+    u = usage_totals(results)
+    if u["letters_recorded"]:
+        m = u["letters_recorded"]
+        lines += [
+            "", "## API usage", "",
+            f"Recorded for {m} of {n} letters ({u['read_this_run']} read by the API in this run, the rest from the cache).",
+            "", "| Tokens | Total | Per letter |", "|---|---:|---:|",
+            *[f"| {label} | {u[k]:,} | {u[k] / m:,.0f} |" for k, label in [
+                ("input_tokens", "Input"), ("output_tokens", "Output (incl. thinking)"),
+                ("cache_read_input_tokens", "Cache read"), ("cache_creation_input_tokens", "Cache write")]],
+            f"| API calls | {u['attempts']} | {u['attempts'] / m:.2f} |",
+            f"| **Cost (USD)** | **${u['cost_usd']:.2f}** | ${u['cost_usd'] / m:.4f} |",
+        ]
+    else:
+        lines += ["", "API usage: not recorded (these cache files predate usage tracking)."]
+    lines += [
         "", "## Per-field accuracy", "",
         fields.to_markdown(index=False, floatfmt=".1%"),
         "", "## Pathway: gold vs from extraction", "", cm.to_markdown(),
@@ -166,6 +195,7 @@ def summarise(results: list[dict], failed: list[tuple[str, str]], model: str, se
         "priority_mae": (letters.priority - letters.gold_priority).abs().mean(),
         "nhs_matched": letters.nhs_matched.mean(),
         "field_accuracy": dict(zip(fields.field, fields.accuracy)),
+        "usage": u,
     }
     (out / "extraction_summary.json").write_text(json.dumps(headline, indent=1, default=float))
     return md
@@ -180,8 +210,14 @@ def main() -> None:
     ap.add_argument("--show", action="store_true", help="print each letter's result")
     ap.add_argument("--data", type=Path, default=OUT, help="letters and answer key (default data/output)")
     ap.add_argument("--results", type=Path, default=RESULTS, help="where to write tables (default eval/results)")
+    ap.add_argument("--max-failures", type=int, default=3, help="stop when more letters than this fail")
+    ap.add_argument("--allow-dev-api", action="store_true", help="let the dev set call the API (normally cache only)")
     a = ap.parse_args()
     label = "dev" if a.data.resolve() == OUT.resolve() else a.data.name
+    if label == "dev" and not a.allow_dev_api:
+        os.environ["DEMO_MODE"] = "1"            # the dev set is cached; never pay to read it again
+        if a.refresh:
+            sys.exit("--refresh on the dev set needs --allow-dev-api")
 
     keys = [json.loads(line) for line in open(a.data / "answer_key.jsonl")]
     texts = {d["letter_id"]: d["text"] for d in map(json.loads, open(a.data / "letters.jsonl"))}
@@ -194,17 +230,28 @@ def main() -> None:
 
     a.results.mkdir(parents=True, exist_ok=True)
     model, start = llm.model_name(), time.time()
-    results, failed = [], []
+    results, failed, stopped = [], [], False
     with ThreadPoolExecutor(max_workers=a.workers) as pool:
         jobs = {pool.submit(run_one, k, texts[k["letter_id"]], waiting, a.refresh): k["letter_id"] for k in keys}
         for i, job in enumerate(as_completed(jobs), 1):
             lid = jobs[job]
             try:
                 results.append(job.result())
+            except CancelledError:
+                continue
             except (llm.LLMError, X.DemoCacheMiss, ValueError) as e:
                 failed.append((lid, str(e)))
+                if len(failed) > a.max_failures and not stopped:
+                    stopped = True
+                    for j in jobs:
+                        j.cancel()            # letters not yet started are skipped; running ones finish
             print(f"\r{i}/{len(keys)} letters", end="", file=sys.stderr, flush=True)
     print(file=sys.stderr)
+    if stopped:
+        for lid, msg in failed:
+            print(f"FAILED {lid}: {msg}")
+        sys.exit(f"Stopped: {len(failed)} letters failed (limit {a.max_failures}). "
+                 f"{len(results)} were read and cached; no summary written.")
     results.sort(key=lambda r: r["letter_id"])
 
     if a.show:

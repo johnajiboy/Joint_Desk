@@ -51,8 +51,11 @@ def tmp_cache(tmp_path, monkeypatch):
 def fake_llm(monkeypatch):
     calls = []
 
-    def complete_json(system, prompt, schema):
+    def complete_json(system, prompt, schema, usage=None):
         calls.append(prompt)
+        if usage is not None:
+            usage.update({"input_tokens": 2500, "output_tokens": 700, "cache_read_input_tokens": 0,
+                          "cache_creation_input_tokens": 0, "attempts": 1, "cost_usd": 0.012})
         return GOOD
     monkeypatch.setattr(llm, "complete_json", complete_json)
     return calls
@@ -212,3 +215,10 @@ def test_name_drops_title(value):
 
 def test_name_keeps_names_that_start_like_titles():
     assert X.TITLE.sub("", "Mrsha Doran") == "Mrsha Doran"
+
+
+def test_cache_file_records_usage_and_cost(tmp_cache, fake_llm):
+    first = X.extract(LETTER, "L0001")
+    saved = json.loads((tmp_cache / "claude-test" / "L0001.json").read_text())
+    assert saved["usage"]["output_tokens"] == 700 and saved["usage"]["cost_usd"] == 0.012
+    assert first.usage == saved["usage"] and X.extract(LETTER, "L0001").usage == saved["usage"]

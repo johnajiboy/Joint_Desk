@@ -5,3 +5,5 @@ node_modules/
 data/cache/
 *.db
 .DS_Store
+.vercel
+.env*

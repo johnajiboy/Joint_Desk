@@ -12,6 +12,8 @@ Model: `claude-sonnet-5-5`. Letters scored: 150. Run time 0s.
 | Priority score, mean absolute difference | 0.0 |
 | NHS number matched to waiting list | 100.0% |
 
+API usage: not recorded (these cache files predate usage tracking).
+
 ## Per-field accuracy
 
 | field                |   accuracy |   correct |   wrong |   missed |   extra |

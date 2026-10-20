@@ -11,8 +11,12 @@ class Facts(BaseModel):
     quote: str
 
 
-def response(*blocks, stop="end_turn"):
-    return NS(stop_reason=stop, content=list(blocks), _request_id="req_test")
+def response(*blocks, stop="end_turn", usage=None):
+    return NS(stop_reason=stop, content=list(blocks), _request_id="req_test", usage=usage)
+
+
+def tokens(i, o, read=0, write=0):
+    return NS(input_tokens=i, output_tokens=o, cache_read_input_tokens=read, cache_creation_input_tokens=write)
 
 
 def tool_use(data):
@@ -95,3 +99,36 @@ def test_model_from_env(fake, monkeypatch):
 def test_blank_env_uses_default(monkeypatch):
     monkeypatch.setenv("CLAUDE_MODEL", "  ")
     assert llm.model_name() == "claude-sonnet-5-5"
+
+
+def test_usage_and_cost_add_up_over_attempts(fake):
+    fake(response(text("no"), usage=tokens(1000, 200, write=2000)),
+         response(tool_use({"quote": "x"}), stop="tool_use", usage=tokens(1200, 300, read=2000)))
+    usage = {}
+    llm.complete_json("s", "p", Facts.model_json_schema(), usage=usage)
+    assert usage["input_tokens"] == 2200 and usage["output_tokens"] == 500
+    assert usage["cache_read_input_tokens"] == 2000 and usage["cache_creation_input_tokens"] == 2000
+    assert usage["attempts"] == 2
+    # sonnet 5.5: 2200*2 + 500*10 + 2000*0.2 + 2000*2.5 = 14,800 per million
+    assert usage["cost_usd"] == pytest.approx(0.0148)
+
+
+def test_missing_usage_counts_as_zero(fake):
+    fake(response(tool_use({"quote": "x"}), stop="tool_use"))
+    usage = {}
+    llm.complete_json("s", "p", Facts.model_json_schema(), usage=usage)
+    assert usage["input_tokens"] == 0 and usage["attempts"] == 1
+
+
+def test_unknown_model_has_no_cost():
+    assert llm.cost_usd("claude-unknown", {"input_tokens": 10}) is None
+
+
+def test_api_errors_become_llm_errors(monkeypatch):
+    import anthropic
+
+    def boom(**kwargs):
+        raise anthropic.APIConnectionError(request=None)
+    monkeypatch.setattr(llm, "_client", lambda: NS(messages=NS(create=boom)))
+    with pytest.raises(llm.LLMError, match="API error"):
+        llm.complete_json("s", "p", Facts.model_json_schema())

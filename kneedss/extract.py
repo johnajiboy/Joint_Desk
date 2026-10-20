@@ -2,7 +2,8 @@
 
 Flow: letter text -> llm.complete_json (cached per model) -> quote check -> rules.decide / priority_score.
 The LLM only reads; rules.py decides. Cache: data/cache/<model>/<letter_id>.json holds the raw LLM answer,
-so the quote check can change without paying for new calls. DEMO_MODE=1 never calls the API.
+so the quote check can change without paying for new calls, plus the call's token usage and cost.
+DEMO_MODE=1 (the default in .env) never calls the API.
 """
 from __future__ import annotations
 
@@ -66,6 +67,7 @@ class Extraction(BaseModel):
     quotes: dict[str, str]             # quote per kept fact, for highlighting in the letter
     dropped: list[dict[str, object]]   # facts removed by the quote check, with the reason
     from_cache: bool
+    usage: dict | None = None          # tokens and cost of the call that read it (None in older cache files)
 
 
 # ---------------------------------------------------------------------------- letter files
@@ -108,18 +110,19 @@ def _load_cached(path: Path, text: str) -> dict | None:
     return saved if fresh else None
 
 
-def read_facts(text: str, letter_id: str, refresh: bool = False) -> tuple[dict, str, bool]:
-    """Raw LLM answer for a letter: (facts, model, from_cache). Uses the cache unless refresh."""
+def read_facts(text: str, letter_id: str, refresh: bool = False) -> tuple[dict, str, bool, dict | None]:
+    """Raw LLM answer for a letter: (facts, model, from_cache, usage). Uses the cache unless refresh."""
     load_dotenv()
     model = llm.model_name()
     path = cache_path(letter_id, model)
     saved = None if refresh else _load_cached(path, text)
     if saved:
-        return saved["raw"], model, True
+        return saved["raw"], model, True, saved.get("usage")
     if os.environ.get("DEMO_MODE") == "1":
         raise DemoCacheMiss(f"No saved result for {letter_id} ({model})")
 
-    raw = llm.complete_json(SYSTEM, PROMPT.format(text=text), LetterFacts.model_json_schema())
+    usage: dict = {}
+    raw = llm.complete_json(SYSTEM, PROMPT.format(text=text), LetterFacts.model_json_schema(), usage=usage)
     raw = LetterFacts.model_validate(raw).model_dump()
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps({
@@ -128,9 +131,10 @@ def read_facts(text: str, letter_id: str, refresh: bool = False) -> tuple[dict, 
         "created": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "text_sha256": _sha(text),
         "prompt_sha256": _prompt_sha(),
+        "usage": usage,
         "raw": raw,
     }, indent=1))
-    return raw, model, False
+    return raw, model, False, usage
 
 
 # ---------------------------------------------------------------------------- quote check
@@ -193,10 +197,10 @@ def age_on(dob: str | None, on: str | None) -> int | None:
 
 
 def extract(text: str, letter_id: str, refresh: bool = False) -> Extraction:
-    raw, model, from_cache = read_facts(text, letter_id, refresh)
+    raw, model, from_cache, usage = read_facts(text, letter_id, refresh)
     facts, quotes, dropped = check_quotes(raw, text)
     return Extraction(letter_id=letter_id, model=model, facts=facts, quotes=quotes, dropped=dropped,
-                      from_cache=from_cache)
+                      from_cache=from_cache, usage=usage)
 
 
 # ---------------------------------------------------------------------------- rules

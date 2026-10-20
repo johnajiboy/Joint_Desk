@@ -12,11 +12,15 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 - Commit only when asked. Small commits with plain messages.
 - Build one stage at a time and run its tests before moving on.
 - The LLM only reads letters. It never decides the pathway: `kneedss/rules.py` does, and a clinician confirms.
-- Anthropic API only. Every LLM call goes through `kneedss/llm.py: complete_json(system, prompt, schema) -> dict`,
+- Anthropic API only. Every LLM call goes through `kneedss/llm.py: complete_json(system, prompt, schema, usage) -> dict`,
   which uses a strict tool built from the pydantic schema and returns the tool input. Only that file imports
   `anthropic`. Validate the result with the pydantic model; the DEMO_MODE cache and quote check sit in `extract.py`.
 - One model reads every letter: `CLAUDE_MODEL` in `.env` (default `claude-sonnet-5-5`), no fallback model.
-  Every cache file stores the model name (`llm.model_name()`) so each result can be traced.
+  Every cache file stores the model name (`llm.model_name()`) so each result can be traced, and new ones store the
+  call's token usage and cost.
+- Protect the API credit: `.env` has `DEMO_MODE=1`, so nothing calls the API. Only a real run the user asks for
+  uses `DEMO_MODE=0` for that one command (`DEMO_MODE=0 python ...`). Never re-run the dev set; it is cached
+  (`eval_extraction.py` forces cache-only on it unless `--allow-dev-api`). Real runs stop after 3 failed letters.
 - Keep `kneedss/rules.py` the single source of the pathway rules; the generators and the app both use it.
 - Vercel deploys automatically on every push to main (root directory: frontend).
 - Before pushing frontend changes, run `npm run build` in frontend/ and fix any errors.
@@ -31,7 +35,7 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 - Backend: FastAPI + SQLite (SQLModel)
 - Frontend: React + TypeScript (Vite), Tailwind, Recharts
 - Env: `ANTHROPIC_API_KEY` in `.env` (never commit it), `CLAUDE_MODEL` (default `claude-sonnet-5-5`).
-  `DEMO_MODE=1` uses saved LLM results.
+  `DEMO_MODE=1` (default) uses saved LLM results only.
 
 ## Layout
 
@@ -155,7 +159,8 @@ Full-screen, animated, dark by default with the same light/dark toggle. Clicking
 python data/generate_patients.py && python data/generate_letters.py && python data/check_data.py
 python data/generate_letters.py --n 100 --seed 2027 --out data/output/test --prefix T --hard \
   --exclude data/output/answer_key.jsonl && python data/check_data.py --out data/output/test
-python eval/eval_extraction.py && python eval/eval_extraction.py --data data/output/test --results eval/results/test
+python eval/eval_extraction.py          # dev, cache only
+DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eval/results/test   # real run
 python eval/compare_sets.py
 pytest
 uvicorn backend.main:app --reload
