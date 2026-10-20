@@ -54,14 +54,23 @@ def decide(f: dict) -> dict:
     return {"pathway": "non_surgical", "rule": 6, "reasons": reasons, "weight_support": False}
 
 
-def priority_score(f: dict) -> int:
-    """0-100. Pain/function (48) + X-ray damage (20) + decline (16) + time waiting (16) + social (8), scaled."""
+# Points available for each part of the priority score (they add up to 108, then scale to 0-100).
+PRIORITY_MAX = {"pain_function": 48, "xray": 20, "decline": 16, "waiting": 16, "social": 8}
+
+
+def priority_breakdown(f: dict) -> dict:
+    """Points behind the priority score: pain/function, X-ray damage, recent decline, time waiting, social."""
     oks, before, kl = f.get("oks"), f.get("oks_before"), f.get("kl")
     weeks = f.get("weeks_waiting") or 0
-    pts = 0
-    pts += 0 if _missing(oks) else 48 - oks
-    pts += 0 if _missing(kl) else kl * 5
-    pts += 0 if (_missing(oks) or _missing(before)) else min(16, max(0, (before - oks) * 2))
-    pts += round(min(weeks, 78) / 78 * 16)
-    pts += (4 if f.get("night_pain") else 0) + (4 if f.get("lives_alone_or_carer") else 0)
-    return round(pts / 108 * 100)
+    return {
+        "pain_function": 0 if _missing(oks) else 48 - oks,
+        "xray": 0 if _missing(kl) else kl * 5,
+        "decline": 0 if (_missing(oks) or _missing(before)) else min(16, max(0, (before - oks) * 2)),
+        "waiting": round(min(weeks, 78) / 78 * 16),
+        "social": (4 if f.get("night_pain") else 0) + (4 if f.get("lives_alone_or_carer") else 0),
+    }
+
+
+def priority_score(f: dict) -> int:
+    """0-100. Pain/function (48) + X-ray damage (20) + decline (16) + time waiting (16) + social (8), scaled."""
+    return round(sum(priority_breakdown(f).values()) / sum(PRIORITY_MAX.values()) * 100)

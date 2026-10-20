@@ -7,29 +7,63 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --color-bg: var(--bg);
   --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
   --color-text: var(--text);
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-danger: var(--danger);
 }
 
 :root {
   --bg: #f7f8fb;
   --surface: #ffffff;
+  --sunken: #f1f3f7;
   --text: #111827;
   --muted: #5b6475;
   --line: #e3e6ee;
   --primary: #1b2f5e;
+  --on-primary: #ffffff;
+  --danger: #b42318;
+  --hl: rgb(27 47 94 / 0.1);
+  --hl-active: rgb(27 47 94 / 0.24);
+  /* pathway chips: the only colour in the app besides over-limit values */
+  --surgery-fg: #4b2bb5;
+  --surgery-bg: #eeeafc;
+  --physio-fg: #0b6b5f;
+  --physio-bg: #e0f3ef;
+  --weight-fg: #8a4b00;
+  --weight-bg: #fcefd9;
+  --nonsurg-fg: #475467;
+  --nonsurg-bg: #eef0f4;
+  --review-fg: #a3143c;
+  --review-bg: #fce7ed;
   color-scheme: light;
 }
 
 :root[data-theme='dark'] {
   --bg: #0f1420;
   --surface: #161c2b;
+  --sunken: #121826;
   --text: #e6e9f2;
   --muted: #98a1b5;
   --line: #263049;
   --primary: #3b63c4;
+  --on-primary: #ffffff;
+  --danger: #f97066;
+  --hl: rgb(59 99 196 / 0.24);
+  --hl-active: rgb(59 99 196 / 0.48);
+  --surgery-fg: #c4b5fd;
+  --surgery-bg: #2a2150;
+  --physio-fg: #7ee0cf;
+  --physio-bg: #12332e;
+  --weight-fg: #f6c177;
+  --weight-bg: #3a2a10;
+  --nonsurg-fg: #c2c9d6;
+  --nonsurg-bg: #252c3b;
+  --review-fg: #f9a8c0;
+  --review-bg: #3d1a26;
   color-scheme: dark;
 }
 
@@ -42,19 +76,107 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ---------- chips ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 500;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.chip-lg { height: 32px; padding: 0 14px; font-size: 14px; }
+.chip-surgery { color: var(--surgery-fg); background: var(--surgery-bg); }
+.chip-physio { color: var(--physio-fg); background: var(--physio-bg); }
+.chip-weight_physio { color: var(--weight-fg); background: var(--weight-bg); }
+.chip-non_surgical { color: var(--nonsurg-fg); background: var(--nonsurg-bg); }
+.chip-review { color: var(--review-fg); background: var(--review-bg); }
+.chip-plain { color: var(--muted); background: var(--sunken); }
+
+/* ---------- letter highlights ---------- */
+
+.hl {
+  background: var(--hl);
+  color: inherit;
+  border-radius: 3px;
+  padding: 1px 0;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  cursor: pointer;
+  animation: hl-in 500ms ease-out both;
+}
+.hl-active { background: var(--hl-active); }
+
+/* ---------- motion (150-900 ms, transform and opacity only) ---------- */
+
 @keyframes fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+}
+@keyframes hl-in {
+  from { opacity: 0; }
+}
+@keyframes pop-in {
+  from { opacity: 0; transform: scale(0.6); }
+}
+@keyframes grow {
+  from { transform: scaleX(0); }
+}
+@keyframes reading {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(250%); }
 }
 
-.fade-up {
-  animation: fade-up 400ms ease-out both;
+.fade-up { animation: fade-up 400ms ease-out both; }
+.pop-in { animation: pop-in 260ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+
+.meter {
+  position: relative;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
 }
+.meter > span {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--primary);
+  transform-origin: left center;
+  animation: grow 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.meter > span.over { background: var(--danger); }
+
+.reading-bar {
+  position: relative;
+  width: 44px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--sunken);
+  overflow: hidden;
+}
+.reading-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 40%;
+  border-radius: inherit;
+  background: var(--primary);
+  animation: reading 900ms ease-in-out infinite;
+}
+
+.press { transition: transform 150ms ease, opacity 150ms ease; }
+.press:active { transform: scale(0.97); }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .fade-up {
-    animation: none;
-  }
+  .fade-up, .pop-in, .hl, .meter > span { animation: none; }
+  .reading-bar::after { animation: none; width: 100%; opacity: 0.5; }
+  .press, .press:active { transition: none; transform: none; }
 }

@@ -1,3 +1,5 @@
+import type React from 'react'
+
 export function Logo({ size = 28 }: { size?: number }) {
   return (
     <svg
@@ -94,5 +96,66 @@ export function CalendarIcon() {
       <rect x="5.5" y="15.5" width="3.4" height="3" rx=".7" fill="#f472b6" />
       <rect x="10.3" y="15.5" width="3.4" height="3" rx=".7" fill="#4fc3f7" />
     </svg>
+  )
+}
+
+/* App icons (stroke, currentColor) */
+
+function Stroke({ children, size = 20 }: { children: React.ReactNode; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
+      strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {children}
+    </svg>
+  )
+}
+
+export function InboxIcon() {
+  return (
+    <Stroke>
+      <path d="M4 13.5V18a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5" />
+      <path d="M4 13.5 6.2 6.3A2 2 0 0 1 8.1 5h7.8a2 2 0 0 1 1.9 1.3L20 13.5h-4.5l-1 2h-5l-1-2z" />
+    </Stroke>
+  )
+}
+
+export function WeekIcon() {
+  return (
+    <Stroke>
+      <rect x="3.5" y="5" width="17" height="15" rx="2" />
+      <path d="M3.5 9.5h17M8 3v4M16 3v4M7.5 13h3M13.5 13h3M7.5 16.5h3" />
+    </Stroke>
+  )
+}
+
+export function ResultsIcon() {
+  return (
+    <Stroke>
+      <path d="M4 20h16M7 16v-4M12 16V6M17 16v-7" />
+    </Stroke>
+  )
+}
+
+export function PaperclipIcon() {
+  return (
+    <Stroke>
+      <path d="m20 11.5-7.6 7.6a5 5 0 0 1-7.1-7.1l8.1-8.1a3.4 3.4 0 0 1 4.8 4.8l-8.1 8.1a1.7 1.7 0 0 1-2.4-2.4L15 7" />
+    </Stroke>
+  )
+}
+
+export function CheckIcon({ size = 16 }: { size?: number }) {
+  return (
+    <Stroke size={size}>
+      <path d="m5 12.5 4.5 4.5L19 7.5" />
+    </Stroke>
+  )
+}
+
+export function BackIcon() {
+  return (
+    <Stroke size={18}>
+      <path d="M15 5l-7 7 7 7" />
+    </Stroke>
   )
 }

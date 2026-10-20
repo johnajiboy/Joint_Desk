@@ -74,7 +74,9 @@ docs/             assumptions, data dictionary
 4. Knowledge: decision tree trained on the clean data, compared with the expert rules.
 5. Optimiser: `kneedss/optimise.py` weekly allocation; compare with first come, first served.
 6. Backend API: upload, queue, patient, confirm, build week, results.
-7. Frontend: the four screens below.
+7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
+   from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
+   `VITE_API_URL` is set). Week list is a greedy stand-in (`frontend/src/week.ts`) until stage 5.
 8. PDF letters: export each generated letter as an NHS-style PDF for upload demos.
 
 ## UI rules (keep it quiet and short)
@@ -164,6 +166,7 @@ python eval/eval_extraction.py          # dev, cache only
 DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eval/results/test   # real run
 python eval/compare_sets.py
 python -m kneedss.clean && python eval/eval_cleaning.py
+python scripts/export_demo.py          # demo JSON for the frontend, from the cache
 pytest
 uvicorn backend.main:app --reload
 cd frontend && npm run dev

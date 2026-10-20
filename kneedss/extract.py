@@ -19,7 +19,7 @@ from dotenv import load_dotenv
 from pydantic import BaseModel
 
 from kneedss import llm
-from kneedss.rules import PATHWAYS, decide, priority_score
+from kneedss.rules import PATHWAYS, decide, priority_breakdown, priority_score
 from kneedss.schemas import FALSE_WITHOUT_QUOTE, FIELDS, RANGES, VALUE_IS_QUOTE, LetterFacts
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -212,4 +212,5 @@ def decide_letter(facts: dict, weeks_waiting: int | None = None) -> dict:
                                     "lives_alone_or_carer")}
     f["weeks_waiting"] = weeks_waiting if weeks_waiting is not None else facts.get("weeks_waiting")
     d = decide(f)
-    return {**d, "label": PATHWAYS[d["pathway"]], "priority": priority_score(f)}
+    return {**d, "label": PATHWAYS[d["pathway"]], "priority": priority_score(f),
+            "priority_parts": priority_breakdown(f), "facts_used": f}
