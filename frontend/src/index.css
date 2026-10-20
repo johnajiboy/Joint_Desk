@@ -1,0 +1,60 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme inline {
+  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-primary: var(--primary);
+}
+
+:root {
+  --bg: #f7f8fb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #5b6475;
+  --line: #e3e6ee;
+  --primary: #1b2f5e;
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  --bg: #0f1420;
+  --surface: #161c2b;
+  --text: #e6e9f2;
+  --muted: #98a1b5;
+  --line: #263049;
+  --primary: #3b63c4;
+  color-scheme: dark;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.fade-up {
+  animation: fade-up 400ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+  }
+}

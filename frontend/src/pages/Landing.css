@@ -1,0 +1,563 @@
+/* Landing page: the one screen allowed gradients, glow and shadows. */
+
+.landing {
+  --l-bg-centre: #141a3d;
+  --l-bg-edge: #0a0e27;
+  --l-text: #e8ecff;
+  --l-muted: #9aa3c7;
+  --l-line: #2a3166;
+  --l-blue: #7c8cf8;
+  --l-sky: #4fc3f7;
+  --l-glass: rgb(20 26 61 / 0.45);
+  --l-disc: rgb(124 140 248 / 0.07);
+  --l-chip-bg: rgb(16 21 52 / 0.92);
+  --chip: 56px;
+  --chip-label: 12px;
+  --logo-frame: var(--l-blue);
+  --logo-joint: var(--l-sky);
+
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+  background: radial-gradient(circle at 50% 50%, var(--l-bg-centre) 0%, var(--l-bg-edge) 75%);
+  background-color: var(--l-bg-edge);
+  color: var(--l-text);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+:root[data-theme='light'] .landing {
+  --l-bg-centre: #f4f6ff;
+  --l-bg-edge: #e4e9ff;
+  --l-text: #0f1640;
+  --l-muted: #4a5384;
+  --l-line: #c6cdf0;
+  --l-blue: #4f5fe0;
+  --l-sky: #0288d1;
+  --l-glass: rgb(255 255 255 / 0.55);
+  --l-disc: rgb(79 95 224 / 0.07);
+  --l-chip-bg: rgb(255 255 255 / 0.95);
+}
+
+/* ---------- Stars ---------- */
+
+.px-stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translate3d(calc(var(--px, 0) * -14px), calc(var(--py, 0) * -14px), 0);
+  transition: transform 600ms ease-out;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: var(--l-text);
+  opacity: 0.7;
+  animation: twinkle 3.6s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.25); }
+}
+
+/* ---------- Header ---------- */
+
+.lp-header {
+  position: relative;
+  z-index: 2;
+  height: 64px;
+  margin: 16px 24px 0;
+  padding: 0 12px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--l-line);
+  border-radius: 16px;
+  background: var(--l-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  animation: drop-in 600ms ease-out both;
+}
+
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-10px); }
+}
+
+.lp-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.lp-wordmark {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.lp-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clock {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+  font-size: 14px;
+  color: var(--l-muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.clock-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--l-sky);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+
+.lp-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--l-line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--l-text);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 150ms ease, border-color 150ms ease;
+}
+
+.lp-toggle:hover { border-color: var(--l-blue); }
+.lp-toggle:active { transform: scale(0.95); }
+.lp-toggle:focus-visible { outline: 2px solid var(--l-sky); outline-offset: 2px; }
+
+/* ---------- Main ---------- */
+
+.lp-main {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px 40px;
+  text-align: center;
+}
+
+.stage {
+  position: relative;
+  width: min(500px, 88vw);
+  aspect-ratio: 1;
+  flex-shrink: 0;
+}
+
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.disc-fill {
+  fill: var(--l-disc);
+  animation: fade 700ms ease-out 0.9s both;
+}
+
+/* Extra layer that fades in when the stage is hovered. */
+.disc-hi {
+  fill: var(--l-disc);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.disc-edge {
+  fill: none;
+  stroke: var(--l-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw 900ms ease-in-out 0.5s both;
+}
+
+.ring {
+  fill: none;
+  stroke: var(--l-blue);
+  stroke-opacity: 0.45;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 9;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ring-in 600ms ease-out 1.3s both;
+}
+
+@keyframes draw {
+  from { stroke-dashoffset: 1; }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+}
+
+@keyframes ring-in {
+  from { opacity: 0; transform: scale(0.9); }
+}
+
+/* Knee + glow layer */
+
+.px-knee {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(calc(var(--px, 0) * 10px), calc(var(--py, 0) * 10px), 0);
+  transition: transform 600ms ease-out;
+  pointer-events: none;
+}
+
+.glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 58%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--l-sky) 20%, transparent) 0%, transparent 65%);
+  filter: blur(18px);
+  animation: fade 1200ms ease-out 0.3s both;
+}
+
+.glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--l-sky) 18%, transparent) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.knee {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 32%;
+  height: 48%;
+  translate: -50% -50%;
+  overflow: visible;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.bone {
+  stroke: var(--l-text);
+  stroke-opacity: 0.9;
+  stroke-width: 2.4;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  animation: draw var(--t, 0.4s) ease-out var(--d, 0s) both;
+}
+
+.tendon {
+  stroke: var(--l-muted);
+  stroke-width: 2;
+}
+
+.joint {
+  stroke: var(--l-sky);
+  stroke-width: 3;
+  animation:
+    fade 400ms ease-out 1.9s both,
+    joint-pulse 2.4s ease-in-out 2.3s infinite;
+}
+
+@keyframes joint-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Orbit */
+
+.px-orbit {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(calc(var(--px, 0) * 22px), calc(var(--py, 0) * 22px), 0);
+  transition: transform 600ms ease-out;
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  animation: spin 80s linear infinite;
+}
+
+.chip-slot {
+  position: absolute;
+  translate: -50% -50%;
+}
+
+.chip-counter {
+  animation: spin 80s linear infinite reverse;
+}
+
+.stage:hover .orbit,
+.stage:hover .chip-counter {
+  animation-play-state: paused;
+}
+
+.stage:hover .disc-hi,
+.stage:hover .glow::after {
+  opacity: 1;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.chip-pop {
+  position: relative;
+  animation: pop 500ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes pop {
+  from { opacity: 0; transform: scale(0); }
+}
+
+.chip {
+  position: relative;
+  width: var(--chip);
+  height: var(--chip);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--l-line);
+  border-radius: 50%;
+  background: var(--l-chip-bg);
+  transition: transform 200ms ease;
+}
+
+.chip svg {
+  width: 50%;
+  height: 50%;
+}
+
+/* Ring and glow live on a pseudo-element so hover only animates opacity. */
+.chip::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 2px var(--c),
+    0 0 22px 4px color-mix(in srgb, var(--c) 55%, transparent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+.chip-label {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 0;
+  font-size: var(--chip-label);
+  font-weight: 500;
+  color: var(--l-muted);
+  white-space: nowrap;
+  transition: color 200ms ease;
+}
+
+@media (hover: hover) {
+  .chip-pop:hover .chip { transform: scale(1.14); }
+  .chip-pop:hover .chip::after { opacity: 1; }
+  .chip-pop:hover .chip-label { color: var(--l-text); }
+}
+
+@media (hover: none) {
+  .chip-pop:active .chip { transform: scale(1.14); }
+  .chip-pop:active .chip::after { opacity: 1; }
+  .chip-pop:active .chip-label { color: var(--l-text); }
+}
+
+/* Title, tagline, button */
+
+.lp-title {
+  margin: 4px 0 0;
+  font-family: 'Outfit', 'IBM Plex Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(46px, 12vw, 76px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  animation: rise 700ms ease-out 2.6s both;
+}
+
+.lp-title span {
+  background: linear-gradient(90deg, var(--l-blue), var(--l-sky));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.lp-tagline {
+  margin: 10px 0 0;
+  font-size: clamp(15px, 4vw, 18px);
+  color: var(--l-muted);
+  animation: rise 700ms ease-out 2.85s both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+}
+
+.lp-cta {
+  margin-top: 28px;
+  animation: rise 700ms ease-out 3.1s both;
+}
+
+.start {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: var(--l-muted);
+  text-decoration: none;
+  transition: transform 200ms ease, color 200ms ease;
+}
+
+.mouse {
+  position: relative;
+  width: 34px;
+  height: 54px;
+  border: 2px solid var(--l-text);
+  border-radius: 17px;
+  transition: border-color 200ms ease;
+}
+
+/* Breathing glow */
+.mouse::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 17px;
+  box-shadow: 0 0 18px 2px color-mix(in srgb, var(--l-sky) 60%, transparent);
+  animation: breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.8; }
+}
+
+.wheel {
+  position: absolute;
+  left: 50%;
+  top: 9px;
+  width: 4px;
+  height: 9px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background: var(--l-sky);
+  animation: scroll-wheel 1.6s ease-in-out infinite;
+}
+
+@keyframes scroll-wheel {
+  0% { opacity: 0; transform: translateY(-2px); }
+  25% { opacity: 1; }
+  80%, 100% { opacity: 0; transform: translateY(14px); }
+}
+
+.start-text {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  padding-left: 0.28em; /* balance trailing letter spacing */
+  transition: letter-spacing 200ms ease, padding 200ms ease;
+}
+
+.start:hover {
+  transform: translateY(-2px);
+  color: var(--l-text);
+}
+.start:hover .mouse { border-color: var(--l-sky); }
+.start:hover .start-text { letter-spacing: 0.38em; padding-left: 0.38em; }
+.start:active { transform: translateY(0) scale(0.97); }
+.start:focus-visible {
+  outline: 2px solid var(--l-sky);
+  outline-offset: 4px;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .landing { --chip: 48px; }
+}
+
+@media (max-width: 600px) {
+  .landing {
+    --chip: 40px;
+    --chip-label: 10.5px;
+  }
+  .lp-header {
+    height: 52px;
+    margin: 12px 16px 0;
+    padding: 0 6px 0 10px;
+  }
+  .lp-wordmark,
+  .lp-toggle .toggle-label {
+    display: none;
+  }
+  .lp-toggle {
+    padding: 0;
+    width: 44px;
+    height: 40px;
+  }
+  .clock { font-size: 13px; padding: 0 4px; }
+  .chip-label { top: calc(100% + 5px); }
+}
+
+@media (max-height: 700px) {
+  .stage { width: min(360px, 88vw); }
+}
+
+/* Touch: no parallax (also skipped in JS). */
+@media (hover: none) {
+  .px-stars, .px-knee, .px-orbit { transform: none; }
+}
+
+/* ---------- Reduced motion: show everything at once ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .landing *,
+  .landing *::before,
+  .landing *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .px-stars, .px-knee, .px-orbit { transform: none; }
+  .mouse::before { opacity: 0.4; }
+}
