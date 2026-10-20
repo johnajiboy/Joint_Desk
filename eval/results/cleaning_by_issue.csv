@@ -1,0 +1,12 @@
+field,issue,logged,fixed,set missing,wrong
+age,impossible value,15,15,0,0
+bmi,decimal point lost (e.g. 31.4 -> 314),22,22,0,0
+bmi,missing,45,0,45,0
+kl_grade,missing,30,0,30,0
+laterality,inconsistent label,120,120,0,0
+oks,missing,90,0,90,0
+oks,out of range (OKS is 0-48),15,0,15,0
+physio_weeks,free text in numeric field,45,0,45,0
+referral_date,mixed date format,75,75,0,0
+sex,inconsistent label,150,150,0,0
+smoking_status,inconsistent label,60,16,44,0

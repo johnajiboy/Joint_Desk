@@ -68,8 +68,9 @@ docs/             assumptions, data dictionary
    per letter with the model name alongside the facts (`data/cache/<model>/<letter_id>.json`).
    Results: `eval/results/extraction_summary.md`. Held-out test set (`data/output/test/`, hard letters, new
    patients): `eval/results/test/`, compared in `eval/results/dev_vs_test.md`. Never tune the prompt on it.
-3. Cleaning: `kneedss/clean.py` turns `patients_raw.csv` into a clean table; check it against
-   `data_quality_log.csv`. Discretise OKS bands, BMI categories, wait bands.
+3. Done: cleaning, `kneedss/clean.py` turns `patients_raw.csv` into `data/output/waiting_list.csv` (+
+   `cleaning_actions.csv`); `eval/eval_cleaning.py` checks it against `data_quality_log.csv` and the truth
+   (`eval/results/cleaning_summary.md`). OKS bands, BMI categories, wait bands; pathway from the rules.
 4. Knowledge: decision tree trained on the clean data, compared with the expert rules.
 5. Optimiser: `kneedss/optimise.py` weekly allocation; compare with first come, first served.
 6. Backend API: upload, queue, patient, confirm, build week, results.
@@ -162,6 +163,7 @@ python data/generate_letters.py --n 100 --seed 2027 --out data/output/test --pre
 python eval/eval_extraction.py          # dev, cache only
 DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eval/results/test   # real run
 python eval/compare_sets.py
+python -m kneedss.clean && python eval/eval_cleaning.py
 pytest
 uvicorn backend.main:app --reload
 cd frontend && npm run dev

@@ -47,6 +47,24 @@
 The same columns minus the five truth columns (`true_pathway` to `priority_score`), with errors added and
 duplicate rows. Every change is in `data_quality_log.csv`.
 
+## waiting_list.csv (cleaned by `kneedss/clean.py`, one row per patient)
+
+`patients_raw.csv` after cleaning, with the same columns as `patients_clean.csv` except the truth columns, plus:
+
+| Column | Type | Meaning |
+|---|---|---|
+| lives_alone_or_carer | true/false | Lives alone or is a carer (the rules' social factor) |
+| oks_band | text | severe (0-19), moderate to severe (20-29), mild to moderate (30-39), satisfactory (40-48) |
+| bmi_category | text | WHO adult: Underweight <18.5, Healthy 18.5-24.9, Overweight 25-29.9, Obese I 30-34.9, Obese II 35-39.9, Obese III 40+ |
+| wait_band | text | 0-18 weeks (RTT standard), 19-52 weeks, Over 52 weeks (long wait) |
+| pathway, pathway_label, rule, weight_support, priority_score | | From `kneedss/rules.py` on the cleaned facts |
+
+Values that couldn't be recovered are empty, not guessed.
+
+## cleaning_actions.csv
+
+One row per change `clean.py` made: patient_id, field, raw_value, clean_value, action.
+
 ## answer_key.jsonl (one object per letter)
 
 | Key | Meaning |

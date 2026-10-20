@@ -1,0 +1,498 @@
+patient_id,field,raw_value,clean_value,action
+KP00873,(row),duplicate row,,duplicate referral removed
+KP01432,(row),duplicate row,,duplicate referral removed
+KP01305,(row),duplicate row,,duplicate referral removed
+KP00189,(row),duplicate row,,duplicate referral removed
+KP00553,(row),duplicate row,,duplicate referral removed
+KP00392,(row),duplicate row,,duplicate referral removed
+KP01151,(row),duplicate row,,duplicate referral removed
+KP01237,(row),duplicate row,,duplicate referral removed
+KP00595,(row),duplicate row,,duplicate referral removed
+KP00935,(row),duplicate row,,duplicate referral removed
+KP00881,(row),duplicate row,,duplicate referral removed
+KP00080,(row),duplicate row,,duplicate referral removed
+KP01023,(row),duplicate row,,duplicate referral removed
+KP00491,(row),duplicate row,,duplicate referral removed
+KP00692,(row),duplicate row,,duplicate referral removed
+KP00833,(row),duplicate row,,duplicate referral removed
+KP00035,(row),duplicate row,,duplicate referral removed
+KP01198,(row),duplicate row,,duplicate referral removed
+KP00868,referral_date,29/07/2026,2026-07-29,date format standardised
+KP00868,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00465,sex,F,Female,label standardised
+KP00181,sex,F,Female,label standardised
+KP00437,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP00898,laterality,B/L,Bilateral,label standardised
+KP01442,laterality,left,Left,label standardised
+KP00737,physio_weeks,?,,"free text in numeric field, set missing"
+KP00375,laterality,Both,Bilateral,label standardised
+KP00375,referral_date,12/07/2026,2026-07-12,date format standardised
+KP00375,age,129,82,recalculated from date of birth
+KP00536,laterality,right,Right,label standardised
+KP00970,sex,male,Male,label standardised
+KP01060,sex,male,Male,label standardised
+KP00629,age,0,51,recalculated from date of birth
+KP00663,laterality,Rt,Right,label standardised
+KP00502,laterality,Rt,Right,label standardised
+KP01203,bmi,318.0,31.8,decimal point restored
+KP00729,referral_date,30/07/2026,2026-07-30,date format standardised
+KP00729,physio_weeks,?,,"free text in numeric field, set missing"
+KP00908,laterality,Lt,Left,label standardised
+KP00279,smoking_status,unknown,,"unknown, set missing"
+KP00279,referral_date,28/07/2026,2026-07-28,date format standardised
+KP01373,sex,F,Female,label standardised
+KP01305,sex,1,Male,label standardised
+KP00223,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00028,physio_weeks,?,,"free text in numeric field, set missing"
+KP00875,bmi,350.0,35.0,decimal point restored
+KP00916,laterality,right,Right,label standardised
+KP01210,laterality,Lt,Left,label standardised
+KP00302,sex,male,Male,label standardised
+KP00302,smoking_status,CURRENT SMOKER,Current smoker,label standardised
+KP00994,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP01475,laterality,B/L,Bilateral,label standardised
+KP00856,referral_date,05/07/2026,2026-07-05,date format standardised
+KP00799,sex,1,Male,label standardised
+KP01309,smoking_status,unknown,,"unknown, set missing"
+KP00768,sex,1,Male,label standardised
+KP01472,laterality,Rt,Right,label standardised
+KP01192,smoking_status,unknown,,"unknown, set missing"
+KP01335,referral_date,19/02/2026,2026-02-19,date format standardised
+KP00295,physio_weeks,?,,"free text in numeric field, set missing"
+KP01012,laterality,Lt,Left,label standardised
+KP00641,bmi,258.0,25.8,decimal point restored
+KP00344,age,0,68,recalculated from date of birth
+KP00980,sex,1,Male,label standardised
+KP00103,physio_weeks,yes,,"free text in numeric field, set missing"
+KP00458,age,129,77,recalculated from date of birth
+KP00798,laterality,Lt,Left,label standardised
+KP01380,sex,female,Female,label standardised
+KP00860,sex,2,Female,label standardised
+KP01013,laterality,R,Right,label standardised
+KP01013,physio_weeks,?,,"free text in numeric field, set missing"
+KP01172,sex,female,Female,label standardised
+KP00871,sex,1,Male,label standardised
+KP00871,laterality,bilateral,Bilateral,label standardised
+KP00406,laterality,left,Left,label standardised
+KP00944,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00330,sex,M,Male,label standardised
+KP00330,laterality,right,Right,label standardised
+KP01286,laterality,B/L,Bilateral,label standardised
+KP01014,laterality,right,Right,label standardised
+KP00455,bmi,295.0,29.5,decimal point restored
+KP00314,laterality,Lt,Left,label standardised
+KP01370,smoking_status,unknown,,"unknown, set missing"
+KP00320,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP00320,physio_weeks,?,,"free text in numeric field, set missing"
+KP00818,oks,52,,"out of range, set missing"
+KP00157,physio_weeks,some,,"free text in numeric field, set missing"
+KP01167,laterality,L,Left,label standardised
+KP00636,laterality,R,Right,label standardised
+KP01025,laterality,bilateral,Bilateral,label standardised
+KP00382,laterality,left,Left,label standardised
+KP00548,sex,M,Male,label standardised
+KP00014,bmi,330.0,33.0,decimal point restored
+KP00105,laterality,Rt,Right,label standardised
+KP00387,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP01180,laterality,right,Right,label standardised
+KP00037,sex,male,Male,label standardised
+KP01239,laterality,Rt,Right,label standardised
+KP00948,sex,2,Female,label standardised
+KP00052,sex,F,Female,label standardised
+KP00227,referral_date,28/06/2026,2026-06-28,date format standardised
+KP00161,sex,1,Male,label standardised
+KP00161,referral_date,24/03/2025,2025-03-24,date format standardised
+KP01366,sex,F,Female,label standardised
+KP00968,sex,1,Male,label standardised
+KP01474,sex,1,Male,label standardised
+KP00597,sex,2,Female,label standardised
+KP00732,referral_date,27/07/2026,2026-07-27,date format standardised
+KP00911,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP01500,laterality,bilateral,Bilateral,label standardised
+KP00385,sex,F,Female,label standardised
+KP01162,oks,52,,"out of range, set missing"
+KP00177,laterality,Lt,Left,label standardised
+KP01206,physio_weeks,some,,"free text in numeric field, set missing"
+KP00405,sex,1,Male,label standardised
+KP00405,laterality,L,Left,label standardised
+KP00405,referral_date,21/06/2026,2026-06-21,date format standardised
+KP00220,laterality,Lt,Left,label standardised
+KP00464,referral_date,24/03/2026,2026-03-24,date format standardised
+KP00623,laterality,Rt,Right,label standardised
+KP00522,laterality,Both,Bilateral,label standardised
+KP01453,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP01453,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01036,physio_weeks,yes,,"free text in numeric field, set missing"
+KP00243,physio_weeks,?,,"free text in numeric field, set missing"
+KP01363,referral_date,22/01/2026,2026-01-22,date format standardised
+KP01326,bmi,264.0,26.4,decimal point restored
+KP00312,referral_date,14/08/2026,2026-08-14,date format standardised
+KP00217,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP01017,referral_date,22/07/2026,2026-07-22,date format standardised
+KP01256,laterality,Both,Bilateral,label standardised
+KP01256,referral_date,05/09/2026,2026-09-05,date format standardised
+KP00529,physio_weeks,yes,,"free text in numeric field, set missing"
+KP00802,referral_date,29/07/2025,2025-07-29,date format standardised
+KP00229,referral_date,04/09/2026,2026-09-04,date format standardised
+KP00760,referral_date,27/06/2026,2026-06-27,date format standardised
+KP00760,bmi,313.0,31.3,decimal point restored
+KP00127,sex,female,Female,label standardised
+KP00545,referral_date,08/09/2026,2026-09-08,date format standardised
+KP01487,sex,F,Female,label standardised
+KP00325,sex,female,Female,label standardised
+KP00712,laterality,Both,Bilateral,label standardised
+KP01240,laterality,Lt,Left,label standardised
+KP00892,sex,M,Male,label standardised
+KP00049,sex,female,Female,label standardised
+KP01000,laterality,L,Left,label standardised
+KP00047,referral_date,04/08/2026,2026-08-04,date format standardised
+KP00827,sex,F,Female,label standardised
+KP00667,laterality,right,Right,label standardised
+KP00108,laterality,bilateral,Bilateral,label standardised
+KP00196,oks,-1,,"out of range, set missing"
+KP00755,sex,F,Female,label standardised
+KP00305,referral_date,10/08/2026,2026-08-10,date format standardised
+KP00005,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00855,sex,female,Female,label standardised
+KP00774,sex,male,Male,label standardised
+KP00518,sex,1,Male,label standardised
+KP00518,physio_weeks,some,,"free text in numeric field, set missing"
+KP00109,sex,M,Male,label standardised
+KP00109,bmi,357.0,35.7,decimal point restored
+KP01391,laterality,right,Right,label standardised
+KP00878,laterality,Lt,Left,label standardised
+KP01446,sex,2,Female,label standardised
+KP00125,laterality,left,Left,label standardised
+KP00419,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP01486,laterality,Rt,Right,label standardised
+KP00825,sex,1,Male,label standardised
+KP00758,laterality,Rt,Right,label standardised
+KP00194,sex,male,Male,label standardised
+KP00262,laterality,B/L,Bilateral,label standardised
+KP01265,oks,-1,,"out of range, set missing"
+KP00032,referral_date,09/06/2026,2026-06-09,date format standardised
+KP01148,sex,2,Female,label standardised
+KP00337,sex,2,Female,label standardised
+KP00337,laterality,Lt,Left,label standardised
+KP00337,referral_date,15/07/2026,2026-07-15,date format standardised
+KP00355,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP00089,laterality,Rt,Right,label standardised
+KP00089,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01343,age,129,77,recalculated from date of birth
+KP01278,referral_date,31/03/2026,2026-03-31,date format standardised
+KP01009,referral_date,29/07/2026,2026-07-29,date format standardised
+KP01480,sex,female,Female,label standardised
+KP00365,smoking_status,unknown,,"unknown, set missing"
+KP00727,bmi,349.0,34.9,decimal point restored
+KP00505,referral_date,16/04/2026,2026-04-16,date format standardised
+KP00188,sex,female,Female,label standardised
+KP01015,sex,2,Female,label standardised
+KP00467,sex,1,Male,label standardised
+KP00467,bmi,259.0,25.9,decimal point restored
+KP00931,sex,2,Female,label standardised
+KP00931,age,199,56,recalculated from date of birth
+KP00995,sex,F,Female,label standardised
+KP00130,sex,female,Female,label standardised
+KP01372,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00039,laterality,right,Right,label standardised
+KP01320,smoking_status,unknown,,"unknown, set missing"
+KP01320,referral_date,29/07/2026,2026-07-29,date format standardised
+KP00359,laterality,Lt,Left,label standardised
+KP01118,oks,-1,,"out of range, set missing"
+KP00027,referral_date,24/03/2026,2026-03-24,date format standardised
+KP00185,bmi,248.0,24.8,decimal point restored
+KP00303,referral_date,26/10/2025,2025-10-26,date format standardised
+KP00238,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP00538,referral_date,15/05/2026,2026-05-15,date format standardised
+KP01055,sex,male,Male,label standardised
+KP01132,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01159,sex,M,Male,label standardised
+KP00812,laterality,R,Right,label standardised
+KP00340,laterality,Rt,Right,label standardised
+KP00595,sex,M,Male,label standardised
+KP00595,laterality,L,Left,label standardised
+KP01358,physio_weeks,?,,"free text in numeric field, set missing"
+KP01133,age,199,64,recalculated from date of birth
+KP00967,sex,M,Male,label standardised
+KP00967,referral_date,19/05/2026,2026-05-19,date format standardised
+KP00967,oks,-1,,"out of range, set missing"
+KP00255,laterality,bilateral,Bilateral,label standardised
+KP00350,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP00159,laterality,Lt,Left,label standardised
+KP00687,sex,F,Female,label standardised
+KP01440,laterality,L,Left,label standardised
+KP00617,physio_weeks,?,,"free text in numeric field, set missing"
+KP00840,sex,F,Female,label standardised
+KP00840,bmi,309.0,30.9,decimal point restored
+KP01233,referral_date,27/07/2026,2026-07-27,date format standardised
+KP01030,laterality,Rt,Right,label standardised
+KP00752,oks,60,,"out of range, set missing"
+KP01339,physio_weeks,?,,"free text in numeric field, set missing"
+KP00020,bmi,287.0,28.7,decimal point restored
+KP01157,laterality,left,Left,label standardised
+KP00580,laterality,right,Right,label standardised
+KP00874,sex,M,Male,label standardised
+KP00599,referral_date,30/09/2026,2026-09-30,date format standardised
+KP01019,physio_weeks,?,,"free text in numeric field, set missing"
+KP00754,sex,male,Male,label standardised
+KP00754,referral_date,12/08/2026,2026-08-12,date format standardised
+KP00175,referral_date,17/06/2026,2026-06-17,date format standardised
+KP00520,laterality,bilateral,Bilateral,label standardised
+KP00475,laterality,left,Left,label standardised
+KP00493,sex,male,Male,label standardised
+KP01496,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01419,sex,2,Female,label standardised
+KP01419,physio_weeks,yes,,"free text in numeric field, set missing"
+KP00765,laterality,right,Right,label standardised
+KP01319,laterality,Lt,Left,label standardised
+KP00167,age,199,64,recalculated from date of birth
+KP01044,referral_date,26/07/2026,2026-07-26,date format standardised
+KP00859,sex,F,Female,label standardised
+KP00859,oks,-1,,"out of range, set missing"
+KP01429,sex,1,Male,label standardised
+KP00728,physio_weeks,?,,"free text in numeric field, set missing"
+KP01134,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP00607,referral_date,10/05/2026,2026-05-10,date format standardised
+KP00695,sex,2,Female,label standardised
+KP01008,sex,F,Female,label standardised
+KP00508,smoking_status,unknown,,"unknown, set missing"
+KP01375,referral_date,20/08/2026,2026-08-20,date format standardised
+KP00788,age,71,70,recalculated from date of birth
+KP00421,sex,1,Male,label standardised
+KP00193,physio_weeks,some,,"free text in numeric field, set missing"
+KP00671,smoking_status,unknown,,"unknown, set missing"
+KP00653,referral_date,11/06/2026,2026-06-11,date format standardised
+KP00234,smoking_status,unknown,,"unknown, set missing"
+KP01463,smoking_status,unknown,,"unknown, set missing"
+KP00902,referral_date,26/02/2026,2026-02-26,date format standardised
+KP00902,age,0,83,recalculated from date of birth
+KP00024,age,129,70,recalculated from date of birth
+KP00289,laterality,left,Left,label standardised
+KP01024,laterality,right,Right,label standardised
+KP00333,sex,F,Female,label standardised
+KP01352,laterality,Rt,Right,label standardised
+KP00074,referral_date,24/12/2025,2025-12-24,date format standardised
+KP01102,laterality,Rt,Right,label standardised
+KP00918,smoking_status,unknown,,"unknown, set missing"
+KP00996,sex,1,Male,label standardised
+KP00569,smoking_status,unknown,,"unknown, set missing"
+KP00569,physio_weeks,?,,"free text in numeric field, set missing"
+KP01412,sex,2,Female,label standardised
+KP00877,sex,F,Female,label standardised
+KP00877,laterality,R,Right,label standardised
+KP01347,sex,1,Male,label standardised
+KP00206,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01160,sex,female,Female,label standardised
+KP00073,sex,female,Female,label standardised
+KP01238,referral_date,29/12/2025,2025-12-29,date format standardised
+KP00445,referral_date,12/07/2026,2026-07-12,date format standardised
+KP00806,physio_weeks,some,,"free text in numeric field, set missing"
+KP00056,bmi,293.0,29.3,decimal point restored
+KP00658,laterality,L,Left,label standardised
+KP01155,bmi,340.0,34.0,decimal point restored
+KP00857,sex,2,Female,label standardised
+KP00857,laterality,L,Left,label standardised
+KP00857,referral_date,28/05/2026,2026-05-28,date format standardised
+KP01408,sex,female,Female,label standardised
+KP00111,sex,M,Male,label standardised
+KP00111,physio_weeks,?,,"free text in numeric field, set missing"
+KP00441,sex,male,Male,label standardised
+KP00242,laterality,right,Right,label standardised
+KP00268,sex,female,Female,label standardised
+KP01369,referral_date,28/09/2025,2025-09-28,date format standardised
+KP00563,sex,F,Female,label standardised
+KP00724,sex,male,Male,label standardised
+KP00368,bmi,302.0,30.2,decimal point restored
+KP00987,sex,female,Female,label standardised
+KP00136,laterality,L,Left,label standardised
+KP00985,sex,1,Male,label standardised
+KP00212,sex,male,Male,label standardised
+KP01037,physio_weeks,some,,"free text in numeric field, set missing"
+KP00362,sex,2,Female,label standardised
+KP00434,sex,F,Female,label standardised
+KP00759,sex,M,Male,label standardised
+KP00410,sex,2,Female,label standardised
+KP00423,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP01093,referral_date,17/12/2025,2025-12-17,date format standardised
+KP00736,laterality,right,Right,label standardised
+KP00557,referral_date,16/12/2025,2025-12-16,date format standardised
+KP00084,sex,M,Male,label standardised
+KP00704,sex,M,Male,label standardised
+KP00201,referral_date,12/12/2025,2025-12-12,date format standardised
+KP00297,sex,male,Male,label standardised
+KP00178,laterality,Rt,Right,label standardised
+KP01276,referral_date,08/06/2026,2026-06-08,date format standardised
+KP00815,laterality,right,Right,label standardised
+KP00815,referral_date,12/06/2026,2026-06-12,date format standardised
+KP01420,referral_date,05/04/2026,2026-04-05,date format standardised
+KP00407,sex,2,Female,label standardised
+KP00407,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP01438,bmi,296.0,29.6,decimal point restored
+KP00115,laterality,left,Left,label standardised
+KP00896,laterality,R,Right,label standardised
+KP00819,laterality,Both,Bilateral,label standardised
+KP00352,laterality,left,Left,label standardised
+KP00352,physio_weeks,6-8,,"free text in numeric field, set missing"
+KP00258,laterality,Rt,Right,label standardised
+KP01270,sex,male,Male,label standardised
+KP01270,age,129,50,recalculated from date of birth
+KP01308,sex,female,Female,label standardised
+KP00489,laterality,B/L,Bilateral,label standardised
+KP00489,smoking_status,unknown,,"unknown, set missing"
+KP00411,laterality,B/L,Bilateral,label standardised
+KP01468,laterality,left,Left,label standardised
+KP01468,bmi,271.0,27.1,decimal point restored
+KP01390,oks,-1,,"out of range, set missing"
+KP01455,referral_date,21/02/2026,2026-02-21,date format standardised
+KP00277,sex,2,Female,label standardised
+KP00955,laterality,left,Left,label standardised
+KP00619,sex,male,Male,label standardised
+KP01021,smoking_status,unknown,,"unknown, set missing"
+KP00091,sex,F,Female,label standardised
+KP01484,oks,60,,"out of range, set missing"
+KP00401,laterality,L,Left,label standardised
+KP01086,bmi,425.0,42.5,decimal point restored
+KP00067,physio_weeks,?,,"free text in numeric field, set missing"
+KP00100,sex,1,Male,label standardised
+KP00435,referral_date,04/05/2026,2026-05-04,date format standardised
+KP00233,sex,2,Female,label standardised
+KP01152,age,129,71,recalculated from date of birth
+KP00919,sex,1,Male,label standardised
+KP00867,laterality,left,Left,label standardised
+KP00964,physio_weeks,yes,,"free text in numeric field, set missing"
+KP00107,laterality,Both,Bilateral,label standardised
+KP01040,laterality,Rt,Right,label standardised
+KP00646,sex,male,Male,label standardised
+KP00646,referral_date,18/09/2026,2026-09-18,date format standardised
+KP00767,laterality,B/L,Bilateral,label standardised
+KP00651,sex,2,Female,label standardised
+KP00750,referral_date,15/06/2026,2026-06-15,date format standardised
+KP00055,referral_date,12/07/2026,2026-07-12,date format standardised
+KP00246,sex,1,Male,label standardised
+KP00094,smoking_status,unknown,,"unknown, set missing"
+KP00501,referral_date,30/12/2025,2025-12-30,date format standardised
+KP00583,sex,M,Male,label standardised
+KP00811,sex,F,Female,label standardised
+KP00850,bmi,354.0,35.4,decimal point restored
+KP00678,sex,F,Female,label standardised
+KP00797,laterality,R,Right,label standardised
+KP00203,bmi,335.0,33.5,decimal point restored
+KP01135,referral_date,30/07/2026,2026-07-30,date format standardised
+KP00941,laterality,right,Right,label standardised
+KP00941,oks,60,,"out of range, set missing"
+KP00313,sex,1,Male,label standardised
+KP00313,laterality,Lt,Left,label standardised
+KP00235,sex,female,Female,label standardised
+KP00235,laterality,Rt,Right,label standardised
+KP01454,sex,male,Male,label standardised
+KP00329,sex,male,Male,label standardised
+KP01110,referral_date,26/06/2026,2026-06-26,date format standardised
+KP00082,referral_date,21/08/2026,2026-08-21,date format standardised
+KP00934,sex,male,Male,label standardised
+KP00934,physio_weeks,?,,"free text in numeric field, set missing"
+KP00842,laterality,Rt,Right,label standardised
+KP01371,sex,F,Female,label standardised
+KP00224,sex,female,Female,label standardised
+KP01410,laterality,left,Left,label standardised
+KP00138,referral_date,31/08/2026,2026-08-31,date format standardised
+KP01328,referral_date,23/05/2026,2026-05-23,date format standardised
+KP00772,sex,F,Female,label standardised
+KP00772,referral_date,31/07/2026,2026-07-31,date format standardised
+KP01207,sex,2,Female,label standardised
+KP01207,laterality,left,Left,label standardised
+KP01216,laterality,bilateral,Bilateral,label standardised
+KP01381,sex,2,Female,label standardised
+KP00939,sex,male,Male,label standardised
+KP01079,laterality,L,Left,label standardised
+KP00689,laterality,right,Right,label standardised
+KP01398,referral_date,05/08/2026,2026-08-05,date format standardised
+KP00631,bmi,256.0,25.6,decimal point restored
+KP01314,smoking_status,unknown,,"unknown, set missing"
+KP00026,sex,2,Female,label standardised
+KP00991,age,199,51,recalculated from date of birth
+KP01471,laterality,R,Right,label standardised
+KP01219,laterality,Lt,Left,label standardised
+KP01260,sex,1,Male,label standardised
+KP01260,oks,52,,"out of range, set missing"
+KP01197,sex,F,Female,label standardised
+KP01460,oks,-1,,"out of range, set missing"
+KP00491,sex,M,Male,label standardised
+KP00575,laterality,right,Right,label standardised
+KP00576,age,0,78,recalculated from date of birth
+KP00068,referral_date,16/04/2026,2026-04-16,date format standardised
+KP01042,laterality,Rt,Right,label standardised
+KP00051,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP00051,referral_date,26/05/2026,2026-05-26,date format standardised
+KP00938,referral_date,31/07/2026,2026-07-31,date format standardised
+KP01258,laterality,L,Left,label standardised
+KP01217,sex,female,Female,label standardised
+KP00633,referral_date,04/09/2026,2026-09-04,date format standardised
+KP00219,sex,1,Male,label standardised
+KP00473,physio_weeks,some,,"free text in numeric field, set missing"
+KP00808,laterality,right,Right,label standardised
+KP01011,physio_weeks,yes,,"free text in numeric field, set missing"
+KP01426,sex,M,Male,label standardised
+KP00618,sex,2,Female,label standardised
+KP00684,sex,1,Male,label standardised
+KP01301,sex,M,Male,label standardised
+KP00692,sex,female,Female,label standardised
+KP00546,sex,M,Male,label standardised
+KP00546,laterality,Rt,Right,label standardised
+KP01248,sex,male,Male,label standardised
+KP00903,sex,male,Male,label standardised
+KP00903,smoking_status,unknown,,"unknown, set missing"
+KP00247,oks,52,,"out of range, set missing"
+KP00097,sex,1,Male,label standardised
+KP01064,sex,male,Male,label standardised
+KP01218,sex,male,Male,label standardised
+KP00787,laterality,Rt,Right,label standardised
+KP00723,sex,1,Male,label standardised
+KP00723,laterality,Rt,Right,label standardised
+KP00973,smoking_status,EX-SMOKER,Ex-smoker,label standardised
+KP00951,referral_date,31/10/2025,2025-10-31,date format standardised
+KP00735,sex,male,Male,label standardised
+KP00899,physio_weeks,some,,"free text in numeric field, set missing"
+KP01082,laterality,right,Right,label standardised
+KP01082,referral_date,30/03/2026,2026-03-30,date format standardised
+KP00282,physio_weeks,some,,"free text in numeric field, set missing"
+KP00649,sex,female,Female,label standardised
+KP01473,sex,female,Female,label standardised
+KP00377,smoking_status,NEVER SMOKED,Never smoked,label standardised
+KP01145,sex,2,Female,label standardised
+KP01450,sex,male,Male,label standardised
+KP01450,laterality,L,Left,label standardised
+KP00424,laterality,Lt,Left,label standardised
+KP00424,physio_weeks,?,,"free text in numeric field, set missing"
+KP00895,laterality,bilateral,Bilateral,label standardised
+KP01138,laterality,Lt,Left,label standardised
+KP01138,referral_date,27/05/2026,2026-05-27,date format standardised
+KP01313,sex,2,Female,label standardised
+KP01277,sex,male,Male,label standardised
+KP01277,age,0,73,recalculated from date of birth
+KP00949,oks,-1,,"out of range, set missing"
+KP00428,referral_date,13/03/2026,2026-03-13,date format standardised
+KP00285,sex,1,Male,label standardised
+KP00162,sex,male,Male,label standardised
+KP00978,sex,F,Female,label standardised
+KP00180,laterality,bilateral,Bilateral,label standardised
+KP00341,laterality,Rt,Right,label standardised
+KP00828,smoking_status,unknown,,"unknown, set missing"
+KP00454,sex,female,Female,label standardised
+KP00454,smoking_status,unknown,,"unknown, set missing"
+KP00609,smoking_status,unknown,,"unknown, set missing"
+KP00645,laterality,right,Right,label standardised
+KP00890,sex,F,Female,label standardised
+KP00158,laterality,Lt,Left,label standardised
+KP01311,sex,2,Female,label standardised
+KP00708,sex,M,Male,label standardised
+KP01026,laterality,right,Right,label standardised
+KP01091,sex,female,Female,label standardised
+KP01091,referral_date,18/09/2026,2026-09-18,date format standardised
+KP00786,referral_date,11/07/2026,2026-07-11,date format standardised
+KP00048,sex,1,Male,label standardised
+KP00261,referral_date,06/09/2026,2026-09-06,date format standardised
+KP00625,laterality,right,Right,label standardised
+KP00090,sex,F,Female,label standardised
+KP00780,laterality,B/L,Bilateral,label standardised
+KP00731,sex,female,Female,label standardised
+KP01255,laterality,right,Right,label standardised

@@ -95,6 +95,29 @@ Gold rule: a fact is in the answer key only if the letter states it. Where two v
 dated value is gold. Weeks waiting for the pathway decision comes from the waiting list (the RTT clock), not
 the letter.
 
+## Cleaning (`kneedss/clean.py`)
+
+| Problem in the raw file | What cleaning does | Why |
+|---|---|---|
+| Duplicate referral (same NHS number) | Keep one row, preferring the surname not in capitals | The capitals copy is the re-keyed one |
+| Sex as "M", "female", "2"... | Take it from the sex code (1 Male, 2 Female) | The code is the coded field and was never corrupted |
+| Laterality as "Rt", "B/L"... | Map to Right, Left, Bilateral | Fixed list of synonyms |
+| Referral date as dd/mm/yyyy | Convert to ISO; recalculate weeks waiting from it | The RTT clock starts at referral |
+| Impossible age (0, 129, 199) | Recalculate from date of birth on 20/10/2026 | Date of birth is the primary record |
+| BMI with a lost decimal point (314) | Divide by 10 when that gives a BMI of 12-80 | 314 can't be a BMI; 31.4 is typical |
+| OKS outside 0-48 | Set missing | The true score can't be known |
+| Physio as "some", "yes", "?", "6-8" | Set missing | In the data these carry no information (true values include 0) |
+| Smoking "unknown" or blank | Set missing; capitals standardised | |
+| OKS, BMI or X-ray grade missing | Left missing, never imputed | The rules send these referrals to "Ask the GP", as a clinician would |
+
+Missing values are not imputed because a guessed Oxford score or X-ray grade would change a patient's pathway.
+`eval/eval_cleaning.py` checks every logged problem and every cell against the truth
+(`eval/results/cleaning_summary.md`): no value is left wrong.
+
+Known issue in the truth table: `generate_patients.py` sets the date of birth from `age x 365.25` days, so one
+patient (KP00788, born 21/10/1955) has a stored age of 71 but is 70 on 20/10/2026. Cleaning gives 70, from the
+date of birth. The generator is left as it is so the existing data doesn't change.
+
 ## Sources
 
 - NHS number validation and test range: [cardinal_pythonlib nhs module](https://cardinalpythonlib.readthedocs.io/en/latest/_modules/cardinal_pythonlib/nhs.html)
