@@ -59,9 +59,7 @@ function Letter({ p, active, onPick }: { p: PatientData; active: string | null; 
   return (
     <div className="rounded-lg border border-line bg-surface">
       <div className="flex items-center gap-2 border-b border-line px-4 py-3 text-sm">
-        <span className="font-medium">Letter</span>
-        <span className="text-muted">{p.letter_id}</span>
-        <span className="ml-auto text-xs text-muted">{p.spans.length} quotes{p.model ? ` · read by ${p.model}` : ''}</span>
+        <span><span className="font-medium">Letter {p.letter_id}</span><span className="text-muted"> · {p.spans.length} quotes</span></span>
       </div>
       <div className="max-h-[75vh] overflow-auto px-4 py-4 text-[13.5px] leading-6 whitespace-pre-wrap break-words">
         {segs.map((s, i) =>

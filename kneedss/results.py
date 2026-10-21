@@ -18,7 +18,8 @@ def extraction_results() -> dict:
     out = {}
     for name, p in [("dev", RESULTS / "extraction_summary.json"), ("test", RESULTS / "test" / "extraction_summary.json")]:
         s = json.loads(p.read_text())
-        out[name] = {k: s[k] for k in ("letters", "model", "mean_field_accuracy", "letters_all_fields_right",
+        # no model or provider name in anything served to users (it stays in eval/results for the report)
+        out[name] = {k: s[k] for k in ("letters", "mean_field_accuracy", "letters_all_fields_right",
                                        "quote_hit_rate", "facts_dropped", "pathway_agreement",
                                        "priority_mae", "field_accuracy")} \
             | {"cost_usd": (s.get("usage") or {}).get("cost_usd")}
@@ -76,7 +77,9 @@ def tree_results() -> dict | None:
         "band_misses": [{"short": x["short"], "rule_cut": x["rule_cut"], "band_edge": x["tree_nearest"]}
                         for x in disc["thresholds"] if not x["same_cut"] and x["tree_nearest"] is not None],
         "disagreements": [{k: d[k] for k in ("patient_id", "oks", "kl_grade", "bmi", "physio_weeks", "oks_drop",
-                                              "rules", "tree", "model")} for d in cont["disagreements"] + disc["disagreements"]],
+                                              "rules", "tree")}
+                          | {"features": "raw values" if d["model"] == "continuous" else "NHS bands"}
+                          for d in cont["disagreements"] + disc["disagreements"]],
         "importances": cont["importances"],
         "tree_text": (RESULTS / "tree" / "tree_rules.txt").read_text(),
     }

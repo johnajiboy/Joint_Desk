@@ -73,7 +73,7 @@ def main() -> None:
                 "pathway": dec["pathway"], "label": dec["label"], "rule": dec["rule"], "reasons": dec["reasons"],
                 "weight_support": dec["weight_support"], "priority": dec["priority"],
                 "priority_parts": dec["priority_parts"], "priority_max": PRIORITY_MAX,
-                "model": ex.model, "letter_text": text,
+                "letter_text": text,                    # the reading model stays in the cache, not public
             }
             write(DEMO / "patients" / f"{pid}.json", json.dumps(patient, default=jsonable))
             written.add(f"{pid}.json")

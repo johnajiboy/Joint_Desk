@@ -196,8 +196,8 @@ function FullTables({ r }: { r: ResultsData }) {
           <Table caption="Rule cut points vs learned splits" head={['Rule', 'Tree · raw', 'Tree · bands']}
             rows={t.thresholds.map((x) => [x.short, x.tree === null ? 'not used' : `≤ ${x.tree}${x.same ? ' · same' : ''}`,
               x.banded === null ? 'not used' : `≤ ${x.banded}${x.banded_same ? ' · same' : ''}`])} />
-          <Table caption="Where the tree and the rules disagree" head={['Patient', 'OKS', 'KL', 'Rules', 'Tree', 'Model']}
-            rows={t.disagreements.length ? t.disagreements.map((d) => [d.patient_id, d.oks, d.kl_grade, d.rules, d.tree, d.model])
+          <Table caption="Where the tree and the rules disagree" head={['Patient', 'OKS', 'KL', 'Rules', 'Tree', 'Features']}
+            rows={t.disagreements.length ? t.disagreements.map((d) => [d.patient_id, d.oks, d.kl_grade, d.rules, d.tree, d.features])
               : [['None', '', '', '', '', '']]} />
         </>}
         <Table caption="Cleaning, logged problems by issue" head={['Problem', 'Logged', 'Fixed', 'Set missing', 'Wrong']}

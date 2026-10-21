@@ -90,7 +90,7 @@ def patient_out(session: Session, p: Patient) -> dict:
             "facts": facts, "quotes": letter.quotes if letter else {}, "spans": letter.spans if letter else [],
             "dropped": letter.dropped if letter else [], "label": PATHWAYS[p.pathway], "reasons": p.reasons,
             "priority_parts": p.priority_parts, "priority_max": PRIORITY_MAX,
-            "model": letter.model if letter else None, "letter_text": letter.text if letter else ""}
+            "letter_text": letter.text if letter else ""}         # Letter.model is kept in the database only
 
 
 def queue(session: Session, pathways: list[str] | None = None) -> list[dict]:

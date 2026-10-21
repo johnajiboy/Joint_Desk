@@ -64,7 +64,7 @@ class Letter(SQLModel, table=True):
     source: str                                  # "dev", "test" (seeded) or "upload"
     text: str
     text_key: str = Field(index=True)
-    model: str
+    model: str | None = None                     # which model read it (traceability; never sent to the app)
     facts: dict = Field(default_factory=dict, sa_column=Column(JSON))
     quotes: dict = Field(default_factory=dict, sa_column=Column(JSON))
     spans: list = Field(default_factory=list, sa_column=Column(JSON))
@@ -102,6 +102,16 @@ def record_facts(r) -> dict:
             "night_pain": bool(r.night_pain), "lives_alone_or_carer": bool(r.lives_alone_or_carer)}
 
 
+def cached_model(letter_id: str) -> str | None:
+    """The model that read a seeded letter, from its cache file when the cache is here (not on the server)."""
+    for path in (ROOT / "data" / "cache").glob(f"*/{letter_id}.json"):
+        try:
+            return json.loads(path.read_text()).get("model")
+        except (OSError, json.JSONDecodeError):
+            return None
+    return None
+
+
 def seed(session: Session) -> None:
     """Fill an empty database: the cleaned waiting list, then the letters already read."""
     wl = pd.read_csv(WAITING_LIST, dtype={"nhs_number": str})
@@ -123,7 +133,7 @@ def seed(session: Session) -> None:
             continue
         session.add(Letter(letter_id=p["letter_id"], patient_id=p["id"], filename=f"{p['letter_id']}.txt",
                            source=p["set"], text=p["letter_text"], text_key=text_key(p["letter_text"]),
-                           model=p["model"], facts=p["facts"], quotes=p["quotes"], spans=p["spans"],
+                           model=cached_model(p["letter_id"]), facts=p["facts"], quotes=p["quotes"], spans=p["spans"],
                            dropped=p["dropped"]))
         patient.pathway, patient.rule, patient.priority = p["pathway"], p["rule"], p["priority"]
         patient.weight_support, patient.reasons, patient.priority_parts = p["weight_support"], p["reasons"], p["priority_parts"]

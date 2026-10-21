@@ -46,7 +46,6 @@ export interface Patient extends Omit<Referral, 'text_key' | 'nhs_number'> {
   reasons: string[]
   priority_parts: Record<string, number>
   priority_max: Record<string, number>
-  model: string | null
   letter_text: string
 }
 
@@ -87,7 +86,6 @@ export type UploadResult =
 
 export interface ExtractionResult {
   letters: number
-  model: string
   mean_field_accuracy: number
   letters_all_fields_right: number
   quote_hit_rate: number
@@ -173,7 +171,7 @@ export interface TreeResults {
   thresholds: { rule: string; short: string; rule_cut: string; tree: number | null; same: boolean; banded: number | null; banded_same: boolean }[]
   band_misses: { short: string; rule_cut: string; band_edge: number }[]
   disagreements: { patient_id: string; oks: number; kl_grade: number; bmi: number | null; physio_weeks: number;
-    oks_drop: number; rules: string; tree: string; model: string }[]
+    oks_drop: number; rules: string; tree: string; features: string }[]
   importances: Record<string, number>
   tree_text: string
 }
