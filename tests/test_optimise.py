@@ -175,3 +175,14 @@ def test_backlog_counts_add_up():
     assert b["surgery"] == b["by_pathway"]["surgery"]
     assert b["over_long_wait"] <= b["over_standard"] <= b["waiting_for_slot"]
     assert (b["standard_weeks"], b["long_wait_weeks"]) == (O.STANDARD_WEEKS, O.LONG_WAIT)
+
+
+def test_plan_json_lists_every_unmet_over_52_longest_wait_first():
+    w = pd.read_csv(ROOT / "data" / "output" / "waiting_list.csv")
+    plan = O.optimise(w)
+    out = O.plan_to_json(plan, w, dict(zip(w.patient_id, w.first_name + " " + w.surname)), set(), "2026-10-26")
+    assert len(out["unmet"]) == out["long_wait"]["unmet"] == len(plan.long_wait["unmet"]) > 0
+    assert {p["id"] for p in out["unmet"]} == set(plan.long_wait["unmet"])
+    weeks = [p["weeks_waiting"] for p in out["unmet"]]
+    assert weeks == sorted(weeks, reverse=True) and min(weeks) > O.LONG_WAIT
+    assert set(out["unmet"][0]) >= {"id", "name", "weeks_waiting", "priority", "has_page"}

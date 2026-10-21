@@ -1,6 +1,6 @@
 # Joint Desk audit
 
-Run 21/10/2026 22:16 on commit `99b2557` with `python scripts/audit.py`: a throwaway database, DEMO_MODE=1, no API calls, no behaviour changed. ✓ = check passed.
+Run 21/10/2026 22:22 on commit `a916c61` with `python scripts/audit.py`: a throwaway database, DEMO_MODE=1, no API calls, no behaviour changed. ✓ = check passed.
 
 | # | Claim | Result | Evidence |
 |---|---|---|---|
@@ -8,9 +8,9 @@ Run 21/10/2026 22:16 on commit `99b2557` with `python scripts/audit.py`: a throw
 | 2 | Quote check | **PASS** | invented OKS quote dropped and logged with reason 'quote not in letter'; 5 real facts kept |
 | 3 | Rules decide | **PASS** | schema has no pathway/priority; LLM called once; 3 examples (surgery rule 4, physio rule 3, needs info rule 1) identical on rerun |
 | 4 | Clinician decides | **PASS** | confirm + override stored with who, when, old/new and reason; the override moved KP00471 out of the Physio queue filter and out of this week's slots, all lists still full |
-| 5 | Optimiser | **PASS** | 18 passed in 5.56s; same plan twice; all slots within capacity; 0 over-52s passed over; infeasible week reported with 41 over-52s listed |
+| 5 | Optimiser | **PASS** | 19 passed in 5.86s; same plan twice; all slots within capacity; 0 over-52s passed over; infeasible week reported with 41 over-52s listed |
 
-Full test suite (`pytest`): **173 passed in 10.35s**
+Full test suite (`pytest`): **174 passed in 10.60s**
 
 ## 1. Reading: PDF, DOCX and TXT through POST /letters (DEMO_MODE=1)
 
@@ -76,8 +76,8 @@ Code: `backend/main.py:118` `@app.post("/patients/{pid}/override")`; `backend/se
 
 | id | patient | kind | by | at (UTC) | rules said | old | new | reason |
 |---|---|---|---|---|---|---|---|---|
-| 1 | KP00678 | confirmed | Dr Audit | 2026-10-21T21:16:38+00:00 | surgery | surgery | surgery | Agree with rules |
-| 2 | KP00471 | overridden | Dr Audit | 2026-10-21T21:16:38+00:00 | weight_physio | weight_physio | non_surgical | Patient declines physio for now |
+| 1 | KP00678 | confirmed | Dr Audit | 2026-10-21T21:22:23+00:00 | surgery | surgery | surgery | Agree with rules |
+| 2 | KP00471 | overridden | Dr Audit | 2026-10-21T21:22:23+00:00 | weight_physio | weight_physio | non_surgical | Patient declines physio for now |
 
 - ✓ two Decision rows: one confirm, one override
 - ✓ override stored with who (Dr Audit), when, old → new (weight_physio → non_surgical) and reason
@@ -91,7 +91,7 @@ Code: `backend/main.py:118` `@app.post("/patients/{pid}/override")`; `backend/se
 
 Code: `kneedss/optimise.py:89` `def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait: int = LONG_WAIT,`; `kneedss/optimise.py:116` `prob += (pulp.lpSum(vs) == 1) if (hard and long[pid]) else (pulp.lpSum(vs) <= 1)`; `kneedss/optimise.py:126` `status = "infeasible"`; `kneedss/optimise.py:176` `def skipped_long_waiters(df: pd.DataFrame, assigned: pd.DataFrame, long_wait: int = LONG_WAIT) -> list[str]:`
 
-- ✓ `pytest tests/test_optimise.py`: 18 passed in 5.56s
+- ✓ `pytest tests/test_optimise.py`: 19 passed in 5.86s
 - ✓ built twice: the two plans are identical (every list, every patient, every reason)
 - ✓ Surgery: 12 of 12 slots
 - ✓ Physio: 20 of 20 slots
@@ -102,5 +102,5 @@ Code: `kneedss/optimise.py:89` `def optimise(df: pd.DataFrame, capacity: dict[st
 - ✓ every surgery slot this week went to someone over 52 weeks
 - ✓ the next in line are over-52s marked 'Over 52 weeks · no slot left' (KP00248, KP01478, KP00709, KP00666, KP00528)
 - the optimiser lists all 41 over-52s without a slot by ID (Plan.long_wait['unmet']): KP00026, KP00099, KP00100, KP00161, KP00215, KP00248, KP00276, KP00288, KP00390, KP00452, KP00454, KP00466, …
-- note: the API and This week page show the count (41) and the first 5 by name; the full list is in the optimiser's plan
+- ✓ the API returns all 41 by name, longest wait first (This week: '41 over 52 weeks still waiting')
 

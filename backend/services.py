@@ -233,4 +233,5 @@ def build_week(session: Session) -> dict:
                      "name": p.name})
     df = pd.DataFrame(rows)
     plan = O.optimise(df)
-    return O.plan_to_json(plan, df, dict(zip(df.patient_id, df.name)), set(df.patient_id[df.has_letter]), next_monday())
+    # the API serves a page for every patient (a letter or the waiting-list record), so every name can link
+    return O.plan_to_json(plan, df, dict(zip(df.patient_id, df.name)), set(df.patient_id), next_monday())

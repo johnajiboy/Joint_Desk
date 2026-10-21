@@ -95,6 +95,42 @@ export default function Week() {
       {error && <ErrorNote text="Couldn't build the list" />}
       {!plan && !error && <ErrorNote text="Not built yet" />}
 
+      {plan && plan.unmet?.length > 0 && (
+        <details className="fade-up mb-5 rounded-lg border border-line bg-surface">
+          <summary className="flex min-h-11 cursor-pointer items-center gap-2 px-4 py-2 text-sm font-medium">
+            <span className="text-danger tabular-nums">{plan.unmet.length}</span>
+            over {plan.long_wait.weeks} weeks still waiting
+            <span className="ml-auto text-xs font-normal text-muted">longest wait first</span>
+          </summary>
+          <div className="border-t border-line px-2 pb-2">
+            <div className="flex px-2 pt-2 pb-1 text-xs text-muted">
+              <span className="flex-1">Name</span>
+              <span className="w-20 text-right">Waiting</span>
+              <span className="w-16 text-right"><Term k="priority">Priority</Term></span>
+            </div>
+            <ol className="max-h-96 overflow-auto">
+              {plan.unmet.map((p) => {
+                const row = (
+                  <>
+                    <span className="min-w-0 flex-1 truncate font-semibold">{p.name}</span>
+                    <span className="w-20 text-right"><Weeks weeks={p.weeks_waiting} limit={plan.long_wait.weeks} /></span>
+                    <span className="w-16 text-right font-medium tabular-nums">{p.priority}</span>
+                  </>
+                )
+                const cls = 'flex min-h-11 items-center gap-2 rounded-md px-2 text-sm'
+                return (
+                  <li key={p.id}>
+                    {p.has_page
+                      ? <Link to={`/patient/${p.id}`} className={`press hover:bg-sunken ${cls}`}>{row}</Link>
+                      : <div className={cls} title={`${p.id} · no letter yet`}>{row}</div>}
+                  </li>
+                )
+              })}
+            </ol>
+          </div>
+        </details>
+      )}
+
       {plan && (
         <>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">

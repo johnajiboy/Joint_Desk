@@ -205,8 +205,9 @@ with TestClient(app) as c:
     ok5 &= check(all(p["long_wait"] and "no slot left" in p["reason"] for p in surg["next"]),
                  f"the next in line are over-52s marked 'Over 52 weeks · no slot left' ({', '.join(p['id'] for p in surg['next'])})")
     md.append(f"- the optimiser lists all {len(unmet)} over-52s without a slot by ID (Plan.long_wait['unmet']): {', '.join(unmet[:12])}, …")
-    md.append(f"- note: the API and This week page show the count ({a['long_wait']['unmet']}) and the first {len(surg['next'])} by name; "
-              "the full list is in the optimiser's plan")
+    api_unmet = [p["id"] for p in a["unmet"]]
+    ok5 &= check(sorted(api_unmet) == sorted(unmet) and [p["weeks_waiting"] for p in a["unmet"]] == sorted((p["weeks_waiting"] for p in a["unmet"]), reverse=True),
+                 f"the API returns all {len(api_unmet)} by name, longest wait first (This week: '{len(api_unmet)} over 52 weeks still waiting')")
     md.append("")
     verdicts.append(("Optimiser", ok5, f"{last}; same plan twice; all slots within capacity; 0 over-52s passed over; "
                      f"infeasible week reported with {len(unmet)} over-52s listed"))

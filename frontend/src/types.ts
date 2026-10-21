@@ -78,6 +78,8 @@ export interface WeekPlan {
   patients: number
   lists: SlotList[]
   long_wait: { weeks: number; total: number; included: number; unmet: number }
+  /** Every over-52 patient left without a slot this week, longest wait first. */
+  unmet: { id: string; name: string; pathway: PathwayKey; priority: number; weeks_waiting: number; has_page: boolean }[]
 }
 
 export type UploadResult =

@@ -200,6 +200,13 @@ def plan_to_json(plan: Plan, patients: pd.DataFrame, names: dict[str, str], with
                       "in": [person(r) for r in chosen.itertuples()],
                       "next": [person(r) for r in plan.next[slot].itertuples()],
                       "waiting": int(can_use.sum()) - len(chosen)})
+    # every over-52 left without a slot, longest wait first (never just a count)
+    by_id = patients.set_index("patient_id")
+    unmet = sorted(plan.long_wait["unmet"], key=lambda pid: (-int(by_id.at[pid, "weeks_waiting"]), -int(by_id.at[pid, "priority_score"]), pid))
+    unmet_patients = [{"id": pid, "name": names.get(pid, pid), "pathway": by_id.at[pid, "pathway"],
+                       "priority": int(by_id.at[pid, "priority_score"]), "weeks_waiting": int(by_id.at[pid, "weeks_waiting"]),
+                       "has_page": pid in with_page} for pid in unmet]
     return {"week_of": week_of, "method": "optimiser", "status": plan.status, "shortfall": plan.shortfall,
             "patients": len(eligible), "lists": lists,
-            "long_wait": {k: (len(v) if k == "unmet" else v) for k, v in plan.long_wait.items()}}
+            "long_wait": {k: (len(v) if k == "unmet" else v) for k, v in plan.long_wait.items()},
+            "unmet": unmet_patients}

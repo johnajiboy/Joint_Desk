@@ -177,6 +177,8 @@ def test_override_checks_its_input(client):
 def test_week_build_uses_overrides(client):
     plan = client.post("/week/build").json()
     assert plan["method"] == "optimiser" and [len(l["in"]) for l in plan["lists"]] == [12, 20, 8]
+    assert len(plan["unmet"]) == plan["long_wait"]["unmet"] > 0           # the full list, not just a count
+    assert all(p["has_page"] for p in plan["unmet"])                       # every patient has a page through the API
     first = plan["lists"][0]["in"][0]["id"]
     client.post(f"/patients/{first}/override", json={"pathway": "non_surgical", "by": "Dr Test", "reason": "Declined"})
     again = client.post("/week/build").json()
