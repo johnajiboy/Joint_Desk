@@ -48,6 +48,12 @@
   --series-3: #1baf7a;
   --gap-fill: rgb(42 120 214 / 0.14);
   --good: #1e6b3a;
+  --outline-bg: #ffffff;
+  --outline-border: #d5dbe7;
+  --outline-text: #1b2f5e;
+  --outline-hover-bg: #eef2fb;
+  --outline-hover-border: #1b2f5e;
+  --sheet-icon: #1e7a46;
   color-scheme: light;
 }
 
@@ -79,6 +85,12 @@
   --series-3: #199e70;
   --gap-fill: rgb(57 135 229 / 0.2);
   --good: #7fd49c;
+  --outline-bg: transparent;
+  --outline-border: #2a3a5c;
+  --outline-text: #e8edf6;
+  --outline-hover-bg: #1a2a4d;
+  --outline-hover-border: #3b63c4;
+  --sheet-icon: #5fd38d;
   color-scheme: dark;
 }
 
@@ -140,6 +152,31 @@ body {
   animation: hl-in 500ms ease-out both;
 }
 .hl-active { background: var(--hl-active); }
+
+/* ---------- outline button (e.g. "Import spreadsheet") ---------- */
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 44px;
+  min-width: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--outline-border);
+  border-radius: 8px;
+  background: var(--outline-bg);
+  color: var(--outline-text);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.btn-outline:hover { background: var(--outline-hover-bg); border-color: var(--outline-hover-border); }
+.btn-outline:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.btn-outline[aria-expanded='true'] { border-color: var(--outline-hover-border); }
+@media (max-width: 639px) {
+  .btn-outline-icon { width: 44px; padding: 0; }          /* phones: icon only (the label is hidden) */
+}
 
 /* ---------- glossary terms ---------- */
 

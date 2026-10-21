@@ -6,7 +6,7 @@ import { stagger } from '../components/ui'
 import { PathwayChip, Weeks } from '../components/PathwayChip'
 import { Term } from '../components/Term'
 import { ImportPanel } from '../components/ImportPanel'
-import { secondaryButton } from '../components/ui'
+import { SheetIcon } from '../components/icons'
 import { UploadBar } from '../components/UploadBar'
 import { effectivePathway, TABS } from '../pathways'
 import { matches } from '../search'
@@ -60,14 +60,15 @@ export default function Queue() {
 
   return (
     <>
-      <PageHeader title="Referrals" meta={queue && <span className="chip chip-plain">{queue.length}</span>} />
-      <div className="flex flex-col gap-x-3 sm:flex-row sm:items-start">
-        <UploadBar onRead={onRead} />
-        <button type="button" onClick={() => setImporting(!importing)} aria-expanded={importing}
-          className={`${secondaryButton} mb-5 shrink-0 sm:mt-2`}>
-          Import spreadsheet
-        </button>
-      </div>
+      <PageHeader title="Referrals" meta={queue && <span className="chip chip-plain">{queue.length}</span>}
+        action={
+          <button type="button" className="btn-outline btn-outline-icon press" aria-label="Import spreadsheet"
+            aria-expanded={importing} onClick={() => setImporting(!importing)}>
+            <SheetIcon />
+            <span className="hidden sm:inline">Import spreadsheet</span>
+          </button>
+        } />
+      <UploadBar onRead={onRead} />
       {importing && <ImportPanel onImported={() => load()} onClose={() => setImporting(false)} />}
 
       <div className="mb-3 w-full max-w-[720px]">

@@ -159,3 +159,14 @@ export function BackIcon() {
     </Stroke>
   )
 }
+
+/** A small spreadsheet grid, in its own green (for "Import spreadsheet"). */
+export function SheetIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sheet-icon)" strokeWidth="1.8"
+      strokeLinejoin="round" aria-hidden="true">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" />
+      <path d="M3.5 9h17M3.5 14.5h17M9.5 9v11.5M15 9v11.5" />
+    </svg>
+  )
+}
