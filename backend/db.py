@@ -53,6 +53,7 @@ class Patient(SQLModel, table=True):
     priority_parts: dict = Field(default_factory=dict, sa_column=Column(JSON))
     facts: dict = Field(default_factory=dict, sa_column=Column(JSON))
     letter_id: str | None = Field(default=None, index=True)
+    imported_from: str | None = None             # spreadsheet file name, when the patient came from an import
     updated_at: datetime = Field(default_factory=now)
 
 
@@ -70,6 +71,20 @@ class Letter(SQLModel, table=True):
     spans: list = Field(default_factory=list, sa_column=Column(JSON))
     dropped: list = Field(default_factory=list, sa_column=Column(JSON))
     read_at: datetime = Field(default_factory=now)
+
+
+class ImportRecord(SQLModel, table=True):
+    """Every spreadsheet import: who, when, which file, and what happened to its rows."""
+    id: int | None = Field(default=None, primary_key=True)
+    filename: str
+    by: str
+    at: datetime = Field(default_factory=now)
+    rows: int
+    added: int
+    updated: int
+    skipped: int
+    mapping: dict = Field(default_factory=dict, sa_column=Column(JSON))
+    skipped_rows: list = Field(default_factory=list, sa_column=Column(JSON))
 
 
 class Decision(SQLModel, table=True):
@@ -142,9 +157,24 @@ def seed(session: Session) -> None:
     session.commit()
 
 
+def add_missing_columns(engine) -> None:
+    """New columns on an existing SQLite database (create_all only makes missing tables)."""
+    from sqlalchemy import inspect, text
+    insp = inspect(engine)
+    with engine.begin() as conn:
+        for table in SQLModel.metadata.sorted_tables:
+            if not insp.has_table(table.name):
+                continue
+            have = {c["name"] for c in insp.get_columns(table.name)}
+            for col in table.columns:
+                if col.name not in have:
+                    conn.execute(text(f'ALTER TABLE "{table.name}" ADD COLUMN "{col.name}" {col.type.compile(engine.dialect)}'))
+
+
 def init_db() -> None:
     engine = get_engine()
     SQLModel.metadata.create_all(engine)
+    add_missing_columns(engine)
     with Session(engine) as s:
         if s.exec(select(Patient).limit(1)).first() is None:
             seed(s)

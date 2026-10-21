@@ -4,7 +4,7 @@
  * scripts/export_demo.py from /demo/ and keeps decisions in this browser's localStorage. No API key ever
  * reaches the frontend.
  */
-import type { Decision, PathwayKey, Patient, Referral, Results, UploadResult, WeekPlan } from './types'
+import type { Decision, ImportPreview, ImportResult, PathwayKey, Patient, Referral, Results, UploadResult, WeekPlan } from './types'
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
 export const DEMO = !API_URL
@@ -90,11 +90,16 @@ let demoQueue: Promise<Referral[]> | null = null
 export async function getQueue(): Promise<Referral[]> {
   if (!DEMO) return request<Referral[]>('', '/queue')          // always fresh: uploads and decisions change it
   demoQueue ??= request<Referral[]>('queue.json', '')
-  return (await demoQueue).map((r) => ({ ...r, decision: decisionFor(r.id) }))
+  const queue = await demoQueue
+  // patients from a demo spreadsheet import replace their old row or join the queue (this page session only)
+  const imported = Object.values(demoImported.referrals)
+  const merged = [...queue.filter((r) => !demoImported.referrals[r.id]), ...imported]
+  return merged.map((r) => ({ ...r, decision: decisionFor(r.id) }))
 }
 
 export async function getPatient(id: string): Promise<Patient> {
   if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new Error('Unknown patient')
+  if (DEMO && demoImported.patients[id]) return { ...demoImported.patients[id], decision: decisionFor(id) }
   const p = await request<Patient>(`patients/${id}.json`, `/patients/${id}`)
   return DEMO ? { ...p, decision: decisionFor(id) } : p
 }
@@ -150,4 +155,51 @@ export async function uploadLetter(file: File): Promise<UploadResult> {
 
 export function uploadLetters(files: File[]): Promise<UploadResult[]> {
   return Promise.all(files.map(uploadLetter))
+}
+
+// ------------------------------------------------------------------ spreadsheet import
+
+/** The demo site has no backend: only the sample spreadsheet works, with results precomputed by the backend code. */
+export const DEMO_SAMPLE = 'import_sample.csv'
+
+export class NeedsBackend extends Error {}
+
+const demoImported: { referrals: Record<string, Referral>; patients: Record<string, Patient> } = { referrals: {}, patients: {} }
+let demoSample: Promise<{ preview: ImportPreview; commit: ImportResult; patients: Record<string, Patient> }> | null = null
+
+function sampleOnly(file: File) {
+  if (file.name !== DEMO_SAMPLE) throw new NeedsBackend('Needs the backend · run locally')
+  demoSample ??= request('import_sample.json', '')
+  return demoSample
+}
+
+async function postForm<T>(path: string, form: FormData): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, { method: 'POST', body: form })
+  const body = await res.json().catch(() => null)
+  if (!res.ok) throw new Error(typeof body?.detail === 'string' ? body.detail : "Couldn't read the spreadsheet")
+  return body as T
+}
+
+/** Detected column mapping (or a given one), the first 10 rows, problems, and how many rows would import. */
+export async function importPreview(file: File, mapping?: Record<string, string | null>): Promise<ImportPreview> {
+  if (DEMO) return (await sampleOnly(file)).preview
+  const form = new FormData()
+  form.append('file', file)
+  if (mapping) form.append('mapping', JSON.stringify(mapping))
+  return postForm<ImportPreview>('/import/preview', form)
+}
+
+/** Import with the confirmed mapping. The backend records who imported what and when. */
+export async function importCommit(file: File, mapping: Record<string, string | null>, by: string): Promise<ImportResult> {
+  if (DEMO) {
+    const sample = await sampleOnly(file)
+    for (const r of sample.commit.referrals) demoImported.referrals[r.id] = r
+    Object.assign(demoImported.patients, sample.patients)
+    return sample.commit
+  }
+  const form = new FormData()
+  form.append('file', file)
+  form.append('mapping', JSON.stringify(mapping))
+  form.append('by', by || 'clinician')
+  return postForm<ImportResult>('/import/commit', form)
 }

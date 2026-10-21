@@ -47,6 +47,34 @@ def jsonable(v):
     return None if isinstance(v, float) and v != v else v
 
 
+def write_import_demo() -> None:
+    """Spreadsheet import on the static demo: the template, the sample file, and the sample's preview and import
+    result, computed by the real backend code against a throwaway database (so the demo can't drift from it)."""
+    import tempfile
+    from kneedss import importer as I
+    (DEMO.parent / "import_template.csv").write_text(I.template_csv())
+    sample = ROOT / "data" / "samples" / "import_sample.csv"
+    (DEMO.parent / "samples").mkdir(exist_ok=True)
+    write(DEMO.parent / "samples" / "import_sample.csv", sample.read_text())
+    data = sample.read_bytes()
+    preview = I.preview(sample.name, data)
+    with tempfile.TemporaryDirectory() as tmp:
+        os.environ["DATABASE_URL"] = f"sqlite:///{tmp}/demo.db"
+        from sqlmodel import Session
+        from backend import services as BS
+        from backend.db import Patient, get_engine, init_db
+        init_db()
+        with Session(get_engine()) as session:
+            commit = BS.import_commit(session, sample.name, data, {c["header"]: c["field"] for c in preview["columns"]},
+                                      "demo")
+            patients = {r["id"]: BS.patient_out(session, session.get(Patient, r["id"])) for r in commit["referrals"]}
+        get_engine().dispose()
+        del os.environ["DATABASE_URL"]
+    commit.pop("import_id", None)
+    write(DEMO / "import_sample.json", json.dumps({"preview": preview, "commit": commit, "patients": patients},
+                                                   default=jsonable))
+
+
 def main() -> None:
     wl = pd.read_csv(OUT / "waiting_list.csv", dtype={"nhs_number": str})
     wl["nhs"] = wl.nhs_number.str.replace(r"\D", "", regex=True)
@@ -89,6 +117,7 @@ def main() -> None:
     plan = O.plan_to_json(O.optimise(wl), wl, names, {r["id"] for r in queue}, WEEK_OF)
     write(DEMO / "week.json", json.dumps(plan, default=jsonable))
 
+    write_import_demo()
     results = build_results()
     write(DEMO / "results.json", json.dumps(results, default=jsonable))
 

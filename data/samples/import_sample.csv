@@ -1,0 +1,31 @@
+NHS No,Patient name,DOB,Gender,Knee,Oxford score,Previous OKS,X-ray grade,BMI (kg/m2),Physio (weeks),Steroid injections,Night pain?,Lives alone / carer,Walking aid,Diabetic,Smoker,Refferal date,Practice,Notes
+999 151 5259,Robert Nowak,17/04/1960,M,Right,18,21,2,36.0,10,0,yes,no,N,N,Ex-smoker,01/04/2026,Y99002,updated score from clinic
+999 456 8892,Gary Hutchinson,13/12/1939,M,Rt,33,40,2,33.2,8,2,no,N,no,Y,Ex-smoker,18/02/2026,Y99006,new referral
+999 880 0676,Sandra Wood,31/07/1934,Female,Left,12,17,2,30.0,0,0,no,No,yes,yes,ex-smoker,2026-08-17,Y99007,updated score from clinic
+999 557 2230,Grace Taylor,12/12/1958,Female,Rt,3,7,4,27.8,11,0,no,Y,Yes,No,never smoked,2026-06-03,Y99006,updated score from clinic
+999 906 6763,Hazel Khan,29/04/1962,female,Rt,11,19,4,34.7,0,2,No,no,N,no,Never smoked,2026-10-08,Y99007,new referral
+999 157 4654,Elizabeth Pearson,04/11/1948,female,Lt,16,18,4,27.2,6,1,Y,no,Y,No,Ex-smoker,2026-04-07,Y99009,
+999 070 0958,Margaret Rahman,26/01/1951,F,Right,17,21,2,32.0,12,0,yes,Y,N,no,never smoked,09/09/2025,Y99007,updated score from clinic
+999 797 1760,Elizabeth Pearson (test),04/11/1948,female,Lt,16,18,4,27.2,6,1,Y,no,Y,No,Ex-smoker,31/02/2026,Y99009,impossible date
+999 704 3359,Tony Carr,26/04/1945,Male,Rt,12,14,3,33.1,7,2,Y,yes,yes,no,ex-smoker,2026-05-29,Y99003,updated score from clinic
+999 891 0870,Linda Taylor,11/03/1952,Female,Lt,11,13,4,28.2,3,2,Yes,Yes,No,yes,ex-smoker,03/11/2025,Y99010,updated score from clinic
+999 123 4567,Stephen Bell (test),1951-12-20,M,Lt,23,29,3,26.2,6,0,Y,no,No,N,Ex-smoker,2026-05-16,Y99010,bad NHS number
+999 085 2553,Grace Lowe,1962-11-01,F,Right,25,33,4,32.7,3,2,N,Yes,N,N,current smoker,23/06/2026,Y99005,new referral
+999 718 3878,Aisha Lowe,12/06/1954,Female,L,16,19,3,28.7,6,0,N,Y,no,No,Ex-smoker,2026-08-31,Y99001,updated score from clinic
+999 531 7214,Ann Wood (test),22/01/1983,female,Both,55,17,4,32.3,12,0,yes,N,No,No,current smoker,2026-06-15,Y99006,OKS out of range
+999 108 0023,Karen Jackson,23/08/1949,F,Rt,25,,3,27.3,12,0,Y,Yes,No,yes,Ex-smoker,12/02/2026,Y99007,
+999 620 0140,John Jackson,06/03/1971,male,Right,20,27,3,32.4,6,0,Y,no,N,N,Ex-smoker,22/03/2026,Y99010,
+999 343 9738,Keith Taylor,1948-07-20,Male,Lt,17,19,3,38.3,7,0,Y,no,N,no,Current smoker,29/07/2026,Y99009,updated score from clinic
+999 156 2931,Ann Hussain,12/06/1954,female,Both,24,,2,35.4,6,0,No,N,Yes,N,current smoker,04/05/2026,Y99006,new referral
+999 697 5401,Michael Moore,1971-11-08,male,Rt,13,,3,30.3,8,0,no,Yes,no,No,Ex-smoker,12/01/2026,Y99001,new referral
+999 369 8687,Kenneth Smith,12/06/1976,male,Rt,20,20,3,27.5,12,2,no,yes,N,N,Ex-smoker,2026-08-20,Y99010,
+999 424 4418,Stephen Bell,1951-12-20,M,Lt,23,29,3,26.2,6,0,Y,no,No,N,Ex-smoker,2026-05-16,Y99010,
+999 924 9604,Neil Okafor,08/07/1952,M,Lt,14,,3,28.5,6,0,Yes,No,No,N,Never smoked,25/08/2026,Y99001,
+999 752 9189,Tariq Rahman,17/08/1958,M,left,26,,1,33.3,0,2,yes,N,no,N,current smoker,01/02/2026,Y99003,new referral
+999 106 8546,Kevin Pike,18/11/1946,male,left,20,,3,31.3,8,0,N,No,Yes,no,Never smoked,21/06/2026,Y99010,
+999 806 9742,Aisha Bell,1976-04-19,female,left,22,24,3,36.3,12,1,N,No,No,N,Never smoked,27/05/2026,Y99010,
+999 565 7546,Gary Wood,1957-07-12,M,Right,19,,3,35.4,3,1,yes,no,No,No,Never smoked,03/03/2026,Y99006,
+999 763 4071,Priya Hutchinson,1972-07-20,F,Right,16,18,3,32.1,6,2,No,N,yes,No,Never smoked,18/06/2026,Y99009,updated score from clinic
+999 079 7773,Ann Wood,22/01/1983,female,Both,17,17,4,32.3,12,0,yes,N,No,No,current smoker,2026-06-15,Y99006,
+999 987 9691,Susan Wilson,22/07/1956,F,Right,16,19,2,42.1,10,0,No,Y,Yes,yes,Never smoked,2026-09-18,Y99010,updated score from clinic
+999 569 9788,Hazel Brennan,1969-07-17,F,Right,24,,4,22.7,6,0,no,yes,N,no,current smoker,2026-09-08,Y99009,

@@ -5,6 +5,8 @@ import { ErrorNote, Loading, PageHeader } from '../components/AppShell'
 import { stagger } from '../components/ui'
 import { PathwayChip, Weeks } from '../components/PathwayChip'
 import { Term } from '../components/Term'
+import { ImportPanel } from '../components/ImportPanel'
+import { secondaryButton } from '../components/ui'
 import { UploadBar } from '../components/UploadBar'
 import { effectivePathway, TABS } from '../pathways'
 import { matches } from '../search'
@@ -25,6 +27,7 @@ export default function Queue() {
   const query = params.get('q') ?? ''
   const [shown, setShown] = useState(PAGE)
   const [uploaded, setUploaded] = useState<Record<string, string[]>>({})   // patient id -> files uploaded this session
+  const [importing, setImporting] = useState(false)
   const search = useRef<HTMLInputElement>(null)
   const navigate = useNavigate()
 
@@ -58,7 +61,14 @@ export default function Queue() {
   return (
     <>
       <PageHeader title="Referrals" meta={queue && <span className="chip chip-plain">{queue.length}</span>} />
-      <UploadBar onRead={onRead} />
+      <div className="flex flex-col gap-x-3 sm:flex-row sm:items-start">
+        <UploadBar onRead={onRead} />
+        <button type="button" onClick={() => setImporting(!importing)} aria-expanded={importing}
+          className={`${secondaryButton} mb-5 shrink-0 sm:mt-2`}>
+          Import spreadsheet
+        </button>
+      </div>
+      {importing && <ImportPanel onImported={() => load()} onClose={() => setImporting(false)} />}
 
       <div className="mb-3 w-full max-w-[720px]">
         <label className="flex h-11 items-center gap-2 rounded-lg border border-line bg-surface px-3 focus-within:border-primary">

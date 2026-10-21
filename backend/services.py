@@ -13,7 +13,8 @@ from pathlib import Path
 import pandas as pd
 from sqlmodel import Session, col, select
 
-from backend.db import Decision, Letter, Patient, nhs_digits, now
+from backend.db import Decision, ImportRecord, Letter, Patient, nhs_digits, now
+from kneedss import importer as I
 from kneedss import extract as X
 from kneedss import llm
 from kneedss import optimise as O
@@ -76,8 +77,9 @@ def latest_letter(session: Session, p: Patient) -> Letter | None:
 
 
 def referral_out(p: Patient, letter: Letter | None, d: Decision | None) -> dict:
-    return {"id": p.id, "letter_id": letter.letter_id if letter else None, "set": letter.source if letter else None,
-            "name": p.name, "nhs_number": p.nhs_number, "filename": letter.filename if letter else None,
+    source = letter.source if letter else ("import" if p.imported_from else None)
+    return {"id": p.id, "letter_id": letter.letter_id if letter else None, "set": source,
+            "name": p.name, "nhs_number": p.nhs_number, "filename": letter.filename if letter else p.imported_from,
             "pathway": p.pathway, "rule": p.rule, "priority": p.priority,
             "weeks_waiting": p.weeks_waiting if p.on_waiting_list else None, "weight_support": p.weight_support,
             "text_key": letter.text_key if letter else None, "decision": decision_out(d)}
@@ -94,9 +96,9 @@ def patient_out(session: Session, p: Patient) -> dict:
 
 
 def queue(session: Session, pathways: list[str] | None = None) -> list[dict]:
-    """Referrals: patients with a letter, highest priority first."""
+    """Referrals: patients with a letter or from a spreadsheet import, highest priority first."""
     rows, decisions, letters = [], latest_decisions(session), latest_letters(session)
-    for p in session.exec(select(Patient).where(col(Patient.letter_id).is_not(None))).all():
+    for p in session.exec(select(Patient).where(col(Patient.letter_id).is_not(None) | col(Patient.imported_from).is_not(None))).all():
         d = decisions.get(p.id)
         if pathways and effective_pathway(p, d) not in pathways:
             continue
@@ -175,6 +177,44 @@ def _save(session: Session, p: Patient, filename: str, letter_id: str, text: str
     session.commit()
     session.refresh(p)
     return {"file": filename, "ok": True, "referral": referral_out(p, letter, latest_decision(session, p.id))}
+
+
+# ---------------------------------------------------------------------------- spreadsheet import
+
+def import_commit(session: Session, filename: str, data: bytes, mapping: dict, by: str) -> dict:
+    """Import a spreadsheet with a confirmed mapping: update patients matched on NHS number, create the rest.
+    Raises ValueError if the file can't be read or the mapping is missing a required field."""
+    headers, rows = I.read_table(filename, data)
+    mapping = {h: mapping.get(h) for h in headers}
+    if problems := I.mapping_problems(mapping):
+        raise ValueError("; ".join(problems))
+    result = I.plan(headers, rows, mapping)
+    added = updated = 0
+    touched: list[Patient] = []
+    for item in result["valid"]:
+        rec, dec = item["record"], item["decision"]
+        digits = nhs_digits(rec["nhs_number"])
+        p = session.exec(select(Patient).where(Patient.nhs_digits == digits)).first()
+        if p:
+            updated += 1
+        else:
+            added += 1
+            p = Patient(id=f"IMP{digits}", nhs_number=rec["nhs_number"], nhs_digits=digits, name=rec["name"],
+                        pathway=dec["pathway"], rule=dec["rule"], priority=dec["priority"])
+        p.name, p.age, p.sex, p.side = rec["name"], rec["age"], rec["sex"], rec["side"]
+        p.weeks_waiting, p.on_waiting_list, p.imported_from = rec["weeks_waiting"], True, filename[:200]
+        p.pathway, p.rule, p.priority, p.weight_support = dec["pathway"], dec["rule"], dec["priority"], dec["weight_support"]
+        p.reasons, p.priority_parts, p.facts, p.updated_at = dec["reasons"], dec["priority_parts"], dec["facts"], now()
+        session.add(p)
+        touched.append(p)
+    record = ImportRecord(filename=filename[:200], by=by, rows=len(rows), added=added, updated=updated,
+                          skipped=len(result["skipped"]), mapping=mapping, skipped_rows=result["skipped"])
+    session.add(record)
+    session.commit()
+    decisions, letters = latest_decisions(session), latest_letters(session)
+    return {"import_id": record.id, "file": filename, "rows": len(rows), "added": added, "updated": updated,
+            "skipped": result["skipped"],
+            "referrals": [referral_out(p, letters.get(p.id), decisions.get(p.id)) for p in touched]}
 
 
 # ---------------------------------------------------------------------------- week

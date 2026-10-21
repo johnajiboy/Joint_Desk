@@ -13,13 +13,16 @@ from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Annotated, Literal
 
-from fastapi import Depends, FastAPI, File, HTTPException, Path as PathParam, Query, UploadFile
+import json
+
+from fastapi import Depends, FastAPI, File, Form, HTTPException, Path as PathParam, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from sqlmodel import Session
 
 from backend import services as S
 from backend.db import Patient, get_session, init_db
+from kneedss import importer as I
 from kneedss.results import build_results
 
 PathwayKey = Literal["surgery", "physio", "weight_physio", "non_surgical", "review"]
@@ -29,6 +32,7 @@ DEFAULT_ORIGINS = ("https://frontend-wine-ten-82.vercel.app,https://frontend-joh
                    "https://frontend-git-main-johnajiboys-projects.vercel.app,http://localhost:5173,http://localhost:4173")
 MAX_FILE_BYTES = 2 * 1024 * 1024
 MAX_FILES = 20
+MAX_SHEET_BYTES = 5 * 1024 * 1024
 SIGNATURES = {".pdf": (b"%PDF-",), ".docx": (b"PK\x03\x04",)}
 
 PatientId = Annotated[str, PathParam(pattern=r"^[A-Za-z0-9_-]{1,32}$")]
@@ -130,6 +134,63 @@ async def upload_letters(session: DB, files: Annotated[list[UploadFile], File()]
         problem = file_problem(name, data)
         out.append({"file": name, "ok": False, "message": problem} if problem else S.read_letter(session, name, data))
     return out
+
+
+# ---------------------------------------------------------------------------- spreadsheet import
+
+async def read_sheet(file: UploadFile) -> tuple[str, bytes]:
+    """A .csv or .xlsx upload, at most 5 MB, whose content matches its type."""
+    name = Path(file.filename or "import").name
+    suffix = Path(name).suffix.lower()
+    if suffix not in (".csv", ".xlsx"):
+        raise HTTPException(415, "Only .csv or .xlsx")
+    data = await file.read(MAX_SHEET_BYTES + 1)
+    if len(data) > MAX_SHEET_BYTES:
+        raise HTTPException(413, "File too large (max 5 MB)")
+    if not data:
+        raise HTTPException(422, "Empty file")
+    if suffix == ".xlsx" and not data.startswith(b"PK\x03\x04"):
+        raise HTTPException(415, "Not a real .xlsx file")
+    if suffix == ".csv":
+        try:
+            if "\x00" in data.decode("utf-8-sig"):
+                raise HTTPException(415, "Not a text CSV file")
+        except UnicodeDecodeError:
+            raise HTTPException(415, "CSV is not UTF-8") from None
+    return name, data
+
+
+def parse_mapping(raw: str | None) -> dict[str, str | None] | None:
+    if raw is None:
+        return None
+    try:
+        m = json.loads(raw)
+    except json.JSONDecodeError:
+        raise HTTPException(422, "Mapping is not JSON") from None
+    if not isinstance(m, dict) or not all(isinstance(k, str) and (v is None or v in I.FIELDS) for k, v in m.items()):
+        raise HTTPException(422, "Mapping must be {column header: field name or null}")
+    return m
+
+
+@app.post("/import/preview")
+async def import_preview(file: Annotated[UploadFile, File()], mapping: Annotated[str | None, Form()] = None) -> dict:
+    """Detected (or given) column mapping, the first 10 rows, problems, and how many rows would import."""
+    name, data = await read_sheet(file)
+    try:
+        return I.preview(name, data, parse_mapping(mapping))
+    except (ValueError, KeyError) as e:
+        raise HTTPException(422, f"Couldn't read the spreadsheet: {e}") from None
+
+
+@app.post("/import/commit")
+async def import_commit(session: DB, file: Annotated[UploadFile, File()], mapping: Annotated[str, Form()],
+                        by: Annotated[str, Form(max_length=80)] = "clinician") -> dict:
+    """Import with the confirmed mapping: added / updated / skipped (with reasons). Recorded in the database."""
+    name, data = await read_sheet(file)
+    try:
+        return S.import_commit(session, name, data, parse_mapping(mapping) or {}, by or "clinician")
+    except (ValueError, KeyError) as e:
+        raise HTTPException(422, str(e)) from None
 
 
 @app.post("/week/build")

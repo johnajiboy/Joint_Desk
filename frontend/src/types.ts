@@ -175,3 +175,31 @@ export interface TreeResults {
   importances: Record<string, number>
   tree_text: string
 }
+
+// ---------------------------------------------------------------- spreadsheet import
+
+export type MatchConfidence = 'exact' | 'alias' | 'fuzzy' | 'none' | 'manual'
+
+export interface ImportColumn { header: string; field: string | null; confidence: MatchConfidence }
+export interface ImportField { field: string; label: string; required: boolean }
+export interface SkippedRow { row: number; nhs_number: string; name: string; reason: string }
+
+export interface ImportPreview {
+  file: string
+  columns: ImportColumn[]
+  rows: string[][]
+  total_rows: number
+  problems: string[]
+  valid: number
+  skipped: SkippedRow[]
+  fields: ImportField[]
+}
+
+export interface ImportResult {
+  file: string
+  rows: number
+  added: number
+  updated: number
+  skipped: SkippedRow[]
+  referrals: Referral[]
+}

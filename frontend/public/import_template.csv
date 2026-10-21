@@ -1,0 +1,3 @@
+nhs_number,name,date_of_birth,sex,side,oks,oks_before,kl_grade,bmi,physio_weeks,injections,night_pain,lives_alone_or_carer,walking_aid,diabetes,smoking_status,referral_date,practice_code
+999 000 0018,Jane Example,1956-03-14,Female,Right,22,26,3,31.4,8,1,yes,no,no,no,Never smoked,2026-05-02,Y99001
+999 000 0026,John Sample,1949-11-02,Male,Left,35,,2,36.2,4,0,no,yes,yes,yes,Ex-smoker,2026-08-19,Y99004

@@ -91,6 +91,11 @@ docs/             assumptions, data dictionary
    synthetic footer) and 10 as DOCX, reads each back and checks every answer-key quote (all found); zips in
    data/output/ (gitignored). Uploads match a letter by base name and reuse its facts only if all its quotes are
    in the file.
+9. Done: spreadsheet import. `kneedss/importer.py` reads .csv/.xlsx, detects columns (exact name, alias, fuzzy
+   0.8), validates each row with the clean.py rules (invalid rows skipped with a reason, nothing guessed) and
+   classifies with rules.py. API: POST /import/preview, POST /import/commit (5 MB, .csv/.xlsx; updates on NHS number,
+   creates the rest; each import recorded). Queue: "Import spreadsheet" panel with mapping, preview and summary.
+   Sample: `data/samples/import_sample.csv/.xlsx` (`python data/make_import_sample.py`); demo site accepts only it.
 
 ## UI rules (keep it quiet and short)
 
@@ -183,6 +188,7 @@ python eval/eval_tree.py
 python eval/eval_optimise.py
 python scripts/export_demo.py          # demo JSON for the frontend, from the cache
 python scripts/export_pdfs.py          # PDF and DOCX letters, read back and checked
+python data/make_import_sample.py      # spreadsheet import sample (30 rows, 3 bad)
 pytest
 pip install -r backend/requirements.txt && uvicorn backend.main:app --reload   # API on :8000
 cd frontend && VITE_API_URL=http://localhost:8000 npm run dev                     # frontend on the API
