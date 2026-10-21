@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import type { ReactNode, Ref } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { DEMO } from '../api'
 import { useTheme } from '../theme'
@@ -72,9 +72,11 @@ export function PageHeader({ title, meta, action }: { title: string; meta?: Reac
   )
 }
 
-export function Card({ title, meta, children, className = '' }: { title?: ReactNode; meta?: ReactNode; children: ReactNode; className?: string }) {
+export function Card({ title, meta, children, className = '', ref }: {
+  title?: ReactNode; meta?: ReactNode; children: ReactNode; className?: string; ref?: Ref<HTMLElement>
+}) {
   return (
-    <section className={`min-w-0 rounded-lg border border-line bg-surface p-4 sm:p-5 ${className}`}>
+    <section ref={ref} className={`min-w-0 rounded-lg border border-line bg-surface p-4 sm:p-5 ${className}`}>
       {title && (
         <div className="mb-3 flex flex-wrap items-center gap-x-2 gap-y-1">
           <h2 className="text-sm font-semibold">{title}</h2>

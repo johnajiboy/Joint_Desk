@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { ReactNode, RefObject } from 'react'
 import { getResults } from '../api'
 import { annotate } from '../components/annotate'
 import { Card, ErrorNote, Loading, PageHeader } from '../components/AppShell'
 import { LongWaitChart } from '../components/LongWaitChart'
 import { Term } from '../components/Term'
+import { phase, useCountUp, useLoop } from '../components/useLoop'
 import type { CI, OptimiseResults, Pair, Policy, Results as ResultsData, TreeResults } from '../types'
 
 // Every number on this page comes from results.json (exported from eval/results). Nothing is typed in.
@@ -19,11 +20,15 @@ const pm = (m: number, lo: number, hi: number) => {
   return `${m.toFixed(d)} ± ${((hi - lo) / 2).toFixed(d)}`
 }
 
-function Tile({ label, value, sub }: { label: string; value: string; sub: string }) {
+/** Counts up once on load, then stays on the final value (which is also its accessible name). */
+function Tile({ label, value, format, sub }: { label: string; value: number | null; format: (n: number) => string; sub: string }) {
+  const num = useCountUp(value ?? 0, format)
   return (
     <div className="fade-up rounded-lg border border-line bg-surface p-4">
       <div className="text-sm text-muted">{label}</div>
-      <div className="mt-1 text-3xl font-semibold tabular-nums">{value}</div>
+      <div className="mt-1 text-3xl font-semibold tabular-nums" aria-label={value === null ? 'not recorded' : format(value)}>
+        {value === null ? '—' : <span ref={num} aria-hidden="true">{format(value)}</span>}
+      </div>
       <div className="mt-0.5 text-xs text-muted">{sub}</div>
     </div>
   )
@@ -35,7 +40,25 @@ function Swatch({ color }: { color: string }) {
 
 // ---------------------------------------------------------------- triage
 
-function TriageBars({ o }: { o: OptimiseResults }) {
+/** Bars regrow from 0 every 10 s (staggered); while grown, a faint shimmer crosses each bar every 4 s. */
+function TriageBars({ o, card }: { o: OptimiseResults; card: RefObject<HTMLElement | null> }) {
+  const bars = useRef<(HTMLDivElement | null)[]>([])
+  const shines = useRef<(HTMLSpanElement | null)[]>([])
+  useLoop(card, (ms) => {
+    const still = ms === Infinity
+    const t = ms % 10000
+    bars.current.forEach((bar, i) => {
+      if (!bar) return
+      const grow = still ? 1 : phase(t, i * 150, 1200) * (1 - phase(t, 9500, 400))
+      bar.style.transform = `scaleX(${grow})`
+      const shine = shines.current[i]
+      if (!shine) return
+      const sweep = (t - 2400 - i * 150) % 4000
+      const on = !still && t > 2400 && t < 9300 && sweep >= 0 && sweep < 1400
+      shine.style.opacity = on ? `${Math.sin((Math.PI * sweep) / 1400)}` : '0'
+      shine.style.transform = `translateX(${-100 + 350 * phase(sweep, 0, 1400)}%)`
+    })
+  })
   const mean = (scenario: string, metric: string) => o.robustness.find((r) => r.scenario === scenario && r.metric === metric)?.mean
   const keys = ['surgery_list_end', 'over_18_end', 'mean_wait_surgery']
   const fmt = (k: string, v: number) => (k.startsWith('mean_wait') ? `${v.toFixed(1)} wk` : Math.round(v).toLocaleString())
@@ -61,8 +84,13 @@ function TriageBars({ o }: { o: OptimiseResults }) {
               {scenarios.map((s, j) => (
                 <div key={s.label} className="mb-1 flex items-center gap-2">
                   <div className="h-3 flex-1">
-                    <div className="bar-grow h-full rounded-r-[4px]"
-                      style={{ width: `${(values[j] / max) * 100}%`, background: s.color, animationDelay: `${(i * 2 + j) * 90}ms` }} />
+                    <div ref={(el) => { bars.current[i * 2 + j] = el }}
+                      className="relative h-full origin-left overflow-hidden rounded-r-[4px]"
+                      style={{ width: `${(values[j] / max) * 100}%`, background: s.color }}>
+                      <span ref={(el) => { shines.current[i * 2 + j] = el }} aria-hidden="true"
+                        className="absolute inset-y-0 left-0 w-2/5 opacity-0"
+                        style={{ background: 'linear-gradient(90deg, transparent, rgb(255 255 255 / 0.14), transparent)' }} />
+                    </div>
                   </div>
                   <span className="w-16 text-right text-sm tabular-nums">{fmt(k, values[j])}</span>
                 </div>
@@ -80,7 +108,15 @@ function TriageBars({ o }: { o: OptimiseResults }) {
 
 // ---------------------------------------------------------------- cleaning
 
-function CleaningBar({ c }: { c: ResultsData['cleaning'] }) {
+/** Segments fill one after another, looping every 10 s. The counts beside them never move. */
+function CleaningBar({ c, card }: { c: ResultsData['cleaning']; card: RefObject<HTMLElement | null> }) {
+  const segs = useRef<(HTMLSpanElement | null)[]>([])
+  useLoop(card, (ms) => {
+    const t = ms % 10000
+    segs.current.forEach((seg, i) => {
+      if (seg) seg.style.transform = `scaleX(${ms === Infinity ? 1 : phase(t, i * 700, 900) * (1 - phase(t, 9500, 400))})`
+    })
+  })
   const parts = [
     { label: 'Fixed', n: c.fixed, color: 'var(--series-1)' },
     { label: 'Set missing', n: c.set_missing, color: 'var(--series-2)' },
@@ -89,9 +125,12 @@ function CleaningBar({ c }: { c: ResultsData['cleaning'] }) {
   const total = parts.reduce((s, p) => s + p.n, 0) + c.wrong
   return (
     <>
-      <div className="bar-grow flex h-5 gap-[2px] overflow-hidden rounded-[4px]" role="img"
+      <div className="flex h-5 gap-[2px] overflow-hidden rounded-[4px]" role="img"
         aria-label={parts.map((p) => `${p.label} ${p.n}`).join(', ')}>
-        {parts.map((p) => <span key={p.label} style={{ width: `${(p.n / total) * 100}%`, background: p.color }} />)}
+        {parts.map((p, i) => (
+          <span key={p.label} ref={(el) => { segs.current[i] = el }} className="origin-left"
+            style={{ width: `${(p.n / total) * 100}%`, background: p.color }} />
+        ))}
       </div>
       <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
         {parts.map((p) => (
@@ -109,33 +148,47 @@ function CleaningBar({ c }: { c: ResultsData['cleaning'] }) {
 
 // ---------------------------------------------------------------- tree
 
-function Gauge({ value, label, sub, color, delay = 0 }: { value: number; label: ReactNode; sub: string; color: string; delay?: number }) {
+/**
+ * Ring loop, every 6 s: fills to the value (1.4 s), holds, empties quickly (0.4 s). The number inside follows the
+ * fill; the caption under the ring always shows the final value.
+ */
+function Gauge({ value, label, sub, color, delay = 0, card }: {
+  value: number; label: ReactNode; sub: string; color: string; delay?: number; card: RefObject<HTMLElement | null>
+}) {
   const r = 46
   const full = 2 * Math.PI * r
+  const ring = useRef<SVGCircleElement>(null)
+  const num = useRef<SVGTextElement>(null)
+  useLoop(card, (ms) => {
+    const t = (ms + 6000 - delay) % 6000
+    const fill = ms === Infinity ? 1 : ms < delay ? 0 : phase(t, 0, 1400) * (1 - phase(t, 5600, 400))
+    if (ring.current) ring.current.style.strokeDashoffset = `${full * (1 - value * fill)}`
+    if (num.current) num.current.textContent = pct(value * fill)
+  })
   return (
     <figure className="flex flex-col items-center text-center">
       <svg viewBox="0 0 120 120" className="size-32" role="img" aria-label={`${pct(value)} agreement`}>
         <circle cx="60" cy="60" r={r} fill="none" stroke="var(--line)" strokeWidth="10" />
-        <circle cx="60" cy="60" r={r} fill="none" stroke={color} strokeWidth="10" strokeLinecap="round"
-          strokeDasharray={full} strokeDashoffset={full * (1 - value)} transform="rotate(-90 60 60)"
-          className="ring-draw" style={{ ['--ring-full' as string]: `${full}`, animationDelay: `${delay}ms` }} />
-        <text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="600" fill="var(--text)">{pct(value)}</text>
+        <circle ref={ring} cx="60" cy="60" r={r} fill="none" stroke={color} strokeWidth="10" strokeLinecap="round"
+          strokeDasharray={full} strokeDashoffset={full * (1 - value)} transform="rotate(-90 60 60)" />
+        <text ref={num} x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="600" fill="var(--text)"
+          aria-hidden="true">{pct(value)}</text>
       </svg>
-      <figcaption className="mt-2 text-sm font-medium">{label}</figcaption>
+      <figcaption className="mt-2 text-sm font-medium">{label} · {pct(value)}</figcaption>
       <div className="text-xs text-muted">{sub}</div>
     </figure>
   )
 }
 
-function TreeGauges({ t }: { t: TreeResults }) {
+function TreeGauges({ t, card }: { t: TreeResults; card: RefObject<HTMLElement | null> }) {
   const [raw, banded] = t.runs
   const sub = (n: number) => (n === 0 ? 'no disagreements' : `${n} disagreement${n === 1 ? '' : 's'}`)
   return (
     <>
       <div className="flex flex-wrap justify-around gap-4">
-        <Gauge value={raw.agreement} label="Raw values" sub={sub(raw.disagreements)} color="var(--series-1)" />
-        <Gauge value={banded.agreement} label={<Term k="nhs_bands">NHS bands</Term>} sub={sub(banded.disagreements)}
-          color="var(--series-3)" delay={200} />
+        <Gauge card={card} value={raw.agreement} label="Raw values" sub={sub(raw.disagreements)} color="var(--series-1)" />
+        <Gauge card={card} value={banded.agreement} label={<Term k="nhs_bands">NHS bands</Term>} sub={sub(banded.disagreements)}
+          color="var(--series-3)" delay={250} />
       </div>
       <p className="mt-3 text-xs text-muted">
         Agreement with the expert rules on {raw.test_patients} held-out patients.
@@ -221,6 +274,10 @@ function FullTables({ r }: { r: ResultsData }) {
 // ---------------------------------------------------------------- page
 
 export default function Results() {
+  const lineCard = useRef<HTMLElement>(null)
+  const triageCard = useRef<HTMLElement>(null)
+  const cleanCard = useRef<HTMLElement>(null)
+  const treeCard = useRef<HTMLElement>(null)
   const [r, setR] = useState<ResultsData | null>(null)
   const [error, setError] = useState(false)
   useEffect(() => { getResults().then(setR).catch(() => setError(true)) }, [])
@@ -244,17 +301,17 @@ export default function Results() {
       <PageHeader title="Results" meta={<span className="chip chip-plain">Held-out test set · {test.letters} letters</span>} />
 
       <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        <Tile label="Letters read right" value={pct(test.letters_all_fields_right)} sub="every fact correct" />
-        <Tile label="Quotes found" value={pct(test.quote_hit_rate)} sub="each fact's words are in the letter" />
-        <Tile label="Pathway matches" value={pct(test.pathway_agreement)} sub="rules on the facts read vs answer key" />
-        <Tile label="Cost to read" value={costPer100 === null ? '—' : `$${costPer100.toFixed(2)}`} sub="per 100 letters" />
+        <Tile label="Letters read right" value={test.letters_all_fields_right} format={pct} sub="every fact correct" />
+        <Tile label="Quotes found" value={test.quote_hit_rate} format={pct} sub="each fact's words are in the letter" />
+        <Tile label="Pathway matches" value={test.pathway_agreement} format={pct} sub="rules on the facts read vs answer key" />
+        <Tile label="Cost to read" value={costPer100} format={(n) => `$${n.toFixed(2)}`} sub="per 100 letters" />
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
         {o && (
-          <Card className="fade-up lg:col-span-2" title={<>Nobody left past {o.thresholds.long_wait_weeks} weeks</>}
+          <Card ref={lineCard} className="fade-up lg:col-span-2" title={<>Nobody left past {o.thresholds.long_wait_weeks} weeks</>}
             meta={<span className="ml-auto text-xs text-muted">waiting over <Term k="waits">{o.thresholds.long_wait_weeks} weeks</Term> · {o.weeks} weeks</span>}>
-            <LongWaitChart o={o} />
+            <LongWaitChart o={o} card={lineCard} />
             {fcfsSame && fcfsOks !== undefined && optOks !== undefined && fcfsOks > optOks && (
               <p className="mt-2 text-xs text-muted">
                 <Term k="fcfs">First come, first served</Term> follows the optimiser line exactly, but operates on milder
@@ -264,18 +321,18 @@ export default function Results() {
           </Card>
         )}
         {o && (
-          <Card className="fade-up" title={<><Term k="triage">Triage</Term> halves the backlog</>}>
-            <TriageBars o={o} />
+          <Card ref={triageCard} className="fade-up" title={<><Term k="triage">Triage</Term> halves the backlog</>}>
+            <TriageBars o={o} card={triageCard} />
           </Card>
         )}
-        <Card className="fade-up lg:col-span-2" title="Data cleaned"
+        <Card ref={cleanCard} className="fade-up lg:col-span-2" title="Data cleaned"
           meta={<span className="ml-auto text-xs text-muted tabular-nums">
             {total.toLocaleString()} problems found in {c.raw_rows.toLocaleString()} raw rows · {c.wrong} left wrong</span>}>
-          <CleaningBar c={c} />
+          <CleaningBar c={c} card={cleanCard} />
         </Card>
         {r.decision_tree && (
-          <Card className="fade-up" title="Learned tree agrees with the rules">
-            <TreeGauges t={r.decision_tree} />
+          <Card ref={treeCard} className="fade-up" title="Learned tree agrees with the rules">
+            <TreeGauges t={r.decision_tree} card={treeCard} />
           </Card>
         )}
       </div>
