@@ -12,6 +12,7 @@
   --color-muted: var(--muted);
   --color-line: var(--line);
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
   --color-on-primary: var(--on-primary);
   --color-danger: var(--danger);
 }
@@ -24,6 +25,7 @@
   --muted: #5b6475;
   --line: #e3e6ee;
   --primary: #1b2f5e;
+  --primary-hover: #24407d;
   --on-primary: #ffffff;
   --danger: #b42318;
   --hl: rgb(42 120 214 / 0.16);
@@ -54,6 +56,7 @@
   --muted: #98a1b5;
   --line: #263049;
   --primary: #3b63c4;
+  --primary-hover: #4a74d6;
   --on-primary: #ffffff;
   --danger: #f97066;
   --hl: rgb(57 135 229 / 0.28);

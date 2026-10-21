@@ -10,6 +10,9 @@ import { effectivePathway } from '../pathways'
 
 type Item = { key: string; name: string; result?: UploadResult }
 
+/** The same file (name and size) is one chip, however often it is uploaded. */
+const fileKey = (f: File) => `${f.name}|${f.size}`
+
 const ACCEPT = '.pdf,.docx,.txt,application/pdf,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
 export function UploadBar({ onRead }: { onRead?: () => void }) {
@@ -31,8 +34,10 @@ export function UploadBar({ onRead }: { onRead?: () => void }) {
   function submit(e: FormEvent) {
     e.preventDefault()
     if (!files.length) return
-    const batch = files.map((f, i) => ({ key: `${Date.now()}-${i}-${f.name}`, name: f.name, file: f }))
-    setItems((prev) => [...batch.map(({ key, name }) => ({ key, name })), ...prev].slice(0, 12))
+    const unique = new Map(files.map((f) => [fileKey(f), f]))
+    const batch = [...unique].map(([key, file]) => ({ key, name: file.name, file }))
+    // a re-uploaded file replaces its old chip (back to "Reading…") rather than adding a second one
+    setItems((prev) => [...batch.map(({ key, name }) => ({ key, name })), ...prev.filter((it) => !unique.has(it.key))].slice(0, 12))
     setFiles([])
     if (input.current) input.current.value = ''
     for (const b of batch) {
@@ -47,7 +52,7 @@ export function UploadBar({ onRead }: { onRead?: () => void }) {
     : files.length === 1 ? files[0].name : `${files.length} letters chosen`
 
   return (
-    <div className="fade-up mb-5">
+    <div className="fade-up mb-5 w-full max-w-[720px]">
       <form onSubmit={submit}
         onDragOver={(e) => { e.preventDefault(); setOver(true) }}
         onDragLeave={() => setOver(false)}
