@@ -30,7 +30,7 @@ function Row({ p, i, muted = false }: { p: WeekPatient; i: number; muted?: boole
     <>
       <span className="w-5 shrink-0 pt-0.5 text-right text-xs text-muted tabular-nums">{i + 1}</span>
       <span className="min-w-0 flex-1">
-        <span className="block truncate">{p.name}</span>
+        <span className="block truncate font-semibold">{p.name}</span>
         <span className={`block truncate text-xs ${p.long_wait && muted ? 'text-danger' : 'text-muted'}`}>{p.reason}</span>
       </span>
       {p.pathway === 'weight_physio' && <PathwayChip pathway={p.pathway} className="hidden xl:inline-flex" />}
