@@ -1,19 +1,29 @@
 import { PATHWAYS } from '../pathways'
 import type { PathwayKey } from '../types'
 
-export function PathwayChip({ pathway, priority, large = false, full = false, className = '' }: {
+/**
+ * The one pathway pill used everywhere: "Surgery", "Weight + physio", "Physio first", "Non-surgical", "Needs info",
+ * or with a priority "Surgery · 79". `weight` adds the "+ weight" tag after a surgery pill.
+ */
+export function PathwayChip({ pathway, priority, weight = false, className = '' }: {
   pathway: PathwayKey
   priority?: number
-  large?: boolean
-  full?: boolean
+  weight?: boolean
   className?: string
 }) {
   const p = PATHWAYS[pathway]
-  return (
-    <span className={`chip chip-${pathway} ${large ? 'chip-lg' : ''} shrink-0 ${className}`} title={p.label}
+  const text = priority === undefined ? p.short : `${p.short} · ${priority}`
+  const pill = (
+    <span className={`pill pill-${pathway} ${weight ? '' : className}`} title={p.label}
       aria-label={priority === undefined ? p.label : `${p.label}, priority ${priority}`}>
-      {/* one text, so the chip never breaks into "Surgery" and "· 79" */}
-      {priority === undefined ? (full ? p.label : p.short) : `${full ? p.label : p.short} · ${priority}`}
+      {text}
+    </span>
+  )
+  if (!(weight && pathway === 'surgery')) return pill
+  return (
+    <span className={`inline-flex shrink-0 items-center gap-1.5 ${className}`}>
+      {pill}
+      <span className="pill pill-weight" title="Weight support offered alongside surgery">+ weight</span>
     </span>
   )
 }

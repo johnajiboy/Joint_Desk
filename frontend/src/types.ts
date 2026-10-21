@@ -16,6 +16,8 @@ export interface Referral {
   letter_id: string | null
   set: 'dev' | 'test' | 'upload' | null
   name: string
+  nhs_number?: string | null
+  filename?: string | null          // the file the letter came from (backend: the latest upload)
   pathway: PathwayKey
   rule: number
   priority: number
@@ -33,7 +35,7 @@ export interface Span {
   end: number
 }
 
-export interface Patient extends Omit<Referral, 'text_key'> {
+export interface Patient extends Omit<Referral, 'text_key' | 'nhs_number'> {
   nhs_number: string | null
   on_waiting_list: boolean
   facts: Record<string, FactValue>

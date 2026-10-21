@@ -15,7 +15,7 @@ const fileKey = (f: File) => `${f.name}|${f.size}`
 
 const ACCEPT = '.pdf,.docx,.txt,application/pdf,text/plain,application/vnd.openxmlformats-officedocument.wordprocessingml.document'
 
-export function UploadBar({ onRead }: { onRead?: () => void }) {
+export function UploadBar({ onRead }: { onRead?: (result: UploadResult) => void }) {
   const input = useRef<HTMLInputElement>(null)
   const [files, setFiles] = useState<File[]>([])
   const [items, setItems] = useState<Item[]>([])
@@ -43,7 +43,7 @@ export function UploadBar({ onRead }: { onRead?: () => void }) {
     for (const b of batch) {
       uploadLetter(b.file).then((result) => {
         setItems((prev) => prev.map((it) => (it.key === b.key ? { ...it, result } : it)))
-        if (result.ok) onRead?.()
+        onRead?.(result)
       })
     }
   }

@@ -77,9 +77,9 @@ def main() -> None:
             }
             write(DEMO / "patients" / f"{pid}.json", json.dumps(patient, default=jsonable))
             written.add(f"{pid}.json")
-            queue.append({k: patient[k] for k in ("id", "letter_id", "set", "name", "pathway", "rule", "priority",
-                                                   "weeks_waiting", "weight_support")}
-                         | {"text_key": text_key(text)})
+            queue.append({k: patient[k] for k in ("id", "letter_id", "set", "name", "nhs_number", "pathway", "rule",
+                                                   "priority", "weeks_waiting", "weight_support")}
+                         | {"filename": f"{lid}.txt", "text_key": text_key(text)})
     for old in (DEMO / "patients").glob("*.json"):
         if old.name not in written:               # patients no longer in the queue (and stray sync copies)
             old.unlink()

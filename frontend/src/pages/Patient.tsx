@@ -153,8 +153,7 @@ export default function Patient() {
             </div>
 
             <div className="fade-up mt-4 flex flex-wrap items-center gap-2" style={{ animationDelay: '60ms' }}>
-              <PathwayChip pathway={current} priority={p.priority} large />
-              {p.weight_support && current === 'surgery' && <span className="chip chip-plain">+ weight support</span>}
+              <PathwayChip pathway={current} priority={p.priority} weight={p.weight_support} />
               {p.decision?.kind === 'confirmed' && (
                 <span className="flex items-center gap-1 text-sm text-muted"><CheckIcon /> Confirmed{p.decision.by ? ` · ${p.decision.by}` : ''}</span>
               )}

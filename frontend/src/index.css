@@ -30,17 +30,17 @@
   --danger: #b42318;
   --hl: rgb(42 120 214 / 0.16);
   --hl-active: rgb(42 120 214 / 0.34);
-  /* pathway chips: the only colour in the app besides over-limit values */
-  --surgery-fg: #4b2bb5;
-  --surgery-bg: #eeeafc;
-  --physio-fg: #0b6b5f;
-  --physio-bg: #e0f3ef;
-  --weight-fg: #8a4b00;
-  --weight-bg: #fcefd9;
+  /* pathway pills: the only colour in the app besides over-limit values and charts (all pairs >= 5.7:1) */
+  --surgery-fg: #1b2f5e;
+  --surgery-bg: #e6ecf8;
+  --physio-fg: #1e6b3a;
+  --physio-bg: #e3f4e8;
+  --weight-fg: #7a4b06;
+  --weight-bg: #fdf3dc;
   --nonsurg-fg: #475467;
-  --nonsurg-bg: #eef0f4;
-  --review-fg: #a3143c;
-  --review-bg: #fce7ed;
+  --nonsurg-bg: #eef1f5;
+  --review-fg: #9b1c1c;
+  --review-bg: #fde8e8;
   /* chart series (validated categorical slots 1-2; see eval charts) */
   --series-1: #2a78d6;
   --series-2: #eb6834;
@@ -61,16 +61,16 @@
   --danger: #f97066;
   --hl: rgb(57 135 229 / 0.28);
   --hl-active: rgb(57 135 229 / 0.5);
-  --surgery-fg: #c4b5fd;
-  --surgery-bg: #2a2150;
-  --physio-fg: #7ee0cf;
-  --physio-bg: #12332e;
-  --weight-fg: #f6c177;
-  --weight-bg: #3a2a10;
-  --nonsurg-fg: #c2c9d6;
-  --nonsurg-bg: #252c3b;
-  --review-fg: #f9a8c0;
-  --review-bg: #3d1a26;
+  --surgery-fg: #c9d6f6;
+  --surgery-bg: #1f2b4d;
+  --physio-fg: #a7e1bb;
+  --physio-bg: #15301f;
+  --weight-fg: #f5cf87;
+  --weight-bg: #3b2c0f;
+  --nonsurg-fg: #ccd3de;
+  --nonsurg-bg: #272e3c;
+  --review-fg: #f8b8b8;
+  --review-bg: #3d1919;
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
@@ -100,13 +100,26 @@ body {
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
-.chip-lg { height: 32px; padding: 0 14px; font-size: 14px; }
-.chip-surgery { color: var(--surgery-fg); background: var(--surgery-bg); }
-.chip-physio { color: var(--physio-fg); background: var(--physio-bg); }
-.chip-weight_physio { color: var(--weight-fg); background: var(--weight-bg); }
-.chip-non_surgical { color: var(--nonsurg-fg); background: var(--nonsurg-bg); }
-.chip-review { color: var(--review-fg); background: var(--review-bg); }
 .chip-plain { color: var(--muted); background: var(--sunken); }
+
+/* pathway pills (components/PathwayChip.tsx) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.pill-surgery { color: var(--surgery-fg); background: var(--surgery-bg); }
+.pill-physio { color: var(--physio-fg); background: var(--physio-bg); }
+.pill-weight_physio, .pill-weight { color: var(--weight-fg); background: var(--weight-bg); }
+.pill-non_surgical { color: var(--nonsurg-fg); background: var(--nonsurg-bg); }
+.pill-review { color: var(--review-fg); background: var(--review-bg); }
 
 /* ---------- letter highlights ---------- */
 

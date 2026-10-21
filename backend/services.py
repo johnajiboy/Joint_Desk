@@ -77,7 +77,8 @@ def latest_letter(session: Session, p: Patient) -> Letter | None:
 
 def referral_out(p: Patient, letter: Letter | None, d: Decision | None) -> dict:
     return {"id": p.id, "letter_id": letter.letter_id if letter else None, "set": letter.source if letter else None,
-            "name": p.name, "pathway": p.pathway, "rule": p.rule, "priority": p.priority,
+            "name": p.name, "nhs_number": p.nhs_number, "filename": letter.filename if letter else None,
+            "pathway": p.pathway, "rule": p.rule, "priority": p.priority,
             "weeks_waiting": p.weeks_waiting if p.on_waiting_list else None, "weight_support": p.weight_support,
             "text_key": letter.text_key if letter else None, "decision": decision_out(d)}
 
