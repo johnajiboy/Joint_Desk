@@ -10,9 +10,10 @@ export function PathwayChip({ pathway, priority, large = false, full = false, cl
 }) {
   const p = PATHWAYS[pathway]
   return (
-    <span className={`chip chip-${pathway} ${large ? 'chip-lg' : ''} ${className}`} title={p.label}>
-      {full ? p.label : p.short}
-      {priority !== undefined && <span aria-label={`priority ${priority}`}>· {priority}</span>}
+    <span className={`chip chip-${pathway} ${large ? 'chip-lg' : ''} shrink-0 ${className}`} title={p.label}
+      aria-label={priority === undefined ? p.label : `${p.label}, priority ${priority}`}>
+      {/* one text, so the chip never breaks into "Surgery" and "· 79" */}
+      {priority === undefined ? (full ? p.label : p.short) : `${full ? p.label : p.short} · ${priority}`}
     </span>
   )
 }

@@ -395,7 +395,7 @@ def main() -> None:
         "weeks": WEEKS, "arrival_rate": rate, "arrivals": sum(len(n) for n in new), "capacity": O.CAPACITY,
         "thresholds": {"standard_weeks": STANDARD_WEEKS, "long_wait_weeks": O.LONG_WAIT},
         "seeds": ROBUST_SEEDS, "metrics": METRICS, "triage_off_scenario": TRIAGE_OFF,
-        "triage_off_rule": f"every referral with KL ≥ {TRIAGE_OFF_MIN_KL} on the surgery list",
+        "triage_off_rule": f"every referral with KL ≥ {TRIAGE_OFF_MIN_KL} goes straight on the surgery list",
         "robustness": robust.to_dict(orient="records"), "pairs": pairs.to_dict(orient="records"),
         "summary": summary.to_dict(orient="records"),
         "series": {p: series[series.policy == p].drop(columns="policy").to_dict(orient="records") for p in POLICIES},

@@ -4,19 +4,22 @@ import { confirmPathway, getClinician, getPatient, overridePathway, setClinician
 import { Card, ErrorNote, Loading, Meter } from '../components/AppShell'
 import { primaryButton, secondaryButton } from '../components/ui'
 import { BackIcon, CheckIcon } from '../components/icons'
+import { annotate } from '../components/annotate'
 import { PathwayChip } from '../components/PathwayChip'
+import { Term } from '../components/Term'
+import type { GlossaryKey } from '../glossary'
 import { effectivePathway, PATHWAY_KEYS, PATHWAYS } from '../pathways'
 import type { FactValue, PathwayKey, Patient as PatientData, Span } from '../types'
 
 const yesNo = (v: FactValue) => (v === true ? 'Yes' : v === false ? 'No' : null)
 
 /** Facts in the order a triage clinician reads them. `field` links a row to its quote in the letter. */
-const FACT_ROWS: { field: string; label: string; show: (f: Record<string, FactValue>) => string | null; empty: string }[] = [
-  { field: 'oks', label: 'Oxford Knee Score', empty: 'No score in letter',
+const FACT_ROWS: { field: string; label: string; term?: GlossaryKey; show: (f: Record<string, FactValue>) => string | null; empty: string }[] = [
+  { field: 'oks', label: 'Oxford Knee Score', term: 'oks', empty: 'No score in letter',
     show: (f) => (f.oks === null ? null : f.oks_before === null ? `${f.oks}` : `${f.oks} (was ${f.oks_before})`) },
-  { field: 'kl', label: 'X-ray grade', empty: 'No X-ray grade', show: (f) => (f.kl === null ? null : `KL ${f.kl}`) },
+  { field: 'kl', label: 'X-ray grade', term: 'kl', empty: 'No X-ray grade', show: (f) => (f.kl === null ? null : `KL ${f.kl}`) },
   { field: 'physio_weeks', label: 'Physio', empty: 'Not clear', show: (f) => (f.physio_weeks === null ? null : `${f.physio_weeks} weeks`) },
-  { field: 'bmi', label: 'BMI', empty: 'Not in letter', show: (f) => (f.bmi === null ? null : `${f.bmi}`) },
+  { field: 'bmi', label: 'BMI', term: 'bmi', empty: 'Not in letter', show: (f) => (f.bmi === null ? null : `${f.bmi}`) },
   { field: 'injections', label: 'Injections', empty: 'Not in letter', show: (f) => (f.injections === null ? null : `${f.injections}`) },
   { field: 'night_pain', label: 'Night pain', empty: 'Not in letter', show: (f) => yesNo(f.night_pain) },
   { field: 'lives_alone_or_carer', label: 'Lives alone or carer', empty: 'Not in letter', show: (f) => yesNo(f.lives_alone_or_carer) },
@@ -163,7 +166,7 @@ export default function Patient() {
             </div>
 
             <div className="fade-up mt-3 flex items-start gap-3 text-sm" style={{ animationDelay: '120ms' }}>
-              <p className="min-w-0 flex-1">{p.reasons.join(' · ')}</p>
+              <p className="min-w-0 flex-1">{annotate(p.reasons.join(' · '))}</p>
               <button onClick={() => setWhy(!why)} aria-expanded={why}
                 className="press -my-2 h-11 shrink-0 rounded-md px-2 text-sm text-primary dark:text-text">
                 {why ? 'Hide' : 'Why'}
@@ -173,7 +176,7 @@ export default function Patient() {
               <div className="fade-up mt-2 rounded-md bg-sunken p-3 text-sm">
                 <div className="font-medium">Rule {p.rule} · {PATHWAYS[p.pathway].label}</div>
                 <ul className="mt-1 list-disc pl-5 text-muted">
-                  {p.reasons.map((r) => <li key={r}>{r}</li>)}
+                  {p.reasons.map((r) => <li key={r}>{annotate(r)}</li>)}
                   {p.weight_support && <li>BMI 35 or more: weight support offered</li>}
                 </ul>
                 <p className="mt-2 text-xs text-muted">Rules decide, the LLM only reads, you confirm.</p>
@@ -225,17 +228,17 @@ export default function Patient() {
                 const value = row.show(f)
                 const quoted = value !== null && row.field in p.quotes
                 return (
-                  <div key={row.field} className="fade-up" style={{ animationDelay: `${i * 25}ms` }}>
-                    <button disabled={!quoted} onClick={() => pick(row.field)}
-                      className={`flex min-h-11 w-full items-center gap-3 py-1.5 text-left text-sm ${quoted ? 'cursor-pointer' : 'cursor-default'} ${
-                        active === row.field ? 'text-text' : ''}`}>
-                      <dt className="w-36 shrink-0 text-muted">{row.label}</dt>
-                      <dd className={`min-w-0 flex-1 ${value === null ? 'text-muted' : 'font-medium'}`}>
-                        {value === null ? row.empty : (
+                  <div key={row.field} className="fade-up flex min-h-11 items-center gap-3 py-1.5 text-sm"
+                    style={{ animationDelay: `${i * 25}ms` }}>
+                    <dt className="w-36 shrink-0 text-muted">{row.term ? <Term k={row.term}>{row.label}</Term> : row.label}</dt>
+                    <dd className={`min-w-0 flex-1 ${value === null ? 'text-muted' : 'font-medium'}`}>
+                      {value === null ? row.empty : quoted ? (
+                        <button onClick={() => pick(row.field)} title="Show in the letter"
+                          className="press -my-2 min-h-11 text-left underline decoration-line decoration-dotted underline-offset-4 hover:decoration-muted">
                           <span className={active === row.field ? 'hl hl-active' : ''}>{value}</span>
-                        )}
-                      </dd>
-                    </button>
+                        </button>
+                      ) : value}
+                    </dd>
                   </div>
                 )
               })}
@@ -257,7 +260,7 @@ export default function Patient() {
           </Card>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-            <Card title="Priority" meta={<span className="ml-auto font-semibold tabular-nums">{p.priority}</span>}>
+            <Card title={<Term k="priority">Priority</Term>} meta={<span className="ml-auto font-semibold tabular-nums">{p.priority}</span>}>
               <ul className="space-y-2.5">
                 {PARTS.map((part, i) => (
                   <li key={part.key} className="text-sm">
@@ -271,7 +274,7 @@ export default function Patient() {
               </ul>
             </Card>
 
-            <Card title="Waiting" meta={<span className={`ml-auto font-semibold tabular-nums ${weeks > 52 ? 'text-danger' : ''}`}>
+            <Card title={<Term k="waits">Waiting</Term>} meta={<span className={`ml-auto font-semibold tabular-nums ${weeks > 52 ? 'text-danger' : ''}`}>
               {p.weeks_waiting === null ? '—' : `${weeks} wk`}</span>}>
               <div className="relative pt-5 pb-6">
                 <Meter value={weeks} max={scale} over={weeks > 52} />

@@ -4,6 +4,7 @@ import { getQueue } from '../api'
 import { ErrorNote, Loading, PageHeader } from '../components/AppShell'
 import { stagger } from '../components/ui'
 import { PathwayChip, Weeks } from '../components/PathwayChip'
+import { Term } from '../components/Term'
 import { UploadBar } from '../components/UploadBar'
 import { effectivePathway, TABS } from '../pathways'
 import type { Referral } from '../types'
@@ -59,8 +60,8 @@ export default function Queue() {
                 <tr>
                   <th className="px-4 py-3 font-medium">Name</th>
                   <th className="px-4 py-3 font-medium">Pathway</th>
-                  <th className="px-4 py-3 text-right font-medium">Priority</th>
-                  <th className="px-4 py-3 text-right font-medium">Waiting</th>
+                  <th className="px-4 py-3 text-right font-medium"><Term k="priority">Priority</Term></th>
+                  <th className="px-4 py-3 text-right font-medium"><Term k="waits">Waiting</Term></th>
                 </tr>
               </thead>
               <tbody>

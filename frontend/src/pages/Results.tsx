@@ -1,240 +1,224 @@
 import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { getResults } from '../api'
-import { Card, ErrorNote, Loading, Meter, PageHeader } from '../components/AppShell'
-import { BacklogChart } from '../components/BacklogChart'
+import { annotate } from '../components/annotate'
+import { Card, ErrorNote, Loading, PageHeader } from '../components/AppShell'
+import { LongWaitChart } from '../components/LongWaitChart'
+import { Term } from '../components/Term'
 import type { CI, OptimiseResults, Pair, Policy, Results as ResultsData, TreeResults } from '../types'
 
-const pct = (v: number) => `${(v * 100).toFixed(1)}%`
+// Every number on this page comes from results.json (exported from eval/results). Nothing is typed in.
 
-const FIELD_LABELS: Record<string, string> = {
-  name: 'Name', age: 'Age', sex: 'Sex', side: 'Knee', oks: 'OKS', oks_before: 'Earlier OKS', kl: 'X-ray grade',
-  xray_finding: 'X-ray wording', physio_weeks: 'Physio weeks', injections: 'Injections', bmi: 'BMI',
-  night_pain: 'Night pain', lives_alone_or_carer: 'Lives alone / carer', walking_aid: 'Walking aid',
-  diabetes: 'Diabetes', smoking: 'Smoking', weeks_waiting: 'Weeks (letter)',
+const pct = (v: number) => {
+  const p = Math.round(v * 1000) / 10
+  return `${Number.isInteger(p) ? p : p.toFixed(1)}%`
 }
-
-function Stat({ label, value, sub }: { label: string; value: string; sub?: string }) {
-  return (
-    <div className="rounded-md bg-sunken p-3">
-      <div className="text-xs text-muted">{label}</div>
-      <div className="mt-0.5 text-xl font-semibold tabular-nums">{value}</div>
-      {sub && <div className="text-xs text-muted">{sub}</div>}
-    </div>
-  )
-}
-
-/** A learned split shown as the rule's comparison: "OKS <= 26.5" reads as 26 for whole-number scores. */
-function Cut({ value, same }: { value: number | null; same: boolean }) {
-  if (value === null) return <span className="text-muted">not used</span>
-  return <span className={`tabular-nums ${same ? '' : 'font-medium text-danger'}`}>≤ {value}{same ? ' · same' : ''}</span>
-}
-
-function TreeCard({ t }: { t: TreeResults }) {
-  const [cont, disc] = t.runs
-  const [showTree, setShowTree] = useState(false)
-  return (
-    <Card title="Rules vs decision tree" className="fade-up"
-      meta={<span className="ml-auto text-xs text-muted tabular-nums">{t.train} train · {t.test} test · labels from rules.py</span>}>
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Agreement · raw values" value={pct(cont.agreement)} sub={`depth ${cont.depth} · ${cont.leaves} leaves`} />
-        <Stat label="Agreement · bands" value={pct(disc.agreement)} sub={`depth ${disc.depth} · ${disc.leaves} leaves`} />
-        <Stat label="Disagreements" value={`${cont.disagreements} · ${disc.disagreements}`} sub="raw · bands" />
-        <Stat label="Truth check" value={`${t.truth_check.matching}/${t.truth_check.patients}`} sub="true pathway = rules" />
-      </div>
-
-      <div className="mt-4 space-y-4">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[22rem] text-sm">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Rule</th><th className="py-1 font-medium">Tree · raw</th>
-                <th className="py-1 font-medium">Tree · bands</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {t.thresholds.map((x) => (
-                <tr key={x.rule}>
-                  <td className="py-1.5">{x.short}</td>
-                  <td className="py-1.5"><Cut value={x.tree} same={x.same} /></td>
-                  <td className="py-1.5"><Cut value={x.banded} same={x.banded_same} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {t.band_misses.map((m) => (
-            <p key={m.short} className="mt-2 text-xs text-muted">
-              Bands can't draw the rule {m.short}; the nearest band edge is {m.band_edge}.
-            </p>
-          ))}
-        </div>
-
-        <div>
-          <h3 className="mb-1 text-xs font-medium text-muted">Where the tree and the rules disagree</h3>
-          {t.disagreements.length === 0 ? <p className="text-sm text-muted">None</p> : (
-            <ul className="divide-y divide-line text-sm">
-              {t.disagreements.map((d) => (
-                <li key={`${d.model}-${d.patient_id}`} className="flex min-h-10 flex-wrap items-center gap-x-3 gap-y-1 py-1.5">
-                  <span className="w-20 font-medium tabular-nums">{d.patient_id}</span>
-                  <span className="text-muted tabular-nums">OKS {d.oks} · KL {d.kl_grade}</span>
-                  <span className="ml-auto text-xs"><span className="text-muted">rules</span> {d.rules.replace('Keep on ', '')}
-                    <span className="text-muted"> · tree</span> {d.tree} <span className="text-muted">({d.model === 'continuous' ? 'raw' : 'bands'})</span></span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </div>
-
-      <button onClick={() => setShowTree(!showTree)} aria-expanded={showTree}
-        className="press mt-3 h-11 rounded-md px-2 text-sm text-primary dark:text-text">
-        {showTree ? 'Hide learned rules' : 'Learned rules'}
-      </button>
-      {showTree && (
-        <pre className="fade-up mt-1 max-h-96 overflow-auto rounded-md bg-sunken p-3 font-mono text-xs leading-5">{t.tree_text}</pre>
-      )}
-    </Card>
-  )
-}
-
 const POLICIES: Policy[] = ['FCFS', 'Priority only', 'Optimiser']
-
-/** Mean ± half-width of the 95% CI, as in eval/results/optimise. */
 const pm = (m: number, lo: number, hi: number) => {
   const d = Math.abs(m) >= 100 ? 0 : 1
   return `${m.toFixed(d)} ± ${((hi - lo) / 2).toFixed(d)}`
 }
 
-function OptimiseCard({ o }: { o: OptimiseResults }) {
-  const cap = o.capacity.surgery
-  const at = (c: number, p: Policy) => o.summary.find((r) => r.surgery_capacity === c && r.policy === p)
-  const caps = [...new Set(o.summary.map((r) => r.surgery_capacity))]
-  const ci = (scenario: string, metric: string) => o.robustness.find((r) => r.scenario === scenario && r.metric === metric)
-  const cell = (c?: CI) => (c ? pm(c.mean, c.ci_low, c.ci_high) : '—')
-  const pair = (comparison: string, metric: string) => o.pairs.find((r) => r.comparison === comparison && r.metric === metric)
-  const metricKeys = Object.keys(o.metrics)
-  const lw = o.thresholds.long_wait_weeks
-  const triageKeys = ['surgery_list_start', 'surgery_list_end', 'mean_wait_surgery', 'over_18_end', 'over_52_end']
-  const triageLabel = (k: string) => (k === 'surgery_list_start' ? 'Surgery list, start' : o.metrics[k])
-  const vs = (other: string) => `Optimiser - ${other}`
-  const PairCell = ({ p }: { p?: Pair }) => p ? (
-    <><span className="tabular-nums">{pm(p.mean_diff, p.ci_low, p.ci_high)}</span>
-      <span className="block text-xs text-muted">{p.verdict}</span></>
-  ) : <>—</>
-
+function Tile({ label, value, sub }: { label: string; value: string; sub: string }) {
   return (
-    <Card title={`Weekly slots · ${o.weeks}-week simulation`} className="fade-up lg:col-span-2"
-      meta={<span className="ml-auto text-xs text-muted tabular-nums">{o.arrival_rate} new referrals a week · surgery {o.capacity.surgery},
-        physio {o.capacity.physio}, weight support {o.capacity.weight_support}</span>}>
-      <BacklogChart o={o} />
-      <div className="mt-5 grid gap-5 lg:grid-cols-2">
-        <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Surgery capacity {cap} · seed {o.seeds[0]}</h3>
-          <table className="w-full min-w-[24rem] text-sm tabular-nums">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Policy</th><th className="py-1 text-right font-medium">Over-{lw}s skipped</th>
-                <th className="py-1 text-right font-medium">Over {lw}, end</th><th className="py-1 text-right font-medium">Surgery wait</th>
-                <th className="py-1 text-right font-medium">OKS operated</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {POLICIES.map((p) => {
-                const r = at(cap, p)
-                if (!r) return null
-                return (
-                  <tr key={p}>
-                    <td className="py-1.5">{p}</td>
-                    <td className={`py-1.5 text-right ${r.over_52_skipped_patients ? 'font-medium text-danger' : ''}`}>{r.over_52_skipped_patients}</td>
-                    <td className={`py-1.5 text-right ${r.over_52_end ? 'text-danger' : ''}`}>{r.over_52_end}</td>
-                    <td className="py-1.5 text-right">{r.mean_wait_surgery.toFixed(1)} wk</td>
-                    <td className="py-1.5 text-right">{r.mean_oks_operated.toFixed(1)}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-          <p className="mt-2 text-xs text-muted">Lower OKS = worse knees treated. Skipped = over {lw} weeks, passed over for someone who isn't.</p>
-        </div>
-        <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Over {lw} weeks after {o.weeks} weeks, by surgery slots a week</h3>
-          <table className="w-full min-w-[20rem] text-sm tabular-nums">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Slots</th>{POLICIES.map((p) => <th key={p} className="py-1 text-right font-medium">{p}</th>)}</tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {caps.map((c) => (
-                <tr key={c}>
-                  <td className="py-1.5">{c}</td>
-                  {POLICIES.map((p) => {
-                    const v = at(c, p)?.over_52_end
-                    return <td key={p} className={`py-1.5 text-right ${v ? 'text-danger' : ''}`}>{v ?? '—'}</td>
-                  })}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Across {o.seeds.length} arrival seeds · mean ± 95% CI</h3>
-          <table className="w-full min-w-[28rem] text-sm tabular-nums">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Measure</th>{POLICIES.map((p) => <th key={p} className="py-1 text-right font-medium">{p}</th>)}</tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {metricKeys.map((k) => (
-                <tr key={k}>
-                  <td className="py-1.5">{o.metrics[k]}</td>
-                  {POLICIES.map((p) => <td key={p} className="py-1.5 text-right">{cell(ci(p, k))}</td>)}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="overflow-x-auto">
-          <h3 className="mb-1 text-xs font-medium text-muted">Do the differences hold? Optimiser minus each policy, paired by seed</h3>
-          <table className="w-full min-w-[28rem] text-sm">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Measure</th><th className="py-1 font-medium">vs FCFS</th>
-                <th className="py-1 font-medium">vs Priority only</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line align-top">
-              {metricKeys.map((k) => (
-                <tr key={k}>
-                  <td className="py-1.5 pr-2">{o.metrics[k]}</td>
-                  <td className="py-1.5 pr-2"><PairCell p={pair(vs('FCFS'), k)} /></td>
-                  <td className="py-1.5"><PairCell p={pair(vs('Priority only'), k)} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="overflow-x-auto lg:col-span-2">
-          <h3 className="mb-1 text-xs font-medium text-muted">
-            Triage on vs off · optimiser, {o.seeds.length} seeds · off = {o.triage_off_rule}
-          </h3>
-          <table className="w-full min-w-[30rem] text-sm">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Measure</th><th className="py-1 text-right font-medium">Triage on</th>
-                <th className="py-1 text-right font-medium">Triage off</th><th className="py-1 pl-4 font-medium">Off minus on</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line align-top">
-              {triageKeys.map((k) => {
-                const p = pair(`${o.triage_off_scenario} - Optimiser`, k)
-                return (
-                  <tr key={k}>
-                    <td className="py-1.5">{triageLabel(k)}</td>
-                    <td className="py-1.5 text-right tabular-nums">{cell(ci('Optimiser', k))}</td>
-                    <td className="py-1.5 text-right tabular-nums">{cell(ci(o.triage_off_scenario, k))}</td>
-                    <td className="py-1.5 pl-4">{p ? <PairCell p={p} /> : <span className="text-muted">same start list each seed</span>}</td>
-                  </tr>
-                )
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </Card>
+    <div className="fade-up rounded-lg border border-line bg-surface p-4">
+      <div className="text-sm text-muted">{label}</div>
+      <div className="mt-1 text-3xl font-semibold tabular-nums">{value}</div>
+      <div className="mt-0.5 text-xs text-muted">{sub}</div>
+    </div>
   )
 }
+
+function Swatch({ color }: { color: string }) {
+  return <span className="inline-block size-2.5 shrink-0 rounded-sm" style={{ background: color }} />
+}
+
+// ---------------------------------------------------------------- triage
+
+function TriageBars({ o }: { o: OptimiseResults }) {
+  const mean = (scenario: string, metric: string) => o.robustness.find((r) => r.scenario === scenario && r.metric === metric)?.mean
+  const keys = ['surgery_list_end', 'over_18_end', 'mean_wait_surgery']
+  const fmt = (k: string, v: number) => (k.startsWith('mean_wait') ? `${v.toFixed(1)} wk` : Math.round(v).toLocaleString())
+  const scenarios = [
+    { name: 'Optimiser', label: 'Triage on', color: 'var(--series-1)' },
+    { name: o.triage_off_scenario, label: 'Off', color: 'var(--series-2)' },
+  ]
+  return (
+    <>
+      <ul className="mb-3 flex justify-end gap-4 text-xs text-muted" aria-label="Legend">
+        {scenarios.map((s) => <li key={s.label} className="flex items-center gap-1.5"><Swatch color={s.color} />{s.label}</li>)}
+      </ul>
+      <div className="space-y-4">
+        {keys.map((k, i) => {
+          const values = scenarios.map((s) => mean(s.name, k) ?? 0)
+          const max = Math.max(...values, 1)
+          const [head, ...rest] = o.metrics[k].split(',')
+          return (
+            <div key={k}>
+              <div className="mb-1.5 text-sm">
+                {k === 'over_18_end' ? <Term k="waits">{head}</Term> : head}{rest.length ? `,${rest.join(',')}` : ''}
+              </div>
+              {scenarios.map((s, j) => (
+                <div key={s.label} className="mb-1 flex items-center gap-2">
+                  <div className="h-3 flex-1">
+                    <div className="bar-grow h-full rounded-r-[4px]"
+                      style={{ width: `${(values[j] / max) * 100}%`, background: s.color, animationDelay: `${(i * 2 + j) * 90}ms` }} />
+                  </div>
+                  <span className="w-16 text-right text-sm tabular-nums">{fmt(k, values[j])}</span>
+                </div>
+              ))}
+            </div>
+          )
+        })}
+      </div>
+      <p className="mt-4 text-xs text-muted">
+        Off = {annotate(o.triage_off_rule)}. Mean of {o.seeds.length} simulations.
+      </p>
+    </>
+  )
+}
+
+// ---------------------------------------------------------------- cleaning
+
+function CleaningBar({ c }: { c: ResultsData['cleaning'] }) {
+  const parts = [
+    { label: 'Fixed', n: c.fixed, color: 'var(--series-1)' },
+    { label: 'Set missing', n: c.set_missing, color: 'var(--series-2)' },
+    { label: 'Duplicates removed', n: c.duplicates_removed, color: 'var(--series-3)' },
+  ]
+  const total = parts.reduce((s, p) => s + p.n, 0) + c.wrong
+  return (
+    <>
+      <div className="bar-grow flex h-5 gap-[2px] overflow-hidden rounded-[4px]" role="img"
+        aria-label={parts.map((p) => `${p.label} ${p.n}`).join(', ')}>
+        {parts.map((p) => <span key={p.label} style={{ width: `${(p.n / total) * 100}%`, background: p.color }} />)}
+      </div>
+      <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1.5 text-sm">
+        {parts.map((p) => (
+          <li key={p.label} className="flex items-center gap-2">
+            <Swatch color={p.color} />
+            <span className="text-muted">{p.label}</span>
+            <span className="font-medium tabular-nums">{p.n}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-xs text-muted">Set missing = the true value can't be recovered, so it is not guessed.</p>
+    </>
+  )
+}
+
+// ---------------------------------------------------------------- tree
+
+function Gauge({ value, label, sub, color, delay = 0 }: { value: number; label: ReactNode; sub: string; color: string; delay?: number }) {
+  const r = 46
+  const full = 2 * Math.PI * r
+  return (
+    <figure className="flex flex-col items-center text-center">
+      <svg viewBox="0 0 120 120" className="size-32" role="img" aria-label={`${pct(value)} agreement`}>
+        <circle cx="60" cy="60" r={r} fill="none" stroke="var(--line)" strokeWidth="10" />
+        <circle cx="60" cy="60" r={r} fill="none" stroke={color} strokeWidth="10" strokeLinecap="round"
+          strokeDasharray={full} strokeDashoffset={full * (1 - value)} transform="rotate(-90 60 60)"
+          className="ring-draw" style={{ ['--ring-full' as string]: `${full}`, animationDelay: `${delay}ms` }} />
+        <text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="600" fill="var(--text)">{pct(value)}</text>
+      </svg>
+      <figcaption className="mt-2 text-sm font-medium">{label}</figcaption>
+      <div className="text-xs text-muted">{sub}</div>
+    </figure>
+  )
+}
+
+function TreeGauges({ t }: { t: TreeResults }) {
+  const [raw, banded] = t.runs
+  const sub = (n: number) => (n === 0 ? 'no disagreements' : `${n} disagreement${n === 1 ? '' : 's'}`)
+  return (
+    <>
+      <div className="flex flex-wrap justify-around gap-4">
+        <Gauge value={raw.agreement} label="Raw values" sub={sub(raw.disagreements)} color="var(--series-1)" />
+        <Gauge value={banded.agreement} label={<Term k="nhs_bands">NHS bands</Term>} sub={sub(banded.disagreements)}
+          color="var(--series-3)" delay={200} />
+      </div>
+      <p className="mt-3 text-xs text-muted">
+        Agreement with the expert rules on {raw.test_patients} held-out patients.
+        {t.band_misses.map((m) => <span key={m.short}> Bands can't draw {annotate(m.short)}; nearest edge {m.band_edge}.</span>)}
+      </p>
+    </>
+  )
+}
+
+// ---------------------------------------------------------------- full tables (closed by default)
+
+function Table({ caption, head, rows }: { caption: string; head: ReactNode[]; rows: ReactNode[][] }) {
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full min-w-[28rem] text-sm tabular-nums">
+        <caption className="mb-1 text-left text-xs font-medium text-muted">{caption}</caption>
+        <thead className="text-left text-xs text-muted">
+          <tr>{head.map((h, i) => <th key={i} className={`py-1 font-medium ${i ? 'text-right' : ''}`}>{h}</th>)}</tr>
+        </thead>
+        <tbody className="divide-y divide-line">
+          {rows.map((row, i) => (
+            <tr key={i}>{row.map((c, j) => <td key={j} className={`py-1.5 align-top ${j ? 'text-right' : ''}`}>{c}</td>)}</tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+function FullTables({ r }: { r: ResultsData }) {
+  const { dev, test } = r.extraction
+  const o = r.optimise
+  const t = r.decision_tree
+  const ci = (sc: string, m: string) => o?.robustness.find((x: CI) => x.scenario === sc && x.metric === m)
+  const cell = (c?: CI) => (c ? pm(c.mean, c.ci_low, c.ci_high) : '—')
+  const pair = (cmp: string, m: string) => o?.pairs.find((x: Pair) => x.comparison === cmp && x.metric === m)
+  const pairCell = (p?: Pair) => (p ? <>{pm(p.mean_diff, p.ci_low, p.ci_high)}<span className="block text-xs text-muted">{p.verdict}</span></> : '—')
+  return (
+    <details className="mt-6">
+      <summary className="w-fit cursor-pointer text-sm text-primary underline-offset-2 hover:underline dark:text-text">Full tables</summary>
+      <div className="mt-4 grid gap-6 lg:grid-cols-2">
+        <Table caption="LLM accuracy per field" head={['Field', `Dev (${dev.letters})`, `Test (${test.letters})`]}
+          rows={Object.keys(dev.field_accuracy).map((f) => [f, pct(dev.field_accuracy[f]), pct(test.field_accuracy[f])])} />
+        <Table caption="Extraction, dev vs held-out test" head={['Measure', 'Dev', 'Test']}
+          rows={[['Letters with every field right', pct(dev.letters_all_fields_right), pct(test.letters_all_fields_right)],
+            ['Quote hit rate', pct(dev.quote_hit_rate), pct(test.quote_hit_rate)],
+            ['Facts dropped by quote check', dev.facts_dropped, test.facts_dropped],
+            ['Pathway agreement', pct(dev.pathway_agreement), pct(test.pathway_agreement)],
+            ['Priority, mean abs. difference', dev.priority_mae.toFixed(1), test.priority_mae.toFixed(1)]]} />
+        {o && (() => {
+          const { standard_weeks: std, long_wait_weeks: lw } = o.thresholds
+          return <>
+            <Table caption={`Waiting over ${std} and ${lw} weeks, by week (surgery capacity ${o.capacity.surgery})`}
+              head={['Week', ...POLICIES.flatMap((p) => [`>${std} · ${p}`, `>${lw} · ${p}`])]}
+              rows={o.series.Optimiser.map((row, i) => [row.week, ...POLICIES.flatMap((p) => [o.series[p][i].over_18, o.series[p][i].over_52])])} />
+            <Table caption={`Over ${lw} weeks after ${o.weeks} weeks, by surgery slots a week`} head={['Slots', ...POLICIES]}
+              rows={[...new Set(o.summary.map((s) => s.surgery_capacity))].map((c) => [c, ...POLICIES.map((p) =>
+                o.summary.find((s) => s.surgery_capacity === c && s.policy === p)?.over_52_end ?? '—')])} />
+            <Table caption={`Across ${o.seeds.length} arrival seeds, mean ± 95% CI`} head={['Measure', ...POLICIES]}
+              rows={Object.keys(o.metrics).map((k) => [o.metrics[k], ...POLICIES.map((p) => cell(ci(p, k)))])} />
+            <Table caption="Optimiser minus each policy, paired by seed" head={['Measure', 'vs FCFS', 'vs Priority only']}
+              rows={Object.keys(o.metrics).map((k) => [o.metrics[k], pairCell(pair('Optimiser - FCFS', k)), pairCell(pair('Optimiser - Priority only', k))])} />
+            <Table caption={`Triage on vs off (optimiser, ${o.seeds.length} seeds)`} head={['Measure', 'On', 'Off', 'Off minus on']}
+              rows={Object.keys(o.metrics).map((k) => [o.metrics[k], cell(ci('Optimiser', k)), cell(ci(o.triage_off_scenario, k)),
+                pairCell(pair(`${o.triage_off_scenario} - Optimiser`, k))])} />
+          </>
+        })()}
+        {t && <>
+          <Table caption="Rule cut points vs learned splits" head={['Rule', 'Tree · raw', 'Tree · bands']}
+            rows={t.thresholds.map((x) => [x.short, x.tree === null ? 'not used' : `≤ ${x.tree}${x.same ? ' · same' : ''}`,
+              x.banded === null ? 'not used' : `≤ ${x.banded}${x.banded_same ? ' · same' : ''}`])} />
+          <Table caption="Where the tree and the rules disagree" head={['Patient', 'OKS', 'KL', 'Rules', 'Tree', 'Model']}
+            rows={t.disagreements.length ? t.disagreements.map((d) => [d.patient_id, d.oks, d.kl_grade, d.rules, d.tree, d.model])
+              : [['None', '', '', '', '', '']]} />
+        </>}
+        <Table caption="Cleaning, logged problems by issue" head={['Problem', 'Logged', 'Fixed', 'Set missing', 'Wrong']}
+          rows={r.cleaning.by_issue.map((b) => [`${b.field} · ${b.issue}`, b.logged, b.fixed, b['set missing'], b.wrong])} />
+      </div>
+    </details>
+  )
+}
+
+// ---------------------------------------------------------------- page
 
 export default function Results() {
   const [r, setR] = useState<ResultsData | null>(null)
@@ -243,79 +227,60 @@ export default function Results() {
 
   if (error) return <ErrorNote text="Couldn't load results" />
   if (!r) return <Loading />
-  const { dev, test } = r.extraction
+  const test = r.extraction.test
+  const o = r.optimise
   const c = r.cleaning
+  const costPer100 = test.cost_usd === null ? null : (test.cost_usd / test.letters) * 100
+  const total = c.fixed + c.set_missing + c.duplicates_removed + c.wrong
+
+  // the note under the chart only says what the data shows
+  const fcfsSame = !!o && o.series.FCFS.every((row, i) => row.over_52 === o.series.Optimiser[i].over_52)
+  const oksAt = (p: Policy) => o?.summary.find((s) => s.policy === p && s.surgery_capacity === o.capacity.surgery)?.mean_oks_operated
+  const fcfsOks = oksAt('FCFS')
+  const optOks = oksAt('Optimiser')
 
   return (
     <>
-      <PageHeader title="Results" meta={<span className="chip chip-plain">{dev.model}</span>} />
-      <div className="grid gap-4 lg:grid-cols-2">
-        <Card title="LLM accuracy per field" meta={<span className="ml-auto flex gap-3 text-xs text-muted">
-          <span>Dev {dev.letters}</span><span>Test {test.letters}</span></span>} className="fade-up">
-          <ul className="space-y-1.5">
-            {Object.keys(dev.field_accuracy).map((f, i) => (
-              <li key={f} className="grid grid-cols-[minmax(0,8rem)_1fr_1fr] items-center gap-3 text-sm">
-                <span className="truncate text-muted">{FIELD_LABELS[f] ?? f}</span>
-                {[dev, test].map((s) => (
-                  <span key={s === dev ? 'd' : 't'} className="flex items-center gap-2">
-                    <span className="flex-1"><Meter value={s.field_accuracy[f]} max={1} delay={i * 30} /></span>
-                    <span className="w-12 text-right text-xs tabular-nums">{pct(s.field_accuracy[f])}</span>
-                  </span>
-                ))}
-              </li>
-            ))}
-          </ul>
-        </Card>
+      <PageHeader title="Results" meta={<span className="chip chip-plain">Held-out test set · {test.letters} letters</span>} />
 
-        <Card title="Quotes and pathway" meta={<span className="ml-auto text-xs text-muted">dev · held-out test</span>}
-          className="fade-up">
-          <div className="grid grid-cols-2 gap-3">
-            <Stat label="Quote hit rate" value={pct(test.quote_hit_rate)} sub={`dev ${pct(dev.quote_hit_rate)}`} />
-            <Stat label="Pathway agreement" value={pct(test.pathway_agreement)} sub={`dev ${pct(dev.pathway_agreement)}`} />
-            <Stat label="Letters fully right" value={pct(test.letters_all_fields_right)} sub={`dev ${pct(dev.letters_all_fields_right)}`} />
-            <Stat label="Facts dropped" value={`${test.facts_dropped}`} sub={`dev ${dev.facts_dropped}`} />
-            <Stat label="Priority difference" value={test.priority_mae.toFixed(1)} sub={`dev ${dev.priority_mae.toFixed(1)}`} />
-            <Stat label="Test run cost" value={test.cost_usd === null ? '—' : `$${test.cost_usd.toFixed(2)}`}
-              sub={`${test.letters} letters`} />
-          </div>
-          <p className="mt-3 text-xs text-muted">Test letters: new patients, shorthand, typos, scanned text. Prompt tuned on dev only.</p>
-        </Card>
+      <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <Tile label="Letters read right" value={pct(test.letters_all_fields_right)} sub="every fact correct" />
+        <Tile label="Quotes found" value={pct(test.quote_hit_rate)} sub="each fact's words are in the letter" />
+        <Tile label="Pathway matches" value={pct(test.pathway_agreement)} sub="rules on the facts read vs answer key" />
+        <Tile label="Cost to read" value={costPer100 === null ? '—' : `$${costPer100.toFixed(2)}`} sub="per 100 letters" />
+      </div>
 
-        <Card title="Cleaning" meta={<span className="ml-auto text-xs text-muted tabular-nums">
-          {c.raw_rows.toLocaleString()} rows → {c.patients.toLocaleString()} patients</span>} className="fade-up">
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <Stat label="Duplicates removed" value={`${c.duplicates_removed}`} />
-            <Stat label="Fixed" value={`${c.fixed}`} sub={`of ${c.logged}`} />
-            <Stat label="Set missing" value={`${c.set_missing}`} sub="can't recover" />
-            <Stat label="Left wrong" value={`${c.wrong}`} />
-          </div>
-          <table className="mt-4 w-full text-sm">
-            <thead className="text-left text-xs text-muted">
-              <tr><th className="py-1 font-medium">Problem</th><th className="py-1 text-right font-medium">Fixed</th>
-                <th className="py-1 text-right font-medium">Missing</th></tr>
-            </thead>
-            <tbody className="divide-y divide-line">
-              {c.by_issue.map((b) => (
-                <tr key={`${b.field}-${b.issue}`}>
-                  <td className="py-1.5"><span className="font-medium">{b.field.replace(/_/g, ' ')}</span>
-                    <span className="text-muted"> · {b.issue.replace(/ \(.*\)/, '')}</span></td>
-                  <td className="py-1.5 text-right tabular-nums">{b.fixed || '—'}</td>
-                  <td className="py-1.5 text-right tabular-nums">{b['set missing'] || '—'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="grid gap-4 lg:grid-cols-3">
+        {o && (
+          <Card className="fade-up lg:col-span-2" title={<>Nobody left past {o.thresholds.long_wait_weeks} weeks</>}
+            meta={<span className="ml-auto text-xs text-muted">waiting over <Term k="waits">{o.thresholds.long_wait_weeks} weeks</Term> · {o.weeks} weeks</span>}>
+            <LongWaitChart o={o} />
+            {fcfsSame && fcfsOks !== undefined && optOks !== undefined && fcfsOks > optOks && (
+              <p className="mt-2 text-xs text-muted">
+                <Term k="fcfs">First come, first served</Term> follows the optimiser line exactly, but operates on milder
+                knees (mean <Term k="oks">OKS</Term> {fcfsOks.toFixed(1)} vs {optOks.toFixed(1)}).
+              </p>
+            )}
+          </Card>
+        )}
+        {o && (
+          <Card className="fade-up" title={<><Term k="triage">Triage</Term> halves the backlog</>}>
+            <TriageBars o={o} />
+          </Card>
+        )}
+        <Card className="fade-up lg:col-span-2" title="Data cleaned"
+          meta={<span className="ml-auto text-xs text-muted tabular-nums">
+            {total.toLocaleString()} problems found in {c.raw_rows.toLocaleString()} raw rows · {c.wrong} left wrong</span>}>
+          <CleaningBar c={c} />
         </Card>
-
-        {r.optimise && <OptimiseCard o={r.optimise} />}
-        {r.decision_tree ? <TreeCard t={r.decision_tree} /> : (
-          <Card title="Rules vs decision tree" className="fade-up">
-            <div className="flex min-h-40 items-center justify-center rounded-md border border-dashed border-line text-sm text-muted">
-              Not built yet
-            </div>
+        {r.decision_tree && (
+          <Card className="fade-up" title="Learned tree agrees with the rules">
+            <TreeGauges t={r.decision_tree} />
           </Card>
         )}
       </div>
+
+      <FullTables r={r} />
     </>
   )
 }

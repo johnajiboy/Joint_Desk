@@ -44,7 +44,7 @@
   "mean_oks_operated": "Mean OKS operated on (lower = worse knees)"
  },
  "triage_off_scenario": "Optimiser, triage off",
- "triage_off_rule": "every referral with KL \u2265 2 on the surgery list",
+ "triage_off_rule": "every referral with KL \u2265 2 goes straight on the surgery list",
  "robustness": [
   {
    "scenario": "FCFS",

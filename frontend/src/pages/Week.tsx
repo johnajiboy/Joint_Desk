@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { buildWeek } from '../api'
 import { Card, ErrorNote, PageHeader } from '../components/AppShell'
 import { PathwayChip, Weeks } from '../components/PathwayChip'
+import { Term } from '../components/Term'
 import { primaryButton, stagger } from '../components/ui'
+import type { ReactNode } from 'react'
 import type { WeekPatient, WeekPlan } from '../types'
 
 const LABELS = { surgery: 'Surgery', physio: 'Physio', weight_support: 'Weight support' }
@@ -11,7 +13,7 @@ const LABELS = { surgery: 'Surgery', physio: 'Physio', weight_support: 'Weight s
 const weekOf = (iso: string) =>
   new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 
-function Tile({ label, value, of, over = false }: { label: string; value: number | null; of: number | null; over?: boolean }) {
+function Tile({ label, value, of, over = false }: { label: ReactNode; value: number | null; of: number | null; over?: boolean }) {
   return (
     <div className="fade-up rounded-lg border border-line bg-surface p-4">
       <div className="text-sm text-muted">{label}</div>
@@ -78,7 +80,8 @@ export default function Week() {
           const l = plan?.lists.find((x) => x.kind === k)
           return <Tile key={k} label={`${LABELS[k]} slots`} value={l ? l.in.length : null} of={l?.capacity ?? null} />
         })}
-        <Tile label={lw ? `Over ${lw.weeks} weeks in` : 'Long waits in'} value={lw ? lw.included : null} of={lw?.total ?? null}
+        <Tile label={<>{lw ? 'Over ' : 'Long waits in'}{lw && <Term k="waits">{lw.weeks} weeks</Term>}{lw ? ' in' : ''}</>}
+          value={lw ? lw.included : null} of={lw?.total ?? null}
           over={!!lw && lw.included < lw.total} />
       </div>
 
@@ -111,7 +114,8 @@ export default function Week() {
             ))}
           </div>
           <p className="mt-4 text-xs text-muted">
-            Optimiser (PuLP, CBC) · {plan.patients.toLocaleString()} on the waiting list · over {lw?.weeks} weeks first, then priority, ties to the longest wait
+            <Term k="optimiser">Optimiser</Term> (PuLP, CBC) · {plan.patients.toLocaleString()} on the waiting list · over {lw?.weeks} weeks
+            first, then <Term k="priority">priority</Term>, ties to the longest wait
           </p>
         </>
       )}
