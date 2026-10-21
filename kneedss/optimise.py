@@ -11,6 +11,7 @@ Needs the `cbc` binary (`brew install cbc`); set CBC_PATH to use another one.
 """
 from __future__ import annotations
 
+import importlib.util
 import os
 import shutil
 from dataclasses import dataclass, field
@@ -26,8 +27,21 @@ ALLOWED = {"surgery": ["surgery"], "physio": ["physio"], "weight_physio": ["weig
 NEXT_SHOWN = 5
 
 
-def solver() -> pulp.LpSolver:
+def cbc_path() -> str | None:
+    """CBC_PATH, else `cbc` on PATH (brew install cbc), else the binary in the cbcbox package (Linux servers)."""
     path = os.environ.get("CBC_PATH") or shutil.which("cbc")
+    if path:
+        return path
+    spec = importlib.util.find_spec("cbcbox")
+    if spec and spec.origin:
+        candidate = os.path.join(os.path.dirname(spec.origin), "cbc_dist", "bin", "cbc")
+        if os.access(candidate, os.X_OK):
+            return candidate
+    return None
+
+
+def solver() -> pulp.LpSolver:
+    path = cbc_path()
     if not path:
         raise RuntimeError("CBC not found: install it with `brew install cbc` or set CBC_PATH")
     return pulp.getSolver("COIN_CMD", path=path, msg=False)
@@ -166,3 +180,25 @@ def skipped_long_waiters(df: pd.DataFrame, assigned: pd.DataFrame, long_wait: in
     given_to_short = set(a.slot[a.weeks_waiting <= long_wait])
     left = cand[(cand.weeks_waiting > long_wait) & ~cand.patient_id.isin(assigned.patient_id)]
     return sorted(left.patient_id[left.pathway.map(lambda p: bool(set(ALLOWED[p]) & given_to_short))])
+
+
+def plan_to_json(plan: Plan, patients: pd.DataFrame, names: dict[str, str], with_page: set[str], week_of: str) -> dict:
+    """The plan as the This week page reads it (week.json and the backend's POST /week/build)."""
+    eligible = patients[patients.pathway.isin(list(ALLOWED))]
+
+    def person(r) -> dict:
+        return {"id": r.patient_id, "name": names.get(r.patient_id, r.patient_id), "pathway": r.pathway,
+                "priority": int(r.priority_score), "weeks_waiting": int(r.weeks_waiting), "long_wait": bool(r.long_wait),
+                "reason": r.reason, "has_page": r.patient_id in with_page}
+
+    lists = []
+    for slot, label in SLOT_NAMES.items():
+        chosen = plan.assigned[plan.assigned.slot == slot]
+        can_use = eligible.pathway.isin([p for p, allowed in ALLOWED.items() if slot in allowed])
+        lists.append({"kind": slot, "label": label, "capacity": plan.capacity[slot],
+                      "in": [person(r) for r in chosen.itertuples()],
+                      "next": [person(r) for r in plan.next[slot].itertuples()],
+                      "waiting": int(can_use.sum()) - len(chosen)})
+    return {"week_of": week_of, "method": "optimiser", "status": plan.status, "shortfall": plan.shortfall,
+            "patients": len(eligible), "lists": lists,
+            "long_wait": {k: (len(v) if k == "unmet" else v) for k, v in plan.long_wait.items()}}

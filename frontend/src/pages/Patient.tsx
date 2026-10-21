@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { confirmPathway, getPatient, overridePathway } from '../api'
+import { confirmPathway, getClinician, getPatient, overridePathway, setClinician } from '../api'
 import { Card, ErrorNote, Loading, Meter } from '../components/AppShell'
 import { primaryButton, secondaryButton } from '../components/ui'
 import { BackIcon, CheckIcon } from '../components/icons'
@@ -58,7 +58,7 @@ function Letter({ p, active, onPick }: { p: PatientData; active: string | null; 
       <div className="flex items-center gap-2 border-b border-line px-4 py-3 text-sm">
         <span className="font-medium">Letter</span>
         <span className="text-muted">{p.letter_id}</span>
-        <span className="ml-auto text-xs text-muted">{p.spans.length} quotes · read by {p.model}</span>
+        <span className="ml-auto text-xs text-muted">{p.spans.length} quotes{p.model ? ` · read by ${p.model}` : ''}</span>
       </div>
       <div className="max-h-[75vh] overflow-auto px-4 py-4 text-[13.5px] leading-6 whitespace-pre-wrap break-words">
         {segs.map((s, i) =>
@@ -91,6 +91,9 @@ export default function Patient() {
   const [letterOpen, setLetterOpen] = useState(false)
   const [overriding, setOverriding] = useState(false)
   const [choice, setChoice] = useState<PathwayKey | null>(null)
+  const [name, setName] = useState(getClinician)
+  const [reason, setReason] = useState('')
+  const [saving, setSaving] = useState(false)
 
   useEffect(() => {
     getPatient(id).then(setLoaded).catch(() => setError(true))
@@ -110,17 +113,19 @@ export default function Patient() {
         block: 'center', behavior: reduceMotion() ? 'auto' : 'smooth' }))
   }
 
-  async function confirm() {
-    const decision = await confirmPathway(p!.id, p!.pathway, current)
-    setP({ ...p!, decision })
+  async function decide(run: () => Promise<PatientData['decision']>) {
+    setSaving(true)
+    setClinician(name.trim())
+    try {
+      setP({ ...p!, decision: await run() })
+      setOverriding(false)
+      setReason('')
+    } finally {
+      setSaving(false)
+    }
   }
-
-  async function saveOverride() {
-    if (!choice) return
-    const decision = await overridePathway(p!.id, p!.pathway, choice)
-    setP({ ...p!, decision })
-    setOverriding(false)
-  }
+  const confirm = () => decide(() => confirmPathway(p!.id, p!.pathway, current, name.trim()))
+  const saveOverride = () => choice && decide(() => overridePathway(p!.id, p!.pathway, choice, name.trim(), reason.trim()))
 
   const weeks = p.weeks_waiting ?? 0
   const scale = Math.max(78, weeks)
@@ -148,10 +153,12 @@ export default function Patient() {
               <PathwayChip pathway={current} priority={p.priority} large />
               {p.weight_support && current === 'surgery' && <span className="chip chip-plain">+ weight support</span>}
               {p.decision?.kind === 'confirmed' && (
-                <span className="flex items-center gap-1 text-sm text-muted"><CheckIcon /> Confirmed</span>
+                <span className="flex items-center gap-1 text-sm text-muted"><CheckIcon /> Confirmed{p.decision.by ? ` · ${p.decision.by}` : ''}</span>
               )}
               {p.decision?.kind === 'overridden' && (
-                <span className="text-sm text-muted">Overridden · rules said {PATHWAYS[p.decision.was].short}</span>
+                <span className="text-sm text-muted">
+                  Overridden{p.decision.by ? ` by ${p.decision.by}` : ''} · rules said {PATHWAYS[p.decision.was].short}
+                </span>
               )}
             </div>
 
@@ -173,9 +180,16 @@ export default function Patient() {
               </div>
             )}
 
-            <div className="mt-4 flex flex-wrap gap-2">
+            {p.decision?.reason && <p className="mt-1 text-sm text-muted">“{p.decision.reason}”</p>}
+
+            <label className="mt-4 flex items-center gap-2 text-sm">
+              <span className="text-muted">Your name</span>
+              <input value={name} onChange={(e) => setName(e.target.value)} maxLength={80} placeholder="e.g. Dr A. Shah"
+                className="h-11 min-w-0 flex-1 rounded-md border border-line bg-surface px-3 text-sm focus:border-primary focus:outline-none" />
+            </label>
+            <div className="mt-2 flex flex-wrap gap-2">
               <button className={primaryButton} onClick={confirm}
-                disabled={p.decision?.kind === 'confirmed' && p.decision.pathway === current}>
+                disabled={saving || (p.decision?.kind === 'confirmed' && p.decision.pathway === current)}>
                 {p.decision?.kind === 'confirmed' && p.decision.pathway === current ? <><CheckIcon /> Confirmed</> : 'Confirm'}
               </button>
               <button className={secondaryButton} onClick={() => { setOverriding(!overriding); setChoice(null) }}
@@ -195,8 +209,10 @@ export default function Patient() {
                     </label>
                   ))}
                 </div>
+                <input value={reason} onChange={(e) => setReason(e.target.value)} maxLength={500} placeholder="Reason"
+                  className="mt-3 h-11 w-full rounded-md border border-line bg-surface px-3 text-sm focus:border-primary focus:outline-none" />
                 <div className="mt-3 flex gap-2">
-                  <button className={secondaryButton} disabled={!choice} onClick={saveOverride}>Save override</button>
+                  <button className={secondaryButton} disabled={!choice || saving} onClick={saveOverride}>Save override</button>
                   <button className="press h-11 px-3 text-sm text-muted" onClick={() => setOverriding(false)}>Cancel</button>
                 </div>
               </fieldset>
@@ -280,7 +296,11 @@ export default function Patient() {
             {letterOpen ? 'Hide letter' : 'Letter'}
           </button>
           <div className={`${letterOpen ? 'block' : 'hidden'} lg:block lg:sticky lg:top-20`}>
-            <Letter p={p} active={active} onPick={setActive} />
+            {p.letter_text ? <Letter p={p} active={active} onPick={setActive} /> : (
+              <div className="rounded-lg border border-dashed border-line p-6 text-center text-sm text-muted">
+                No letter · from the waiting list record
+              </div>
+            )}
           </div>
         </div>
       </div>

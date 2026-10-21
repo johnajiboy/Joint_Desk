@@ -9,7 +9,6 @@ in the letter so the app can highlight it.
 """
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 import re
@@ -22,7 +21,9 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 os.environ["DEMO_MODE"] = "1"                      # cache only: this script must never call the API
 from kneedss import extract as X                   # noqa: E402
+from kneedss.extract import quote_spans, text_key  # noqa: E402,F401  (re-exported for tests)
 from kneedss import optimise as O                  # noqa: E402
+from kneedss.results import build_results         # noqa: E402
 from kneedss.rules import PRIORITY_MAX             # noqa: E402
 
 OUT = ROOT / "data" / "output"
@@ -31,21 +32,6 @@ DEMO = ROOT / "frontend" / "public" / "demo"
 LETTER_SETS = [("dev", OUT / "letters.jsonl"), ("test", OUT / "test" / "letters.jsonl")]
 
 WEEK_OF = "2026-10-26"
-
-
-def text_key(text: str) -> str:
-    """Fingerprint used to recognise an uploaded copy of a demo letter (spacing ignored)."""
-    return hashlib.sha256(re.sub(r"\s+", " ", text).strip().encode()).hexdigest()
-
-
-def quote_spans(text: str, quotes: dict[str, str]) -> list[dict]:
-    """Where each quote sits in the letter. The quote check ignores spacing, so the search does too."""
-    spans = []
-    for field, q in quotes.items():
-        m = re.search(r"\s+".join(map(re.escape, q.split())), text)
-        if m:
-            spans.append({"field": field, "start": m.start(), "end": m.end()})
-    return sorted(spans, key=lambda s: (s["start"], -s["end"]))
 
 
 def write(path: Path, text: str) -> None:
@@ -59,74 +45,6 @@ def jsonable(v):
     if hasattr(v, "item"):
         return v.item()
     return None if isinstance(v, float) and v != v else v
-
-
-def week_plan(wl: pd.DataFrame, with_page: set[str]) -> dict:
-    """The optimiser's plan for this week on the cleaned waiting list (stage 5)."""
-    plan = O.optimise(wl)
-    names = wl.set_index("patient_id").apply(lambda r: f"{r.first_name} {r.surname}", axis=1)
-    eligible = wl[wl.pathway.isin(O.ALLOWED)]
-
-    def person(r) -> dict:
-        return {"id": r.patient_id, "name": names[r.patient_id], "pathway": r.pathway, "priority": int(r.priority_score),
-                "weeks_waiting": int(r.weeks_waiting), "long_wait": bool(r.long_wait), "reason": r.reason,
-                "has_page": r.patient_id in with_page}
-
-    lists = []
-    for slot, label in O.SLOT_NAMES.items():
-        chosen = plan.assigned[plan.assigned.slot == slot]
-        can_use = eligible.pathway.map(lambda p: slot in O.ALLOWED[p])
-        lists.append({"kind": slot, "label": label, "capacity": plan.capacity[slot],
-                      "in": [person(r) for r in chosen.itertuples()],
-                      "next": [person(r) for r in plan.next[slot].itertuples()],
-                      "waiting": int(can_use.sum()) - len(chosen)})
-    return {"week_of": WEEK_OF, "method": "optimiser", "status": plan.status, "shortfall": plan.shortfall,
-            "patients": len(eligible), "lists": lists,
-            "long_wait": {k: (len(v) if k == "unmet" else v) for k, v in plan.long_wait.items()}}
-
-
-def optimise_results() -> dict | None:
-    """Stage 5 simulation summary for the Results page (eval/eval_optimise.py must have been run)."""
-    path = RESULTS / "optimise" / "optimise_summary.json"
-    if not path.exists():
-        return None
-    o = json.loads(path.read_text())
-    keep = ("policy", "surgery_capacity", "over_18_end", "over_52_end", "over_52_mean", "over_52_skipped_patients",
-            "weeks_infeasible", "mean_wait_surgery", "mean_oks_operated")
-    return {"weeks": o["weeks"], "arrival_rate": round(o["arrival_rate"], 1), "capacity": o["capacity"],
-            "thresholds": o["thresholds"], "seeds": o["seeds"], "metrics": o["metrics"],
-            "triage_off_scenario": o["triage_off_scenario"], "triage_off_rule": o["triage_off_rule"], "series": o["series"],
-            "summary": [{k: r[k] for k in keep} for r in o["summary"]],
-            "robustness": o["robustness"], "pairs": o["pairs"]}
-
-
-def tree_results() -> dict | None:
-    """Stage 4 summary for the Results page (eval/eval_tree.py must have been run)."""
-    path = RESULTS / "tree" / "tree_summary.json"
-    if not path.exists():
-        return None
-    t = json.loads(path.read_text())
-    runs = {r["name"]: r for r in t["runs"]}
-    cont, disc = runs["continuous"], runs["discretised"]
-    banded_cut = {x["rule"]: x for x in disc["thresholds"]}
-    return {
-        "truth_check": {k: t["truth_check"][k] for k in ("patients", "matching")},
-        "train": t["train"], "test": t["test"],
-        "runs": [{k: r[k] for k in ("name", "agreement", "agreement_complete", "cv_accuracy", "depth", "leaves",
-                                    "best_params", "test_patients")} | {"disagreements": len(r["disagreements"])}
-                 for r in (cont, disc)],
-        "thresholds": [{"rule": x["rule"], "short": x["short"], "rule_cut": x["rule_cut"], "tree": x["tree_nearest"],
-                        "same": x["same_cut"], "banded": banded_cut[x["rule"]]["tree_nearest"],
-                        "banded_same": banded_cut[x["rule"]]["same_cut"]}
-                       for x in cont["thresholds"]],
-        # the cut points the banded tree can't draw, and the band edge it used instead
-        "band_misses": [{"short": x["short"], "rule_cut": x["rule_cut"], "band_edge": x["tree_nearest"]}
-                        for x in disc["thresholds"] if not x["same_cut"] and x["tree_nearest"] is not None],
-        "disagreements": [{k: d[k] for k in ("patient_id", "oks", "kl_grade", "bmi", "physio_weeks", "oks_drop",
-                                              "rules", "tree", "model")} for d in cont["disagreements"] + disc["disagreements"]],
-        "importances": cont["importances"],
-        "tree_text": (RESULTS / "tree" / "tree_rules.txt").read_text(),
-    }
 
 
 def main() -> None:
@@ -167,31 +85,11 @@ def main() -> None:
             old.unlink()
     queue.sort(key=lambda r: (-r["priority"], -(r["weeks_waiting"] or 0)))
     write(DEMO / "queue.json", json.dumps(queue))
-    write(DEMO / "week.json", json.dumps(week_plan(wl, {r["id"] for r in queue}), default=jsonable))
+    names = dict(zip(wl.patient_id, wl.first_name + " " + wl.surname))
+    plan = O.plan_to_json(O.optimise(wl), wl, names, {r["id"] for r in queue}, WEEK_OF)
+    write(DEMO / "week.json", json.dumps(plan, default=jsonable))
 
-    # results: extraction (dev and held-out test) and cleaning
-    by_issue = pd.read_csv(RESULTS / "cleaning_by_issue.csv")
-    actions = pd.read_csv(OUT / "cleaning_actions.csv")
-    raw_rows = sum(1 for _ in open(OUT / "patients_raw.csv")) - 1
-    extraction = {}
-    for name, p in [("dev", RESULTS / "extraction_summary.json"), ("test", RESULTS / "test" / "extraction_summary.json")]:
-        s = json.loads(p.read_text())
-        extraction[name] = {k: s[k] for k in ("letters", "model", "mean_field_accuracy", "letters_all_fields_right",
-                                              "quote_hit_rate", "facts_dropped", "pathway_agreement",
-                                              "priority_mae", "field_accuracy")} \
-            | {"cost_usd": (s.get("usage") or {}).get("cost_usd")}
-    results = {
-        "extraction": extraction,
-        "cleaning": {
-            "raw_rows": raw_rows, "patients": len(wl),
-            "duplicates_removed": int((actions.field == "(row)").sum()),
-            "logged": int(by_issue.logged.sum()), "fixed": int(by_issue.fixed.sum()),
-            "set_missing": int(by_issue["set missing"].sum()), "wrong": int(by_issue.wrong.sum()),
-            "by_issue": by_issue.to_dict(orient="records"),
-        },
-        "decision_tree": tree_results(),
-        "optimise": optimise_results(),
-    }
+    results = build_results()
     write(DEMO / "results.json", json.dumps(results, default=jsonable))
 
     size = sum(f.stat().st_size for f in DEMO.rglob("*.json"))

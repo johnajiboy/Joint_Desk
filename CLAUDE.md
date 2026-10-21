@@ -79,7 +79,11 @@ docs/             assumptions, data dictionary
    surgery 8/12/16), triage on vs off (KL 2+ straight to surgery) and 20 arrival seeds (mean ± 95% CI, paired
    verdicts) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
    Every figure on the Results page comes from `results.json` (exported from eval/results); none are typed in.
-6. Backend API: upload, queue, patient, confirm, build week, results.
+6. Done: backend API (`backend/`: FastAPI + SQLModel + SQLite `backend/joint_desk.db`, gitignored). Seeds on first
+   start from the cleaned waiting list and the 250 checked letters (demo export), so it needs no cache or API.
+   POST /letters, GET /queue, GET /patients/{id}, POST /patients/{id}/confirm and /override (who, when, old/new,
+   reason), POST /week/build (optimiser, overrides included), GET /results. Frontend uses it when VITE_API_URL is
+   set. Deployed on Render from `render.yaml` with DEMO_MODE=1; ANTHROPIC_API_KEY only in Render's settings.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
    `VITE_API_URL` is set). Week list is a greedy stand-in (`frontend/src/week.ts`) until stage 5.
@@ -176,6 +180,7 @@ python eval/eval_tree.py
 python eval/eval_optimise.py
 python scripts/export_demo.py          # demo JSON for the frontend, from the cache
 pytest
-uvicorn backend.main:app --reload
+pip install -r backend/requirements.txt && uvicorn backend.main:app --reload   # API on :8000
+cd frontend && VITE_API_URL=http://localhost:8000 npm run dev                     # frontend on the API
 cd frontend && npm run dev
 ```

@@ -36,7 +36,7 @@ export function AppShell() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2">
-            {DEMO && <span className="chip chip-plain hidden md:inline-flex">Demo data</span>}
+            <span className="chip chip-plain hidden md:inline-flex">{DEMO ? 'Demo data' : 'Live'}</span>
             <ThemeToggle theme={theme} onToggle={toggle}
               className="press inline-flex h-11 min-w-11 items-center justify-center gap-2 rounded-md border border-line px-3 text-sm hover:border-primary [&_.toggle-label]:hidden lg:[&_.toggle-label]:inline" />
           </div>

@@ -1,7 +1,8 @@
 /**
- * All data access. Without VITE_API_URL the app runs in demo mode: it reads the JSON exported by
- * scripts/export_demo.py from /demo/ and keeps the clinician's decisions in localStorage. With VITE_API_URL set,
- * the same functions call the FastAPI backend (stage 6). Nothing here ever holds an API key.
+ * All data access. With VITE_API_URL set, every function calls the FastAPI backend (backend/main.py), which
+ * stores decisions in its database. Without it the app runs in demo mode: it reads the JSON exported by
+ * scripts/export_demo.py from /demo/ and keeps decisions in this browser's localStorage. No API key ever
+ * reaches the frontend.
  */
 import type { Decision, PathwayKey, Patient, Referral, Results, UploadResult, WeekPlan } from './types'
 
@@ -42,35 +43,54 @@ function decisionFor(id: string): Decision | undefined {
   return memory[id] ?? readDecisions()[id]
 }
 
-async function saveDecision(id: string, d: Decision): Promise<Decision> {
-  if (DEMO) {
-    writeDecision(id, d)
-    return d
+function post<T>(path: string, body: unknown): Promise<T> {
+  return request<T>('', path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+}
+
+/** Who is deciding. No accounts yet: the name the clinician types, remembered in this browser. */
+const NAME_KEY = 'jd-clinician'
+
+export function getClinician(): string {
+  try {
+    return localStorage.getItem(NAME_KEY) ?? ''
+  } catch {
+    return ''
   }
-  return request<Decision>('', `/patients/${id}/decision`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(d),
-  })
 }
 
-export function confirmPathway(id: string, rulesPathway: PathwayKey, pathway: PathwayKey) {
-  return saveDecision(id, { kind: 'confirmed', pathway, was: rulesPathway, at: new Date().toISOString() })
+export function setClinician(name: string) {
+  try {
+    localStorage.setItem(NAME_KEY, name)
+  } catch {
+    // storage blocked: the name is asked again next time
+  }
 }
 
-export function overridePathway(id: string, rulesPathway: PathwayKey, pathway: PathwayKey) {
+/** Confirm the pathway that counts now. Backend: stored with who and when. Demo: this browser only. */
+export async function confirmPathway(id: string, rulesPathway: PathwayKey, pathway: PathwayKey, by: string, reason?: string) {
+  if (!DEMO) return post<Decision>(`/patients/${id}/confirm`, { by: by || 'clinician', reason: reason || null })
+  const d: Decision = { kind: 'confirmed', pathway, was: rulesPathway, by, reason, at: new Date().toISOString() }
+  writeDecision(id, d)
+  return d
+}
+
+/** Change the pathway. Backend: stored with who, when, old and new pathway and the reason. */
+export async function overridePathway(id: string, rulesPathway: PathwayKey, pathway: PathwayKey, by: string, reason?: string) {
+  if (!DEMO) return post<Decision>(`/patients/${id}/override`, { pathway, by: by || 'clinician', reason: reason || null })
   const kind = pathway === rulesPathway ? 'confirmed' : 'overridden'
-  return saveDecision(id, { kind, pathway, was: rulesPathway, at: new Date().toISOString() })
+  const d: Decision = { kind, pathway, was: rulesPathway, by, reason, at: new Date().toISOString() }
+  writeDecision(id, d)
+  return d
 }
 
 // ------------------------------------------------------------------ reads
 
-let queueRequest: Promise<Referral[]> | null = null
+let demoQueue: Promise<Referral[]> | null = null
 
 export async function getQueue(): Promise<Referral[]> {
-  queueRequest ??= request<Referral[]>('queue.json', '/queue')
-  const queue = await queueRequest
-  return DEMO ? queue.map((r) => ({ ...r, decision: decisionFor(r.id) })) : queue
+  if (!DEMO) return request<Referral[]>('', '/queue')          // always fresh: uploads and decisions change it
+  demoQueue ??= request<Referral[]>('queue.json', '')
+  return (await demoQueue).map((r) => ({ ...r, decision: decisionFor(r.id) }))
 }
 
 export async function getPatient(id: string): Promise<Patient> {
@@ -105,10 +125,10 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 export async function uploadLetter(file: File): Promise<UploadResult> {
   if (!DEMO) {
     const body = new FormData()
-    body.append('file', file)
+    body.append('files', file)
     try {
-      const referral = await request<Referral>('', '/letters', { method: 'POST', body })
-      return { file: file.name, ok: true, referral }
+      const [result] = await request<UploadResult[]>('', '/letters', { method: 'POST', body })
+      return result
     } catch {
       return { file: file.name, ok: false, message: "Couldn't read file" }
     }

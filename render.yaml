@@ -1,0 +1,22 @@
+# Render blueprint: the Joint Desk API as a free web service.
+# Secrets are never in this file: ANTHROPIC_API_KEY is set by hand in the Render dashboard (sync: false).
+services:
+  - type: web
+    name: joint-desk-api
+    runtime: python
+    plan: free
+    region: frankfurt
+    buildCommand: pip install -r requirements.txt -r backend/requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.15"
+      # cached LLM results only: the public site never spends API credit
+      - key: DEMO_MODE
+        value: "1"
+      - key: ALLOWED_ORIGINS
+        value: "https://frontend-wine-ten-82.vercel.app,https://frontend-johnajiboys-projects.vercel.app,https://frontend-git-main-johnajiboys-projects.vercel.app,http://localhost:5173,http://localhost:4173"
+      - key: ANTHROPIC_API_KEY
+        sync: false

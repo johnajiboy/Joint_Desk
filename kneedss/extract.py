@@ -203,6 +203,23 @@ def extract(text: str, letter_id: str, refresh: bool = False) -> Extraction:
                       from_cache=from_cache, usage=usage)
 
 
+# ---------------------------------------------------------------------------- for the app
+
+def text_key(text: str) -> str:
+    """Fingerprint used to recognise an uploaded copy of a demo letter (spacing ignored)."""
+    return hashlib.sha256(re.sub(r"\s+", " ", text).strip().encode()).hexdigest()
+
+
+def quote_spans(text: str, quotes: dict[str, str]) -> list[dict]:
+    """Where each quote sits in the letter. The quote check ignores spacing, so the search does too."""
+    spans = []
+    for field, q in quotes.items():
+        m = re.search(r"\s+".join(map(re.escape, q.split())), text)
+        if m:
+            spans.append({"field": field, "start": m.start(), "end": m.end()})
+    return sorted(spans, key=lambda s: (s["start"], -s["end"]))
+
+
 # ---------------------------------------------------------------------------- rules
 
 def decide_letter(facts: dict, weeks_waiting: int | None = None) -> dict:

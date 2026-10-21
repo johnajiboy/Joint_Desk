@@ -4,22 +4,25 @@ export type PathwayKey = 'surgery' | 'physio' | 'weight_physio' | 'non_surgical'
 export interface Decision {
   kind: 'confirmed' | 'overridden'
   pathway: PathwayKey
-  was: PathwayKey
+  was: PathwayKey              // what the rules said
+  old_pathway?: PathwayKey     // the pathway before this decision (backend)
+  reason?: string | null
+  by?: string
   at: string
 }
 
 export interface Referral {
   id: string
-  letter_id: string
-  set: 'dev' | 'test'
+  letter_id: string | null
+  set: 'dev' | 'test' | 'upload' | null
   name: string
   pathway: PathwayKey
   rule: number
   priority: number
   weeks_waiting: number | null
   weight_support: boolean
-  text_key: string
-  decision?: Decision
+  text_key: string | null
+  decision?: Decision | null
 }
 
 export type FactValue = string | number | boolean | null
@@ -41,7 +44,7 @@ export interface Patient extends Omit<Referral, 'text_key'> {
   reasons: string[]
   priority_parts: Record<string, number>
   priority_max: Record<string, number>
-  model: string
+  model: string | null
   letter_text: string
 }
 
