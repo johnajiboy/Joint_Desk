@@ -15,6 +15,7 @@
   --color-primary-hover: var(--primary-hover);
   --color-on-primary: var(--on-primary);
   --color-danger: var(--danger);
+  --color-good: var(--good);
 }
 
 :root {
@@ -45,6 +46,8 @@
   --series-1: #2a78d6;
   --series-2: #eb6834;
   --series-3: #1baf7a;
+  --gap-fill: rgb(42 120 214 / 0.14);
+  --good: #1e6b3a;
   color-scheme: light;
 }
 
@@ -74,6 +77,8 @@
   --series-1: #3987e5;
   --series-2: #d95926;
   --series-3: #199e70;
+  --gap-fill: rgb(57 135 229 / 0.2);
+  --good: #7fd49c;
   color-scheme: dark;
 }
 

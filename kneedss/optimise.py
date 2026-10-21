@@ -21,7 +21,8 @@ import pulp
 
 SLOT_NAMES = {"surgery": "Surgery", "physio": "Physio", "weight_support": "Weight support"}
 CAPACITY = {"surgery": 12, "physio": 20, "weight_support": 8}
-LONG_WAIT = 52
+LONG_WAIT = 52            # weeks: the NHS maximum wait; over this a patient must get a slot
+STANDARD_WEEKS = 18       # weeks: the NHS referral-to-treatment target
 # Slot types each pathway may use, preferred first.
 ALLOWED = {"surgery": ["surgery"], "physio": ["physio"], "weight_physio": ["weight_support", "physio"]}
 NEXT_SHOWN = 5

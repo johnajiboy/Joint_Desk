@@ -40,7 +40,7 @@ SEED = 2026
 SURGERY_CAPACITIES = [8, 12, 16]
 POLICIES = ["FCFS", "Priority only", "Optimiser"]
 ELIGIBLE = list(O.ALLOWED)
-STANDARD_WEEKS = 18                      # RTT standard; the long-wait mark is O.LONG_WAIT
+STANDARD_WEEKS = O.STANDARD_WEEKS        # RTT standard; the long-wait mark is O.LONG_WAIT
 ROBUST_SEEDS = list(range(SEED, SEED + 20))
 TRIAGE_OFF = "Optimiser, triage off"
 TRIAGE_OFF_MIN_KL = 2                    # triage off: KL at or above this goes straight on the surgery list
@@ -232,10 +232,11 @@ def ci95(x: pd.Series) -> tuple[float, float, float]:
     return m, m - h, m + h
 
 
-def seed_runs(start: pd.DataFrame, rate: float, seeds: list[int], capacity: dict) -> pd.DataFrame:
-    """Every policy, plus the optimiser with triage off, for each arrival seed."""
+def seed_runs(start: pd.DataFrame, rate: float, seeds: list[int], capacity: dict) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Every policy, plus the optimiser with triage off, for each arrival seed. Also returns the weekly surgery-list
+    size for triage on (the optimiser) and off, per seed, starting at week 0 (the list before any slots)."""
     off_start = triage_off(start)
-    rows = []
+    rows, lists = [], []
     for seed in seeds:
         new = arrivals(start, rate, WEEKS, seed)
         runs = [(p, start, new) for p in POLICIES] + [(TRIAGE_OFF, off_start, [triage_off(n) for n in new])]
@@ -243,7 +244,23 @@ def seed_runs(start: pd.DataFrame, rate: float, seeds: list[int], capacity: dict
             weekly, served, skipped = simulate(s0, ns, "Optimiser" if name == TRIAGE_OFF else name, capacity)
             rows.append({**summarise(weekly, served, skipped, name, capacity["surgery"]), "seed": seed,
                          "surgery_list_start": int((s0.pathway == "surgery").sum())})
-    return pd.DataFrame(rows)
+            if name in ("Optimiser", TRIAGE_OFF):
+                triage = "on" if name == "Optimiser" else "off"
+                lists.append({"seed": seed, "triage": triage, "week": 0, "surgery_list": int((s0.pathway == "surgery").sum())})
+                lists += [{"seed": seed, "triage": triage, "week": int(w), "surgery_list": int(n)}
+                          for w, n in zip(weekly.week, weekly.waiting_surgery)]
+    return pd.DataFrame(rows), pd.DataFrame(lists)
+
+
+def surgery_list_series(lists: pd.DataFrame, seed: int) -> dict:
+    """Weekly surgery-list size, triage on vs off: one seed, and the mean over all seeds."""
+    one = lists[lists.seed == seed]
+    mean = lists.groupby(["triage", "week"]).surgery_list.mean().round(1)
+    weeks = sorted(one.week.unique())
+    pick = lambda d, t: [float(x) for x in d[d.triage == t].sort_values("week").surgery_list]
+    return {"seed": seed, "seeds": int(lists.seed.nunique()), "weeks": [int(w) for w in weeks],
+            "on": pick(one, "on"), "off": pick(one, "off"),
+            "mean_on": [float(mean[("on", w)]) for w in weeks], "mean_off": [float(mean[("off", w)]) for w in weeks]}
 
 
 def robustness_tables(runs: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
@@ -352,7 +369,8 @@ def main() -> None:
         "![Sensitivity](sensitivity.png)", "",
     ]
     # triage off and robustness (20 arrival seeds, surgery capacity 12)
-    runs = seed_runs(start, rate, ROBUST_SEEDS, O.CAPACITY)
+    runs, lists = seed_runs(start, rate, ROBUST_SEEDS, O.CAPACITY)
+    lists.to_csv(RESULTS / "surgery_list_weekly.csv", index=False)
     runs.to_csv(RESULTS / "robustness_runs.csv", index=False)
     robust, pairs = robustness_tables(runs)
     robust.to_csv(RESULTS / "robustness.csv", index=False)
@@ -397,6 +415,7 @@ def main() -> None:
         "seeds": ROBUST_SEEDS, "metrics": METRICS, "triage_off_scenario": TRIAGE_OFF,
         "triage_off_rule": f"every referral with KL ≥ {TRIAGE_OFF_MIN_KL} goes straight on the surgery list",
         "robustness": robust.to_dict(orient="records"), "pairs": pairs.to_dict(orient="records"),
+        "surgery_list": surgery_list_series(lists, SEED),
         "summary": summary.to_dict(orient="records"),
         "series": {p: series[series.policy == p].drop(columns="policy").to_dict(orient="records") for p in POLICIES},
     }, indent=1, default=lambda v: v.item() if hasattr(v, "item") else str(v)))

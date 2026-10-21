@@ -157,3 +157,21 @@ def test_robustness_verdicts():
     assert v[("Optimiser - Priority only", "over_52_skipped_patients")] == "holds: lower in 5/5 seeds"
     assert v[("Optimiser - Priority only", "mean_wait_surgery")] == "holds: higher in 5/5 seeds"
     assert v[("Optimiser - FCFS", "mean_wait_surgery")].startswith("holds: lower in")
+
+
+def test_surgery_list_series_one_seed_and_mean():
+    lists = pd.DataFrame([{"seed": s, "triage": t, "week": w, "surgery_list": base + s * 10 + w}
+                          for s in (1, 2) for t, base in (("on", 100), ("off", 200)) for w in (0, 1, 2)])
+    out = E.surgery_list_series(lists, 1)
+    assert out["weeks"] == [0, 1, 2] and out["seeds"] == 2
+    assert out["on"] == [110, 111, 112] and out["off"] == [210, 211, 212]
+    assert out["mean_on"] == [115, 116, 117] and out["mean_off"] == [215, 216, 217]
+
+
+def test_backlog_counts_add_up():
+    from kneedss.results import backlog_results
+    b = backlog_results()
+    assert sum(b["by_pathway"].values()) == b["patients"] == 1500
+    assert b["surgery"] == b["by_pathway"]["surgery"]
+    assert b["over_long_wait"] <= b["over_standard"] <= b["waiting_for_slot"]
+    assert (b["standard_weeks"], b["long_wait_weeks"]) == (O.STANDARD_WEEKS, O.LONG_WAIT)

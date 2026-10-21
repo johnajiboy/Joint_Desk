@@ -76,7 +76,7 @@ def test_unknown_or_bad_patient_id(client):
 
 def test_results_come_from_the_eval_files(client):
     r = client.get("/results").json()
-    assert set(r) == {"extraction", "cleaning", "decision_tree", "optimise"}
+    assert set(r) == {"extraction", "cleaning", "decision_tree", "optimise", "backlog"}
     demo = json.loads((ROOT / "frontend" / "public" / "demo" / "results.json").read_text())
     assert r == demo                                                  # the API and the static demo agree
 

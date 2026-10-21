@@ -3,8 +3,8 @@ import type { RefObject } from 'react'
 
 /**
  * A pausable animation clock for the Results charts. Calls `frame(ms)` every animation frame with the time the
- * loop has been running. Time stops while the pointer is over `card` and while the tab is hidden, so loops
- * resume where they left off. Under prefers-reduced-motion it calls `frame(Infinity)` once: draw the final state.
+ * loop has been running. Time stops while the pointer is over `card`, while the tab is hidden and while the card
+ * isn't rendered (e.g. inside a closed <details>), so loops resume where they left off. Under prefers-reduced-motion it calls `frame(Infinity)` once: draw the final state.
  * Frames should only set transform, opacity or stroke-dashoffset.
  */
 export function useLoop(card: RefObject<HTMLElement | null>, frame: (ms: number) => void) {
@@ -31,8 +31,10 @@ export function useLoop(card: RefObject<HTMLElement | null>, frame: (ms: number)
     const tick = (now: number) => {
       const dt = Math.min(now - last, 100)          // a long gap (tab switch) never jumps the loop
       last = now
-      if (!hovered && document.visibilityState === 'visible') elapsed += dt
-      latest.current(elapsed)
+      // a card inside a closed <details> isn't rendered (content-visibility), so its loop doesn't run at all
+      const shown = !el || (el.checkVisibility ? el.checkVisibility() : el.getClientRects().length > 0)
+      if (shown && !hovered && document.visibilityState === 'visible') elapsed += dt
+      if (shown) latest.current(elapsed)
       raf = requestAnimationFrame(tick)
     }
     raf = requestAnimationFrame(tick)

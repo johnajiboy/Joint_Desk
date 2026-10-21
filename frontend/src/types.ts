@@ -112,6 +112,19 @@ export interface Results {
   }
   decision_tree: TreeResults | null
   optimise: OptimiseResults | null
+  backlog: Backlog
+}
+
+/** The current (cleaned) waiting list. */
+export interface Backlog {
+  patients: number
+  waiting_for_slot: number
+  surgery: number
+  over_standard: number
+  over_long_wait: number
+  standard_weeks: number
+  long_wait_weeks: number
+  by_pathway: Partial<Record<PathwayKey, number>>
 }
 
 export type Policy = 'FCFS' | 'Priority only' | 'Optimiser'
@@ -134,6 +147,7 @@ export interface OptimiseResults {
   triage_off_rule: string
   robustness: CI[]
   pairs: Pair[]
+  surgery_list: { seed: number; seeds: number; weeks: number[]; on: number[]; off: number[]; mean_on: number[]; mean_off: number[] } | null
   series: Record<Policy, { week: number; over_18: number; over_52: number; waiting: number }[]>
   summary: { policy: Policy; surgery_capacity: number; over_18_end: number; over_52_end: number; over_52_mean: number;
     over_52_skipped_patients: number; weeks_infeasible: number; mean_wait_surgery: number; mean_oks_operated: number }[]

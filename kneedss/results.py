@@ -50,7 +50,7 @@ def optimise_results() -> dict | None:
             "thresholds": o["thresholds"], "seeds": o["seeds"], "metrics": o["metrics"],
             "triage_off_scenario": o["triage_off_scenario"], "triage_off_rule": o["triage_off_rule"], "series": o["series"],
             "summary": [{k: r[k] for k in keep} for r in o["summary"]],
-            "robustness": o["robustness"], "pairs": o["pairs"]}
+            "robustness": o["robustness"], "pairs": o["pairs"], "surgery_list": o.get("surgery_list")}
 
 
 def tree_results() -> dict | None:
@@ -82,6 +82,19 @@ def tree_results() -> dict | None:
     }
 
 
+def backlog_results() -> dict:
+    """The current waiting list (cleaned): how many need a slot, how long they have waited, where referrals went."""
+    from kneedss.optimise import ALLOWED, LONG_WAIT, STANDARD_WEEKS
+    wl = pd.read_csv(OUT / "waiting_list.csv")
+    slot = wl[wl.pathway.isin(list(ALLOWED))]
+    return {
+        "patients": len(wl), "waiting_for_slot": len(slot), "surgery": int((wl.pathway == "surgery").sum()),
+        "over_standard": int((slot.weeks_waiting > STANDARD_WEEKS).sum()), "over_long_wait": int((slot.weeks_waiting > LONG_WAIT).sum()),
+        "standard_weeks": STANDARD_WEEKS, "long_wait_weeks": LONG_WAIT,
+        "by_pathway": {k: int(v) for k, v in wl.pathway.value_counts().items()},
+    }
+
+
 def build_results() -> dict:
     return {"extraction": extraction_results(), "cleaning": cleaning_results(),
-            "decision_tree": tree_results(), "optimise": optimise_results()}
+            "decision_tree": tree_results(), "optimise": optimise_results(), "backlog": backlog_results()}
