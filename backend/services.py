@@ -19,7 +19,8 @@ from kneedss import llm
 from kneedss import optimise as O
 from kneedss.rules import PATHWAYS, PRIORITY_MAX
 
-LETTER_ID = re.compile(r"^[LT]\d{4}$")
+# A demo letter's ID at the start of a file name: L0001.txt, T0042.pdf, "L0001 (1).pdf"
+LETTER_ID = re.compile(r"^([LT]\d{4})(?!\d)")
 
 
 # ---------------------------------------------------------------------------- decisions
@@ -130,8 +131,17 @@ def read_letter(session: Session, filename: str, data: bytes) -> dict:
         p = session.get(Patient, seen.patient_id)
         return {"file": filename, "ok": True, "referral": referral_out(p, seen, latest_decision(session, p.id))}
 
-    stem = Path(filename).stem.strip().upper()
-    letter_id = stem if LETTER_ID.match(stem) else f"U{key[:11].upper()}"
+    named = LETTER_ID.match(Path(filename).stem.strip().upper())
+    letter_id = named.group(1) if named else f"U{key[:11].upper()}"
+
+    # Same letter in another format (a PDF or DOCX of a letter already read): reuse its facts only if every quote
+    # behind them is in this document, then highlight them in this document's text. No extraction needed.
+    stored = session.exec(select(Letter).where(Letter.letter_id == letter_id)
+                          .order_by(col(Letter.read_at).desc())).first() if named else None
+    if stored and stored.quotes and all(X.quote_in_letter(q, text) for q in stored.quotes.values()):
+        p = session.get(Patient, stored.patient_id)
+        return _save(session, p, filename, letter_id, text, key, stored.model, stored.facts, stored.quotes, stored.dropped)
+
     try:
         ex = X.extract(text, letter_id)
     except X.DemoCacheMiss:
@@ -148,13 +158,19 @@ def read_letter(session: Session, filename: str, data: bytes) -> dict:
                     name=str(ex.facts.get("name") or "Unknown"), age=ex.facts.get("age"), sex=ex.facts.get("sex"),
                     side=ex.facts.get("side"), weeks_waiting=0, on_waiting_list=False,
                     pathway="review", rule=1, priority=0)
+    return _save(session, p, filename, letter_id, text, key, ex.model, ex.facts, ex.quotes, ex.dropped)
+
+
+def _save(session: Session, p: Patient, filename: str, letter_id: str, text: str, key: str, model: str,
+          facts: dict, quotes: dict, dropped: list) -> dict:
+    """Store the letter, apply the rules to the patient, and return the UploadResult."""
     letter = Letter(letter_id=letter_id, patient_id=p.id, filename=filename[:200], source="upload", text=text,
-                    text_key=key, model=ex.model, facts=ex.facts, quotes=ex.quotes,
-                    spans=X.quote_spans(text, ex.quotes), dropped=ex.dropped)
+                    text_key=key, model=model, facts=facts, quotes=quotes, spans=X.quote_spans(text, quotes),
+                    dropped=dropped)
     session.add(p)
     session.flush()
     session.add(letter)
-    _apply(session, p, letter, ex.facts)
+    _apply(session, p, letter, facts)
     session.commit()
     session.refresh(p)
     return {"file": filename, "ok": True, "referral": referral_out(p, letter, latest_decision(session, p.id))}

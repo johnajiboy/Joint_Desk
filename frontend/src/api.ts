@@ -119,8 +119,8 @@ async function textKey(text: string): Promise<string> {
 const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 /**
- * Read one letter. Demo mode has no LLM, so it recognises the demo letters by file name (L0001.txt, T0042.pdf)
- * or, for text files, by their content, and shows the saved result.
+ * Read one letter. Demo mode has no LLM, so it recognises the demo letters by base name (L0001.txt, L0001.pdf,
+ * T0042.docx all mean that letter) or, for text files, by their content, and shows the saved result.
  */
 export async function uploadLetter(file: File): Promise<UploadResult> {
   if (!DEMO) {
@@ -135,8 +135,9 @@ export async function uploadLetter(file: File): Promise<UploadResult> {
   }
   const started = Date.now()
   const queue = await getQueue()
-  const stem = file.name.replace(/\.[^.]+$/, '').trim().toUpperCase()
-  let match = queue.find((r) => r.letter_id === stem)
+  // the letter ID at the start of the name: L0001.txt, L0001.pdf, T0042.docx, "L0001 (1).pdf"
+  const id = /^([LT]\d{4})(?!\d)/.exec(file.name.trim().toUpperCase())?.[1]
+  let match = id ? queue.find((r) => r.letter_id === id) : undefined
   if (!match && (file.type.startsWith('text/') || /\.txt$/i.test(file.name))) {
     const key = await textKey(await file.text())
     match = queue.find((r) => r.text_key === key)

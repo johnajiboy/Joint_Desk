@@ -10,3 +10,9 @@ data/cache/
 
 # iCloud Drive conflict copies ("name 2.json")
 * [0-9].*
+
+# Exported letters (scripts/export_pdfs.py): rebuild locally, not committed
+data/output/letters_pdf/
+data/output/test/letters_pdf/
+data/output/letters_docx/
+data/output/*.zip

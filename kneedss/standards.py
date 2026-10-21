@@ -113,6 +113,15 @@ PRACTICES = [
     ("Y99007", "Teesway Medical Group"), ("Y99008", "Eston Hills Surgery"),
     ("Y99009", "Thornaby Bridge Practice"), ("Y99010", "Stockton Quay Health Centre"),
 ]
+# Fictional addresses for the practices above (used on the PDF letterheads). Streets are invented and postcodes are
+# outward codes only, so no real address can be matched.
+PRACTICE_ADDRESSES = {
+    "Y99001": "1 Riverside Walk, Middlesbrough TS1", "Y99002": "48 Linthorpe Lane, Middlesbrough TS5",
+    "Y99003": "Acklam Green, Acklam, Middlesbrough TS5", "Y99004": "Marton Park Road, Marton, Middlesbrough TS7",
+    "Y99005": "2 Coulby Fields Way, Coulby Newham TS8", "Y99006": "17 North Ormesby Square, Middlesbrough TS3",
+    "Y99007": "Teesway House, Stockton-on-Tees TS18", "Y99008": "Eston Hills Road, Eston TS6",
+    "Y99009": "5 Bridge Street, Thornaby TS17", "Y99010": "Quayside, Stockton-on-Tees TS18",
+}
 GP_NAMES = ["Dr A. Patel", "Dr S. Byrne", "Dr R. Hughes", "Dr L. Okonkwo", "Dr M. Clarke", "Dr K. Ahmed",
             "Dr J. Fenwick", "Dr P. Sharma", "Dr E. Lowther", "Dr T. Adeyemi", "Dr H. Robson", "Dr N. Iqbal"]
 

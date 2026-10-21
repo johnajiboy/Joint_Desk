@@ -193,3 +193,48 @@ def test_cors_only_for_the_site_and_localhost(client):
     assert local.headers.get("access-control-allow-origin") == "http://localhost:5173"
     other = client.get("/health", headers={"Origin": "https://evil.example"})
     assert "access-control-allow-origin" not in other.headers
+
+
+# ---------------------------------------------------------------- PDF and DOCX uploads (stage 8)
+
+def _export():
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("export_pdfs", ROOT / "scripts" / "export_pdfs.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+FORMATS = [("L0010", "pdf"), ("L0020", "pdf"), ("L0030", "pdf"), ("T0010", "pdf"), ("T0020", "pdf"),
+           ("L0040", "docx"), ("T0040", "docx")]
+
+
+@pytest.mark.parametrize("lid,kind", FORMATS)
+def test_pdf_and_docx_give_the_same_facts_and_pathway_as_the_txt(client, monkeypatch, lid, kind):
+    P = _export()
+    base = ROOT / "data" / "output" / ("test" if lid.startswith("T") else "")
+    text = (base / "letters" / f"{lid}.txt").read_text()
+    data = (P.letter_pdf if kind == "pdf" else P.letter_docx)(text, P.letter_meta(text))
+    monkeypatch.setattr(S.X, "extract", lambda *a, **k: pytest.fail("no extraction: reuse the stored facts"))
+
+    [txt] = upload(client, (f"{lid}.txt", text.encode(), "text/plain")).json()
+    before = client.get(f"/patients/{txt['referral']['id']}").json()
+    [doc] = upload(client, (f"{lid}.{kind}", data, "application/octet-stream")).json()
+    after = client.get(f"/patients/{doc['referral']['id']}").json()
+
+    assert txt["ok"] and doc["ok"] and doc["referral"]["id"] == txt["referral"]["id"]
+    assert after["facts"] == before["facts"] and after["quotes"] == before["quotes"]
+    assert (doc["referral"]["pathway"], doc["referral"]["priority"]) == (txt["referral"]["pathway"], txt["referral"]["priority"])
+    assert after["letter_text"] != before["letter_text"]                 # the PDF/DOCX text, with its letterhead
+    assert len(after["spans"]) == len(after["quotes"])                    # every quote highlighted in the new text
+    assert all(after["letter_text"][s["start"]:s["end"]] for s in after["spans"])
+
+
+def test_a_renamed_file_with_another_letter_inside_is_not_given_its_facts(client):
+    P = _export()
+    other = (ROOT / "data" / "output" / "letters" / "L0002.txt").read_text()
+    pdf = P.letter_pdf(other, P.letter_meta(other))
+    [r] = upload(client, ("L0001.pdf", pdf, "application/pdf")).json()
+    # L0001's quotes are not in this document, so its stored facts are not reused, and the cache only holds
+    # L0001's own text: in demo mode the file can't be read
+    assert r == {"file": "L0001.pdf", "ok": False, "message": "Couldn't read file · demo mode"}

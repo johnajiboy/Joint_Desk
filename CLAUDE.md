@@ -87,7 +87,10 @@ docs/             assumptions, data dictionary
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
    `VITE_API_URL` is set). Week list is a greedy stand-in (`frontend/src/week.ts`) until stage 5.
-8. PDF letters: export each generated letter as an NHS-style PDF for upload demos.
+8. Done: `scripts/export_pdfs.py` exports all 250 letters as PDF (reportlab, fictional practice letterhead,
+   synthetic footer) and 10 as DOCX, reads each back and checks every answer-key quote (all found); zips in
+   data/output/ (gitignored). Uploads match a letter by base name and reuse its facts only if all its quotes are
+   in the file.
 
 ## UI rules (keep it quiet and short)
 
@@ -179,6 +182,7 @@ python -m kneedss.clean && python eval/eval_cleaning.py
 python eval/eval_tree.py
 python eval/eval_optimise.py
 python scripts/export_demo.py          # demo JSON for the frontend, from the cache
+python scripts/export_pdfs.py          # PDF and DOCX letters, read back and checked
 pytest
 pip install -r backend/requirements.txt && uvicorn backend.main:app --reload   # API on :8000
 cd frontend && VITE_API_URL=http://localhost:8000 npm run dev                     # frontend on the API
