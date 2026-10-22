@@ -6,6 +6,7 @@ paid for twice and the seeded demo letters can be uploaded on a server that has 
 """
 from __future__ import annotations
 
+import logging
 import os
 import re
 from datetime import date, datetime, timedelta, timezone
@@ -27,6 +28,7 @@ from kneedss.rules import PATHWAYS, PRIORITY_MAX
 LETTER_ID = re.compile(r"^([LT]\d{4})(?!\d)")
 
 
+log = logging.getLogger("uvicorn.error")         # the server log (Render)
 LIMIT_REACHED = "Daily limit reached · try tomorrow"
 DEFAULT_DAILY_CAP = 20
 
@@ -212,7 +214,8 @@ def read_letter(session: Session, filename: str, data: bytes) -> dict:
         ex = X.extract(text, letter_id)
     except X.DemoCacheMiss:
         return fail("Couldn't read file · demo mode")
-    except (llm.LLMError, ValueError):
+    except (llm.LLMError, ValueError) as e:
+        log.warning("Letter %s not read: %s: %s", letter_id, type(e).__name__, e)     # never the key or the URL
         return fail("Couldn't read file")
 
     digits = nhs_digits(ex.facts.get("nhs_number"))

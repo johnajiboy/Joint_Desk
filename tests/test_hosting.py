@@ -163,3 +163,32 @@ def test_at_most_five_files_of_two_mb(client):
     assert client.post("/letters", files=six).status_code == 413
     [big] = client.post("/letters", files=[("files", ("big.txt", b"a" * (2 * 1024 * 1024 + 1), "text/plain"))]).json()
     assert big == {"file": "big.txt", "ok": False, "message": "File too large (max 2 MB)"}
+
+
+def test_a_failed_read_is_logged_and_never_fails_the_upload(client, live_reads, monkeypatch, caplog):
+    from kneedss import llm
+    monkeypatch.setattr(S, "today", lambda: "2026-12-01")         # a day with reads left
+
+    def broken(text, lid, **k):
+        raise llm.LLMError("API error: 401 invalid x-api-key")
+    monkeypatch.setattr(S.X, "extract", broken)
+    r = send(client, "fails.txt", "OKS 20. A letter the reader fails on.")
+    assert r["message"] == "Couldn't read file" and "not read: LLMError: API error: 401" in caplog.text
+
+    def surprise(text, lid, **k):
+        raise RuntimeError("something unexpected")
+    monkeypatch.setattr(S.X, "extract", surprise)
+    resp = client.post("/letters", files=[("files", ("odd.txt", b"OKS 20. Another new letter.", "text/plain"))])
+    assert resp.status_code == 200 and resp.json()[0]["message"] == "Couldn't read file"
+    assert "Upload odd.txt failed" in caplog.text
+
+
+def test_api_key_is_stripped(monkeypatch):
+    from kneedss import llm
+    monkeypatch.undo()                                   # the real _client, not the no-API guard
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test-key\n")
+    llm._client.cache_clear()
+    try:
+        assert llm._client().api_key == "sk-test-key"   # builds the client only; nothing is sent
+    finally:
+        llm._client.cache_clear()

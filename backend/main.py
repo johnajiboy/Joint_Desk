@@ -197,7 +197,15 @@ async def upload_letters(session: DB, files: Annotated[list[UploadFile], File()]
         name = Path(f.filename or "letter").name
         data = await f.read(MAX_FILE_BYTES + 1)
         problem = file_problem(name, data)
-        out.append({"file": name, "ok": False, "message": problem} if problem else S.read_letter(session, name, data))
+        if problem:
+            out.append({"file": name, "ok": False, "message": problem})
+            continue
+        try:
+            out.append(S.read_letter(session, name, data))
+        except Exception:                                # one file's surprise never fails the others
+            S.log.exception("Upload %s failed", name)
+            session.rollback()
+            out.append({"file": name, "ok": False, "message": "Couldn't read file"})
     return out
 
 
