@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react'
 import type { DragEvent, FormEvent } from 'react'
 import { Link } from 'react-router-dom'
-import { uploadLetter } from '../api'
+import { MAX_FILES, uploadLetter } from '../api'
 import type { UploadResult } from '../types'
 import { primaryButton, secondaryButton } from './ui'
 import { PaperclipIcon } from './icons'
@@ -20,9 +20,12 @@ export function UploadBar({ onRead }: { onRead?: (result: UploadResult) => void 
   const [files, setFiles] = useState<File[]>([])
   const [items, setItems] = useState<Item[]>([])
   const [over, setOver] = useState(false)
+  const [tooMany, setTooMany] = useState(false)
 
   function pick(list: FileList | null) {
-    if (list?.length) setFiles([...list])
+    if (!list?.length) return
+    setTooMany(list.length > MAX_FILES)
+    setFiles([...list].slice(0, MAX_FILES))
   }
 
   function onDrop(e: DragEvent) {
@@ -39,6 +42,7 @@ export function UploadBar({ onRead }: { onRead?: (result: UploadResult) => void 
     // a re-uploaded file replaces its old chip (back to "Reading…") rather than adding a second one
     setItems((prev) => [...batch.map(({ key, name }) => ({ key, name })), ...prev.filter((it) => !unique.has(it.key))].slice(0, 12))
     setFiles([])
+    setTooMany(false)
     if (input.current) input.current.value = ''
     for (const b of batch) {
       uploadLetter(b.file).then((result) => {
@@ -72,6 +76,8 @@ export function UploadBar({ onRead }: { onRead?: (result: UploadResult) => void 
           Upload and read
         </button>
       </form>
+
+      {tooMany && <p className="mt-2 text-sm text-muted">At most {MAX_FILES} files at once · first {MAX_FILES} chosen</p>}
 
       {items.length > 0 && (
         <ul className="mt-3 flex flex-wrap gap-2" aria-live="polite">

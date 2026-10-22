@@ -77,19 +77,44 @@ DEMO_MODE=0 python eval/eval_extraction.py --data data/output/test --results eva
 python eval/compare_sets.py
 ```
 
-## Deploy
+## Hosting
 
-- Frontend: Vercel, root directory `frontend`, deploys on every push to `main`. Set `VITE_API_URL` in the Vercel
-  project to use the backend.
-- Backend: Render free web service from `render.yaml` (`DEMO_MODE=1`). `ANTHROPIC_API_KEY` is set only in the
-  Render dashboard, never in the repo.
+| Part | Where | Notes |
+|---|---|---|
+| Frontend | Vercel, root directory `frontend` | Deploys on every push to `main`. Without `VITE_API_URL` it is the demo site (saved data, header "Demo data"); with it, it uses the API (header "Live"). |
+| API | Render free web service, `render.yaml` | `uvicorn backend.main:app --host 0.0.0.0 --port $PORT`, health check `/health`. Free services sleep after 15 minutes idle; the first request then takes about a minute. |
+| Database | Supabase Postgres | Set `DATABASE_URL`; without it the API uses SQLite (`backend/joint_desk.db`). Seeded on first start when the tables are empty. |
+
+Render environment (all `sync: false`, typed into the dashboard, never in the repo):
+
+| Variable | What it does |
+|---|---|
+| `DATABASE_URL` | Supabase connection string (Project Settings > Database > Connection string; the pooler on port 6543 works). Never printed or logged. |
+| `ANTHROPIC_API_KEY` | Only read when `DEMO_MODE=0`. |
+| `DEMO_MODE` | `1`: saved LLM results only, no API calls. `0`: new letters are read by the LLM, within the daily cap. |
+| `UPLOAD_PASSCODE` | Uploads and imports need it. The app asks once and keeps it for the browser session. Unset = open (local use). |
+| `LLM_DAILY_CAP` | New LLM reads a day (UTC), default 20, counted in the database. After that: "Daily limit reached · try tomorrow". Letters already read or saved never count. |
+
+Uploads: at most 5 files at a time, 2 MB each. CORS allows only the Vercel site and localhost.
+
+Set up once:
+
+1. Supabase: new project; copy the connection string (pooler) with the database password.
+2. Render: New > Blueprint, pick this repo (it reads `render.yaml`), fill in the five variables, deploy. Check
+   `https://<service>.onrender.com/health` shows `"ok": true` and `"database": "postgres"`.
+3. Vercel: Project > Settings > Environment Variables, add `VITE_API_URL` = the Render URL for Production, then
+   redeploy (Deployments > latest > Redeploy). Or from `frontend/`: `vercel env add VITE_API_URL production` and
+   `vercel --prod`.
+
+Tests run the API on SQLite and, when `pgserver` is installed (`pip install pgserver`, a throwaway local
+Postgres), on Postgres too. Tests never call the API (`tests/conftest.py` blocks it).
 
 ## Layout
 
 | Path | What it is |
 |---|---|
 | `kneedss/` | Shared Python: standards, rules, LLM call (`llm.py`), extraction and quote check, cleaning, decision tree, optimiser, results |
-| `backend/` | FastAPI + SQLite: letters, queue, patients, decisions, week plan, results |
+| `backend/` | FastAPI + Postgres (Supabase) or SQLite: letters, queue, patients, decisions, bookings, week plan, results |
 | `frontend/` | React + TypeScript (Vite, Tailwind, Recharts): landing, Referrals, Patient, This week, Results |
 | `data/` | Generators and output (patients, letters, answer keys) |
 | `eval/` | Evaluation scripts; tables and figures in `eval/results/` |

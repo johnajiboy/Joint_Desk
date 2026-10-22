@@ -7,6 +7,7 @@ import { PathwayChip, Weeks } from '../components/PathwayChip'
 import { Term } from '../components/Term'
 import { ImportPanel } from '../components/ImportPanel'
 import { SheetIcon } from '../components/icons'
+import { PasscodeGate } from '../components/PasscodeGate'
 import { UploadBar } from '../components/UploadBar'
 import { effectivePathway, TABS } from '../pathways'
 import { matches } from '../search'
@@ -68,7 +69,7 @@ export default function Queue() {
             <span className="hidden sm:inline">Import spreadsheet</span>
           </button>
         } />
-      <UploadBar onRead={onRead} />
+      <PasscodeGate><UploadBar onRead={onRead} /></PasscodeGate>
       {importing && <ImportPanel onImported={() => load()} onClose={() => setImporting(false)} />}
 
       <div className="mb-3 w-full max-w-[720px]">

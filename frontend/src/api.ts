@@ -212,7 +212,69 @@ export async function unbookThisWeek(id: string, by: string): Promise<void> {
   writeBooking(id, null)
 }
 
+// ------------------------------------------------------------------ passcode (live site: uploads and imports)
+
+/** Uploads and imports can spend API credit, so on the live site they need a passcode: asked once, kept for this
+ * browser session (sessionStorage), sent as X-Upload-Passcode. A wrong or changed one locks them again. */
+const PASSCODE_KEY = 'jd-passcode'
+let passcodeMemory = ''
+export const LOCK_EVENT = 'jd-uploads-lock'
+
+function storedPasscode(): string {
+  try {
+    return sessionStorage.getItem(PASSCODE_KEY) ?? passcodeMemory
+  } catch {
+    return passcodeMemory
+  }
+}
+
+function keepPasscode(code: string) {
+  passcodeMemory = code
+  try {
+    if (code) sessionStorage.setItem(PASSCODE_KEY, code)
+    else sessionStorage.removeItem(PASSCODE_KEY)
+  } catch {
+    // storage blocked: kept in memory until the page reloads
+  }
+  window.dispatchEvent(new Event(LOCK_EVENT))
+}
+
+const passcodeHeader = (): Record<string, string> => (storedPasscode() ? { 'X-Upload-Passcode': storedPasscode() } : {})
+
+export interface Health {
+  ok: boolean
+  demo_mode: boolean
+  database: 'postgres' | 'sqlite'
+  passcode: boolean
+  llm_reads_today: number
+  llm_daily_cap: number
+}
+
+let health: Promise<Health> | null = null
+
+export function getHealth(): Promise<Health> {
+  health ??= request<Health>('', '/health')
+  return health
+}
+
+/** True when uploads need a passcode that this session doesn't have yet. */
+export async function uploadsLocked(): Promise<boolean> {
+  if (DEMO) return false
+  const h = await getHealth().catch(() => null)
+  return !!h?.passcode && !storedPasscode()
+}
+
+export async function unlockUploads(code: string): Promise<boolean> {
+  const res = await fetch(`${API_URL}/passcode`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ passcode: code }) })
+  if (res.ok) keepPasscode(code)
+  return res.ok
+}
+
 // ------------------------------------------------------------------ upload
+
+export const MAX_FILES = 5
+export const MAX_FILE_MB = 2
 
 async function textKey(text: string): Promise<string> {
   const data = new TextEncoder().encode(text.replace(/\s+/g, ' ').trim())
@@ -227,11 +289,18 @@ const wait = (ms: number) => new Promise((r) => setTimeout(r, ms))
  * T0042.docx all mean that letter) or, for text files, by their content, and shows the saved result.
  */
 export async function uploadLetter(file: File): Promise<UploadResult> {
+  if (file.size > MAX_FILE_MB * 1024 * 1024) return { file: file.name, ok: false, message: `File too large (max ${MAX_FILE_MB} MB)` }
   if (!DEMO) {
     const body = new FormData()
     body.append('files', file)
     try {
-      const [result] = await request<UploadResult[]>('', '/letters', { method: 'POST', body })
+      const res = await fetch(`${API_URL}/letters`, { method: 'POST', body, headers: passcodeHeader() })
+      if (res.status === 401) {
+        keepPasscode('')
+        return { file: file.name, ok: false, message: 'Passcode needed' }
+      }
+      if (!res.ok) throw new Error(String(res.status))
+      const [result] = (await res.json()) as UploadResult[]
       return result
     } catch {
       return { file: file.name, ok: false, message: "Couldn't read file" }
@@ -273,7 +342,11 @@ function sampleOnly(file: File) {
 }
 
 async function postForm<T>(path: string, form: FormData): Promise<T> {
-  const res = await fetch(`${API_URL}${path}`, { method: 'POST', body: form })
+  const res = await fetch(`${API_URL}${path}`, { method: 'POST', body: form, headers: passcodeHeader() })
+  if (res.status === 401) {
+    keepPasscode('')
+    throw new Error('Passcode needed')
+  }
   const body = await res.json().catch(() => null)
   if (!res.ok) throw new Error(typeof body?.detail === 'string' ? body.detail : "Couldn't read the spreadsheet")
   return body as T

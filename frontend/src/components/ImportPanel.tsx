@@ -5,6 +5,7 @@ import { DEMO, DEMO_SAMPLE, getClinician, importCommit, importPreview, NeedsBack
 import { effectivePathway } from '../pathways'
 import type { ImportPreview, ImportResult, MatchConfidence, SkippedRow } from '../types'
 import { PaperclipIcon } from './icons'
+import { PasscodeGate } from './PasscodeGate'
 import { PathwayChip } from './PathwayChip'
 import { primaryButton, secondaryButton } from './ui'
 
@@ -107,8 +108,9 @@ export function ImportPanel({ onImported, onClose }: { onImported: (r: ImportRes
         <button type="button" onClick={onClose} className="press ml-auto h-11 px-2 text-sm text-muted hover:text-text">Close</button>
       </div>
 
-      {/* step 1: choose a file */}
+      {/* step 1: choose a file (live site: after the passcode) */}
       {!result && (
+        <PasscodeGate primary={false}>
         <label onDragOver={(e) => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)} onDrop={onDrop}
           className={`flex min-h-16 cursor-pointer items-center gap-3 rounded-md border border-dashed px-4 py-3 text-sm ${
             over ? 'border-primary' : 'border-line'}`}>
@@ -120,6 +122,7 @@ export function ImportPanel({ onImported, onClose }: { onImported: (r: ImportRes
           <input ref={input} type="file" accept=".csv,.xlsx,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             className="sr-only" onChange={(e) => choose(e.target.files?.[0])} />
         </label>
+        </PasscodeGate>
       )}
       {DEMO && !result && <p className="mt-2 text-xs text-muted">Demo site: only {DEMO_SAMPLE} works; other files need the backend.</p>}
       {error && <p className="mt-3 text-sm font-medium text-danger">{error}</p>}

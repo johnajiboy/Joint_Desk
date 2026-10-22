@@ -28,12 +28,15 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
   confirm it is Ready. Report the live URL. If the build fails, show the error from the build log, fix it, and push
   again.
 - Never put the API key or anything from .env into the frontend or Vercel.
+- Never print or log DATABASE_URL (it holds the database password). /health says only "postgres" or "sqlite".
+- Tests never call the API: `tests/conftest.py` blanks the key, DATABASE_URL and UPLOAD_PASSCODE and blocks the
+  client; extraction is faked in tests.
 
 ## Stack
 
 - Python 3.12: pandas, numpy, scikit-learn, PuLP, pydantic, anthropic SDK, pypdf, python-docx, pytest.
   PuLP 4 needs the `cbc` binary: `brew install cbc` (the pip `cbcbox` build is killed by macOS here).
-- Backend: FastAPI + SQLite (SQLModel)
+- Backend: FastAPI + SQLModel: Postgres (Supabase, psycopg) when DATABASE_URL is set, else SQLite
 - Frontend: React + TypeScript (Vite), Tailwind, Recharts
 - Env: `ANTHROPIC_API_KEY` in `.env` (never commit it), `CLAUDE_MODEL` (default `claude-sonnet-5-5`).
   `DEMO_MODE=1` (default) uses saved LLM results only.
@@ -79,13 +82,18 @@ docs/             assumptions, data dictionary
    surgery 8/12/16), triage on vs off (KL 2+ straight to surgery) and 20 arrival seeds (mean ± 95% CI, paired
    verdicts) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
    Every figure on the Results page comes from `results.json` (exported from eval/results); none are typed in.
-6. Done: backend API (`backend/`: FastAPI + SQLModel + SQLite `backend/joint_desk.db`, gitignored). Seeds on first
+6. Done: backend API (`backend/`: FastAPI + SQLModel; Postgres from DATABASE_URL, else SQLite `backend/joint_desk.db`,
+   gitignored). Seeds on first
    start from the cleaned waiting list and the 250 checked letters (demo export), so it needs no cache or API.
    POST /letters, GET /queue, GET /patients/{id}, POST /patients/{id}/confirm and /override (who, when, old/new,
    reason), POST /patients/{id}/book and /unbook (booked patients always get a slot; a booking that pushes out an
    over-52 needs confirm), POST /week/build (optimiser: bookings, then over-52s, then priority; overrides included;
    "changes" says where each overridden or booked patient ended up), GET /results. Frontend uses it when VITE_API_URL is
-   set. Deployed on Render from `render.yaml` with DEMO_MODE=1; ANTHROPIC_API_KEY only in Render's settings.
+   set. Hosting: API on Render (`render.yaml`), database on Supabase Postgres, frontend on Vercel with VITE_API_URL.
+   Render secrets (sync: false): DATABASE_URL, ANTHROPIC_API_KEY, DEMO_MODE, UPLOAD_PASSCODE, LLM_DAILY_CAP.
+   Credit protection: uploads and imports need UPLOAD_PASSCODE (X-Upload-Passcode header; the app asks once per
+   session); at most LLM_DAILY_CAP (default 20) new LLM reads a day, counted in the LlmDay table (cached letters
+   never count); 5 files per upload, 2 MB each. CORS: the Vercel site and localhost only.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
    `VITE_API_URL` is set). The demo site re-plans the week in the browser (`frontend/src/planner.ts`, "Demo plan")
