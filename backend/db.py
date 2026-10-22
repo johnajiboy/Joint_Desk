@@ -10,7 +10,9 @@ frontend/public/demo/patients/, which came from the extraction cache).
 from __future__ import annotations
 
 import json
+import logging
 import os
+import time
 import re
 from datetime import datetime, timezone
 from functools import lru_cache
@@ -27,6 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 WAITING_LIST = ROOT / "data" / "output" / "waiting_list.csv"
 DEMO_PATIENTS = ROOT / "frontend" / "public" / "demo" / "patients"
 DEFAULT_DB = ROOT / "backend" / "joint_desk.db"
+log = logging.getLogger("uvicorn.error")         # shows in the server log (Render) next to uvicorn's own lines
 
 
 def now() -> datetime:
@@ -121,7 +124,8 @@ def engine_options(url: str) -> dict:
     if url.startswith("sqlite"):
         return {"connect_args": {"check_same_thread": False}}
     # Supabase's pooler (pgbouncer, transaction mode) can't keep prepared statements; drop dead pooled connections
-    return {"connect_args": {"prepare_threshold": None}, "pool_pre_ping": True, "pool_recycle": 300}
+    # connect_timeout: fail in seconds (with an error in the log) rather than hang when the host can't be reached
+    return {"connect_args": {"prepare_threshold": None, "connect_timeout": 10}, "pool_pre_ping": True, "pool_recycle": 300}
 
 
 @lru_cache(maxsize=None)
@@ -159,20 +163,22 @@ def cached_model(letter_id: str) -> str | None:
 def seed(session: Session) -> None:
     """Fill an empty database: the cleaned waiting list, then the letters already read."""
     wl = pd.read_csv(WAITING_LIST, dtype={"nhs_number": str})
+    patients: dict[str, Patient] = {}
     for r in wl.itertuples():
         f = record_facts(r)
         d = decide(f)
-        session.add(Patient(
+        patients[r.patient_id] = Patient(
             id=r.patient_id, nhs_number=r.nhs_number, nhs_digits=nhs_digits(r.nhs_number),
             name=f"{r.first_name} {r.surname}", age=int(r.age), sex=r.sex, side=r.laterality,
             weeks_waiting=int(r.weeks_waiting), on_waiting_list=True,
             pathway=d["pathway"], rule=d["rule"], priority=priority_score(f), weight_support=d["weight_support"],
-            reasons=d["reasons"], priority_parts=priority_breakdown(f), facts=f))
+            reasons=d["reasons"], priority_parts=priority_breakdown(f), facts=f)
+    session.add_all(patients.values())
     session.commit()
 
     for path in sorted(DEMO_PATIENTS.glob("*.json")):
         p = json.loads(path.read_text())
-        patient = session.get(Patient, p["id"])
+        patient = patients.get(p["id"])             # already in memory: no round trip per letter
         if patient is None:
             continue
         session.add(Letter(letter_id=p["letter_id"], patient_id=p["id"], filename=f"{p['letter_id']}.txt",
@@ -202,11 +208,15 @@ def add_missing_columns(engine) -> None:
 
 def init_db() -> None:
     engine = get_engine()
+    log.info("Database: %s", backend_name())          # never the URL: it holds the password
     SQLModel.metadata.create_all(engine)
     add_missing_columns(engine)
-    with Session(engine) as s:
+    with Session(engine, expire_on_commit=False) as s:
         if s.exec(select(Patient).limit(1)).first() is None:
+            started = time.monotonic()
+            log.info("Empty database: seeding the waiting list and the letters already read")
             seed(s)
+            log.info("Seeded in %.0f s", time.monotonic() - started)
 
 
 def get_session():

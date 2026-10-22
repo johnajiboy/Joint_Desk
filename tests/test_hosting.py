@@ -35,7 +35,7 @@ def test_database_url_picks_postgres_when_set_else_sqlite(monkeypatch, given, ex
 def test_engine_options_per_database():
     assert db.engine_options("sqlite:///x.db") == {"connect_args": {"check_same_thread": False}}
     pg = db.engine_options("postgresql+psycopg://u:pw@h/db")
-    assert pg["connect_args"] == {"prepare_threshold": None} and pg["pool_pre_ping"]      # works through Supabase's pooler
+    assert pg["connect_args"] == {"prepare_threshold": None, "connect_timeout": 10} and pg["pool_pre_ping"]   # pooler-safe, fails fast
 
 
 def test_health_and_startup_never_show_the_database_url(client, capsys, caplog):
