@@ -120,7 +120,8 @@ class OverrideIn(ConfirmIn):
 def health(session: DB) -> dict:
     """Up, and how: demo mode, which database (never its URL), passcode on, today's new LLM reads and the cap."""
     return {"ok": True, "demo_mode": os.environ.get("DEMO_MODE") == "1", "database": backend_name(),
-            "passcode": passcode_needed(), "llm_reads_today": S.reads_today(session), "llm_daily_cap": S.daily_cap()}
+            "passcode": passcode_needed(), "llm_reads_today": S.reads_today(session), "llm_daily_cap": S.daily_cap(),
+            "version": (os.environ.get("RENDER_GIT_COMMIT") or "local")[:7]}         # which commit Render is running
 
 
 class PasscodeIn(BaseModel):

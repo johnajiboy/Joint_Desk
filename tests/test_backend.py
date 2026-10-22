@@ -29,7 +29,7 @@ def letter_only_patient(client):
 def test_health_reports_demo_mode(client, request):
     h = client.get("/health").json()
     assert h == {"ok": True, "demo_mode": True, "database": request.node.callspec.params["client"], "passcode": False,
-                 "llm_reads_today": 0, "llm_daily_cap": 20}
+                 "llm_reads_today": 0, "llm_daily_cap": 20, "version": "local"}
 
 
 def test_queue_is_the_250_referrals_by_priority(client):
