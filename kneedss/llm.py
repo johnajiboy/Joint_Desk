@@ -64,7 +64,8 @@ def model_name() -> str:
 @lru_cache(maxsize=1)
 def _client() -> anthropic.Anthropic:
     load_dotenv()
-    key = os.environ.get("ANTHROPIC_API_KEY", "").strip()     # a pasted key often ends in a newline
+    # a pasted key often ends in a newline or keeps the quotes it had in .env
+    key = os.environ.get("ANTHROPIC_API_KEY", "").strip().strip("\"'").strip()
     if key in ("", "your-key-here"):
         raise LLMError("ANTHROPIC_API_KEY is not set")
     return anthropic.Anthropic(api_key=key)

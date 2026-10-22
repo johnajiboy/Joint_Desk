@@ -186,9 +186,10 @@ def test_a_failed_read_is_logged_and_never_fails_the_upload(client, live_reads, 
 def test_api_key_is_stripped(monkeypatch):
     from kneedss import llm
     monkeypatch.undo()                                   # the real _client, not the no-API guard
-    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test-key\n")
-    llm._client.cache_clear()
     try:
-        assert llm._client().api_key == "sk-test-key"   # builds the client only; nothing is sent
+        for pasted in ("sk-test-key\n", ' "sk-test-key" ', "'sk-test-key'"):
+            monkeypatch.setenv("ANTHROPIC_API_KEY", pasted)
+            llm._client.cache_clear()
+            assert llm._client().api_key == "sk-test-key"   # builds the client only; nothing is sent
     finally:
         llm._client.cache_clear()
