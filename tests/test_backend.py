@@ -184,6 +184,72 @@ def test_week_build_uses_overrides(client):
     again = client.post("/week/build").json()
     assert all(p["id"] != first for l in again["lists"] for p in l["in"])
 
+    change = next(c for c in again["changes"] if c["id"] == first)
+    assert change["overridden"] and change["pathway"] == "non_surgical" and change["outcome"] == "none"
+
+
+def surgery_patient_without_a_slot(client, plan):
+    in_slots = {p["id"] for l in plan["lists"] for p in l["in"]}
+    with Session(get_engine()) as s:
+        df = S.week_frame(s)
+    pool = df[(df.pathway == "surgery") & (df.weeks_waiting <= 52) & ~df.patient_id.isin(in_slots)]
+    return pool.sort_values("priority_score").patient_id.iloc[0]
+
+
+@needs_cbc
+def test_overridden_patient_moves_into_the_right_list(client):
+    plan = client.post("/week/build").json()
+    physio = next(l for l in plan["lists"] if l["kind"] == "physio")["in"]
+    pid = physio[0]["id"]
+    client.post(f"/patients/{pid}/override", json={"pathway": "surgery", "by": "Dr Test", "reason": "Wants surgery"})
+    again = client.post("/week/build").json()
+    assert all(p["id"] != pid for p in next(l for l in again["lists"] if l["kind"] == "physio")["in"])
+    change = next(c for c in again["changes"] if c["id"] == pid)
+    assert change["pathway"] == "surgery" and change["slot"] == "surgery"
+    surgery = next(l for l in again["lists"] if l["kind"] == "surgery")
+    if change["outcome"] == "in":
+        assert pid in {p["id"] for p in surgery["in"]}
+    else:            # surgery slots full of over-52s: in the surgery queue, with its place
+        assert change["outcome"] == "next" and change["rank"] >= 1
+
+
+@needs_cbc
+def test_booking_is_always_in_and_never_silently_pushes_out_an_over_52(client):
+    plan = client.post("/week/build").json()
+    pid = surgery_patient_without_a_slot(client, plan)
+    assert client.post(f"/patients/{pid}/book", json={"by": "Dr Test", "reason": ""}).status_code == 422
+    # the surgery slots are all over-52s this week, so a booking pushes one out: nothing stored until confirmed
+    first = client.post(f"/patients/{pid}/book", json={"by": "Dr Test", "reason": "Clinical urgency"}).json()
+    assert first["needs_confirm"] and not first["booked"] and first["pushed_out"]
+    assert client.get(f"/patients/{pid}").json()["booking"] is None
+    assert all(p["id"] != pid for l in client.post("/week/build").json()["lists"] for p in l["in"])
+
+    done = client.post(f"/patients/{pid}/book", json={"by": "Dr Test", "reason": "Clinical urgency", "confirm": True}).json()
+    assert done["booked"] and done["booking"]["by"] == "Dr Test" and done["booking"]["reason"] == "Clinical urgency"
+    week = client.post("/week/build").json()
+    surgery = next(l for l in week["lists"] if l["kind"] == "surgery")
+    assert pid in {p["id"] for p in surgery["in"]} and len(surgery["in"]) == 12 and week["locked"] == 1
+    assert [p["id"] for p in week["pushed_out"]] == [p["id"] for p in first["pushed_out"]]
+    assert all(p["pushed_out"] for p in week["unmet"] if p["id"] in {q["id"] for q in week["pushed_out"]})
+    change = next(c for c in week["changes"] if c["id"] == pid)
+    assert change["booked"] and change["outcome"] == "in" and change["slot"] == "surgery"
+    with Session(get_engine()) as s:
+        kinds = [d.kind for d in s.exec(select(Decision).where(Decision.patient_id == pid))]
+    assert kinds == ["booked"] and client.get(f"/patients/{pid}").json()["pathway"] == "surgery"
+
+    client.post(f"/patients/{pid}/unbook", json={"by": "Dr Test"})
+    after = client.post("/week/build").json()
+    assert client.get(f"/patients/{pid}").json()["booking"] is None and after["locked"] == 0 and after["pushed_out"] == []
+    assert all(p["id"] != pid for l in after["lists"] for p in l["in"])
+
+
+@needs_cbc
+def test_booking_needs_a_slot_pathway(client):
+    pid = letter_only_patient(client)
+    client.post(f"/patients/{pid}/override", json={"pathway": "review", "by": "Dr Test", "reason": "Ask GP"})
+    r = client.post(f"/patients/{pid}/book", json={"by": "Dr Test", "reason": "Urgent"})
+    assert r.status_code == 409 and r.json()["detail"] == "No slot for this pathway"
+
 
 # ---------------------------------------------------------------- CORS
 

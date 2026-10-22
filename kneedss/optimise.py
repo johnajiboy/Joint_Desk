@@ -57,6 +57,8 @@ class Plan:
     slots_used: dict[str, int]
     long_wait: dict                               # weeks, total, included, unmet (patient ids)
     shortfall: list[str] = field(default_factory=list)
+    locked: list[str] = field(default_factory=list)       # booked by a clinician: always in
+    pushed_out: list[str] = field(default_factory=list)   # over-52s who lost their slot to a lock
 
     @property
     def feasible(self) -> bool:
@@ -87,12 +89,15 @@ def shortfall(cand: pd.DataFrame, capacity: dict[str, int], long_wait: int = LON
 
 
 def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait: int = LONG_WAIT,
-             fallback: bool = True) -> Plan:
+             fallback: bool = True, locked: set[str] | None = None) -> Plan:
     """Plan one week. `df` needs patient_id, pathway, priority_score and weeks_waiting.
 
-    With fallback=False an infeasible week returns no assignments, just the shortfall."""
+    Locked patients (booked this week by a clinician) are fixed into a slot first and count against capacity;
+    then everyone over 52 weeks; then priority. Over-52s that lose their slot to a lock are named in
+    `pushed_out`. With fallback=False an infeasible week returns no assignments, just the shortfall."""
     capacity = {**CAPACITY, **(capacity or {})}
     cand = df[df.pathway.isin(ALLOWED)].set_index("patient_id", drop=False)
+    locked = sorted(set(locked or ()) & set(cand.index))
     long = cand.weeks_waiting > long_wait
     eps, eps2 = _weights(cand, capacity) if len(cand) else (0.0, 0.0)
     pairs = [(pid, s) for pid, pw in cand.pathway.items() for s in ALLOWED[pw] if capacity.get(s, 0) > 0]
@@ -113,7 +118,7 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
         big = 0 if hard else 1000 * (sum(capacity.values()) + 1)
         prob += pulp.lpSum([(score(pid, s) + (big if long[pid] else 0)) * v for (pid, s), v in x.items()])
         for pid, vs in by_patient.items():
-            prob += (pulp.lpSum(vs) == 1) if (hard and long[pid]) else (pulp.lpSum(vs) <= 1)
+            prob += (pulp.lpSum(vs) == 1) if (pid in locked or (hard and long[pid])) else (pulp.lpSum(vs) <= 1)
         for s, vs in by_slot.items():
             if vs:
                 prob += pulp.lpSum(vs) <= capacity[s]
@@ -131,9 +136,17 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
         prob, x = build(hard=False)
         stats = prob.solve(solver())
         if stats.status != pulp.LpSolveStatus.Optimal:
-            raise RuntimeError(f"CBC could not solve the fallback plan: {stats.status}")
+            raise RuntimeError(f"CBC could not solve the fallback plan (more locks than slots?): {stats.status}")
 
     chosen = [(pid, s) for (pid, s), v in x.items() if (v.value() or 0) > 0.5]
+    # The solver is indifferent to which chosen weight support patients sit in weight support vs physio slots;
+    # fix it so the plan is repeatable (and matches the demo site's planner): the most urgent take weight support.
+    wp = [pid for pid, s in chosen if cand.at[pid, "pathway"] == "weight_physio"]
+    n_ws = sum(1 for pid, s in chosen if s == "weight_support")
+    wp.sort(key=lambda pid: (pid not in locked, not long[pid], -int(cand.at[pid, "priority_score"]),
+                             -int(cand.at[pid, "weeks_waiting"]), pid))
+    slot_of = {pid: ("weight_support" if i < n_ws else "physio") for i, pid in enumerate(wp)}
+    chosen = [(pid, slot_of.get(pid, s)) for pid, s in chosen]
     assigned = cand.loc[[pid for pid, _ in chosen], ["patient_id", "pathway", "priority_score", "weeks_waiting"]].copy()
     assigned["slot"] = [s for _, s in chosen]
     assigned["long_wait"] = assigned.weeks_waiting > long_wait
@@ -145,6 +158,8 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
     cut = merit.groupby("slot").priority_score.min().to_dict()
 
     def reason_in(r) -> str:
+        if r.patient_id in locked:
+            return "Booked this week by a clinician"
         if r.long_wait:
             return f"Over {long_wait} weeks ({r.weeks_waiting}) · must have a slot"
         moved = r.pathway == "weight_physio" and r.slot == "physio"
@@ -165,11 +180,17 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
         nxt[s] = pool[["patient_id", "pathway", "priority_score", "weeks_waiting", "long_wait", "reason"]].reset_index(drop=True)
 
     unmet = sorted(waiting.patient_id[waiting.long_wait])
+    pushed_out = []
+    if locked and unmet:
+        # compare with the same week without locks: anyone over 52 who had a slot then was pushed out by a lock
+        free = optimise(df, capacity, long_wait, fallback)
+        pushed_out = sorted(set(unmet) - set(free.long_wait["unmet"]))
     return Plan(
         status=status, assigned=assigned, next=nxt, capacity=capacity,
         slots_used={s: int((assigned.slot == s).sum()) for s in capacity},
         long_wait={"weeks": long_wait, "total": int(long.sum()), "included": int(assigned.long_wait.sum()), "unmet": unmet},
         shortfall=shortfall(cand, capacity, long_wait) if status == "infeasible" else [],
+        locked=locked, pushed_out=pushed_out,
     )
 
 
@@ -183,8 +204,38 @@ def skipped_long_waiters(df: pd.DataFrame, assigned: pd.DataFrame, long_wait: in
     return sorted(left.patient_id[left.pathway.map(lambda p: bool(set(ALLOWED[p]) & given_to_short))])
 
 
-def plan_to_json(plan: Plan, patients: pd.DataFrame, names: dict[str, str], with_page: set[str], week_of: str) -> dict:
-    """The plan as the This week page reads it (week.json and the backend's POST /week/build)."""
+def queue_rank(plan: Plan, patients: pd.DataFrame, pid: str, long_wait: int = LONG_WAIT) -> tuple[str, int] | None:
+    """Where a patient without a slot stands: their preferred slot type and place in its queue (1 = next)."""
+    by_id = patients.set_index("patient_id")
+    pathway = by_id.at[pid, "pathway"]
+    if pathway not in ALLOWED or pid in set(plan.assigned.patient_id):
+        return None
+    slot = ALLOWED[pathway][0]
+    pool = patients[patients.pathway.isin([p for p, allowed in ALLOWED.items() if slot in allowed])
+                    & ~patients.patient_id.isin(plan.assigned.patient_id)].copy()
+    pool["long_wait"] = pool.weeks_waiting > long_wait
+    pool = pool.sort_values(["long_wait", "priority_score", "weeks_waiting", "patient_id"],
+                            ascending=[False, False, False, True]).reset_index(drop=True)
+    return slot, int(pool.index[pool.patient_id == pid][0]) + 1
+
+
+def change_outcome(plan: Plan, patients: pd.DataFrame, pid: str) -> dict:
+    """What a clinician's change did this week: in a slot, next in line (#N), or no slot needed."""
+    chosen = plan.assigned[plan.assigned.patient_id == pid]
+    if len(chosen):
+        return {"outcome": "in", "slot": chosen.slot.iloc[0], "rank": None}
+    rank = queue_rank(plan, patients, pid)
+    if rank:
+        return {"outcome": "next", "slot": rank[0], "rank": rank[1]}
+    return {"outcome": "none", "slot": None, "rank": None}
+
+
+def plan_to_json(plan: Plan, patients: pd.DataFrame, names: dict[str, str], with_page: set[str], week_of: str,
+                 changes: dict[str, dict] | None = None) -> dict:
+    """The plan as the This week page reads it (week.json and the backend's POST /week/build).
+
+    `changes`: patients a clinician overrode or booked, {id: {overridden, booked, was, by, at, reason}}; each comes
+    back with its pathway now and what happened to it this week."""
     eligible = patients[patients.pathway.isin(list(ALLOWED))]
 
     def person(r) -> dict:
@@ -206,7 +257,19 @@ def plan_to_json(plan: Plan, patients: pd.DataFrame, names: dict[str, str], with
     unmet_patients = [{"id": pid, "name": names.get(pid, pid), "pathway": by_id.at[pid, "pathway"],
                        "priority": int(by_id.at[pid, "priority_score"]), "weeks_waiting": int(by_id.at[pid, "weeks_waiting"]),
                        "has_page": pid in with_page} for pid in unmet]
+    pushed = set(plan.pushed_out)
+    for u in unmet_patients:
+        u["pushed_out"] = u["id"] in pushed            # had a slot until a booking took it
+    changed = []
+    for pid, c in (changes or {}).items():
+        if pid not in by_id.index:
+            continue
+        changed.append({"id": pid, "name": names.get(pid, pid), "pathway": by_id.at[pid, "pathway"],
+                        "priority": int(by_id.at[pid, "priority_score"]), "weeks_waiting": int(by_id.at[pid, "weeks_waiting"]),
+                        "has_page": pid in with_page, **c, **change_outcome(plan, patients, pid)})
+    changed.sort(key=lambda c: c.get("at") or "", reverse=True)
     return {"week_of": week_of, "method": "optimiser", "status": plan.status, "shortfall": plan.shortfall,
             "patients": len(eligible), "lists": lists,
             "long_wait": {k: (len(v) if k == "unmet" else v) for k, v in plan.long_wait.items()},
-            "unmet": unmet_patients}
+            "unmet": unmet_patients, "locked": len(plan.locked), "pushed_out": [u for u in unmet_patients if u["pushed_out"]],
+            "changes": changed}

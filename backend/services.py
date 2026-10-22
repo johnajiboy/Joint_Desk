@@ -26,17 +26,32 @@ LETTER_ID = re.compile(r"^([LT]\d{4})(?!\d)")
 
 # ---------------------------------------------------------------------------- decisions
 
-def latest_decision(session: Session, pid: str) -> Decision | None:
-    return session.exec(select(Decision).where(Decision.patient_id == pid)
+PATHWAY_KINDS = ("confirmed", "overridden")     # decisions that set the pathway
+BOOKING_KINDS = ("booked", "unbooked")          # "Book this week" and "Unbook": the pathway stays as it was
+
+
+def latest_decision(session: Session, pid: str, kinds: tuple[str, ...] = PATHWAY_KINDS) -> Decision | None:
+    return session.exec(select(Decision).where(Decision.patient_id == pid, col(Decision.kind).in_(kinds))
                         .order_by(col(Decision.at).desc(), col(Decision.id).desc())).first()
 
 
-def latest_decisions(session: Session) -> dict[str, Decision]:
-    """Each patient's newest decision, in one query."""
+def latest_decisions(session: Session, kinds: tuple[str, ...] = PATHWAY_KINDS) -> dict[str, Decision]:
+    """Each patient's newest decision of these kinds, in one query."""
     out: dict[str, Decision] = {}
-    for d in session.exec(select(Decision).order_by(col(Decision.at), col(Decision.id))).all():
+    for d in session.exec(select(Decision).where(col(Decision.kind).in_(kinds)).order_by(col(Decision.at), col(Decision.id))).all():
         out[d.patient_id] = d
     return out
+
+
+def bookings(session: Session) -> dict[str, Decision]:
+    """Patients booked into this week now (their newest booking decision is "booked")."""
+    return {pid: d for pid, d in latest_decisions(session, BOOKING_KINDS).items() if d.kind == "booked"}
+
+
+def booking_out(d: Decision | None) -> dict | None:
+    if d is None or d.kind != "booked":
+        return None
+    return {"by": d.by, "at": d.at.isoformat(), "reason": d.reason}
 
 
 def latest_letters(session: Session) -> dict[str, Letter]:
@@ -57,8 +72,10 @@ def decision_out(d: Decision | None) -> dict | None:
             "reason": d.reason, "by": d.by, "at": d.at.isoformat()}
 
 
-def record_decision(session: Session, p: Patient, new_pathway: str, by: str, reason: str | None, kind: str) -> Decision:
+def record_decision(session: Session, p: Patient, new_pathway: str | None, by: str, reason: str | None, kind: str) -> Decision:
+    """A confirm or override (new_pathway), or a booking (new_pathway None: the pathway is unchanged)."""
     old = effective_pathway(p, latest_decision(session, p.id))
+    new_pathway = new_pathway or old
     d = Decision(patient_id=p.id, kind=kind, rules_pathway=p.pathway, old_pathway=old, new_pathway=new_pathway,
                  reason=reason, by=by)
     session.add(d)
@@ -92,6 +109,7 @@ def patient_out(session: Session, p: Patient) -> dict:
             "facts": facts, "quotes": letter.quotes if letter else {}, "spans": letter.spans if letter else [],
             "dropped": letter.dropped if letter else [], "label": PATHWAYS[p.pathway], "reasons": p.reasons,
             "priority_parts": p.priority_parts, "priority_max": PRIORITY_MAX,
+            "booking": booking_out(latest_decision(session, p.id, BOOKING_KINDS)),
             "letter_text": letter.text if letter else ""}         # Letter.model is kept in the database only
 
 
@@ -224,14 +242,61 @@ def next_monday(today: date | None = None) -> str:
     return (today + timedelta(days=(7 - today.weekday()) % 7 or 7)).isoformat()
 
 
-def build_week(session: Session) -> dict:
-    """The optimiser on the current database, overrides included."""
+def week_frame(session: Session) -> pd.DataFrame:
     rows, decisions = [], latest_decisions(session)
     for p in session.exec(select(Patient)).all():
         rows.append({"patient_id": p.id, "pathway": effective_pathway(p, decisions.get(p.id)),
                      "priority_score": p.priority, "weeks_waiting": p.weeks_waiting, "has_letter": p.letter_id is not None,
                      "name": p.name})
-    df = pd.DataFrame(rows)
-    plan = O.optimise(df)
+    return pd.DataFrame(rows)
+
+
+class NoSlotLeft(Exception):
+    """More patients booked than a slot type has slots."""
+
+
+def plan_week(df: pd.DataFrame, locked: set[str]) -> O.Plan:
+    try:
+        return O.optimise(df, locked=locked)
+    except RuntimeError as e:
+        raise NoSlotLeft("No slot left · all booked") from e
+
+
+def build_week(session: Session) -> dict:
+    """The optimiser on the current database: bookings first, then over-52s, then priority (overrides included)."""
+    df = week_frame(session)
+    booked = bookings(session)
+    plan = plan_week(df, set(booked))
+    changes = {pid: {"overridden": True, "booked": False, "was": d.rules_pathway, "by": d.by, "at": d.at.isoformat(),
+                     "reason": d.reason, "booking_reason": None}
+               for pid, d in latest_decisions(session).items() if d.kind == "overridden"}
+    for pid, d in booked.items():
+        c = changes.setdefault(pid, {"overridden": False, "was": None})
+        c.update(booked=True, by=d.by, at=max(c.get("at") or "", d.at.isoformat()), booking_reason=d.reason)
+        c.setdefault("reason", None)
     # the API serves a page for every patient (a letter or the waiting-list record), so every name can link
-    return O.plan_to_json(plan, df, dict(zip(df.patient_id, df.name)), set(df.patient_id), next_monday())
+    return O.plan_to_json(plan, df, dict(zip(df.patient_id, df.name)), set(df.patient_id), next_monday(), changes)
+
+
+def book(session: Session, p: Patient, by: str, reason: str, confirm: bool) -> dict:
+    """Book a patient into this week. If that pushes anyone over 52 weeks out of a slot, nothing is stored until the
+    clinician confirms with those names in front of them."""
+    pathway = effective_pathway(p, latest_decision(session, p.id))
+    if pathway not in O.ALLOWED:
+        raise NoSlotLeft("No slot for this pathway")
+    df = week_frame(session)
+    plan = plan_week(df, set(bookings(session)) | {p.id})
+    names = dict(zip(df.patient_id, df.name))
+    weeks = dict(zip(df.patient_id, df.weeks_waiting))
+    pushed = [{"id": pid, "name": names[pid], "weeks_waiting": int(weeks[pid])} for pid in plan.pushed_out]
+    if pushed and not confirm:
+        return {"booked": False, "needs_confirm": True, "pushed_out": pushed, "booking": None}
+    d = record_decision(session, p, None, by, reason, "booked")
+    return {"booked": True, "needs_confirm": False, "pushed_out": pushed, "booking": booking_out(d)}
+
+
+def unbook(session: Session, p: Patient, by: str, reason: str | None) -> dict:
+    if latest_decision(session, p.id, BOOKING_KINDS) is None or p.id not in bookings(session):
+        return {"booked": False, "booking": None}
+    record_decision(session, p, None, by, reason, "unbooked")
+    return {"booked": False, "booking": None}

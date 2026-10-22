@@ -122,6 +122,32 @@ def override(pid: PatientId, body: OverrideIn, session: DB) -> dict:
     return S.decision_out(S.record_decision(session, p, body.pathway, body.by, body.reason, kind))
 
 
+class BookIn(BaseModel):
+    by: str = Field("clinician", min_length=1, max_length=80)
+    reason: str = Field(min_length=1, max_length=500)
+    confirm: bool = False           # set after seeing who over 52 weeks the booking pushes out
+
+
+class UnbookIn(BaseModel):
+    by: str = Field("clinician", min_length=1, max_length=80)
+    reason: str | None = Field(None, max_length=500)
+
+
+@app.post("/patients/{pid}/book")
+def book(pid: PatientId, body: BookIn, session: DB) -> dict:
+    """Book into this week (always in, counts against capacity). Returns needs_confirm with the over-52s it would
+    push out, and stores nothing, unless confirm is true."""
+    try:
+        return S.book(session, get_patient(session, pid), body.by, body.reason.strip(), body.confirm)
+    except S.NoSlotLeft as e:
+        raise HTTPException(409, str(e)) from None
+
+
+@app.post("/patients/{pid}/unbook")
+def unbook(pid: PatientId, body: UnbookIn, session: DB) -> dict:
+    return S.unbook(session, get_patient(session, pid), body.by, body.reason)
+
+
 @app.post("/letters")
 async def upload_letters(session: DB, files: Annotated[list[UploadFile], File()]) -> list[dict]:
     """Read one or many letters. Each file gets its own result, so one bad file doesn't stop the rest."""
@@ -195,7 +221,10 @@ async def import_commit(session: DB, file: Annotated[UploadFile, File()], mappin
 
 @app.post("/week/build")
 def week(session: DB) -> dict:
-    return S.build_week(session)
+    try:
+        return S.build_week(session)
+    except S.NoSlotLeft as e:
+        raise HTTPException(409, str(e)) from None
 
 
 @app.get("/results")

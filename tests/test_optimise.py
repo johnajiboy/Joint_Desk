@@ -186,3 +186,29 @@ def test_plan_json_lists_every_unmet_over_52_longest_wait_first():
     weeks = [p["weeks_waiting"] for p in out["unmet"]]
     assert weeks == sorted(weeks, reverse=True) and min(weeks) > O.LONG_WAIT
     assert set(out["unmet"][0]) >= {"id", "name", "weeks_waiting", "priority", "has_page"}
+
+
+def _week(rows):
+    return pd.DataFrame(rows, columns=["patient_id", "pathway", "priority_score", "weeks_waiting"])
+
+
+def test_locked_patient_is_always_in_and_counts_against_capacity():
+    df = _week([("A", "surgery", 90, 10), ("B", "surgery", 80, 10), ("L", "surgery", 5, 2)])
+    plan = O.optimise(df, capacity={"surgery": 2})
+    assert "L" not in set(plan.assigned.patient_id)
+    plan = O.optimise(df, capacity={"surgery": 2}, locked={"L"})
+    assert set(plan.assigned.patient_id) == {"A", "L"}
+    assert plan.pushed_out == []
+
+
+def test_overridden_patient_moves_into_the_right_list():
+    df = _week([("A", "physio", 70, 10), ("B", "surgery", 60, 10)])
+    plan = O.optimise(df.assign(pathway=["surgery", "surgery"]), capacity={"surgery": 2})
+    assert set(plan.assigned.patient_id[plan.assigned.slot == "surgery"]) == {"A", "B"}
+
+
+def test_lock_never_silently_pushes_out_an_over_52():
+    df = _week([("O", "surgery", 10, 60), ("L", "surgery", 5, 2)])
+    plan = O.optimise(df, capacity={"surgery": 1}, locked={"L"})
+    assert set(plan.assigned.patient_id) == {"L"}
+    assert plan.status == "infeasible" and plan.pushed_out == ["O"]

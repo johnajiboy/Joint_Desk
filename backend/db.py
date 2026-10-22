@@ -88,10 +88,10 @@ class ImportRecord(SQLModel, table=True):
 
 
 class Decision(SQLModel, table=True):
-    """Every confirm and override is kept: who, when, the pathway before and after, and why."""
+    """Every confirm, override and booking is kept: who, when, the pathway before and after, and why."""
     id: int | None = Field(default=None, primary_key=True)
     patient_id: str = Field(foreign_key="patient.id", index=True)
-    kind: str                                    # "confirmed" or "overridden"
+    kind: str                                    # "confirmed", "overridden", "booked" or "unbooked"
     rules_pathway: str
     old_pathway: str
     new_pathway: str
