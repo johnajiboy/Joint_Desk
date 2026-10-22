@@ -4,7 +4,6 @@ import shutil
 
 import pytest
 from docx import Document
-from fastapi.testclient import TestClient
 from sqlmodel import Session, select
 
 from backend import services as S
@@ -13,17 +12,6 @@ from kneedss.extract import Extraction
 
 LETTERS = ROOT / "data" / "output" / "letters"
 needs_cbc = pytest.mark.skipif(not shutil.which("cbc"), reason="needs the cbc solver (brew install cbc)")
-
-
-@pytest.fixture(scope="module")
-def client(tmp_path_factory):
-    mp = pytest.MonkeyPatch()
-    mp.setenv("DATABASE_URL", f"sqlite:///{tmp_path_factory.mktemp('db') / 'test.db'}")
-    mp.setenv("DEMO_MODE", "1")
-    from backend.main import app
-    with TestClient(app) as c:
-        yield c
-    mp.undo()
 
 
 def upload(client, *files):
@@ -38,8 +26,10 @@ def letter_only_patient(client):
 
 # ---------------------------------------------------------------- reads
 
-def test_health_reports_demo_mode(client):
-    assert client.get("/health").json() == {"ok": True, "demo_mode": True}
+def test_health_reports_demo_mode(client, request):
+    h = client.get("/health").json()
+    assert h == {"ok": True, "demo_mode": True, "database": request.node.callspec.params["client"], "passcode": False,
+                 "llm_reads_today": 0, "llm_daily_cap": 20}
 
 
 def test_queue_is_the_250_referrals_by_priority(client):

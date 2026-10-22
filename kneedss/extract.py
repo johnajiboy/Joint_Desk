@@ -110,6 +110,12 @@ def _load_cached(path: Path, text: str) -> dict | None:
     return saved if fresh else None
 
 
+def is_cached(text: str, letter_id: str) -> bool:
+    """A saved answer for this exact letter text, prompt and model: reading it costs nothing."""
+    load_dotenv()
+    return _load_cached(cache_path(letter_id), text) is not None
+
+
 def read_facts(text: str, letter_id: str, refresh: bool = False) -> tuple[dict, str, bool, dict | None]:
     """Raw LLM answer for a letter: (facts, model, from_cache, usage). Uses the cache unless refresh."""
     load_dotenv()

@@ -1,5 +1,5 @@
-# Render blueprint: the Joint Desk API as a free web service.
-# Secrets are never in this file: ANTHROPIC_API_KEY is set by hand in the Render dashboard (sync: false).
+# Render blueprint: the Joint Desk API as a free web service, with its database on Supabase Postgres.
+# No secrets in this file: every value marked sync: false is typed into the Render dashboard (Environment).
 services:
   - type: web
     name: joint-desk-api
@@ -13,10 +13,21 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: "3.12.15"
-      # cached LLM results only: the public site never spends API credit
-      - key: DEMO_MODE
-        value: "1"
+      # only the Vercel site and local development may call the API from a browser
       - key: ALLOWED_ORIGINS
-        value: "https://frontend-wine-ten-82.vercel.app,https://frontend-johnajiboys-projects.vercel.app,https://frontend-git-main-johnajiboys-projects.vercel.app,http://localhost:5173,http://localhost:4173"
+        value: "https://frontend-wine-ten-82.vercel.app,http://localhost:5173,http://localhost:4173"
+      # Supabase connection string (Project Settings > Database > Connection string, pooler); never logged
+      - key: DATABASE_URL
+        sync: false
+      # only read when DEMO_MODE is 0
       - key: ANTHROPIC_API_KEY
+        sync: false
+      # 1 = saved LLM results only (no API calls); 0 = read new letters with the API, within LLM_DAILY_CAP
+      - key: DEMO_MODE
+        sync: false
+      # uploads and imports need it; the app asks once per browser session
+      - key: UPLOAD_PASSCODE
+        sync: false
+      # new LLM reads a day (default 20); cached letters never count
+      - key: LLM_DAILY_CAP
         sync: false

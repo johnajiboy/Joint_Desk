@@ -1,6 +1,9 @@
-"""SQLite database (SQLModel): patients, letters read, and the clinician's decisions.
+"""The database (SQLModel): patients, letters read, the clinician's decisions, and the daily LLM read count.
 
-On first start the database is filled from what the repo already holds, with no API calls: the cleaned waiting list
+DATABASE_URL set: that database (Postgres on the live site, e.g. Supabase, through psycopg). Not set: SQLite in
+backend/joint_desk.db. The URL holds a password, so it is never printed or logged.
+
+On first start (empty tables) the database is filled from what the repo already holds, with no API calls: the cleaned waiting list
 (data/output/waiting_list.csv) and the 250 letters already read and checked (the demo export in
 frontend/public/demo/patients/, which came from the extraction cache).
 """
@@ -87,6 +90,12 @@ class ImportRecord(SQLModel, table=True):
     skipped_rows: list = Field(default_factory=list, sa_column=Column(JSON))
 
 
+class LlmDay(SQLModel, table=True):
+    """New LLM reads per day (UTC), for the daily cap. Cached letters never count."""
+    day: str = Field(primary_key=True)          # YYYY-MM-DD
+    reads: int = 0
+
+
 class Decision(SQLModel, table=True):
     """Every confirm, override and booking is kept: who, when, the pathway before and after, and why."""
     id: int | None = Field(default=None, primary_key=True)
@@ -100,13 +109,33 @@ class Decision(SQLModel, table=True):
     at: datetime = Field(default_factory=now)
 
 
+def database_url() -> str:
+    """DATABASE_URL, with postgres:// and postgresql:// pointed at the psycopg (v3) driver; else local SQLite."""
+    url = (os.environ.get("DATABASE_URL") or "").strip()
+    if not url:
+        return f"sqlite:///{DEFAULT_DB}"
+    return re.sub(r"^postgres(ql)?://", "postgresql+psycopg://", url)
+
+
+def engine_options(url: str) -> dict:
+    if url.startswith("sqlite"):
+        return {"connect_args": {"check_same_thread": False}}
+    # Supabase's pooler (pgbouncer, transaction mode) can't keep prepared statements; drop dead pooled connections
+    return {"connect_args": {"prepare_threshold": None}, "pool_pre_ping": True, "pool_recycle": 300}
+
+
 @lru_cache(maxsize=None)
 def engine_for(url: str):
-    return create_engine(url, connect_args={"check_same_thread": False})
+    return create_engine(url, **engine_options(url))
 
 
 def get_engine():
-    return engine_for(os.environ.get("DATABASE_URL") or f"sqlite:///{DEFAULT_DB}")
+    return engine_for(database_url())
+
+
+def backend_name() -> str:
+    """"postgres" or "sqlite", for /health (never the URL)."""
+    return "postgres" if database_url().startswith("postgresql") else "sqlite"
 
 
 def record_facts(r) -> dict:

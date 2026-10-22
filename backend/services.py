@@ -6,14 +6,17 @@ paid for twice and the seeded demo letters can be uploaded on a server that has 
 """
 from __future__ import annotations
 
+import os
 import re
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 import pandas as pd
+from sqlalchemy import update
+from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, col, select
 
-from backend.db import Decision, ImportRecord, Letter, Patient, nhs_digits, now
+from backend.db import Decision, ImportRecord, Letter, LlmDay, Patient, nhs_digits, now
 from kneedss import importer as I
 from kneedss import extract as X
 from kneedss import llm
@@ -22,6 +25,45 @@ from kneedss.rules import PATHWAYS, PRIORITY_MAX
 
 # A demo letter's ID at the start of a file name: L0001.txt, T0042.pdf, "L0001 (1).pdf"
 LETTER_ID = re.compile(r"^([LT]\d{4})(?!\d)")
+
+
+LIMIT_REACHED = "Daily limit reached · try tomorrow"
+DEFAULT_DAILY_CAP = 20
+
+
+# ---------------------------------------------------------------------------- daily LLM cap
+
+def daily_cap() -> int:
+    try:
+        return max(0, int(os.environ.get("LLM_DAILY_CAP", DEFAULT_DAILY_CAP)))
+    except ValueError:
+        return DEFAULT_DAILY_CAP
+
+
+def today() -> str:
+    return datetime.now(timezone.utc).date().isoformat()
+
+
+def reads_today(session: Session) -> int:
+    row = session.get(LlmDay, today())
+    return row.reads if row else 0
+
+
+def reserve_llm_read(session: Session) -> bool:
+    """Take one of today's new LLM reads, or False when the cap is reached. One conditional UPDATE, so two uploads
+    at once can't both take the last read."""
+    day = today()
+    if session.get(LlmDay, day) is None:
+        try:
+            session.add(LlmDay(day=day, reads=0))
+            session.commit()
+        except IntegrityError:                           # another request made today's row first
+            session.rollback()
+    taken = session.execute(update(LlmDay).where(col(LlmDay.day) == day, col(LlmDay.reads) < daily_cap())
+                            .values(reads=LlmDay.reads + 1)).rowcount
+    session.commit()
+    session.expire_all()
+    return taken == 1
 
 
 # ---------------------------------------------------------------------------- decisions
@@ -163,6 +205,9 @@ def read_letter(session: Session, filename: str, data: bytes) -> dict:
         p = session.get(Patient, stored.patient_id)
         return _save(session, p, filename, letter_id, text, key, stored.model, stored.facts, stored.quotes, stored.dropped)
 
+    # a new read costs API credit: it needs one of today's reads (DEMO_MODE=1 never calls the API; cached letters are free)
+    if os.environ.get("DEMO_MODE") != "1" and not X.is_cached(text, letter_id) and not reserve_llm_read(session):
+        return fail(LIMIT_REACHED)
     try:
         ex = X.extract(text, letter_id)
     except X.DemoCacheMiss:
