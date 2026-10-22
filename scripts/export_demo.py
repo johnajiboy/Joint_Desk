@@ -5,7 +5,7 @@ cleaned waiting list, apply rules.py (pathway, rule, priority and its breakdown)
 in the letter so the app can highlight it.
 
     python scripts/export_demo.py
-      -> frontend/public/demo/queue.json, patients/<id>.json, week.json, results.json
+      -> frontend/public/demo/queue.json, patients/<id>.json, week.json, waiting_list.json, results.json
 """
 from __future__ import annotations
 
@@ -113,9 +113,21 @@ def main() -> None:
             old.unlink()
     queue.sort(key=lambda r: (-r["priority"], -(r["weeks_waiting"] or 0)))
     write(DEMO / "queue.json", json.dumps(queue))
+    # the week as the backend plans it: the waiting list, with the newest letter's pathway and priority
+    week = wl[["patient_id", "pathway", "priority_score", "weeks_waiting"]].copy()
+    from_letter = {r["id"]: r for r in queue if r["weeks_waiting"] is not None}
+    week["pathway"] = [from_letter[i]["pathway"] if i in from_letter else p for i, p in zip(week.patient_id, week.pathway)]
+    week["priority_score"] = [from_letter[i]["priority"] if i in from_letter else int(v) for i, v in zip(week.patient_id, week.priority_score)]
     names = dict(zip(wl.patient_id, wl.first_name + " " + wl.surname))
-    plan = O.plan_to_json(O.optimise(wl), wl, names, {r["id"] for r in queue}, WEEK_OF)
+    pages = {r["id"] for r in queue}
+    plan = O.plan_to_json(O.optimise(week), week, names, pages, WEEK_OF)
     write(DEMO / "week.json", json.dumps(plan, default=jsonable))
+    # everyone, compact, so the demo site can re-plan the week in the browser with this browser's overrides and bookings
+    write(DEMO / "waiting_list.json", json.dumps({
+        "week_of": WEEK_OF, "capacity": O.CAPACITY, "long_wait": O.LONG_WAIT,
+        "columns": ["id", "name", "pathway", "priority", "weeks_waiting", "has_page"],
+        "rows": [[r.patient_id, names[r.patient_id], r.pathway, int(r.priority_score), int(r.weeks_waiting), r.patient_id in pages]
+                 for r in week.itertuples()]}, separators=(",", ":")))
 
     write_import_demo()
     results = build_results()

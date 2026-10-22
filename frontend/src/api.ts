@@ -4,7 +4,10 @@
  * scripts/export_demo.py from /demo/ and keeps decisions in this browser's localStorage. No API key ever
  * reaches the frontend.
  */
-import type { Decision, ImportPreview, ImportResult, PathwayKey, Patient, Referral, Results, UploadResult, WeekPlan } from './types'
+import { plan as planWeek } from './planner'
+import type { Change, ListPatient } from './planner'
+import type { Booking, BookResult, Decision, ImportPreview, ImportResult, PathwayKey, Patient, Referral, Results, SlotKind,
+  UploadResult, WeekPlan } from './types'
 
 const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '')
 export const DEMO = !API_URL
@@ -45,6 +48,43 @@ function decisionFor(id: string): Decision | undefined {
 
 function post<T>(path: string, body: unknown): Promise<T> {
   return request<T>('', path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+}
+
+/** POST that turns the API's error detail into the message ("No slot left · all booked"). */
+async function postChecked<T>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${API_URL}${path}`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+  const out = await res.json().catch(() => null)
+  if (!res.ok) throw new Error(typeof out?.detail === 'string' ? out.detail : "Couldn't save")
+  return out as T
+}
+
+// ------------------------------------------------------------------ bookings (demo: this browser only)
+
+const BOOKINGS_KEY = 'jd-bookings'
+const bookingMemory: Record<string, Booking | null> = {}
+
+function readBookings(): Record<string, Booking> {
+  let stored: Record<string, Booking> = {}
+  try {
+    stored = JSON.parse(localStorage.getItem(BOOKINGS_KEY) ?? '{}') as Record<string, Booking>
+  } catch {
+    // storage blocked: only this page session's bookings
+  }
+  const out = { ...stored }
+  for (const [id, b] of Object.entries(bookingMemory)) {
+    if (b) out[id] = b
+    else delete out[id]
+  }
+  return out
+}
+
+function writeBooking(id: string, b: Booking | null) {
+  bookingMemory[id] = b
+  try {
+    localStorage.setItem(BOOKINGS_KEY, JSON.stringify(readBookings()))
+  } catch {
+    // storage blocked: the booking lasts until the page reloads
+  }
 }
 
 /** Who is deciding. No accounts yet: the name the clinician types, remembered in this browser. */
@@ -99,18 +139,77 @@ export async function getQueue(): Promise<Referral[]> {
 
 export async function getPatient(id: string): Promise<Patient> {
   if (!/^[A-Za-z0-9_-]+$/.test(id)) throw new Error('Unknown patient')
-  if (DEMO && demoImported.patients[id]) return { ...demoImported.patients[id], decision: decisionFor(id) }
+  const local = () => ({ decision: decisionFor(id), booking: readBookings()[id] ?? null })
+  if (DEMO && demoImported.patients[id]) return { ...demoImported.patients[id], ...local() }
   const p = await request<Patient>(`patients/${id}.json`, `/patients/${id}`)
-  return DEMO ? { ...p, decision: decisionFor(id) } : p
+  return DEMO ? { ...p, ...local() } : p
 }
 
 export function getResults(): Promise<Results> {
   return request<Results>('results.json', '/results')
 }
 
-/** This week's slots from the optimiser. Demo: the plan exported from the cleaned waiting list. */
+interface WaitingList {
+  week_of: string
+  capacity: Record<SlotKind, number>
+  long_wait: number
+  columns: string[]
+  rows: [string, string, PathwayKey, number, number, boolean][]
+}
+
+let demoList: Promise<WaitingList> | null = null
+
+/** The demo week, re-planned in this browser: the waiting list with this browser's overrides, bookings and import. */
+async function demoPlan(extraBooking?: { id: string } & Booking): Promise<WeekPlan> {
+  demoList ??= request<WaitingList>('waiting_list.json', '')
+  const list = await demoList
+  const patients = new Map<string, ListPatient>(list.rows.map(([id, name, pathway, priority, weeks_waiting, has_page]) =>
+    [id, { id, name, pathway, priority, weeks_waiting, has_page }]))
+  for (const r of Object.values(demoImported.referrals)) {
+    if (r.weeks_waiting !== null) patients.set(r.id, { id: r.id, name: r.name, pathway: r.pathway, priority: r.priority,
+      weeks_waiting: r.weeks_waiting, has_page: true })
+  }
+  const changes: Record<string, Change> = {}
+  for (const [id, d] of Object.entries({ ...readDecisions(), ...memory })) {
+    const p = patients.get(id)
+    if (!p) continue
+    p.pathway = d.pathway                                     // the pathway that counts: the clinician's
+    if (d.kind === 'overridden') changes[id] = { overridden: true, booked: false, was: d.was, by: d.by, at: d.at, reason: d.reason }
+  }
+  const bookings = { ...readBookings(), ...(extraBooking ? { [extraBooking.id]: extraBooking } : {}) }
+  for (const [id, b] of Object.entries(bookings)) {
+    if (!patients.has(id)) continue
+    const c = changes[id] ?? { overridden: false, booked: false, was: null, at: b.at }
+    changes[id] = { ...c, booked: true, by: b.by, at: c.at > b.at ? c.at : b.at, booking_reason: b.reason }
+  }
+  return planWeek([...patients.values()], changes, list.capacity, list.long_wait, list.week_of)
+}
+
+/** This week's slots. Backend: the optimiser on the database. Demo: re-planned in the browser (same rules). */
 export function buildWeek(): Promise<WeekPlan> {
-  return request<WeekPlan>('week.json', '/week/build', DEMO ? undefined : { method: 'POST' })
+  return DEMO ? demoPlan() : postChecked<WeekPlan>('/week/build', {})
+}
+
+/**
+ * Book a patient into this week: always in, counts against capacity. If that pushes anyone over 52 weeks out of a
+ * slot, nothing is saved and the answer names them; call again with confirm to book anyway.
+ */
+export async function bookThisWeek(id: string, by: string, reason: string, confirm = false): Promise<BookResult> {
+  if (!DEMO) return postChecked<BookResult>(`/patients/${id}/book`, { by: by || 'clinician', reason, confirm })
+  const booking: Booking = { by: by || null, at: new Date().toISOString(), reason }
+  const week = await demoPlan({ id, ...booking })             // throws NoSlotLeft when every slot is booked
+  const pushed_out = week.pushed_out.map(({ id, name, weeks_waiting }) => ({ id, name, weeks_waiting }))
+  if (pushed_out.length && !confirm) return { booked: false, needs_confirm: true, pushed_out, booking: null }
+  writeBooking(id, booking)
+  return { booked: true, needs_confirm: false, pushed_out, booking }
+}
+
+export async function unbookThisWeek(id: string, by: string): Promise<void> {
+  if (!DEMO) {
+    await postChecked(`/patients/${id}/unbook`, { by: by || 'clinician' })
+    return
+  }
+  writeBooking(id, null)
 }
 
 // ------------------------------------------------------------------ upload

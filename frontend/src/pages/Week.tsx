@@ -6,7 +6,7 @@ import { PathwayChip, Weeks } from '../components/PathwayChip'
 import { Term } from '../components/Term'
 import { primaryButton, stagger } from '../components/ui'
 import type { ReactNode } from 'react'
-import type { WeekPatient, WeekPlan } from '../types'
+import type { UnmetPatient, WeekChange, WeekPatient, WeekPlan } from '../types'
 
 const LABELS = { surgery: 'Surgery', physio: 'Physio', weight_support: 'Weight support' }
 
@@ -21,6 +21,63 @@ function Tile({ label, value, of, over = false }: { label: ReactNode; value: num
         <span className={over ? 'text-danger' : ''}>{value ?? '—'}</span>
         {of !== null && <span className="text-base font-normal text-muted"> / {of}</span>}
       </div>
+    </div>
+  )
+}
+
+const SLOT_TEXT = { surgery: 'surgery', physio: 'physio', weight_support: 'weight support' }
+
+function outcome(c: WeekChange): string {
+  if (c.outcome === 'in' && c.slot) return `In a ${SLOT_TEXT[c.slot]} slot`
+  if (c.outcome === 'next') return `Next in line · #${c.rank}`
+  return 'No slot needed (non-surgical / needs info)'
+}
+
+function PersonLink({ p, className, children }: { p: { id: string; has_page: boolean }; className: string; children: ReactNode }) {
+  return p.has_page
+    ? <Link to={`/patient/${p.id}`} className={`press hover:bg-sunken ${className}`}>{children}</Link>
+    : <div className={className} title={`${p.id} · no letter yet`}>{children}</div>
+}
+
+function Changes({ changes }: { changes: WeekChange[] }) {
+  return (
+    <Card title="Your changes this week" className="fade-up mb-5 min-w-0"
+      meta={<span className="ml-auto text-xs text-muted tabular-nums">{changes.length}</span>}>
+      {changes.length === 0 ? <p className="py-2 text-sm text-muted">No overrides or bookings</p> : (
+        <ul className="-mx-2">
+          {changes.map((c, i) => (
+            <li key={c.id} className="fade-up" style={stagger(i)}>
+              <PersonLink p={c} className="flex min-h-12 flex-wrap items-center gap-x-3 gap-y-1 rounded-md px-2 py-1.5 text-sm">
+                <span className="min-w-0 flex-1 basis-40">
+                  <span className="block truncate font-semibold">{c.name}</span>
+                  <span className="block truncate text-xs text-muted">
+                    {[c.overridden && 'Overridden', c.booked && 'Booked', c.by].filter(Boolean).join(' · ')}
+                  </span>
+                </span>
+                <PathwayChip pathway={c.pathway} />
+                <span className={`w-full text-sm sm:w-56 sm:text-right ${c.outcome === 'in' ? 'font-medium' : 'text-muted'}`}>{outcome(c)}</span>
+              </PersonLink>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Card>
+  )
+}
+
+function PushedOut({ people }: { people: UnmetPatient[] }) {
+  return (
+    <div className="fade-up mb-5 rounded-lg border border-line bg-surface p-4 text-sm" role="alert">
+      <div className="font-medium text-danger">Bookings push out {people.length} over 52 weeks</div>
+      <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-1">
+        {people.map((p) => (
+          <li key={p.id}>
+            <PersonLink p={p} className="-mx-1 inline-flex min-h-11 items-center rounded-md px-1">
+              <span className="font-semibold">{p.name}</span><span className="ml-1 text-muted tabular-nums">· {p.weeks_waiting} wk</span>
+            </PersonLink>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -51,15 +108,15 @@ function Row({ p, i, muted = false }: { p: WeekPatient; i: number; muted?: boole
 export default function Week() {
   const [plan, setPlan] = useState<WeekPlan | null>(null)
   const [busy, setBusy] = useState(false)
-  const [error, setError] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   async function build() {
     setBusy(true)
-    setError(false)
+    setError(null)
     try {
       setPlan(await buildWeek())
-    } catch {
-      setError(true)
+    } catch (e) {
+      setError(e instanceof Error && e.message.startsWith('No slot') ? e.message : "Couldn't build the list")
     } finally {
       setBusy(false)
     }
@@ -70,7 +127,10 @@ export default function Week() {
   return (
     <>
       <PageHeader title="This week"
-        meta={plan && <span className="chip chip-plain">Week of {weekOf(plan.week_of)}</span>}
+        meta={plan && <>
+          <span className="chip chip-plain">Week of {weekOf(plan.week_of)}</span>
+          {plan.method === 'demo' && <span className="chip chip-plain">Demo plan</span>}
+        </>}
         action={<button className={primaryButton} onClick={build} disabled={busy}>
           {busy ? 'Building…' : plan ? 'Rebuild list' : "Build this week's list"}
         </button>} />
@@ -85,14 +145,20 @@ export default function Week() {
           over={!!lw && lw.included < lw.total} />
       </div>
 
+      {plan && plan.pushed_out?.length > 0 && <PushedOut people={plan.pushed_out} />}
+
       {plan?.status === 'infeasible' && (
         <div className="fade-up mb-5 rounded-lg border border-line bg-surface p-4 text-sm">
           <div className="font-medium text-danger">Over-52s don't all fit · {lw?.unmet} without a slot</div>
-          <p className="mt-1 text-muted">{plan.shortfall.join(' · ')}. Every slot they can use goes to them; nobody over 52 weeks is skipped.</p>
+          <p className="mt-1 text-muted">
+            {[...plan.shortfall, plan.locked > 0 && `${plan.locked} booked`].filter(Boolean).join(' · ')}.
+            {' '}Every slot left after bookings goes to them; nobody over 52 weeks is skipped.
+          </p>
         </div>
       )}
 
-      {error && <ErrorNote text="Couldn't build the list" />}
+      {error && <ErrorNote text={error} />}
+      {plan && <Changes changes={plan.changes ?? []} />}
       {!plan && !error && <ErrorNote text="Not built yet" />}
 
       {plan && plan.unmet?.length > 0 && (
@@ -112,17 +178,15 @@ export default function Week() {
               {plan.unmet.map((p) => {
                 const row = (
                   <>
-                    <span className="min-w-0 flex-1 truncate font-semibold">{p.name}</span>
+                    <span className="min-w-0 flex-1 truncate font-semibold">{p.name}
+                      {p.pushed_out && <span className="ml-2 text-xs font-normal text-danger">pushed out by a booking</span>}</span>
                     <span className="w-20 text-right"><Weeks weeks={p.weeks_waiting} limit={plan.long_wait.weeks} /></span>
                     <span className="w-16 text-right font-medium tabular-nums">{p.priority}</span>
                   </>
                 )
-                const cls = 'flex min-h-11 items-center gap-2 rounded-md px-2 text-sm'
                 return (
                   <li key={p.id}>
-                    {p.has_page
-                      ? <Link to={`/patient/${p.id}`} className={`press hover:bg-sunken ${cls}`}>{row}</Link>
-                      : <div className={cls} title={`${p.id} · no letter yet`}>{row}</div>}
+                    <PersonLink p={p} className="flex min-h-11 items-center gap-2 rounded-md px-2 text-sm">{row}</PersonLink>
                   </li>
                 )
               })}
@@ -150,8 +214,11 @@ export default function Week() {
             ))}
           </div>
           <p className="mt-4 text-xs text-muted">
-            <Term k="optimiser">Optimiser</Term> (PuLP, CBC) · {plan.patients.toLocaleString()} on the waiting list · over {lw?.weeks} weeks
-            first, then <Term k="priority">priority</Term>, ties to the longest wait
+            {plan.method === 'demo'
+              ? <>Demo plan · rebuilt in this browser with your overrides and bookings, same rules as the <Term k="optimiser">optimiser</Term></>
+              : <><Term k="optimiser">Optimiser</Term> (PuLP, CBC)</>}
+            {' '}· {plan.patients.toLocaleString()} on the waiting list · bookings first, then over {lw?.weeks} weeks,
+            then <Term k="priority">priority</Term>, ties to the longest wait
           </p>
         </>
       )}

@@ -82,11 +82,15 @@ docs/             assumptions, data dictionary
 6. Done: backend API (`backend/`: FastAPI + SQLModel + SQLite `backend/joint_desk.db`, gitignored). Seeds on first
    start from the cleaned waiting list and the 250 checked letters (demo export), so it needs no cache or API.
    POST /letters, GET /queue, GET /patients/{id}, POST /patients/{id}/confirm and /override (who, when, old/new,
-   reason), POST /week/build (optimiser, overrides included), GET /results. Frontend uses it when VITE_API_URL is
+   reason), POST /patients/{id}/book and /unbook (booked patients always get a slot; a booking that pushes out an
+   over-52 needs confirm), POST /week/build (optimiser: bookings, then over-52s, then priority; overrides included;
+   "changes" says where each overridden or booked patient ended up), GET /results. Frontend uses it when VITE_API_URL is
    set. Deployed on Render from `render.yaml` with DEMO_MODE=1; ANTHROPIC_API_KEY only in Render's settings.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
-   `VITE_API_URL` is set). Week list is a greedy stand-in (`frontend/src/week.ts`) until stage 5.
+   `VITE_API_URL` is set). The demo site re-plans the week in the browser (`frontend/src/planner.ts`, "Demo plan")
+   from `waiting_list.json` plus this browser's overrides and bookings; `tests/test_demo_planner.py` checks it gives
+   the optimiser's plan.
 8. Done: `scripts/export_pdfs.py` exports all 250 letters as PDF (reportlab, fictional practice letterhead,
    synthetic footer) and 10 as DOCX, reads each back and checks every answer-key quote (all found); zips in
    data/output/ (gitignored). Uploads match a letter by base name and reuse its facts only if all its quotes are

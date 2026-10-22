@@ -46,7 +46,23 @@ export interface Patient extends Omit<Referral, 'text_key' | 'nhs_number'> {
   reasons: string[]
   priority_parts: Record<string, number>
   priority_max: Record<string, number>
+  /** Booked into this week by a clinician ("Book this week"): always gets a slot. */
+  booking?: Booking | null
   letter_text: string
+}
+
+export interface Booking {
+  by?: string | null
+  at: string
+  reason?: string | null
+}
+
+/** Booking answer: when it would push anyone over 52 weeks out of a slot, nothing is stored until confirmed. */
+export interface BookResult {
+  booked: boolean
+  needs_confirm: boolean
+  pushed_out: { id: string; name: string; weeks_waiting: number }[]
+  booking: Booking | null
 }
 
 export interface WeekPatient {
@@ -60,8 +76,10 @@ export interface WeekPatient {
   has_page: boolean
 }
 
+export type SlotKind = 'surgery' | 'physio' | 'weight_support'
+
 export interface SlotList {
-  kind: 'surgery' | 'physio' | 'weight_support'
+  kind: SlotKind
   label: string
   capacity: number
   in: WeekPatient[]
@@ -69,17 +87,46 @@ export interface SlotList {
   waiting: number
 }
 
-/** The optimiser's plan for this week (kneedss/optimise.py via scripts/export_demo.py, later the backend). */
+export interface UnmetPatient {
+  id: string; name: string; pathway: PathwayKey; priority: number; weeks_waiting: number; has_page: boolean
+  pushed_out?: boolean          // had a slot until a booking took it
+}
+
+/** A patient a clinician overrode or booked, and what that did this week. */
+export interface WeekChange {
+  id: string
+  name: string
+  pathway: PathwayKey           // the pathway now
+  priority: number
+  weeks_waiting: number
+  has_page: boolean
+  overridden: boolean
+  booked: boolean
+  was: PathwayKey | null        // what the rules said (overrides)
+  by?: string | null
+  at: string
+  reason?: string | null
+  booking_reason?: string | null
+  outcome: 'in' | 'next' | 'none'
+  slot: SlotKind | null
+  rank: number | null           // place in the queue for that slot type (1 = next)
+}
+
+/** The week plan: the optimiser (backend POST /week/build) or the demo site's browser plan (planner.ts). */
 export interface WeekPlan {
   week_of: string
-  method: 'optimiser'
+  method: 'optimiser' | 'demo'
   status: 'optimal' | 'infeasible'
   shortfall: string[]
   patients: number
   lists: SlotList[]
   long_wait: { weeks: number; total: number; included: number; unmet: number }
   /** Every over-52 patient left without a slot this week, longest wait first. */
-  unmet: { id: string; name: string; pathway: PathwayKey; priority: number; weeks_waiting: number; has_page: boolean }[]
+  unmet: UnmetPatient[]
+  locked: number
+  /** Over-52s who lost their slot to a booking. */
+  pushed_out: UnmetPatient[]
+  changes: WeekChange[]
 }
 
 export type UploadResult =

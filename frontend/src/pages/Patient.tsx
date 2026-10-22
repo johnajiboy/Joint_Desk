@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { confirmPathway, getClinician, getPatient, overridePathway, setClinician } from '../api'
+import { bookThisWeek, confirmPathway, getClinician, getPatient, overridePathway, setClinician, unbookThisWeek } from '../api'
 import { Card, ErrorNote, Loading, Meter } from '../components/AppShell'
 import { primaryButton, secondaryButton } from '../components/ui'
 import { BackIcon, CheckIcon } from '../components/icons'
@@ -9,7 +9,8 @@ import { PathwayChip } from '../components/PathwayChip'
 import { Term } from '../components/Term'
 import type { GlossaryKey } from '../glossary'
 import { effectivePathway, PATHWAY_KEYS, PATHWAYS } from '../pathways'
-import type { FactValue, PathwayKey, Patient as PatientData, Span } from '../types'
+import { ALLOWED } from '../planner'
+import type { BookResult, FactValue, PathwayKey, Patient as PatientData, Span } from '../types'
 
 const yesNo = (v: FactValue) => (v === true ? 'Yes' : v === false ? 'No' : null)
 
@@ -95,6 +96,10 @@ export default function Patient() {
   const [name, setName] = useState(getClinician)
   const [reason, setReason] = useState('')
   const [saving, setSaving] = useState(false)
+  const [booking, setBooking] = useState(false)
+  const [bookReason, setBookReason] = useState('')
+  const [pushed, setPushed] = useState<BookResult['pushed_out'] | null>(null)
+  const [bookError, setBookError] = useState<string | null>(null)
 
   useEffect(() => {
     getPatient(id).then(setLoaded).catch(() => setError(true))
@@ -126,6 +131,39 @@ export default function Patient() {
     }
   }
   const confirm = () => decide(() => confirmPathway(p!.id, p!.pathway, current, name.trim()))
+
+  async function book(confirmed = false) {
+    setSaving(true)
+    setBookError(null)
+    setClinician(name.trim())
+    try {
+      const r = await bookThisWeek(p!.id, name.trim(), bookReason.trim(), confirmed)
+      if (r.needs_confirm) {
+        setPushed(r.pushed_out)
+        return
+      }
+      setP({ ...p!, booking: r.booking })
+      setBooking(false); setBookReason(''); setPushed(null)
+    } catch (e) {
+      setBookError(e instanceof Error ? e.message : "Couldn't book")
+    } finally {
+      setSaving(false)
+    }
+  }
+
+  async function unbook() {
+    setSaving(true)
+    setBookError(null)
+    try {
+      await unbookThisWeek(p!.id, name.trim())
+      setP({ ...p!, booking: null })
+    } catch (e) {
+      setBookError(e instanceof Error ? e.message : "Couldn't unbook")
+    } finally {
+      setSaving(false)
+    }
+  }
+  const canBook = !!ALLOWED[current] && p.weeks_waiting !== null
   const saveOverride = () => choice && decide(() => overridePathway(p!.id, p!.pathway, choice, name.trim(), reason.trim()))
 
   const weeks = p.weeks_waiting ?? 0
@@ -196,7 +234,44 @@ export default function Patient() {
                 aria-expanded={overriding}>
                 Override
               </button>
+              {p.booking ? (
+                <button className={secondaryButton} onClick={unbook} disabled={saving}>Unbook</button>
+              ) : canBook && (
+                <button className={secondaryButton} aria-expanded={booking}
+                  onClick={() => { setBooking(!booking); setPushed(null); setBookError(null) }}>
+                  Book this week
+                </button>
+              )}
             </div>
+            {p.booking && (
+              <p className="fade-up mt-2 text-sm text-muted">
+                <span className="font-medium text-text">Booked this week</span>
+                {p.booking.by ? ` · ${p.booking.by}` : ''}{p.booking.reason ? ` · “${p.booking.reason}”` : ''}
+              </p>
+            )}
+            {bookError && <p className="mt-2 text-sm font-medium text-danger">{bookError}</p>}
+            {booking && !p.booking && (
+              <fieldset className="fade-up mt-3 rounded-md border border-line p-3">
+                <legend className="px-1 text-xs text-muted">Book into this week · always gets a slot</legend>
+                <input value={bookReason} onChange={(e) => { setBookReason(e.target.value); setPushed(null) }} maxLength={500}
+                  placeholder="Reason (needed)" aria-label="Reason for booking"
+                  className="h-11 w-full rounded-md border border-line bg-surface px-3 text-sm focus:border-primary focus:outline-none" />
+                {pushed && (
+                  <div className="fade-up mt-3 text-sm" role="alert">
+                    <p className="font-medium text-danger">Pushes out {pushed.length} over 52 weeks</p>
+                    <ul className="mt-1 text-muted">
+                      {pushed.map((q) => <li key={q.id}>{q.name} · {q.weeks_waiting} wk</li>)}
+                    </ul>
+                  </div>
+                )}
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <button className={secondaryButton} disabled={!bookReason.trim() || saving} onClick={() => book(!!pushed)}>
+                    {pushed ? 'Book anyway' : 'Save booking'}
+                  </button>
+                  <button className="press h-11 px-3 text-sm text-muted" onClick={() => { setBooking(false); setPushed(null) }}>Cancel</button>
+                </div>
+              </fieldset>
+            )}
             {overriding && (
               <fieldset className="fade-up mt-3 rounded-md border border-line p-3">
                 <legend className="px-1 text-xs text-muted">Change pathway to</legend>
