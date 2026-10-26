@@ -22,6 +22,7 @@ import json
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Path as PathParam, Query, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 from sqlmodel import Session
 
@@ -58,6 +59,12 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type", "X-Upload-Passcode"],
 )
+
+
+@app.exception_handler(S.WeekBuildError)
+async def week_build_failed(_, e: S.WeekBuildError) -> JSONResponse:
+    """A solver failure: a plain message for the client (the real reason is already in the server log)."""
+    return JSONResponse(status_code=500, content={"detail": str(e)})
 
 
 def passcode_needed() -> bool:
@@ -267,12 +274,24 @@ async def import_commit(session: DB, file: Annotated[UploadFile, File()], mappin
         raise HTTPException(422, str(e)) from None
 
 
+class BuildIn(BaseModel):
+    by: str = Field("clinician", min_length=1, max_length=80)
+
+
 @app.post("/week/build")
-def week(session: DB) -> dict:
+def week(session: DB, body: BuildIn | None = None) -> dict:
+    """Build this week's plan and store it (who, when). 409 when bookings exceed the slots; 500 on a solver failure."""
     try:
-        return S.build_week(session)
+        plan = S.build_week(session)
     except S.NoSlotLeft as e:
         raise HTTPException(409, str(e)) from None
+    return S.save_week(session, plan, (body.by if body else None) or "clinician")
+
+
+@app.get("/week/latest")
+def week_latest(session: DB) -> dict | None:
+    """The last plan built (with built_by, built_at), or null before the first build."""
+    return S.latest_week(session)
 
 
 @app.get("/results")

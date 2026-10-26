@@ -17,7 +17,7 @@ from sqlalchemy import update
 from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, col, select
 
-from backend.db import Decision, ImportRecord, Letter, LlmDay, Patient, nhs_digits, now
+from backend.db import Decision, ImportRecord, Letter, LlmDay, Patient, WeekPlanRecord, nhs_digits, now
 from kneedss import importer as I
 from kneedss import extract as X
 from kneedss import llm
@@ -299,15 +299,43 @@ def week_frame(session: Session) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+SOLVER_ERROR = "Couldn't build the list · solver error"
+
+
 class NoSlotLeft(Exception):
-    """More patients booked than a slot type has slots."""
+    """More patients booked than the slots they can use (or a pathway with no slot)."""
+
+
+class WeekBuildError(Exception):
+    """The solver failed. The client gets SOLVER_ERROR; the real reason is in the server log."""
 
 
 def plan_week(df: pd.DataFrame, locked: set[str]) -> O.Plan:
     try:
         return O.optimise(df, locked=locked)
-    except RuntimeError as e:
-        raise NoSlotLeft("No slot left · all booked") from e
+    except O.BookingsExceedCapacity as e:
+        raise NoSlotLeft(str(e)) from e
+    except O.SolverError as e:
+        log.error("Week plan failed: %s", e)            # solver messages hold no secrets
+        raise WeekBuildError(SOLVER_ERROR) from e
+
+
+def save_week(session: Session, plan: dict, by: str) -> dict:
+    """Store a built plan (who, when) and return it with those two added."""
+    rec = WeekPlanRecord(week_of=plan["week_of"], by=by, plan=plan)
+    session.add(rec)
+    session.commit()
+    session.refresh(rec)
+    return week_out(rec)
+
+
+def week_out(rec: WeekPlanRecord) -> dict:
+    return {**rec.plan, "built_by": rec.by, "built_at": rec.at.isoformat()}
+
+
+def latest_week(session: Session) -> dict | None:
+    rec = session.exec(select(WeekPlanRecord).order_by(col(WeekPlanRecord.at).desc(), col(WeekPlanRecord.id).desc())).first()
+    return week_out(rec) if rec else None
 
 
 def build_week(session: Session) -> dict:

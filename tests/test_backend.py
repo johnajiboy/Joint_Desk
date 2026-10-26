@@ -1,3 +1,4 @@
+import importlib.util
 import io
 import json
 import shutil
@@ -11,7 +12,8 @@ from backend.db import ROOT, Decision, get_engine
 from kneedss.extract import Extraction
 
 LETTERS = ROOT / "data" / "output" / "letters"
-needs_cbc = pytest.mark.skipif(not shutil.which("cbc"), reason="needs the cbc solver (brew install cbc)")
+needs_cbc = pytest.mark.skipif(not (importlib.util.find_spec("highspy") or shutil.which("cbc")),
+                               reason="needs a solver (pip install highspy)")
 
 
 def upload(client, *files):
@@ -296,3 +298,37 @@ def test_a_renamed_file_with_another_letter_inside_is_not_given_its_facts(client
     # L0001's quotes are not in this document, so its stored facts are not reused, and the cache only holds
     # L0001's own text: in demo mode the file can't be read
     assert r == {"file": "L0001.pdf", "ok": False, "message": "Couldn't read file · demo mode"}
+
+
+# ---------------------------------------------------------------- week build errors and saved plans
+
+@needs_cbc
+def test_week_plan_is_stored_and_served_after_a_restart(client):
+    built = client.post("/week/build", json={"by": "Dr Store"}).json()
+    assert built["built_by"] == "Dr Store" and built["built_at"]
+    assert [(l["kind"], len(l["in"]), l["capacity"]) for l in built["lists"]] == [("surgery", 12, 12), ("physio", 20, 20), ("weight_support", 8, 8)]
+    from backend.db import init_db
+    init_db()                                                         # a restart: the tables are kept
+    latest = client.get("/week/latest").json()
+    assert latest == built
+
+
+def test_solver_failure_is_a_500_with_the_reason_only_in_the_log(client, monkeypatch, caplog):
+    from kneedss import optimise as O
+
+    def broken(*a, **k):
+        raise O.SolverError("HiGHS gave status NumericalError on the week plan")
+    monkeypatch.setattr(S.O, "optimise", broken)
+    r = client.post("/week/build", json={"by": "Dr Test"})
+    assert r.status_code == 500 and r.json() == {"detail": "Couldn't build the list · solver error"}
+    assert "Week plan failed: HiGHS gave status NumericalError" in caplog.text
+
+
+def test_overbooking_is_409_not_a_solver_error(client, monkeypatch):
+    from kneedss import optimise as O
+
+    def full(*a, **k):
+        raise O.BookingsExceedCapacity("No slot left · all booked")
+    monkeypatch.setattr(S.O, "optimise", full)
+    r = client.post("/week/build", json={})
+    assert r.status_code == 409 and r.json()["detail"] == "No slot left · all booked"

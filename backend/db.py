@@ -99,6 +99,15 @@ class LlmDay(SQLModel, table=True):
     reads: int = 0
 
 
+class WeekPlanRecord(SQLModel, table=True):
+    """Every built week plan, so the This week page shows the latest one after a restart."""
+    id: int | None = Field(default=None, primary_key=True)
+    week_of: str
+    by: str
+    at: datetime = Field(default_factory=now, index=True)
+    plan: dict = Field(default_factory=dict, sa_column=Column(JSON))
+
+
 class Decision(SQLModel, table=True):
     """Every confirm, override and booking is kept: who, when, the pathway before and after, and why."""
     id: int | None = Field(default=None, primary_key=True)
