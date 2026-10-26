@@ -1,4 +1,4 @@
-"""Weekly slot allocation with PuLP and the CBC solver.
+"""Weekly slot allocation with PuLP and the HiGHS solver (highspy; CBC only if HiGHS isn't installed).
 
 Each patient on the cleaned waiting list gets at most one slot this week, and only a slot type their pathway
 allows: surgery -> surgery; physio -> physio; weight support and physio first -> weight support, or physio if the
@@ -7,7 +7,8 @@ fit, the plan says so (status "infeasible") and lists them by name; it then fill
 as fit, rather than quietly skipping anyone. Within that, the objective is the total priority score, with a
 bonus for weeks waiting that is too small to beat one priority point, so it only breaks ties.
 
-Needs the `cbc` binary (`brew install cbc`); set CBC_PATH to use another one.
+Solver: HiGHS through highspy (pip, every platform), with a zero optimality gap so even the tie-breaks are exact.
+CBC is a fallback only when highspy is missing (`cbc` on PATH or CBC_PATH).
 """
 from __future__ import annotations
 
@@ -28,24 +29,39 @@ ALLOWED = {"surgery": ["surgery"], "physio": ["physio"], "weight_physio": ["weig
 NEXT_SHOWN = 5
 
 
+class SolverError(RuntimeError):
+    """The solver failed or isn't installed (not a week that doesn't fit: that is status "infeasible")."""
+
+
+class BookingsExceedCapacity(ValueError):
+    """More patients booked than the slots they can use."""
+
+
 def cbc_path() -> str | None:
-    """CBC_PATH, else `cbc` on PATH (brew install cbc), else the binary in the cbcbox package (Linux servers)."""
-    path = os.environ.get("CBC_PATH") or shutil.which("cbc")
-    if path:
-        return path
-    spec = importlib.util.find_spec("cbcbox")
-    if spec and spec.origin:
-        candidate = os.path.join(os.path.dirname(spec.origin), "cbc_dist", "bin", "cbc")
-        if os.access(candidate, os.X_OK):
-            return candidate
-    return None
+    return os.environ.get("CBC_PATH") or shutil.which("cbc")
+
+
+def solver_name() -> str:
+    if importlib.util.find_spec("highspy"):
+        return "HiGHS"
+    if cbc_path():
+        return "CBC"
+    raise SolverError("No solver: pip install highspy")
 
 
 def solver() -> pulp.LpSolver:
-    path = cbc_path()
-    if not path:
-        raise RuntimeError("CBC not found: install it with `brew install cbc` or set CBC_PATH")
-    return pulp.getSolver("COIN_CMD", path=path, msg=False)
+    if solver_name() == "HiGHS":
+        return pulp.HiGHS(msg=False, gapRel=0, gapAbs=0)
+    return pulp.getSolver("COIN_CMD", path=cbc_path(), msg=False, gapRel=0)
+
+
+def check_bookings(cand: pd.DataFrame, locked: list[str], capacity: dict[str, int]) -> None:
+    """Bookings alone must fit: surgery in surgery slots, physio in physio, weight support in weight support plus
+    the physio slots the physio bookings leave."""
+    n = cand.loc[locked].pathway.value_counts() if locked else pd.Series(dtype=int)
+    s, p, w = (int(n.get(k, 0)) for k in ("surgery", "physio", "weight_physio"))
+    if s > capacity["surgery"] or p > capacity["physio"] or w > capacity["weight_support"] + capacity["physio"] - p:
+        raise BookingsExceedCapacity("No slot left · all booked")
 
 
 @dataclass
@@ -98,6 +114,7 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
     capacity = {**CAPACITY, **(capacity or {})}
     cand = df[df.pathway.isin(ALLOWED)].set_index("patient_id", drop=False)
     locked = sorted(set(locked or ()) & set(cand.index))
+    check_bookings(cand, locked, capacity)
     long = cand.weeks_waiting > long_wait
     eps, eps2 = _weights(cand, capacity) if len(cand) else (0.0, 0.0)
     pairs = [(pid, s) for pid, pw in cand.pathway.items() for s in ALLOWED[pw] if capacity.get(s, 0) > 0]
@@ -124,19 +141,29 @@ def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait
                 prob += pulp.lpSum(vs) <= capacity[s]
         return prob, x
 
+    def solve(prob: pulp.LpProblem, what: str):
+        try:
+            stats = prob.solve(solver())
+        except SolverError:
+            raise
+        except Exception as e:                       # the solver crashed or couldn't start
+            raise SolverError(f"{solver_name()} failed on the {what} plan: {type(e).__name__}: {e}") from e
+        if stats.status not in (pulp.LpSolveStatus.Optimal, pulp.LpSolveStatus.Infeasible):
+            raise SolverError(f"{solver_name()} gave status {stats.status} on the {what} plan")
+        return stats
+
     status = "optimal"
     prob, x = build(hard=True)
-    stats = prob.solve(solver())
-    if stats.status != pulp.LpSolveStatus.Optimal:
+    stats = solve(prob, "week")
+    if stats.status == pulp.LpSolveStatus.Infeasible:     # over-52s don't all fit: say so, then fill what we can
         status = "infeasible"
         if not fallback:
             return Plan(status, pd.DataFrame(columns=["patient_id", "slot"]), {}, capacity,
                         {s: 0 for s in capacity}, {"weeks": long_wait, "total": int(long.sum()), "included": 0,
                                                     "unmet": list(cand.index[long])}, shortfall(cand, capacity, long_wait))
         prob, x = build(hard=False)
-        stats = prob.solve(solver())
-        if stats.status != pulp.LpSolveStatus.Optimal:
-            raise RuntimeError(f"CBC could not solve the fallback plan (more locks than slots?): {stats.status}")
+        if solve(prob, "fallback").status != pulp.LpSolveStatus.Optimal:   # bookings fit (checked), so this is a solver fault
+            raise SolverError(f"{solver_name()} found no fallback plan")
 
     chosen = [(pid, s) for (pid, s), v in x.items() if (v.value() or 0) > 0.5]
     # The solver is indifferent to which chosen weight support patients sit in weight support vs physio slots;

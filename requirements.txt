@@ -10,5 +10,6 @@ openpyxl>=3.1
 reportlab>=5.0
 scikit-learn>=1.9
 matplotlib>=3.11
-pulp>=4.1          # needs the cbc solver: brew install cbc
+pulp>=4.1
+highspy>=1.11      # the HiGHS solver for PuLP, from pip on every platform (CBC only as a fallback)
 pytest>=9.1

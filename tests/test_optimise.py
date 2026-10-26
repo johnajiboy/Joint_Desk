@@ -3,11 +3,13 @@ import shutil
 from pathlib import Path
 
 import pandas as pd
+import pulp
 import pytest
 
 from kneedss import optimise as O
 
-pytestmark = pytest.mark.skipif(not shutil.which("cbc"), reason="needs the cbc solver (brew install cbc)")
+pytestmark = pytest.mark.skipif(not (importlib.util.find_spec("highspy") or shutil.which("cbc")),
+                                reason="needs a solver (pip install highspy)")
 
 ROOT = Path(__file__).resolve().parent.parent
 spec = importlib.util.spec_from_file_location("eval_optimise", ROOT / "eval" / "eval_optimise.py")
@@ -212,3 +214,49 @@ def test_lock_never_silently_pushes_out_an_over_52():
     plan = O.optimise(df, capacity={"surgery": 1}, locked={"L"})
     assert set(plan.assigned.patient_id) == {"L"}
     assert plan.status == "infeasible" and plan.pushed_out == ["O"]
+
+
+# ---------------------------------------------------------------- solver
+
+def test_highs_is_the_default_and_cbc_only_a_fallback(monkeypatch):
+    assert O.solver_name() == "HiGHS"
+    real = importlib.util.find_spec
+    monkeypatch.setattr(O.importlib.util, "find_spec", lambda name: None if name == "highspy" else real(name))
+    monkeypatch.setattr(O, "cbc_path", lambda: "/usr/local/bin/cbc")
+    assert O.solver_name() == "CBC"
+    monkeypatch.setattr(O, "cbc_path", lambda: None)
+    with pytest.raises(O.SolverError, match="pip install highspy"):
+        O.solver_name()
+
+
+@pytest.mark.skipif(not (shutil.which("cbc") and importlib.util.find_spec("highspy")), reason="needs both solvers")
+@pytest.mark.parametrize("capacity", [None, {"surgery": 8}, {"surgery": 16}])
+def test_highs_gives_the_cbc_plan_on_the_real_waiting_list(monkeypatch, capacity):
+    wl = pd.read_csv(Path(__file__).resolve().parent.parent / "data" / "output" / "waiting_list.csv")
+    highs = O.optimise(wl, capacity=capacity)
+    monkeypatch.setattr(O, "solver_name", lambda: "CBC")
+    cbc = O.optimise(wl, capacity=capacity)
+    assert highs.status == cbc.status
+    for slot in O.CAPACITY:
+        assert sorted(highs.assigned.patient_id[highs.assigned.slot == slot]) == sorted(cbc.assigned.patient_id[cbc.assigned.slot == slot])
+        assert list(highs.next[slot].patient_id) == list(cbc.next[slot].patient_id)
+
+
+def test_only_real_overbooking_is_bookings_exceed_capacity():
+    df = _week([(f"S{i}", "surgery", 50, 10) for i in range(3)] + [("W1", "weight_physio", 40, 5), ("P1", "physio", 30, 5)])
+    with pytest.raises(O.BookingsExceedCapacity):
+        O.optimise(df, capacity={"surgery": 2}, locked={"S0", "S1", "S2"})
+    # weight support bookings may spill into physio slots the physio bookings leave
+    plan = O.optimise(df, capacity={"weight_support": 0, "physio": 2}, locked={"W1", "P1"})
+    assert set(plan.assigned.patient_id[plan.assigned.slot == "physio"]) == {"W1", "P1"}
+    with pytest.raises(O.BookingsExceedCapacity):
+        O.optimise(df, capacity={"weight_support": 0, "physio": 1}, locked={"W1", "P1"})
+
+
+def test_a_solver_failure_is_a_solver_error_not_an_infeasible_week(monkeypatch):
+    class Broken(pulp.LpSolver):
+        def actualSolve(self, lp, **kw):
+            raise OSError("solver binary killed (status -7)")
+    monkeypatch.setattr(O, "solver", lambda: Broken())
+    with pytest.raises(O.SolverError, match="status -7"):
+        O.optimise(_week([("A", "surgery", 50, 10)]))

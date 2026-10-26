@@ -12,7 +12,7 @@ from backend.db import ROOT
 from kneedss import optimise as O
 
 DEMO = ROOT / "frontend" / "public" / "demo"
-pytestmark = pytest.mark.skipif(not (shutil.which("node") and shutil.which("cbc")), reason="needs node and cbc")
+pytestmark = pytest.mark.skipif(not shutil.which("node"), reason="needs node")
 
 
 def browser_plan(rows: list[dict], changes: dict) -> dict:
@@ -86,5 +86,5 @@ def test_more_bookings_than_slots_is_refused():
     surgery = [r for r in rows if r["pathway"] == "surgery"][: O.CAPACITY["surgery"] + 1]
     changes = {r["id"]: {"overridden": False, "booked": True, "was": None, "at": "2026-10-22T10:00:00"} for r in surgery}
     assert browser_plan(rows, changes) == {"error": "No slot left · all booked"}
-    with pytest.raises(RuntimeError):
+    with pytest.raises(O.BookingsExceedCapacity):
         optimiser_plan(rows, changes)

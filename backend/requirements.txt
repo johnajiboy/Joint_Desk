@@ -4,6 +4,4 @@ sqlmodel>=0.0.48
 uvicorn[standard]>=0.54
 python-multipart>=0.0.32
 httpx>=0.28          # FastAPI TestClient
-# CBC for PuLP: on Linux servers (Render) from pip; on macOS use brew install cbc (the pip build is killed there)
-cbcbox; sys_platform == "linux"
 psycopg[binary]>=3.2 # Postgres (Supabase) when DATABASE_URL is set
