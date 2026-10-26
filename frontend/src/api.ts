@@ -185,9 +185,30 @@ async function demoPlan(extraBooking?: { id: string } & Booking): Promise<WeekPl
   return planWeek([...patients.values()], changes, list.capacity, list.long_wait, list.week_of)
 }
 
-/** This week's slots. Backend: the optimiser on the database. Demo: re-planned in the browser (same rules). */
-export function buildWeek(): Promise<WeekPlan> {
-  return DEMO ? demoPlan() : postChecked<WeekPlan>('/week/build', {})
+const WEEK_KEY = 'jd-week'
+
+/** This week's slots, stored with who built it and when. Backend: the optimiser on the database, saved there.
+ * Demo: re-planned in the browser (same rules), saved in this browser. */
+export async function buildWeek(by: string): Promise<WeekPlan> {
+  if (!DEMO) return postChecked<WeekPlan>('/week/build', { by: by || 'clinician' })
+  const plan: WeekPlan = { ...(await demoPlan()), built_by: by || null, built_at: new Date().toISOString() }
+  try {
+    localStorage.setItem(WEEK_KEY, JSON.stringify(plan))
+  } catch {
+    // storage blocked: the plan lasts until the page reloads
+  }
+  return plan
+}
+
+/** The last plan built, or null before the first build. */
+export async function getLatestWeek(): Promise<WeekPlan | null> {
+  if (!DEMO) return request<WeekPlan | null>('', '/week/latest')
+  try {
+    const saved = localStorage.getItem(WEEK_KEY)
+    return saved ? (JSON.parse(saved) as WeekPlan) : null
+  } catch {
+    return null
+  }
 }
 
 /**

@@ -1,7 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { buildWeek } from '../api'
-import { Card, ErrorNote, PageHeader } from '../components/AppShell'
+import { buildWeek, getClinician, getLatestWeek } from '../api'
+import { Card, ErrorNote, Loading, PageHeader } from '../components/AppShell'
 import { PathwayChip, Weeks } from '../components/PathwayChip'
 import { Term } from '../components/Term'
 import { primaryButton, stagger } from '../components/ui'
@@ -9,6 +9,9 @@ import type { ReactNode } from 'react'
 import type { UnmetPatient, WeekChange, WeekPatient, WeekPlan } from '../types'
 
 const LABELS = { surgery: 'Surgery', physio: 'Physio', weight_support: 'Weight support' }
+
+const builtAt = (iso: string) =>
+  new Date(iso).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
 
 const weekOf = (iso: string) =>
   new Date(`${iso}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
@@ -107,16 +110,23 @@ function Row({ p, i, muted = false }: { p: WeekPatient; i: number; muted?: boole
 
 export default function Week() {
   const [plan, setPlan] = useState<WeekPlan | null>(null)
+  const [loaded, setLoaded] = useState(false)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // the latest saved plan, so a refresh (or a server restart) keeps it
+  useEffect(() => {
+    getLatestWeek().then(setPlan).catch(() => setPlan(null)).finally(() => setLoaded(true))
+  }, [])
 
   async function build() {
     setBusy(true)
     setError(null)
     try {
-      setPlan(await buildWeek())
+      setPlan(await buildWeek(getClinician()))
     } catch (e) {
-      setError(e instanceof Error && e.message.startsWith('No slot') ? e.message : "Couldn't build the list")
+      // the API's own words for overbooking and solver failures; anything else (network, 5xx) in short
+      setError(e instanceof Error && /^(No slot|Couldn't build)/.test(e.message) ? e.message : "Couldn't build the list")
     } finally {
       setBusy(false)
     }
@@ -130,6 +140,9 @@ export default function Week() {
         meta={plan && <>
           <span className="chip chip-plain">Week of {weekOf(plan.week_of)}</span>
           {plan.method === 'demo' && <span className="chip chip-plain">Demo plan</span>}
+          {plan.built_at && (
+            <span className="text-xs text-muted">Built {builtAt(plan.built_at)}{plan.built_by ? ` · ${plan.built_by}` : ''}</span>
+          )}
         </>}
         action={<button className={primaryButton} onClick={build} disabled={busy}>
           {busy ? 'Building…' : plan ? 'Rebuild list' : "Build this week's list"}
@@ -159,7 +172,8 @@ export default function Week() {
 
       {error && <ErrorNote text={error} />}
       {plan && <Changes changes={plan.changes ?? []} />}
-      {!plan && !error && <ErrorNote text="Not built yet" />}
+      {!loaded && <Loading />}
+      {loaded && !plan && !error && <ErrorNote text="Not built yet · click Build this week's list" />}
 
       {plan && plan.unmet?.length > 0 && (
         <details className="fade-up mb-5 rounded-lg border border-line bg-surface">
@@ -216,7 +230,7 @@ export default function Week() {
           <p className="mt-4 text-xs text-muted">
             {plan.method === 'demo'
               ? <>Demo plan · rebuilt in this browser with your overrides and bookings, same rules as the <Term k="optimiser">optimiser</Term></>
-              : <><Term k="optimiser">Optimiser</Term> (PuLP, CBC)</>}
+              : <><Term k="optimiser">Optimiser</Term> (PuLP, HiGHS)</>}
             {' '}· {plan.patients.toLocaleString()} on the waiting list · bookings first, then over {lw?.weeks} weeks,
             then <Term k="priority">priority</Term>, ties to the longest wait
           </p>

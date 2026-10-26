@@ -127,6 +127,8 @@ export interface WeekPlan {
   /** Over-52s who lost their slot to a booking. */
   pushed_out: UnmetPatient[]
   changes: WeekChange[]
+  built_by?: string | null      // who built it and when (stored plans)
+  built_at?: string
 }
 
 export type UploadResult =

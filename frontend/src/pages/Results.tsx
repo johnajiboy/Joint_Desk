@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import type { ReactNode, RefObject } from 'react'
-import { buildWeek, getResults } from '../api'
+import { getLatestWeek, getResults } from '../api'
 import { annotate } from '../components/annotate'
 import { Card, ErrorNote, Loading, PageHeader } from '../components/AppShell'
 import { LoopLineChart } from '../components/LoopLineChart'
@@ -254,11 +254,13 @@ function SurgeryListCard({ o, card }: { o: OptimiseResults; card: RefObject<HTML
   )
 }
 
-function ThisWeekCard({ plan, card }: { plan: WeekPlan | null; card: RefObject<HTMLElement | null> }) {
+function ThisWeekCard({ plan, card }: { plan: WeekPlan | null | undefined; card: RefObject<HTMLElement | null> }) {
   const grow = useRegrow(card)
   return (
     <Card ref={card} className="fade-up" title="This week">
-      {!plan ? <p className="py-6 text-sm text-muted">Loading…</p> : (() => {
+      {plan === undefined ? <p className="py-6 text-sm text-muted">Loading…</p>
+        : plan === null ? <p className="py-6 text-sm text-muted">Not built yet · <Link to="/week" className="underline underline-offset-2">This week</Link></p>
+        : (() => {
         const booked = plan.lists.flatMap((l) => l.in)
         const longest = booked.length ? Math.max(...booked.map((p) => p.weeks_waiting)) : null
         const surgeryShort = plan.shortfall.some((x) => x.includes('surgery'))
@@ -353,11 +355,12 @@ export default function Results() {
   const cleanCard = useRef<HTMLElement>(null)
   const treeCard = useRef<HTMLElement>(null)
   const [r, setR] = useState<ResultsData | null>(null)
-  const [plan, setPlan] = useState<WeekPlan | null>(null)
+  // undefined while loading; null before the first build (reading the saved plan never builds or stores one)
+  const [plan, setPlan] = useState<WeekPlan | null | undefined>(undefined)
   const [error, setError] = useState(false)
   useEffect(() => {
     getResults().then(setR).catch(() => setError(true))
-    buildWeek().then(setPlan).catch(() => setPlan(null))
+    getLatestWeek().then(setPlan).catch(() => setPlan(null))
   }, [])
 
   if (error) return <ErrorNote text="Couldn't load results" />
