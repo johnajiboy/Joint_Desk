@@ -10,7 +10,7 @@ Live demo (demo data, no backend): https://frontend-wine-ten-82.vercel.app
 
 ## Run it locally
 
-Needs Python 3.12, Node 20+, and the CBC solver for the weekly optimiser (`brew install cbc` on macOS).
+Needs Python 3.12 and Node 20+. The weekly optimiser uses the HiGHS solver (`highspy`, installed from `requirements.txt`).
 
 ### One-time setup
 

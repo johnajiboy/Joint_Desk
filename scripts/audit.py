@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -22,10 +23,12 @@ sys.path.insert(0, str(ROOT))
 TMP = tempfile.mkdtemp()
 os.environ["DATABASE_URL"] = f"sqlite:///{TMP}/audit.db"
 os.environ["DEMO_MODE"] = "1"
+os.environ["UPLOAD_PASSCODE"] = ""          # blank, not missing: .env can't switch the passcode on for this run
 
 from fastapi.testclient import TestClient    # noqa: E402
 from sqlmodel import Session, select         # noqa: E402
 
+from backend import services as S           # noqa: E402
 from backend.db import Decision, Patient, get_engine   # noqa: E402
 from backend.main import app                 # noqa: E402
 from kneedss import extract as X             # noqa: E402
@@ -64,7 +67,7 @@ def table(head: list[str], rows: list[list]) -> list[str]:
 with TestClient(app) as c:
     # ------------------------------------------------------------------ 1. reading
     md += ["## 1. Reading: PDF, DOCX and TXT through POST /letters (DEMO_MODE=1)", "",
-           "Code: " + where("backend/main.py", r'@app.post\("/letters"\)'),
+           "Code: " + where("backend/main.py", r'@app.post\("/letters"'),
            "; " + where("kneedss/extract.py", r"^def read_letter"),
            "; " + where("backend/services.py", r"^def read_letter"),
            "; " + where("backend/services.py", r"all\(X.quote_in_letter\(q, text\)"), ""]
@@ -176,12 +179,18 @@ with TestClient(app) as c:
     # ------------------------------------------------------------------ 5. optimiser
     md += ["## 5. The optimiser", "",
            "Code: " + where("kneedss/optimise.py", r"^def optimise") + "; " + where("kneedss/optimise.py", r"hard and long\[pid\]")
-           + "; " + where("kneedss/optimise.py", r'status = "infeasible"') + "; " + where("kneedss/optimise.py", r"^def skipped_long_waiters"), ""]
+           + "; " + where("kneedss/optimise.py", r'status = "infeasible"') + "; " + where("kneedss/optimise.py", r"^def skipped_long_waiters")
+           + "; solver " + where("kneedss/optimise.py", r"^def solver\(") + "; stored plans " + where("backend/services.py", r"^def save_week"), ""]
     tests = subprocess.run([sys.executable, "-m", "pytest", "-q", "tests/test_optimise.py"], cwd=ROOT, capture_output=True, text=True)
     last = tests.stdout.strip().splitlines()[-1]
     ok5 = check(tests.returncode == 0, f"`pytest tests/test_optimise.py`: {last}")
-    a, b = c.post("/week/build").json(), c.post("/week/build").json()
+    ok5 &= check(O.solver_name() == "HiGHS", f"solver: {O.solver_name()} (highspy), zero optimality gap")
+    built_a, built_b = c.post("/week/build", json={"by": "Audit"}).json(), c.post("/week/build", json={"by": "Audit"}).json()
+    plain = lambda w: {k: v for k, v in w.items() if k not in ("built_by", "built_at")}
+    a, b = plain(built_a), plain(built_b)
     ok5 &= check(a == b, "built twice: the two plans are identical (every list, every patient, every reason)")
+    ok5 &= check(c.get("/week/latest").json() == built_b and built_b["built_by"] == "Audit",
+                 "each build is stored (who, when) and GET /week/latest serves the last one, so a refresh keeps it")
     for l in a["lists"]:
         ok5 &= check(len(l["in"]) <= l["capacity"], f"{l['label']}: {len(l['in'])} of {l['capacity']} slots")
     # who is waiting, from the database, with overrides applied
@@ -193,6 +202,16 @@ with TestClient(app) as c:
     plan = O.optimise(df)
     assigned_ids = {p["id"] for l in a["lists"] for p in l["in"]}
     ok5 &= check(assigned_ids == set(plan.assigned.patient_id), "the API's plan and a direct optimise() on the same data give the same patients")
+    if shutil.which("cbc"):
+        real_solver = O.solver_name
+        O.solver_name = lambda: "CBC"
+        try:
+            cbc_plan = O.optimise(df)
+        finally:
+            O.solver_name = real_solver
+        same = all(sorted(plan.assigned.patient_id[plan.assigned.slot == k]) == sorted(cbc_plan.assigned.patient_id[cbc_plan.assigned.slot == k])
+                   for k in O.CAPACITY)
+        ok5 &= check(same, "HiGHS and CBC give the same patients in every slot on this waiting list")
     skipped = O.skipped_long_waiters(df, plan.assigned)
     ok5 &= check(skipped == [], "no patient over 52 weeks was passed over for someone under 52 weeks (skipped_long_waiters = [])")
     unmet = plan.long_wait["unmet"]
@@ -208,9 +227,20 @@ with TestClient(app) as c:
     api_unmet = [p["id"] for p in a["unmet"]]
     ok5 &= check(sorted(api_unmet) == sorted(unmet) and [p["weeks_waiting"] for p in a["unmet"]] == sorted((p["weeks_waiting"] for p in a["unmet"]), reverse=True),
                  f"the API returns all {len(api_unmet)} by name, longest wait first (This week: '{len(api_unmet)} over 52 weeks still waiting')")
+    # a solver failure is reported as one, never as "all booked", with the reason only in the server log
+    real_optimise = S.O.optimise
+    def broken(*args, **kw):
+        raise O.SolverError("audit: simulated solver failure")
+    S.O.optimise = broken
+    try:
+        r = c.post("/week/build", json={"by": "Audit"})
+    finally:
+        S.O.optimise = real_optimise
+    ok5 &= check(r.status_code == 500 and r.json() == {"detail": "Couldn't build the list · solver error"},
+                 "a solver failure gives 500 \"Couldn't build the list · solver error\" (not 'No slot left'); the reason is logged")
     md.append("")
-    verdicts.append(("Optimiser", ok5, f"{last}; same plan twice; all slots within capacity; 0 over-52s passed over; "
-                     f"infeasible week reported with {len(unmet)} over-52s listed"))
+    verdicts.append(("Optimiser", ok5, f"{last}; HiGHS; same plan twice; plan stored and served after refresh; all slots within capacity; "
+                     f"0 over-52s passed over; infeasible week reported with {len(unmet)} over-52s listed; solver errors reported as such"))
 
 # ------------------------------------------------------------------ full suite and summary
 suite = subprocess.run([sys.executable, "-m", "pytest", "-q"], cwd=ROOT, capture_output=True, text=True)

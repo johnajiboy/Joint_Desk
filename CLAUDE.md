@@ -35,7 +35,8 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
 ## Stack
 
 - Python 3.12: pandas, numpy, scikit-learn, PuLP, pydantic, anthropic SDK, pypdf, python-docx, pytest.
-  PuLP 4 needs the `cbc` binary: `brew install cbc` (the pip `cbcbox` build is killed by macOS here).
+  Solver: HiGHS through `highspy` (pip, every platform, zero optimality gap). CBC is only a fallback when highspy is
+  missing (`cbc` on PATH or CBC_PATH); the pip `cbcbox` build fails on Linux (status -7) and is not used.
 - Backend: FastAPI + SQLModel: Postgres (Supabase, psycopg) when DATABASE_URL is set, else SQLite
 - Frontend: React + TypeScript (Vite), Tailwind, Recharts
 - Env: `ANTHROPIC_API_KEY` in `.env` (never commit it), `CLAUDE_MODEL` (default `claude-sonnet-5-5`).
@@ -77,7 +78,7 @@ docs/             assumptions, data dictionary
    (`eval/results/cleaning_summary.md`). OKS bands, BMI categories, wait bands; pathway from the rules.
 4. Done: knowledge, `kneedss/tree.py` (gated decision tree on the cleaned table, raw and banded features) and
    `eval/eval_tree.py` (`eval/results/tree/`): agreement with the rules, thresholds, disagreements.
-5. Done: optimiser, `kneedss/optimise.py` (PuLP + CBC: over-52s as a hard rule, infeasible weeks reported, then
+5. Done: optimiser, `kneedss/optimise.py` (PuLP + HiGHS: over-52s as a hard rule, infeasible weeks reported, then
    priority with a weeks tie-break); `eval/eval_optimise.py` simulates 26 weeks (FCFS, priority only, optimiser;
    surgery 8/12/16), triage on vs off (KL 2+ straight to surgery) and 20 arrival seeds (mean ± 95% CI, paired
    verdicts) into `eval/results/optimise/`. The This week page shows the optimiser's plan from `week.json`.
@@ -94,6 +95,10 @@ docs/             assumptions, data dictionary
    Credit protection: uploads and imports need UPLOAD_PASSCODE (X-Upload-Passcode header; the app asks once per
    session); at most LLM_DAILY_CAP (default 20) new LLM reads a day, counted in the LlmDay table (cached letters
    never count); 5 files per upload, 2 MB each. CORS: the Vercel site and localhost only.
+   Week plans: POST /week/build stores each plan (who, when; WeekPlanRecord), GET /week/latest serves the last one, so
+   This week and Backlog show it after a refresh or restart. Errors: 409 "No slot left · all booked" only when
+   bookings exceed the slots; any solver failure is a 500 "Couldn't build the list · solver error" with the real
+   reason in the server log.
 7. Frontend: the four screens below. Built on demo data: `scripts/export_demo.py` writes `frontend/public/demo/`
    from the cache (never the API); all data access is in `frontend/src/api.ts` (demo JSON now, FastAPI when
    `VITE_API_URL` is set). The demo site re-plans the week in the browser (`frontend/src/planner.ts`, "Demo plan")
