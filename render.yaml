@@ -2,7 +2,7 @@
 # No secrets in this file: every value marked sync: false is typed into the Render dashboard (Environment).
 services:
   - type: web
-    name: joint-desk-api
+    name: joint-desk-api-r8hg
     runtime: python
     plan: free
     region: frankfurt
