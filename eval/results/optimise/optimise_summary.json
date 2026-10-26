@@ -231,9 +231,9 @@
   {
    "scenario": "Optimiser",
    "metric": "mean_oks_operated",
-   "mean": 15.025,
-   "ci_low": 14.988195463349967,
-   "ci_high": 15.061804536650033
+   "mean": 15.020000000000001,
+   "ci_low": 14.980990589550059,
+   "ci_high": 15.059009410449944
   },
   {
    "scenario": "Optimiser, triage off",
@@ -380,9 +380,9 @@
   {
    "comparison": "Optimiser - FCFS",
    "metric": "mean_oks_operated",
-   "mean_diff": -2.0750000000000015,
-   "ci_low": -2.111804536650035,
-   "ci_high": -2.038195463349968,
+   "mean_diff": -2.0800000000000014,
+   "ci_low": -2.119009410449944,
+   "ci_high": -2.040990589550059,
    "lower_seeds": 20,
    "higher_seeds": 0,
    "seeds": 20,
@@ -468,9 +468,9 @@
   {
    "comparison": "Optimiser - Priority only",
    "metric": "mean_oks_operated",
-   "mean_diff": 2.9599999999999995,
-   "ci_low": 2.9134455343835,
-   "ci_high": 3.006554465616499,
+   "mean_diff": 2.9549999999999996,
+   "ci_low": 2.910795419597588,
+   "ci_high": 2.9992045804024112,
    "lower_seeds": 0,
    "higher_seeds": 20,
    "seeds": 20,
@@ -556,9 +556,9 @@
   {
    "comparison": "Optimiser, triage off - Optimiser",
    "metric": "mean_oks_operated",
-   "mean_diff": 3.475,
-   "ci_low": 3.4381954633499667,
-   "ci_high": 3.5118045366500334,
+   "mean_diff": 3.4799999999999995,
+   "ci_low": 3.440990589550057,
+   "ci_high": 3.519009410449942,
    "lower_seeds": 0,
    "higher_seeds": 20,
    "seeds": 20,
