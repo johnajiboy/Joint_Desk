@@ -1,6 +1,6 @@
 # Joint Desk audit
 
-Run 26/10/2026 11:44 on commit `5d60ee1` with `python scripts/audit.py`: a throwaway database, DEMO_MODE=1, no API calls, no behaviour changed. ✓ = check passed.
+Run 27/10/2026 21:30 on commit `29c5320` with `python scripts/audit.py`: a throwaway database, DEMO_MODE=1, no API calls, no behaviour changed. ✓ = check passed.
 
 | # | Claim | Result | Evidence |
 |---|---|---|---|
@@ -8,9 +8,10 @@ Run 26/10/2026 11:44 on commit `5d60ee1` with `python scripts/audit.py`: a throw
 | 2 | Quote check | **PASS** | invented OKS quote dropped and logged with reason 'quote not in letter'; 5 real facts kept |
 | 3 | Rules decide | **PASS** | schema has no pathway/priority; LLM called once; 3 examples (surgery rule 4, physio rule 3, needs info rule 1) identical on rerun |
 | 4 | Clinician decides | **PASS** | confirm + override stored with who, when, old/new and reason; the override moved KP01437 out of the Physio queue filter and out of this week's slots, all lists still full |
-| 5 | Optimiser | **PASS** | 28 passed in 6.58s; HiGHS; same plan twice; plan stored and served after refresh; all slots within capacity; 0 over-52s passed over; infeasible week reported with 41 over-52s listed; solver errors reported as such |
+| 5 | Optimiser | **PASS** | 28 passed in 6.36s; HiGHS; same plan twice; plan stored and served after refresh; all slots within capacity; 0 over-52s passed over; infeasible week reported with 41 over-52s listed; solver errors reported as such |
+| 6 | Database exposure | **PASS** | RLS on for every public table; no access for anon or authenticated (now or for new tables); the owner (the backend) unaffected; SQLite untouched |
 
-Full test suite (`pytest`): **263 passed in 18.84s**
+Full test suite (`pytest`): **266 passed, 3 skipped in 18.40s**
 
 ## 1. Reading: PDF, DOCX and TXT through POST /letters (DEMO_MODE=1)
 
@@ -76,8 +77,8 @@ Code: `backend/main.py:165` `@app.post("/patients/{pid}/override")`; `backend/se
 
 | id | patient | kind | by | at (UTC) | rules said | old | new | reason |
 |---|---|---|---|---|---|---|---|---|
-| 1 | KP00678 | confirmed | Dr Audit | 2026-10-26T11:43:47+00:00 | surgery | surgery | surgery | Agree with rules |
-| 2 | KP01437 | overridden | Dr Audit | 2026-10-26T11:43:47+00:00 | physio | physio | non_surgical | Patient declines physio for now |
+| 1 | KP00678 | confirmed | Dr Audit | 2026-10-27T21:30:18+00:00 | surgery | surgery | surgery | Agree with rules |
+| 2 | KP01437 | overridden | Dr Audit | 2026-10-27T21:30:18+00:00 | physio | physio | non_surgical | Patient declines physio for now |
 
 - ✓ two Decision rows: one confirm, one override
 - ✓ override stored with who (Dr Audit), when, old → new (physio → non_surgical) and reason
@@ -91,7 +92,7 @@ Code: `backend/main.py:165` `@app.post("/patients/{pid}/override")`; `backend/se
 
 Code: `kneedss/optimise.py:107` `def optimise(df: pd.DataFrame, capacity: dict[str, int] | None = None, long_wait: int = LONG_WAIT,`; `kneedss/optimise.py:138` `prob += (pulp.lpSum(vs) == 1) if (pid in locked or (hard and long[pid])) else (pulp.lpSum(vs) <= 1)`; `kneedss/optimise.py:159` `status = "infeasible"`; `kneedss/optimise.py:224` `def skipped_long_waiters(df: pd.DataFrame, assigned: pd.DataFrame, long_wait: int = LONG_WAIT) -> list[str]:`; solver `kneedss/optimise.py:52` `def solver() -> pulp.LpSolver:`; stored plans `backend/services.py:323` `def save_week(session: Session, plan: dict, by: str) -> dict:`
 
-- ✓ `pytest tests/test_optimise.py`: 28 passed in 6.58s
+- ✓ `pytest tests/test_optimise.py`: 28 passed in 6.36s
 - ✓ solver: HiGHS (highspy), zero optimality gap
 - ✓ built twice: the two plans are identical (every list, every patient, every reason)
 - ✓ each build is stored (who, when) and GET /week/latest serves the last one, so a refresh keeps it
@@ -107,4 +108,15 @@ Code: `kneedss/optimise.py:107` `def optimise(df: pd.DataFrame, capacity: dict[s
 - the optimiser lists all 41 over-52s without a slot by ID (Plan.long_wait['unmet']): KP00026, KP00099, KP00100, KP00161, KP00215, KP00248, KP00276, KP00288, KP00390, KP00452, KP00454, KP00466, …
 - ✓ the API returns all 41 by name, longest wait first (This week: '41 over 52 weeks still waiting')
 - ✓ a solver failure gives 500 "Couldn't build the list · solver error" (not 'No slot left'); the reason is logged
+
+## Database exposure: RLS on, no public API access
+
+Supabase's Data API serves every table in the public schema to anyone holding the project's public (anon) key, unless row level security is on. On every start the API turns RLS on for every public table, adds no policies, and revokes all access from the `anon` and `authenticated` roles, including on tables made later. The backend connects as the tables' owner, which RLS doesn't apply to (not FORCEd), so the app is unaffected. SQLite: nothing runs.
+
+Code: `backend/db.py:221` `def lock_down_public(engine) -> list[str]:`; called from `backend/db.py:250` `lock_down_public(engine)`
+
+- ✓ `pytest tests/test_hosting.py -k "lockdown or rls or owner"`: 3 passed, 3 skipped, 28 deselected in 2.50s
+- ✓ Postgres (local, with Supabase's anon and authenticated roles): every public table has RLS on, not forced; anon and authenticated have no SELECT/INSERT/UPDATE/DELETE; running it twice changes nothing
+- ✓ a table owner that isn't a superuser still reads and writes with RLS on (how the backend connects on Supabase); anon gets 'permission denied'
+- ✓ SQLite: lock_down_public sends nothing; the queue and the week build still work
 
