@@ -30,6 +30,8 @@ def client(request, tmp_path_factory):
     else:
         pgserver = pytest.importorskip("pgserver")
         server = pgserver.get_server(tmp_path_factory.mktemp("pg"), cleanup_mode="stop")
+        # like Supabase: the Data API roles exist, so every backend test runs with them locked out
+        server.psql("CREATE ROLE anon NOLOGIN; CREATE ROLE authenticated NOLOGIN;")
         mp.setenv("DATABASE_URL", server.get_uri())
     mp.setenv("DEMO_MODE", "1")
     from backend.main import app

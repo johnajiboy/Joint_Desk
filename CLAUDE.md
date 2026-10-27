@@ -29,6 +29,10 @@ All data is synthetic (see `docs/assumptions.md`). Never add real patient data.
   again.
 - Never put the API key or anything from .env into the frontend or Vercel.
 - Never print or log DATABASE_URL (it holds the database password). /health says only "postgres" or "sqlite".
+- Supabase exposure: `init_db` calls `db.lock_down_public` on Postgres (never SQLite) after create_all: RLS on for
+  every public table, no policies, all access revoked from `anon` and `authenticated` (also default privileges, so
+  new tables stay closed). Idempotent, runs on every start. The backend connects as the tables' owner (postgres),
+  which RLS doesn't apply to, so the app is unaffected; never FORCE row level security. New tables need nothing extra.
 - Tests never call the API: `tests/conftest.py` blanks the key, DATABASE_URL and UPLOAD_PASSCODE and blocks the
   client; extraction is faked in tests.
 

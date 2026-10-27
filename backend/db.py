@@ -215,11 +215,39 @@ def add_missing_columns(engine) -> None:
                     conn.execute(text(f'ALTER TABLE "{table.name}" ADD COLUMN "{col.name}" {col.type.compile(engine.dialect)}'))
 
 
+PUBLIC_API_ROLES = ("anon", "authenticated")     # Supabase's Data API roles (the public key and signed-in users)
+
+
+def lock_down_public(engine) -> list[str]:
+    """Postgres only (never SQLite): row level security on every table in the public schema, and no access for
+    Supabase's Data API roles, now or for tables made later. No policies are added, so those roles see nothing.
+    The backend connects as the tables' owner, which RLS doesn't apply to (it isn't FORCEd), so the app is
+    unaffected. Safe to run on every start. Returns the tables it covered."""
+    if engine.dialect.name != "postgresql":
+        return []
+    from sqlalchemy import text
+    with engine.begin() as conn:
+        tables = conn.execute(text("SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY tablename")).scalars().all()
+        roles = conn.execute(text("SELECT rolname FROM pg_roles WHERE rolname = ANY(:r)"), {"r": list(PUBLIC_API_ROLES)}).scalars().all()
+        who = ", ".join(f'"{r}"' for r in sorted(roles))
+        for t in tables:
+            conn.execute(text(f'ALTER TABLE public."{t}" ENABLE ROW LEVEL SECURITY'))
+            if who:
+                conn.execute(text(f'REVOKE ALL ON TABLE public."{t}" FROM {who}'))
+        if who:
+            conn.execute(text(f"REVOKE ALL ON ALL SEQUENCES IN SCHEMA public FROM {who}"))
+            conn.execute(text(f"ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON TABLES FROM {who}"))
+            conn.execute(text(f"ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE ALL ON SEQUENCES FROM {who}"))
+    log.info("Row level security on %d public tables; no access for %s", len(tables), ", ".join(roles) or "(no Data API roles)")
+    return list(tables)
+
+
 def init_db() -> None:
     engine = get_engine()
     log.info("Database: %s", backend_name())          # never the URL: it holds the password
     SQLModel.metadata.create_all(engine)
     add_missing_columns(engine)
+    lock_down_public(engine)
     with Session(engine, expire_on_commit=False) as s:
         if s.exec(select(Patient).limit(1)).first() is None:
             started = time.monotonic()

@@ -193,3 +193,48 @@ def test_api_key_is_stripped(monkeypatch):
             assert llm._client().api_key == "sk-test-key"   # builds the client only; nothing is sent
     finally:
         llm._client.cache_clear()
+
+
+# ---------------------------------------------------------------- database exposure (Supabase Data API)
+
+def test_lockdown_never_runs_on_sqlite(client, request):
+    if request.node.callspec.params["client"] != "sqlite":
+        pytest.skip("SQLite only")
+    assert db.lock_down_public(db.get_engine()) == []                  # no SQL sent
+    assert client.get("/queue").status_code == 200 and client.post("/week/build", json={}).status_code == 200
+
+
+def test_postgres_tables_have_rls_and_no_public_api_access(client, request):
+    if request.node.callspec.params["client"] != "postgres":
+        pytest.skip("Postgres only")
+    from sqlalchemy import text
+    engine = db.get_engine()
+    assert db.lock_down_public(engine) == db.lock_down_public(engine)  # safe to run on every start
+    with engine.connect() as conn:
+        rows = conn.execute(text(
+            "SELECT c.relname, c.relrowsecurity, c.relforcerowsecurity, "
+            "has_table_privilege('anon', c.oid, 'SELECT'), has_table_privilege('authenticated', c.oid, 'SELECT,INSERT,UPDATE,DELETE') "
+            "FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace WHERE n.nspname = 'public' AND c.relkind = 'r'")).all()
+    names = {r[0] for r in rows}
+    assert {"patient", "letter", "decision", "importrecord", "llmday", "weekplanrecord"} <= names
+    for name, rls, forced, anon, authed in rows:
+        assert rls and not forced and not anon and not authed, name
+
+
+def test_the_table_owner_still_reads_and_writes_with_rls_on(client, request):
+    """Supabase's postgres role owns the tables but isn't a superuser: check an owner that isn't one still has
+    full access (a superuser would pass for the wrong reason)."""
+    if request.node.callspec.params["client"] != "postgres":
+        pytest.skip("Postgres only")
+    from sqlalchemy import text
+    with db.get_engine().connect() as conn:
+        tx = conn.begin()
+        conn.execute(text("CREATE ROLE owner_test NOLOGIN NOSUPERUSER NOBYPASSRLS"))
+        conn.execute(text('ALTER TABLE public.llmday OWNER TO owner_test'))
+        conn.execute(text("SET LOCAL ROLE owner_test"))
+        conn.execute(text("INSERT INTO public.llmday (day, reads) VALUES ('1999-01-01', 1)"))
+        assert conn.execute(text("SELECT reads FROM public.llmday WHERE day = '1999-01-01'")).scalar() == 1
+        conn.execute(text("SET LOCAL ROLE anon"))
+        with pytest.raises(Exception, match="permission denied"):
+            conn.execute(text("SELECT * FROM public.llmday"))
+        tx.rollback()

@@ -242,6 +242,30 @@ with TestClient(app) as c:
     verdicts.append(("Optimiser", ok5, f"{last}; HiGHS; same plan twice; plan stored and served after refresh; all slots within capacity; "
                      f"0 over-52s passed over; infeasible week reported with {len(unmet)} over-52s listed; solver errors reported as such"))
 
+# ------------------------------------------------------------------ database exposure
+md += ["## Database exposure: RLS on, no public API access", "",
+       "Supabase's Data API serves every table in the public schema to anyone holding the project's public (anon) key, "
+       "unless row level security is on. On every start the API turns RLS on for every public table, adds no policies, "
+       "and revokes all access from the `anon` and `authenticated` roles, including on tables made later. The backend "
+       "connects as the tables' owner, which RLS doesn't apply to (not FORCEd), so the app is unaffected. SQLite: nothing runs.", "",
+       "Code: " + where("backend/db.py", r"^def lock_down_public") + "; called from " + where("backend/db.py", r"^    lock_down_public\(engine\)"), ""]
+exposure = subprocess.run([sys.executable, "-m", "pytest", "-v", "tests/test_hosting.py", "-k", "lockdown or rls or owner"],
+                          cwd=ROOT, capture_output=True, text=True)
+passed = set(re.findall(r"::(\S+) PASSED", exposure.stdout))
+ok_exp = check(exposure.returncode == 0, "`pytest tests/test_hosting.py -k \"lockdown or rls or owner\"`: "
+               + exposure.stdout.strip().splitlines()[-1].strip("= "))
+ok_exp &= check("test_postgres_tables_have_rls_and_no_public_api_access[postgres]" in passed,
+                "Postgres (local, with Supabase's anon and authenticated roles): every public table has RLS on, not forced; "
+                "anon and authenticated have no SELECT/INSERT/UPDATE/DELETE; running it twice changes nothing")
+ok_exp &= check("test_the_table_owner_still_reads_and_writes_with_rls_on[postgres]" in passed,
+                "a table owner that isn't a superuser still reads and writes with RLS on (how the backend connects on "
+                "Supabase); anon gets 'permission denied'")
+ok_exp &= check("test_lockdown_never_runs_on_sqlite[sqlite]" in passed,
+                "SQLite: lock_down_public sends nothing; the queue and the week build still work")
+md.append("")
+verdicts.append(("Database exposure", ok_exp, "RLS on for every public table; no access for anon or authenticated (now or for new tables); "
+                 "the owner (the backend) unaffected; SQLite untouched"))
+
 # ------------------------------------------------------------------ full suite and summary
 suite = subprocess.run([sys.executable, "-m", "pytest", "-q"], cwd=ROOT, capture_output=True, text=True)
 suite_line = suite.stdout.strip().splitlines()[-1]
